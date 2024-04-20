@@ -1,0 +1,69 @@
+.overView .selectButton {
+    /* color: var(--fontColorForPara); */
+    color: #fff;
+    height: 30px;
+    width: 120px;
+    /* background-color:var(--mainThemeColor); */
+    background-color: var(--mainBgColor);
+    /* background-color: #f4f7fe; */
+    border: none;
+    border-radius: 8px 8px 0px 8px;
+    padding: 5px;
+    outline: none;
+  }
+  .overView .selectButton  option {
+    background-color: #fff;
+    color: var(--fontColorForPara);
+    /* background-color: var(--mainBgColor); */
+  }
+  
+  .overView .selectButton  option:hover {
+    color: red;
+  }
+  
+  .overView .topCartCont {
+    /* background-color: #f8f9fa; */
+  
+    height: 76px;
+    width: 100%;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    /* border: 1px solid var(--mainThemeColor) ; */
+    background-color: #f4f7fe;
+  }
+  
+  .overView .iconAdminCont {
+    width: 60px;
+    height: 60px;
+    background-color: #fff;
+    border-radius: 50%;
+    border: 0.5px solid var(var(--mainBgColor));
+    margin: 0px 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .overView .adminCartIcons {
+    color: var(--blueThemeColor);
+    width: 32px;
+    height: 32px;
+  }
+  .overView .titleAndValueCont {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    justify-content: flex-end;
+  }
+  .overView .topCartTitle {
+    color: var(--fontColorForPara); 
+    font-size: 14px;
+    margin: 0px;
+  }
+  .overView .topCartValue {
+    color: var(--mainBgColor);
+    font-size: 24px;
+    margin: 0px;
+  }
+  

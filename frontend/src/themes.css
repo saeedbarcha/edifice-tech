@@ -1,0 +1,79 @@
+/* theme.css */
+:root {
+  /*********************************/
+  /*******    main-background-color     *******/
+  /* --blueThemeColor: #3ec1d5; */
+  --blueThemeColor: #f58e10;
+
+  /* --blueThemeColor: #71dfbe; */
+  /* --blueThemeColor: #f71bff; */
+
+  /* --blueThemeColor:#50d8af; */
+  /* --blueThemeColor: #FE9900; */
+  --mainThemeColor: #FE9900;
+
+
+
+
+  /* --mainThemeColor: #172337; */
+
+  /* mainDarkBlueColor*/
+  /* use in 
+   * header background
+   * footer background */
+  /* --mainBgColor: #172337; */
+  --mainBgColor: #1B254B;
+
+  /* --mainBgColor: #3c4539; */
+
+
+  
+  /* --mainBgColor: #3c4539; */
+  /* --mainBgColor:#3c4c5d; */
+
+  --socilaIconBgColor: #ff8000;
+  /* --socilaIconBgColor:#172337; */
+
+  /*********************************/
+  /*******    font-color     *******/
+  /*********************************/
+  --fontColorForPara:#444444;
+  --whiteColor: #fff;
+
+  --colorForH1: #fff;
+  --colorForH2: #fff;
+  --colorForH3: #fff;
+  --colorForH4: #fff;
+  --colorForH5: #fff;
+  --colorForH6: #fff;
+  --colorForP: #fff;
+
+  /*********************************/
+  /*******     font-style    *******/
+  /*********************************/
+
+  --FontForH1: "Arial", sans-serif;
+  --FontForH2: "Arial", sans-serif;
+  --FontForH3: "Arial", sans-serif;
+  --FontForH4: "Arial", sans-serif;
+  --FontForH5: "Arial", sans-serif;
+  --FontForH6: "Arial", sans-serif;
+  --FontForP: "Arial", sans-serif;
+
+  /*  font for section titles */
+  --FontForSectionTitle: "Arial", sans-serif;
+
+  /**********************************/
+  /*******      On active     *******/
+  /**********************************/
+  /* On active social icons */
+  --onActiveSocialIcon: linear-gradient(to bottom, #f7a96e 10%, #ff6f00 100%);
+  --onActiveZoomIn: translateY(2px);
+  --onActiveShadow: 0px 0px 5px rgba(0, 0, 0, 0.3) inset;
+
+  /**********************************/
+  /*******      On hover     *******/
+  /**********************************/
+  /* On hover Social icons */
+  --onActiveZoomOut: scale(1.1);
+}

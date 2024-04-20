@@ -1,0 +1,9 @@
+/* styles.css */
+/* Example styles for the internal button of Accordion.Header */
+.accordion-item:last-of-type .accordion-button.collapsed {
+    /* height: 55px; */
+    }
+    .accordion-button:hover {
+      /* Add hover styles if needed */
+      background-color: #ddd;
+    }

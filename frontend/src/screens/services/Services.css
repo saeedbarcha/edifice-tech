@@ -1,0 +1,108 @@
+/* @dev  saeed barcha */
+/* @file Services.jsx */
+
+/* @tag --Container/Row/div */
+.wrapper  {
+  margin-top: 30px;
+  margin-bottom: 100px;
+}
+
+/* @tag --Container/Row/div */
+.wrapper .titleParaContServices {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* @tag --Container/Row/div/h1 */
+.wrapper .titleServices {
+ color: var(--blueThemeColor);
+ margin-top: 20px;
+ font-size: 70px;
+ font-weight: bold;
+ font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+/* @tag --Container/Row/div/p */
+.wrapper .paraServices {
+  color: #444444;
+  width: 60%;
+  margin: 10px 0px;
+  padding: 30px;
+  font-size: 20px;
+  text-align: center;
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  background-color: rgb(219, 219, 219);
+  border-radius: 15px;
+  width: 90%;
+  height: 200px;
+  margin-bottom: -80px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+ }
+
+/* @tag --Container/Row/Col/div */
+.wrapper .showCardCont {
+  padding: 30px;
+  background: #f8f9fa;
+  border-radius: 5%;
+  transition: transform 0.8s;
+  border: 1px solid  var(--blueThemeColor);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+}
+
+/* @tag --Container/Row/Col/div */
+.wrapper .showCardCont:hover {
+  background: #f4f5f7;
+  background:  var(--blueThemeColor);
+
+  cursor: pointer;
+  transform: scale(1.03);
+}
+
+/* @tag --Container/Row/Col/div/div*/
+.iconCont {
+
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  border: 1px solid var(--mainBgColor);
+  background-color: #ffffff;
+  margin: auto;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* @tag --Container/Row/Col/div/h4 */
+.wrapper .showCardCont .serviceHeading {
+  text-align: center;
+  /* color: var(--mainThemeColor); */
+  color: var(--mainBgColor);
+  height: 2.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+
+/*---------media query-----------*/
+@media screen and (max-width: 992px) {
+  /* @tag --Container */
+.wrapper  {
+  margin-top: 40px;
+  margin-bottom: 40px;
+}
+
+  /* @tag --Container/Row/div/h1 */
+
+.wrapper .titleServices {
+  color: var(--blueThemeColor);
+  margin-top: 20px;
+  font-size: 36px;
+  
+ }
+
+}

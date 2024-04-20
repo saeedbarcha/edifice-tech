@@ -1,0 +1,83 @@
+/* @dev  saeed barcha */
+/* @file WhoWeAre.jsx */
+
+/* @tag --Container */
+.whoWeAreWrapper {
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+/* @tag --Container/Row/Col1 */
+.whoWeAreTitleAndIcon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* @tag --Container/Row/Col1/h1 */
+.titleWhoWeAre {
+  color: var(--mainBgColor);
+  margin-top: 20px;
+  font-size: 50px;
+  font-weight: bolder;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
+
+/* @tag --Container/Row/Col1/icon */
+.questionMarK {
+  width: 150px;
+  height: 150px;
+  color: #1b254b;
+  border-radius: 58%;
+}
+
+/* @tag --Container/Row/Col1/p */
+.slogan{
+  width: 40%;
+  text-align: center;
+}
+
+/* @tag --Container/Row/Col2 */
+.whoWeAreText{
+  background-image:linear-gradient(rgba(255, 255, 255, .0),rgba(239, 239, 239, 0.9)) , url('./who-mainbg.jpg');
+  background-position: center;
+  background-size: cover;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 0 4px 8px  wheat;
+  padding: 25px;
+
+}
+
+/* @tag --Container/Row/Col2 */
+.whoWeAreText p{
+  font-size: 14px;
+  background-color: #fff;
+  padding: 8px;
+  border-radius: 15px
+}
+
+
+/*---------media query-----------*/
+@media screen and (max-width: 992px) {
+
+/* @tag --Container */
+  .whoWeAreWrapper {
+    margin-top: 40;
+    margin-bottom: 40px;
+  }
+
+/* @tag --Container/Row/Col1/p */
+  .slogan{
+    width: 80%;
+    text-align: center;
+    color: white;
+  }
+  /* @tag --Container/Row2/div/h1 */
+  .whoWeAreWrapper .titleWhoWeAre {
+    color: #fe9900;
+    margin-top: 20px;
+    font-size: 34px;
+  }
+}

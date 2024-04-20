@@ -1,0 +1,56 @@
+
+/* top users */
+.topUserCont  {
+    background-color: #f4f7fe;
+    padding:15px  0px ;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 20px;
+  }
+  .topUserCont .topUserTitleCont {
+  
+    display: flex;
+    justify-content: space-between;
+    width: 95%;
+    margin-bottom: 15px;
+    /* position: relative; */
+    border-radius: 20px;
+  }
+  
+
+  
+  .topUserCont  .userDetailCont {
+    width: 95%;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #fff;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3px;
+    margin-bottom: 3px
+    
+    }
+    .topUserCont  .userDetailCont .imgNameCont{
+      display: flex;
+      align-items: center;
+    }
+  
+  .topUserCont  .userDetailCont .userProImage{
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 8px;
+  }
+  .topUserCont  .userDetailCont h5{
+  font-size: 14px;
+  margin: auto 0px;
+  
+  }
+  .userCardBody{
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+  }
