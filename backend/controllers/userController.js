@@ -27,7 +27,6 @@ const authUser = asyncHandler(async (req, res) => {
       address: user.address,
       isAdmin: user.isAdmin,
       skill: user.skill,
-      companyCode: user.companyCode,
       designation: user.designation,
       description: user.description,
       fiverrUrl: user.fiverrUrl,
@@ -53,7 +52,6 @@ const registerUser = asyncHandler(async (req, res) => {
     email,
     password,
     skill,
-    companyCode,
     phone,
     dateOfBirth,
     gender,
@@ -80,9 +78,6 @@ const registerUser = asyncHandler(async (req, res) => {
   } else if (!gender) {
     res.status(400);
     throw new Error("Gender is required");
-  } else if (!companyCode) {
-    res.status(400);
-    throw new Error("Company Code is required");
   } else {
     const userExists = await User.findOne({ email });
     if (userExists) {
@@ -95,7 +90,6 @@ const registerUser = asyncHandler(async (req, res) => {
       email,
       password,
       skill,
-      companyCode,
       phone,
       dateOfBirth,
       gender,
@@ -122,7 +116,6 @@ const registerUser = asyncHandler(async (req, res) => {
         address: user.address,
         isAdmin: user.isAdmin,
         skill: user.skill,
-        companyCode: user.companyCode,
         designation: user.designation,
         description: user.description,
         fiverrUrl: user.fiverrUrl,
@@ -168,7 +161,6 @@ const getUserProfile = asyncHandler(async (req, res) => {
       address: user.address,
       isAdmin: user.isAdmin,
       skill: user.skill,
-      companyCode: user.companyCode,
       designation: user.designation,
       description: user.description,
       fiverrUrl: user.fiverrUrl,

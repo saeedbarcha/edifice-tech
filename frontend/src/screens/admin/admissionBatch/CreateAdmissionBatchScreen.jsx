@@ -4,13 +4,16 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useCreateAdmissionBatchMutation } from "../../../slices/admissionBatchApiSlice";
 import { useGetActiveCoursesQuery } from "../../../slices/courseApiSlice.js";
 import { toast } from "react-toastify";
-
+import {
+  useUploadProductImageMutation,
+} from "../../../slices/productApiSlice";
 const CreateAdmissionBatchScreen = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [admissionFee, setAdmissionFee] = useState(1000);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const [image, setImage] = useState("");
   const [lastDateToApply, setLastDateToApply] = useState("");
   const [certificate, setCertificate] = useState(false);
   const [courses, setCourses] = useState([]);
@@ -26,28 +29,43 @@ const CreateAdmissionBatchScreen = () => {
   } = useGetActiveCoursesQuery();
 
   const [createAdmissionBatch, { isLoading: loadingCreate }] =
-  useCreateAdmissionBatchMutation();
+    useCreateAdmissionBatchMutation();
 
+    const [uploadAdmissionBacthImage, { isLoading: loadingUpload }] =
+    useUploadProductImageMutation();
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      const admissionBatch ={
+      const admissionBatch = {
         title,
         description,
         admissionFee,
         startDate,
         endDate,
+        image,
         lastDateToApply,
         certificate,
         courses,
         isActive
       };
       const res = await createAdmissionBatch(admissionBatch);
-      if(res.data){
+      if (res.data) {
         navigate("/admin/admissionbatchlist");
       }
     } catch (err) {
       console.error("Error:", err);
+      toast.error(err?.data?.message || err.error);
+    }
+  };
+
+  const uploadFileHandler = async (e) => {
+    const formData = new FormData();
+    formData.append("image", e.target.files[0]);
+    try {
+      const res = await uploadAdmissionBacthImage(formData).unwrap();
+      toast.success(res?.message);
+      setImage(res.image);
+    } catch (err) {
       toast.error(err?.data?.message || err.error);
     }
   };
@@ -68,6 +86,20 @@ const CreateAdmissionBatchScreen = () => {
                 required
               />
             </Form.Group>
+            <Form.Group controlId="image" className="mt-3">
+              <Form.Label>Image</Form.Label>
+              <Form.Control
+                type="file"
+                label="Choose file"
+                onChange={uploadFileHandler}
+              ></Form.Control>
+            </Form.Group>
+
+            {image &&
+              <Form.Group className="mt-3">
+                <img src={image} alt="Selected" className="w-100" />
+              </Form.Group>}
+
             <Form.Group controlId="description" className="my-4">
               <Form.Label>Description</Form.Label>
               <Form.Control
@@ -141,7 +173,7 @@ const CreateAdmissionBatchScreen = () => {
               {allActiveCourses?.map((course, index) => {
                 return (
                   <Form.Check
-                    key={course._id} 
+                    key={course._id}
                     type="checkbox"
                     label={course.title}
                     onChange={(e) => {

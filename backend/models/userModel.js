@@ -45,11 +45,6 @@ const userSchema = new mongoose.Schema(
       required: true,
       default: false,
     },
-    companyCode: {
-      type: String,
-      required: true,
-      enum: ["12345"],
-    },
     skill: {
       type: String,
       default:"software engineer"

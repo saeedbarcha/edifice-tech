@@ -3,6 +3,9 @@ import { Container, Card, Form, Button, Col } from "react-bootstrap";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useGetAdmissionBatchDetailsQuery, useUpdateAdmissionBatchMutation } from "../../../slices/admissionBatchApiSlice";
+import {
+  useUploadProductImageMutation,
+} from "../../../slices/productApiSlice";
 import { useGetActiveCoursesQuery } from "../../../slices/courseApiSlice";
 const EditAdmissionBatchScreen = () => {
   const [title, setTitle] = useState("");
@@ -10,13 +13,11 @@ const EditAdmissionBatchScreen = () => {
   const [admissionFee, setAdmissionFee] = useState(0);
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const [image, setImage] = useState("");
   const [lastDateToApply, setLastDateToApply] = useState("");
   const [certificate, setCertificate] = useState(false);
   const [courses, setCourses] = useState([]);
   const [isActive, setIsActive] = useState(false);
-
-
-  console.log("ad........isActive", isActive);
 
   const { id: admissionBatchId } = useParams();
 
@@ -26,13 +27,14 @@ const EditAdmissionBatchScreen = () => {
     // isLoading:isLoadingAllActiveCourses,
     // error,
   } = useGetActiveCoursesQuery();
+  const [uploadAdmissionBacthImage, { isLoading: loadingUpload }] =
+  useUploadProductImageMutation();
   const {
     data: admissionBatch,
     isLoading,
     error,
   } = useGetAdmissionBatchDetailsQuery(admissionBatchId);
-  console.log("ad........admissionBatch", admissionBatch);
-
+ 
   const [updateAdmissionBatch, { isLoading: loadingUpdate }] =
   useUpdateAdmissionBatchMutation();
 
@@ -40,14 +42,12 @@ const EditAdmissionBatchScreen = () => {
     if (admissionBatch) {
       setTitle(admissionBatch?.title);
       setDescription(admissionBatch?.description);
+      setImage(admissionBatch?.image);
       setAdmissionFee(admissionBatch?.admissionFee);
-      // Format and set the start date
       setStartDate(
         new Date(admissionBatch?.startDate).toISOString().split("T")[0]
       );
-      // Format and set the end date
       setEndDate(new Date(admissionBatch?.endDate).toISOString().split("T")[0]);
-      // Format and set the last date to apply
       setLastDateToApply(
         new Date(admissionBatch?.lastDateToApply).toISOString().split("T")[0]
       );
@@ -67,6 +67,7 @@ const EditAdmissionBatchScreen = () => {
         admissionFee,
         startDate,
         endDate,
+        image,
         lastDateToApply,
         isActive,
         certificate,
@@ -101,6 +102,18 @@ const EditAdmissionBatchScreen = () => {
       }
     });
   };
+
+  const uploadFileHandler = async (e) => {
+    const formData = new FormData();
+    formData.append("image", e.target.files[0]);
+    try {
+      const res = await uploadAdmissionBacthImage(formData).unwrap();
+      toast.success(res?.message);
+      setImage(res.image);
+    } catch (err) {
+      toast.error(err?.data?.message || err.error);
+    }
+  };
   return (
     <Container>
       <h2 className="my-4">Update Admission batch</h2>
@@ -117,6 +130,21 @@ const EditAdmissionBatchScreen = () => {
                 required
               />
             </Form.Group>
+
+            <Form.Group controlId="image" className="mt-3">
+              <Form.Label>Image</Form.Label>
+              <Form.Control
+                type="file"
+                label="Choose file"
+                onChange={uploadFileHandler}
+              ></Form.Control>
+            </Form.Group>
+
+            {image &&
+              <Form.Group className="mt-3">
+                <img src={image} alt="Selected" className="w-100" />
+              </Form.Group>}
+
             <Form.Group controlId="description" className="my-4">
               <Form.Label>Description</Form.Label>
               <Form.Control

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { Form, Button, Card } from "react-bootstrap";
+import { Form, Button, Card, Image } from "react-bootstrap";
 import { toast } from "react-toastify";
 import Message from "../../../components/Message";
 import Loader from "../../../components/Loader";
@@ -9,11 +9,14 @@ import {
   useGetBlogDetailsQuery,
   useUpdateBlogMutation,
 } from "../../../slices/blogApiSlice";
+import PicImg from "./g-img-1.jpg";
+
 const BlogEditScreen = () => {
   const { id: blogId } = useParams();
 
   const [title, setTitle] = useState("");
   const [image, setImage] = useState("");
+  const [selectedImage, setSelectedImage] = useState(null);
   const [content, setContent] = useState("");
   const [isActive, setIsActive] = useState(true);
 
@@ -31,6 +34,7 @@ const BlogEditScreen = () => {
     if (blog) {
       setTitle(blog.title);
       setImage(blog.image);
+      setSelectedImage(blog.image);
       setContent(blog.content);
       setIsActive(blog.isActive);
     }
@@ -62,10 +66,12 @@ const BlogEditScreen = () => {
       const res = await uploadBlogImage(formData).unwrap();
       toast.success(res?.message);
       setImage(res.image);
+      setSelectedImage(res.image);
     } catch (err) {
       toast.error(err?.data?.message || err.error);
     }
   };
+
   return (
     <div>
       <div className="space" style={{ paddingTop: "3%", paddingBottom: "3%" }}>
@@ -80,6 +86,8 @@ const BlogEditScreen = () => {
             <Card.Body>
               <Card.Title>My Blog Post!</Card.Title>
               <Form onSubmit={submitHandler}>
+
+
                 <Form.Group controlId="blogTitle" className="mt-3">
                   <Form.Label>Blog Title</Form.Label>
                   <Form.Control
@@ -97,15 +105,13 @@ const BlogEditScreen = () => {
                     label="Choose file"
                     onChange={uploadFileHandler}
                   ></Form.Control>
-
-                  <Form.Control
-                    type="text"
-                    placeholder="Enter image url"
-                    value={image}
-                    className="mt-3"
-                    onChange={(e) => setImage}
-                  ></Form.Control>
                 </Form.Group>
+
+                {selectedImage &&
+                  <Form.Group className="mt-3">
+                    <img src={selectedImage} alt="Selected" className="w-100" />
+                  </Form.Group>}
+
 
                 <Form.Group controlId="blogBody" className="mt-3">
                   <Form.Label>Blog Body</Form.Label>

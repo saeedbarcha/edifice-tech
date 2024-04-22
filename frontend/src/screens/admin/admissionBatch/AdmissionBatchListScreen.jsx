@@ -31,23 +31,6 @@ const AdmissionBatchListScreen = () => {
       }
     }
   };
-
-  const createAdmissionBatchHandler = async () => {
-    if (
-      window.confirm("Are you sure you want to create a new admission batch?")
-    ) {
-      try {
-        const admissionBatch = await createAdmissionBatch();
-        if (admissionBatch) {
-          toast.success("Admission Batch created successfully");
-          refetch();
-        }
-      } catch (err) {
-        toast.error(err?.data?.message || err.error);
-      }
-    }
-  };
-
   function formatDateString(dateString) {
     var date = new Date(dateString);
     var month = (date.getMonth() + 1).toString().padStart(2, "0");

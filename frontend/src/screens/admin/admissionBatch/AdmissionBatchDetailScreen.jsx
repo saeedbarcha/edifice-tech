@@ -136,19 +136,19 @@ const AdmissionBatchDetailScreen = () => {
                   ))} */}
 
                   {admissionBatch?.courses.map((course) => (
-                    <tr key={course.courseId}>
-                      <td>{course.courseId.title}</td>
+                    <tr key={course?.courseId}>
+                      <td>{course?.courseId?.title}</td>
                       <td>
                         <Table responsive>
                           {" "}
                           {/* Nested responsive table for enrolled users */}
                           <tbody>
-                            {course.enrolledUsers.map((user) => (
-                              <tr key={user.user}>
-                                <td>{user.user}</td>
-                                <td>{user.completed.toString()}</td>
-                                <td>{user.courseFeePaid.toString()}</td>
-                                <td>{user.performance}</td>
+                            {course?.enrolledUsers?.map((user) => (
+                              <tr key={user?.user}>
+                                <td>{user?.user}</td>
+                                <td>{user?.completed?.toString()}</td>
+                                <td>{user?.courseFeePaid?.toString()}</td>
+                                <td>{user?.performance}</td>
                                 <td>
                                   <button className="btn btn-primary">Update</button>
                                   <button  className="btn btn-primary">Delete</button>

@@ -54,6 +54,18 @@ const admissionBatchSchema = new Schema(
                 ref: "User",
                 required: true,
               },
+              firstName:{
+                type: String,
+                required: true,
+              },
+              lastName:{
+                type: String,
+                required: true,
+              },
+              fatherName:{
+                type: String,
+                required: true,
+              },
               completed: {
                 type: Boolean,
                 default: false,

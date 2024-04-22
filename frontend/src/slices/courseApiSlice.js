@@ -40,6 +40,14 @@ export const courseApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Course"],
     }),
+    createCourse: builder.mutation({
+      query: (data) => ({
+        url: `${COURSE_URL}`,
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: ["Course"],
+    }),
 //     getActiveBlogs: builder.query({
 //       query: () => ({
 //         url: `${COURSE_URL}/active-blogs`,
@@ -68,6 +76,7 @@ export const {
  useGetCoursesQuery,
  useGetActiveCoursesQuery,
  useUpdateCourseMutation,
+ useCreateCourseMutation,
  useGetCourseDetailsQuery,
  useDeleteCourseMutation
 } = courseApiSlice;

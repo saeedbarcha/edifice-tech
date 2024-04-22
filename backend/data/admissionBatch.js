@@ -2,7 +2,7 @@ const admissionBatch = [
   {
     title: "Spring Course for Fresh Students",
     image: "/images/blog/b-2-5g-2.jpeg",
-    description:"Embark on a transformative journey into the realm of web development with our comprehensive course offerings. At our software company, we're thrilled to extend an invitation to aspiring developers eager to delve into the intricacies of building dynamic websites and applications. Our courses are meticulously crafted to provide hands-on experience guided by seasoned experts boasting rich industrial backgrounds. Through immersive learning modules, learners will gain invaluable insights, mastering the latest technologies and best practices in the field. With a focus on practical application and real-world projects, students will emerge equipped with the skills and confidence to thrive in the ever-evolving landscape of web development. Join us and unlock your potential to shape the digital future.",
+    description: "Embark on a transformative journey into the realm of web development with our comprehensive course offerings. At our software company, we're thrilled to extend an invitation to aspiring developers eager to delve into the intricacies of building dynamic websites and applications. Our courses are meticulously crafted to provide hands-on experience guided by seasoned experts boasting rich industrial backgrounds. Through immersive learning modules, learners will gain invaluable insights, mastering the latest technologies and best practices in the field. With a focus on practical application and real-world projects, students will emerge equipped with the skills and confidence to thrive in the ever-evolving landscape of web development. Join us and unlock your potential to shape the digital future.",
     admissionFee: 100,
     startDate: "2024-04-01",
     endDate: "2024-06-30",
@@ -15,24 +15,36 @@ const admissionBatch = [
         enrolledUsers: [
           {
             user: "609b7de8d2a7902c4c58d4ef",
+            firstName: "Khan",
+            lastName: "barcha",
+            fatherName: "issa khan",
             completed: false,
             courseFeePaid: false,
             performance: "Average"
           },
           {
             user: "609b7de8d2a7902c4c58d4ef",
+            firstName: "saeed",
+            lastName: "barcha",
+            fatherName: "issa khan",
             completed: false,
             courseFeePaid: false,
             performance: "Average"
           },
           {
             user: "609b7de8d2a7902c4c58d4ef",
+            firstName: "Karim",
+            lastName: "barcha",
+            fatherName: "issa khan",
             completed: false,
             courseFeePaid: false,
             performance: "Average"
           },
           {
             user: "60a2e1e6fbc5d41f60a521b7",
+            firstName: "saleem",
+            lastName: "barcha",
+            fatherName: "issa khan",
             completed: true,
             courseFeePaid: true,
             performance: "Good"
@@ -44,12 +56,18 @@ const admissionBatch = [
         enrolledUsers: [
           {
             user: "609b7de8d2a7902c4c58d4ef",
+            firstName: "leem",
+            lastName: "barcha",
+            fatherName: "issa khan",
             completed: false,
             courseFeePaid: false,
             performance: "Average"
           },
           {
             user: "60a2e1e6fbc5d41f60a521b7",
+            firstName: "team",
+            lastName: "barcha",
+            fatherName: "issa khan",
             completed: true,
             courseFeePaid: true,
             performance: "Good"
@@ -61,6 +79,9 @@ const admissionBatch = [
         enrolledUsers: [
           {
             user: "609b7de8d2a7902c4c58d4ef",
+            firstName: "m",
+            lastName: "barcha",
+            fatherName: "issa khan",
             completed: false,
             courseFeePaid: false,
             performance: "Poor"
@@ -72,7 +93,7 @@ const admissionBatch = [
   {
     title: "Summer Bootcamp for Beginners",
     image: "/images/blog/b-2-5g-2.jpeg",
-    description:"Embark on a transformative journey into the realm of web development with our comprehensive course offerings. At our software company, we're thrilled to extend an invitation to aspiring developers eager to delve into the intricacies of building dynamic websites and applications. Our courses are meticulously crafted to provide hands-on experience guided by seasoned experts boasting rich industrial backgrounds. Through immersive learning modules, learners will gain invaluable insights, mastering the latest technologies and best practices in the field. With a focus on practical application and real-world projects, students will emerge equipped with the skills and confidence to thrive in the ever-evolving landscape of web development. Join us and unlock your potential to shape the digital future.",
+    description: "Embark on a transformative journey into the realm of web development with our comprehensive course offerings. At our software company, we're thrilled to extend an invitation to aspiring developers eager to delve into the intricacies of building dynamic websites and applications. Our courses are meticulously crafted to provide hands-on experience guided by seasoned experts boasting rich industrial backgrounds. Through immersive learning modules, learners will gain invaluable insights, mastering the latest technologies and best practices in the field. With a focus on practical application and real-world projects, students will emerge equipped with the skills and confidence to thrive in the ever-evolving landscape of web development. Join us and unlock your potential to shape the digital future.",
     admissionFee: 150,
     startDate: "2024-07-01",
     endDate: "2024-08-31",
@@ -85,12 +106,18 @@ const admissionBatch = [
         enrolledUsers: [
           {
             user: "609b7de8d2a7902c4c58d4ef",
+            firstName: "leem",
+            lastName: "barcha",
+            fatherName: "issa khan",
             completed: false,
             courseFeePaid: false,
             performance: "Average"
           },
           {
             user: "60a2e1e6fbc5d41f60a521b7",
+            firstName: "ali",
+            lastName: "barcha",
+            fatherName: "issa khan",
             completed: true,
             courseFeePaid: true,
             performance: "Excellent"
@@ -102,6 +129,9 @@ const admissionBatch = [
         enrolledUsers: [
           {
             user: "609b7de8d2a7902c4c58d4ef",
+            firstName: "alish",
+            lastName: "barcha",
+            fatherName: "issa khan",
             completed: false,
             courseFeePaid: false,
             performance: "Good"
@@ -113,7 +143,7 @@ const admissionBatch = [
   {
     title: "Fall Coding Bootcamp",
     image: "/images/blog/b-2-5g-2.jpeg",
-    description:"Embark on a transformative journey into the realm of web development with our comprehensive course offerings. At our software company, we're thrilled to extend an invitation to aspiring developers eager to delve into the intricacies of building dynamic websites and applications. Our courses are meticulously crafted to provide hands-on experience guided by seasoned experts boasting rich industrial backgrounds. Through immersive learning modules, learners will gain invaluable insights, mastering the latest technologies and best practices in the field. With a focus on practical application and real-world projects, students will emerge equipped with the skills and confidence to thrive in the ever-evolving landscape of web development. Join us and unlock your potential to shape the digital future.",
+    description: "Embark on a transformative journey into the realm of web development with our comprehensive course offerings. At our software company, we're thrilled to extend an invitation to aspiring developers eager to delve into the intricacies of building dynamic websites and applications. Our courses are meticulously crafted to provide hands-on experience guided by seasoned experts boasting rich industrial backgrounds. Through immersive learning modules, learners will gain invaluable insights, mastering the latest technologies and best practices in the field. With a focus on practical application and real-world projects, students will emerge equipped with the skills and confidence to thrive in the ever-evolving landscape of web development. Join us and unlock your potential to shape the digital future.",
     admissionFee: 200,
     startDate: "2024-09-01",
     endDate: "2024-11-30",
@@ -126,6 +156,9 @@ const admissionBatch = [
         enrolledUsers: [
           {
             user: "609b7de8d2a7902c4c58d4ef",
+            firstName: "barcha",
+            lastName: "barcha",
+            fatherName: "issa khan",
             completed: true,
             courseFeePaid: true,
             performance: "Good"
@@ -137,6 +170,9 @@ const admissionBatch = [
         enrolledUsers: [
           {
             user: "609b7de8d2a7902c4c58d4ef",
+            firstName: "afzal",
+            lastName: "barcha",
+            fatherName: "issa khan",
             completed: false,
             courseFeePaid: false,
             performance: "Poor"
@@ -148,7 +184,7 @@ const admissionBatch = [
   {
     title: "Winter Web Development Bootcamp",
     image: "/images/blog/b-2-5g-2.jpeg",
-    description:"Embark on a transformative journey into the realm of web development with our comprehensive course offerings. At our software company, we're thrilled to extend an invitation to aspiring developers eager to delve into the intricacies of building dynamic websites and applications. Our courses are meticulously crafted to provide hands-on experience guided by seasoned experts boasting rich industrial backgrounds. Through immersive learning modules, learners will gain invaluable insights, mastering the latest technologies and best practices in the field. With a focus on practical application and real-world projects, students will emerge equipped with the skills and confidence to thrive in the ever-evolving landscape of web development. Join us and unlock your potential to shape the digital future.",
+    description: "Embark on a transformative journey into the realm of web development with our comprehensive course offerings. At our software company, we're thrilled to extend an invitation to aspiring developers eager to delve into the intricacies of building dynamic websites and applications. Our courses are meticulously crafted to provide hands-on experience guided by seasoned experts boasting rich industrial backgrounds. Through immersive learning modules, learners will gain invaluable insights, mastering the latest technologies and best practices in the field. With a focus on practical application and real-world projects, students will emerge equipped with the skills and confidence to thrive in the ever-evolving landscape of web development. Join us and unlock your potential to shape the digital future.",
     admissionFee: 180,
     startDate: "2024-12-01",
     endDate: "2025-02-28",
@@ -161,6 +197,9 @@ const admissionBatch = [
         enrolledUsers: [
           {
             user: "609b7de8d2a7902c4c58d4ef",
+            firstName: "akram",
+            lastName: "barcha",
+            fatherName: "issa khan",
             completed: true,
             courseFeePaid: true,
             performance: "Excellent"
@@ -172,6 +211,9 @@ const admissionBatch = [
         enrolledUsers: [
           {
             user: "609b7de8d2a7902c4c58d4ef",
+            firstName: "safeer",
+            lastName: "barcha",
+            fatherName: "issa khan",
             completed: false,
             courseFeePaid: false,
             performance: "Average"
@@ -183,7 +225,7 @@ const admissionBatch = [
   {
     title: "Advanced Machine Learning Course",
     image: "/images/blog/b-2-5g-2.jpeg",
-    description:"Embark on a transformative journey into the realm of web development with our comprehensive course offerings. At our software company, we're thrilled to extend an invitation to aspiring developers eager to delve into the intricacies of building dynamic websites and applications. Our courses are meticulously crafted to provide hands-on experience guided by seasoned experts boasting rich industrial backgrounds. Through immersive learning modules, learners will gain invaluable insights, mastering the latest technologies and best practices in the field. With a focus on practical application and real-world projects, students will emerge equipped with the skills and confidence to thrive in the ever-evolving landscape of web development. Join us and unlock your potential to shape the digital future.",
+    description: "Embark on a transformative journey into the realm of web development with our comprehensive course offerings. At our software company, we're thrilled to extend an invitation to aspiring developers eager to delve into the intricacies of building dynamic websites and applications. Our courses are meticulously crafted to provide hands-on experience guided by seasoned experts boasting rich industrial backgrounds. Through immersive learning modules, learners will gain invaluable insights, mastering the latest technologies and best practices in the field. With a focus on practical application and real-world projects, students will emerge equipped with the skills and confidence to thrive in the ever-evolving landscape of web development. Join us and unlock your potential to shape the digital future.",
     admissionFee: 250,
     startDate: "2024-03-15",
     endDate: "2024-05-15",
@@ -196,6 +238,9 @@ const admissionBatch = [
         enrolledUsers: [
           {
             user: "609b7de8d2a7902c4c58d4ef",
+            firstName: "noor",
+            lastName: "barcha",
+            fatherName: "issa khan",
             completed: true,
             courseFeePaid: true,
             performance: "Excellent"
@@ -207,6 +252,9 @@ const admissionBatch = [
         enrolledUsers: [
           {
             user: "609b7de8d2a7902c4c58d4ef",
+            firstName: "nawaz",
+            lastName: "barcha",
+            fatherName: "issa khan",
             completed: true,
             courseFeePaid: true,
             performance: "Good"
@@ -218,7 +266,7 @@ const admissionBatch = [
   {
     title: "Digital Marketing Crash Course",
     image: "/images/blog/b-2-5g-2.jpeg",
-    description:"Embark on a transformative journey into the realm of web development with our comprehensive course offerings. At our software company, we're thrilled to extend an invitation to aspiring developers eager to delve into the intricacies of building dynamic websites and applications. Our courses are meticulously crafted to provide hands-on experience guided by seasoned experts boasting rich industrial backgrounds. Through immersive learning modules, learners will gain invaluable insights, mastering the latest technologies and best practices in the field. With a focus on practical application and real-world projects, students will emerge equipped with the skills and confidence to thrive in the ever-evolving landscape of web development. Join us and unlock your potential to shape the digital future.",
+    description: "Embark on a transformative journey into the realm of web development with our comprehensive course offerings. At our software company, we're thrilled to extend an invitation to aspiring developers eager to delve into the intricacies of building dynamic websites and applications. Our courses are meticulously crafted to provide hands-on experience guided by seasoned experts boasting rich industrial backgrounds. Through immersive learning modules, learners will gain invaluable insights, mastering the latest technologies and best practices in the field. With a focus on practical application and real-world projects, students will emerge equipped with the skills and confidence to thrive in the ever-evolving landscape of web development. Join us and unlock your potential to shape the digital future.",
     admissionFee: 120,
     startDate: "2024-07-15",
     endDate: "2024-09-15",
@@ -231,6 +279,9 @@ const admissionBatch = [
         enrolledUsers: [
           {
             user: "609b7de8d2a7902c4c58d4ef",
+            firstName: "waz",
+            lastName: "barcha",
+            fatherName: "issa khan",
             completed: true,
             courseFeePaid: true,
             performance: "Good"
@@ -242,6 +293,9 @@ const admissionBatch = [
         enrolledUsers: [
           {
             user: "609b7de8d2a7902c4c58d4ef",
+            firstName: "naaz",
+            lastName: "barcha",
+            fatherName: "issa khan",
             completed: false,
             courseFeePaid: false,
             performance: "Average"

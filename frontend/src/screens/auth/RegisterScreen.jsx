@@ -13,7 +13,6 @@ const RegisterScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [companyCode, setCompanyCode] = useState("");
   // const [address, setAddress] = useState("");
   // const [phone, setPhone] = useState("");
   // const [dateOfBirth, setDateOfBirth] = useState("");
@@ -53,11 +52,7 @@ const RegisterScreen = () => {
     }else if (password !== confirmPassword) {
       toast.error("Password do not match");
       return;
-    } 
-    else if (!companyCode) {
-      toast.error("Company code is required");
-      return;
-    }else {
+    } else {
       try {
         const res = await register(
           
@@ -66,7 +61,6 @@ const RegisterScreen = () => {
             name,
             email,
             password,
-            companyCode,
             phone:"",
             dateOfBirth:"",
             gender,
@@ -78,26 +72,6 @@ const RegisterScreen = () => {
             facebookUrl:"",
             instagramUrl:"",
             linkedInUrl:"",
-            education:
-              {
-                instituteName: "",
-                degree: "",
-                course: "",
-                date: "",
-              },
-            experience:{
-                instituteName: "",
-                designation: "",
-                joiningDate: "",
-                endingDate: "",
-              },
-            projects: {
-                projectTitle: "",
-                projectUrl: "",
-                projectDecription: "",
-                projectImage: "",
-              },
-            
           }
           // 
          ).unwrap();
@@ -203,16 +177,6 @@ const RegisterScreen = () => {
               onChange={(e) => setAddress(e.target.value)}
             ></Form.Control>
           </Form.Group> */}
-
-          <Form.Group controlId="companyCode" className="my-3">
-            <Form.Label>Company Code </Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter company code"
-              value={companyCode}
-              onChange={(e) => setCompanyCode(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
           <Button
             type="submit"
             variant="primary"

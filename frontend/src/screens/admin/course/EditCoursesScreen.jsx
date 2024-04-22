@@ -37,17 +37,17 @@ const EditCoursesScreen = () => {
 
   console.log("ccccccccccccccc", course)
   const [updateCourse, { isLoading: loadingUpdate }] =
-  useUpdateCourseMutation();
+    useUpdateCourseMutation();
 
   const [uploadCourseImage, { isLoading: loadingUpload }] =
-  useUploadProductImageMutation();
+    useUploadProductImageMutation();
 
 
   useEffect(() => {
     if (course) {
       setTitle(course.title);
       setPrice(course.price);
-      setIsActive(course.isActive);      
+      setIsActive(course.isActive);
       setDiscount(course.discount);
       setSkillSet(course.skillSet);
       setPreRequisites(course.preRequisites);
@@ -84,7 +84,7 @@ const EditCoursesScreen = () => {
       toast.error(result.error);
     } else {
       toast.success("Course updated successfully");
-      
+
     }
   };
 
@@ -127,6 +127,19 @@ const EditCoursesScreen = () => {
                   onChange={(e) => setTitle(e.target.value)}
                 />
               </Form.Group>
+              <Form.Group controlId="image" className="mt-3">
+                <Form.Label>Image</Form.Label>
+                <Form.Control
+                  type="file"
+                  label="Choose file"
+                  onChange={uploadFileHandler}
+                ></Form.Control>
+              </Form.Group>
+
+              {image &&
+                <Form.Group className="mt-3">
+                  <img src={image} alt="Selected" className="w-100" />
+                </Form.Group>}
 
               <Form.Group controlId="price" className="my-2">
                 <Form.Label>Price</Form.Label>
@@ -178,7 +191,7 @@ const EditCoursesScreen = () => {
                   onChange={(e) => setDescription(e.target.value)}
                 ></Form.Control>
               </Form.Group>
-
+              {/* 
               <Form.Group controlId="image" className="my-2">
                 <Form.Label>Image</Form.Label>
 
@@ -195,7 +208,7 @@ const EditCoursesScreen = () => {
                   value={image}
                   onChange={(e) => setImage(e.target.value)}
                 ></Form.Control>
-              </Form.Group>
+              </Form.Group> */}
 
               <Form.Group controlId="hoursInDay" className="my-2">
                 <Form.Label>Hours In Day</Form.Label>

@@ -48,7 +48,7 @@ import AdmissionBatchDetailScreen from "./screens/admin/admissionBatch/Admission
 import CreateAdmissionBatchScreen from "./screens/admin/admissionBatch/CreateAdmissionBatchScreen";
 import EditCoursesScreen from "./screens/admin/course/EditCoursesScreen";
 import EditAdmissionBatchScreen from "./screens/admin/admissionBatch/EditAdmissionBatchScreen";
-
+import EnrollAdmissionBatchScreen from "./screens/admission/EnrollAdmissionBatchScreen";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -69,6 +69,8 @@ const router = createBrowserRouter(
       <Route path="/member/:id" element={<TeamMemberProfile />} />
       <Route path="/blogs" element={<AllBlogsScreen />} />
       <Route path="/admissionbatch/:id" element={<AdmissionBatchDetailScreen />} />
+      <Route path="/activeadmissionbatch/:id" element={<EnrollAdmissionBatchScreen />} />
+
 
          
 
