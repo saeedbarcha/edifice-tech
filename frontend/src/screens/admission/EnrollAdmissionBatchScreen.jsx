@@ -32,6 +32,7 @@ const EnrollAdmissionBatchScreen = () => {
     } = useGetAdmissionBatchDetailsQuery(id);
 
 
+
     const [enrollCourse, { isLoading: loadingEnroll }] =
         useCreateEnrollmentMutation();
 
@@ -71,7 +72,7 @@ const EnrollAdmissionBatchScreen = () => {
                     {error?.data?.message || error?.data || error?.error}
                 </Message>
             ) : (
-                <Card>
+                <Card className="my-4">
                     <Card.Body>
                         <Card.Title className="mb-4">{admissionBatch?.title}</Card.Title>
                         <Card.Text>
@@ -140,7 +141,8 @@ const EnrollAdmissionBatchScreen = () => {
                             </Form.Group>
                             <Form.Group className="my-4">
                                 <Form.Label>Selected Courses</Form.Label>
-                                {admissionBatch?.courses?.map((course, index) => {
+                                
+                                {admissionBatch?.selectedCourses?.map((course, index) => {
                                     return (
                                         <Form.Check
                                             key={course?._id}
@@ -153,7 +155,7 @@ const EnrollAdmissionBatchScreen = () => {
                                                 } else {
                                                     setCourses(
                                                         courses.filter(
-                                                            (selectedCourse) => selectedCourse !== course?._id
+                                                            (sCourse) => sCourse !== course?._id
                                                         )
                                                     );
                                                 }

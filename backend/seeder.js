@@ -12,6 +12,7 @@ import gallery from "./data/gallery.js";
 import aboutCopmany from "./data/aboutCompany.js";
 import admissionBatch from "./data/admissionBatch.js";
 
+
 import User from "./models/userModel.js";
 import Course from "./models/courseModel.js";
 import Product from "./models/productModel.js";
@@ -22,6 +23,7 @@ import Blog from "./models/blogModel.js";
 import Gallery from "./models/galleryModel.js";
 import AboutCompany from "./models/aboutCompanyModel.js";
 import AdmissionBatch from "./models/admissionBatchModel.js";
+import Enrollment from "./models/enrollmentModel.js";
 import connectDB from "./config/db.js";
 
 dotenv.config();
@@ -40,7 +42,9 @@ const importData = async () => {
     await Blog.deleteMany();
     await Project.deleteMany();
     await Gallery.deleteMany();
+    await Enrollment.deleteMany();
 
+    
     const createdUsers = await User.insertMany(users);
 
     const adminUser = createdUsers[0]._id;
@@ -121,6 +125,7 @@ const destroyData = async () => {
     await Blog.deleteMany();
     await Project.deleteMany();
     await Gallery.deleteMany();
+    await Enrollment.deleteMany();
 
     console.log("Data Destroyed!".red.inverse);
     process.exit();

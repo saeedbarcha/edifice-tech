@@ -3,7 +3,6 @@ const router = express.Router();
 import {
   getAdmissionBatches,
   getAdmissionBatchById,
-  updateToEnrollAdmissionBatch,
   updateAdmissionBatch,
   createAdmissionBatch,
   deleteAdmissionBatch,
@@ -19,8 +18,6 @@ router
   router
   .route("/new-admission")
   .get(getRecentAdmissionBatch)
-  router.route("/new-admission/:id/enroll").put(protect, updateToEnrollAdmissionBatch);
-
 router
   .route("/:id")
   .get(getAdmissionBatchById)

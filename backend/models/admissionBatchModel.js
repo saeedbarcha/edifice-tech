@@ -15,7 +15,7 @@ const admissionBatchSchema = new Schema(
       type: String,
       required: true,
     },
-    admissionFee:{
+    admissionFee: {
       type: Number,
       required: true,
       default: 0
@@ -40,53 +40,18 @@ const admissionBatchSchema = new Schema(
       type: Boolean,
       default: true,
     },
-    courses:[
-        {
-          courseId: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "Course",
-            required: true,
-          },
-          enrolledUsers: [
-            {
-              user: {
-                type: mongoose.Schema.Types.ObjectId,
-                ref: "User",
-                required: true,
-              },
-              firstName:{
-                type: String,
-                required: true,
-              },
-              lastName:{
-                type: String,
-                required: true,
-              },
-              fatherName:{
-                type: String,
-                required: true,
-              },
-              completed: {
-                type: Boolean,
-                default: false,
-              },
-              courseFeePaid: {
-                type: Boolean,
-                default: false,
-              },
-              performance: {
-                type: String,
-                enum: ['Excellent', 'Good', 'Average', 'Poor'],
-                default: 'Average', 
-              },
-            }
-          ],
-        }
-      ],
-    
-    },
-    // other fields...
-  
+    selectedCourses: [{
+      courseId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Course",
+        required: true,
+      },
+    }
+    ],
+
+  },
+  // other fields...
+
   {
     timestamps: true,
   }

@@ -2,23 +2,23 @@ import mongoose from "mongoose";
 import asyncHandler from "../middleware/asyncHandler.js";
 import AdmissionBatch from "../models/admissionBatchModel.js";
 
-// @desc    Fetch all Admission Batches with associated Courses and Users
+// @desc    Fetch all Admission Batches with associated selectedCourses and Users
 // @route   GET /api/admission-batches
 // @access  Public
 const getAdmissionBatches = asyncHandler(async (req, res) => {
   const admissionBatches = await AdmissionBatch.find({}).populate({
-    path: "courses.courseId",
-    // populate: { path: 'enrolledUsers.user', select: 'name' } // Populate both courses and enrolled users
+    path: "selectedCourses.courseId",
+    // populate: { path: 'enrolledUsers.user', select: 'name' } // Populate both selectedCourses and enrolled users
   });
   res.status(200).json(admissionBatches);
 });
 
-// @desc    Fetch all Admission Batches with associated Courses and Users
+// @desc    Fetch all Admission Batches with associated selectedCourses and Users
 // @route   GET /api/admission-batches
 // @access  Public
 const getRecentAdmissionBatch = asyncHandler(async (req, res) => {
   const admissionBatches = await AdmissionBatch.find({})
-    .populate({ path: "courses.courseId" })
+    .populate({ path: "selectedCourses.courseId" })
     .sort({ _id: -1 }) // Sort by _id in descending order to get the last one
     .limit(1); // Limit to only the last batch
 
@@ -32,7 +32,7 @@ const getRecentAdmissionBatch = asyncHandler(async (req, res) => {
 // // @access  Public
 // const getAdmissionBatchById = asyncHandler(async (req, res) => {
 //   const admissionBatch = await AdmissionBatch.findById(req.params.id).populate({
-//     path: "courses.courseId",
+//     path: "selectedCourses.courseId",
 //     // populate: { path: 'enrolledUsers.user', select: 'name' }
 //   });
 //   if (admissionBatch) {
@@ -50,7 +50,7 @@ const getAdmissionBatchById = asyncHandler(async (req, res) => {
   try {
     const admissionBatch = await AdmissionBatch.findById(req.params.id)
       .populate({
-        path: "courses.courseId",
+        path: "selectedCourses.courseId",
         // Optionally, you can populate further fields if needed
         // populate: { path: 'enrolledUsers.user', select: 'name' }
       });
@@ -82,7 +82,7 @@ const createAdmissionBatch = asyncHandler(async (req, res) => {
     lastDateToApply,
     certificate,
     isActive,
-    courses,
+    selectedCourses,
   } = req.body;
   if (
     !title ||
@@ -90,14 +90,14 @@ const createAdmissionBatch = asyncHandler(async (req, res) => {
     !startDate ||
     !endDate ||
     !lastDateToApply ||
-    !Array.isArray(courses) ||
-    courses.length === 0
+    !Array.isArray(selectedCourses) ||
+    selectedCourses.length === 0
   ) {
     res.status(400);
     throw new Error("All required fields must be provided");
   }
 
-  const preparedCourses = courses.map((course) => ({
+  const preparedselectedCourses = selectedCourses.map((course) => ({
     courseId: course,
     enrolledUsers: [],
   }));
@@ -113,7 +113,7 @@ const createAdmissionBatch = asyncHandler(async (req, res) => {
     lastDateToApply,
     certificate,
     isActive,
-    courses: preparedCourses,
+    selectedCourses: preparedselectedCourses,
   });
 
   if (admissionBatch) {
@@ -138,14 +138,13 @@ const updateAdmissionBatch = asyncHandler(async (req, res) => {
     lastDateToApply,
     certificate,
     isActive,
-    courses,
+    selectedCourses,
   } = req.body;
 
   const admissionBatchId = req.params.id;
 
-  const preparedCourses = courses.map((course) => ({
+  const preparedselectedCourses = selectedCourses.map((course) => ({
     courseId: course,
-    enrolledUsers: [],
   }));
   let admissionBatch = await AdmissionBatch.findById({ _id: admissionBatchId });
 
@@ -168,7 +167,7 @@ const updateAdmissionBatch = asyncHandler(async (req, res) => {
     certificate !== undefined ? certificate : admissionBatch.certificate;
   admissionBatch.isActive =
     isActive !== undefined ? isActive : admissionBatch.isActive;
-  admissionBatch.courses = preparedCourses || admissionBatch.courses;
+  admissionBatch.selectedCourses = preparedselectedCourses || admissionBatch.selectedCourses;
 
   const updatedAdmissionBatch = await admissionBatch.save();
   if (updatedAdmissionBatch) {
@@ -179,177 +178,6 @@ const updateAdmissionBatch = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc    Update Admission Batch including course enrollment
-// @route   PUT /api/admission-batches/:id/enroll
-// // @access  Private/login
-// const updateToEnrollAdmissionBatch = asyncHandler(async (req, res) => {
-//   const { admissionBatchId, firstName, lastName, fatherName, courses } = req.body;
-
-//   try {
-//     let admissionBatch = await AdmissionBatch.findById(admissionBatchId);
-//     if (!admissionBatch) {
-//       res.status(404);
-//       throw new Error("Admission batch not found");
-//     }
-//     if (admissionBatch.courses) {
-//       admissionBatch.courses.map((courses) => {
-
-//         courses.enrolledUsers.push({
-//           user: req.user._id,
-//           firstName,
-//           lastName,
-//           fatherName,
-//           completed: false,
-//           courseFeePaid: false,
-//           performance: "Average",
-//         });
-//         console.log("lllllllllllll......", courses)
-//       })
-//     }
-//     const updatedAdmissionBatch = await admissionBatch.save();
-//     res.status(200).json(updatedAdmissionBatch);
-//   } catch (error) {
-//     res.status(500);
-//     throw new Error("Internal server error");
-//   }
-// });
-// const updateToEnrollAdmissionBatch = asyncHandler(async (req, res) => {
-//   const { admissionBatchId, firstName, lastName, fatherName, courses } = req.body;
-
-//   try {
-//     let admissionBatch = await AdmissionBatch.findById(admissionBatchId);
-//     if (!admissionBatch) {
-//       res.status(404);
-//       throw new Error("Admission batch not found");
-//     }
-
-//     admissionBatch?.courses?.map(course => {
-
-//       courses.map((c) => {
-//         if (c == course._id.toString()) {
-//           course.enrolledUsers.push({
-//             user: req.user._id,
-//             firstName,
-//             lastName,
-//             fatherName,
-//             completed: false,
-//             courseFeePaid: false,
-//             performance: "Average",
-//           });
-//         }
-//       }
-//       )
-//     }
-//     );
-
-//     const updatedAdmissionBatch = await admissionBatch.save();
-//     res.status(200).json(updatedAdmissionBatch);
-//   } catch (error) {
-//     console.error("Error:", error);
-//     res.status(500).json({ error: "Internal server error" });
-//   }
-// });
-
-
-const updateToEnrollAdmissionBatch = asyncHandler(async (req, res) => {
-  const { admissionBatchId, firstName, lastName, fatherName, courses } = req.body;
-  console.log("ccccccccccc", courses.length == 0)
-
-  try {
-    let admissionBatch = await AdmissionBatch.findById(admissionBatchId);
-    if (!admissionBatch) {
-      res.status(404);
-      return res.json({ error: "Admission batch not found" }); // Return early after sending the response
-    }else if (!firstName){
-      res.status(400);
-      return res.json({ error: "First name is required" });
-  
-    }else if (!lastName){
-      res.status(400);
-      return res.json({ error: "Last name is required" });
-    }else if (!fatherName){
-      res.status(400);
-      return res.json({ error: "Father name is required" });
-    }else if (courses.length == 0){
-      res.status(400);
-      return res.json({ error: "Select atleast 1 course to Enroll"});
-    }else{
-      for (const courseId of courses) {
-        const course = admissionBatch.courses.find(course => courseId === course._id.toString());       
-        if (!course) {
-          res.status(404);
-          return res.json({ error: "Course not found" }); 
-        }
-  
-        const isEnrolled = course.enrolledUsers.some(user => user.user.toString() === req.user._id.toString());
-        
-        if (isEnrolled) {
-          res.status(400);
-          return res.json({ error: "You are already enrolled in this course" });
-        }else{
-          course.enrolledUsers.push({
-            user: req.user._id,
-            firstName,
-            lastName,
-            fatherName,
-            completed: false,
-            courseFeePaid: false,
-            performance: "Average",
-          });
-        }
-  
-       
-      }
-  
-      await admissionBatch.save();
-      res.status(200).json({ message: "Enrolled successfully" }); 
-    }
-
-  
-  } catch (error) {
-    console.error("Error:", error);
-    res.status(500).json({ error: "Internal server error" }); // Handle other errors
-  }
-});
-
-
-
-// // @desc    Update Admission Batch including course enrollment
-// // @route   PUT /api/admission-batches/:id/enroll
-// // // @access  Private/login
-// const updateToEnrollAdmissionBatch = asyncHandler(async (req, res) => {
-//   const admissionBatchId = req.body.admissionBatchId;
-
-//   try {
-//     let admissionBatch = await AdmissionBatch.findById(admissionBatchId);
-//     const foundCourse = admissionBatch.courses.find((course) =>
-//       course.courseId.equals(req.body.courseId)
-//     );
-
-//     if (!admissionBatch) {
-//       res.status(404);
-//       throw new Error("Admission batch not found");
-//     } else if (!foundCourse) {
-//       res.status(404);
-//       throw new Error("Course not found");
-//     } else {
-//       foundCourse.enrolledUsers.push({
-//         user: req.user._id,
-//         completed: false,
-//         courseFeePaid: false,
-//         performance: "Average",
-//       });
-//     }
-
-//     const updatedAdmissionBatch = await admissionBatch.save();
-//     res.status(200).json(updatedAdmissionBatch);
-//   } catch (error) {
-//     console.error(error);
-//     res
-//       .status(error.statusCode || 500)
-//       .json({ error: error.message || "Internal server error" });
-//   }
-// });
 
 // @desc    Delete an Admission Batch
 // @route   DELETE /api/admission-batches/:id
@@ -368,7 +196,6 @@ const deleteAdmissionBatch = asyncHandler(async (req, res) => {
 
 export {
   getAdmissionBatches,
-  updateToEnrollAdmissionBatch,
   updateAdmissionBatch,
   getRecentAdmissionBatch,
   getAdmissionBatchById,

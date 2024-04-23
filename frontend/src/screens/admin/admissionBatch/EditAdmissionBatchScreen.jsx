@@ -16,7 +16,7 @@ const EditAdmissionBatchScreen = () => {
   const [image, setImage] = useState("");
   const [lastDateToApply, setLastDateToApply] = useState("");
   const [certificate, setCertificate] = useState(false);
-  const [courses, setCourses] = useState([]);
+  const [selectedCourses, setSelectedCourses] = useState([]);
   const [isActive, setIsActive] = useState(false);
 
   const { id: admissionBatchId } = useParams();
@@ -53,7 +53,7 @@ const EditAdmissionBatchScreen = () => {
       );
       setIsActive(admissionBatch?.isActive)
       setCertificate(admissionBatch?.certificate);
-      setCourses(admissionBatch?.courses?.map(course => course?.courseId?._id)); 
+      setSelectedCourses(admissionBatch?.selectedCourses?.map(course => course?.courseId?._id)); 
     }
   }, [admissionBatch]);
 
@@ -71,7 +71,7 @@ const EditAdmissionBatchScreen = () => {
         lastDateToApply,
         isActive,
         certificate,
-        courses,
+        selectedCourses,
       };
       // const res = "jjj";
       const res = await updateAdmissionBatch(admissionBatch);
@@ -94,7 +94,7 @@ const EditAdmissionBatchScreen = () => {
   // };
 
   const handleCourseChange = (courseId, checked) => {
-    setCourses(prevCourses => {
+    setSelectedCourses(prevCourses => {
       if (checked) {
         return [...prevCourses, courseId];
       } else {
@@ -217,7 +217,7 @@ const EditAdmissionBatchScreen = () => {
                 {allActiveCourses?.map((c, index) => {
 
                   const courseId = c?._id;
-                  const isChecked = courses?.includes(courseId);
+                  const isChecked = selectedCourses?.includes(courseId);
                   return (
                     <Form.Check
                       key={courseId}

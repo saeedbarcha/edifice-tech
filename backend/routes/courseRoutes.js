@@ -4,7 +4,7 @@ import {
   getCourses,
   getAllActiveCourses,
   getCourseById,
-  createCourse,
+  createNewCourse,
   updateCourse,
   deleteCourse,
 } from "../controllers/courseController.js";
@@ -12,7 +12,7 @@ import { protect, admin } from "../middleware/authMiddleware.js";
 import checkObjectId from "../middleware/checkObjectId.js";
 
 
-router.route("/").get(getCourses).post(protect, admin, createCourse);
+router.route("/").get(getCourses).post(protect, admin, createNewCourse);
 router.route("/active-courses").get(getAllActiveCourses);
 
 

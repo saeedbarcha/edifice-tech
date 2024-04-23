@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { LinkContainer } from "react-router-bootstrap";
 import { Container, Row, Col, Form, Carousel, Card, Image, Button, Badge, Table } from "react-bootstrap";
+import { FaTimes, FaTrash, FaEdit, FaCheck } from "react-icons/fa";
 import Message from "../../../../components/Message";
 import Loader from "../../../../components/Loader";
 import {
@@ -28,22 +30,22 @@ const MyEnrollments = () => {
     const navigate = useNavigate();
 
     const {
-        data: admissionBatch,
+        data: admissionBatches,
         isLoading,
         error,
     } = useGetMyEnrolmentsQuery(id);
 
 
-    console.log("ssssssssssssssssss.........", admissionBatch)
+    console.log("ssssssssssssssssss.........", admissionBatches)
 
     const [enrollCourse, { isLoading: loadingEnroll }] =
         useCreateEnrollmentMutation();
 
     useEffect(() => {
-        if (admissionBatch) {
-            setAdmissionBatchId(admissionBatch._id);
+        if (admissionBatches) {
+            setAdmissionBatchId(admissionBatches._id);
         }
-    }, [admissionBatch]);
+    }, [admissionBatches]);
 
     const submitHandler = async (e) => {
         e.preventDefault();
@@ -75,117 +77,77 @@ const MyEnrollments = () => {
                     {error?.data?.message || error?.data || error?.error}
                 </Message>
             ) : (
-                <Card>
-                    <Card.Body>
-                        <Card.Title className="mb-4">{admissionBatch?.title}</Card.Title>
-                        <Card.Text>
-                            <strong>Start Date:</strong> {admissionBatch?.startDate}
-                        </Card.Text>
-                        <Card.Text>
-                            <strong>End Date:</strong> {admissionBatch?.endDate}
-                        </Card.Text>
-                        <Card.Text>
-                            <strong>Last Date To Apply:</strong>{" "}
-                            {admissionBatch?.lastDateToApply}
-                        </Card.Text>
-                        <Card.Text>
-                            <strong>Certificate Available:</strong>{" "}
-                            <Badge
-                                bg={admissionBatch?.certificate ? "success" : "danger"}
-                            >
-                                {admissionBatch?.certificate ? "Yes" : "No"}
-                            </Badge>
-                        </Card.Text>
-                        <Card.Text>
-                            <strong>Active:</strong>{" "}
-                            <Badge bg={admissionBatch?.isActive ? "success" : "danger"}>
-                                {admissionBatch?.isActive ? "Yes" : "No"}
-                            </Badge>
-                        </Card.Text>
+                <div>
+                    {admissionBatches?.admissionBatches.map((admissionB) => (
+                        <Card className="my-4">
+                            <Card.Body>
+                                <Card.Title className="mb-4">{admissionB?.batch?.title}</Card.Title>
+                                <Card.Text>
+                                    <strong>Start Date:</strong> {admissionB?.batch?.startDate}
+                                </Card.Text>
+                                <Card.Text>
+                                    <strong>End Date:</strong> {admissionB?.batch?.endDate}
+                                </Card.Text>
+                                <Card.Text>
+                                    <strong>Last Date To Apply:</strong>{" "}
+                                    {admissionB?.batch?.lastDateToApply}
+                                </Card.Text>
+                                <Card.Text>
+                                    <strong>Certificate Available:</strong>{" "}
+                                    <Badge
+                                        bg={admissionB?.certificate ? "success" : "danger"}
+                                    >
+                                        {admissionB?.batch?.certificate ? "Yes" : "No"}
+                                    </Badge>
+                                </Card.Text>
+                                <Card.Text>
+                                    <strong>Active:</strong>{" "}
+                                    <Badge bg={admissionB?.batch?.isActive ? "success" : "danger"}>
+                                        {admissionB?.batch?.isActive ? "Yes" : "No"}
+                                    </Badge>
+                                </Card.Text>
 
-                        <br />
-                        <br />
+                                <br />
+                                <br />
 
-                        <hr />
-                        <br />
+                                <hr />
+                                <br />
+                                <h1>Track your courses record.</h1>
+                                <Table striped hover responsive className="table-sm">
+                                    <thead>
+                                        <tr>
+                                            <th>COURSE TITLE</th>
+                                            <th>TOTAL DURATION</th>                                            
+                                            <th>COURSE FEE</th>
+                                            <th>PERFORMANCE</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {admissionB?.enrollments?.map((enrollment) => (
+                                            <tr >
+                                                {/* <td><Image src={blog.image} fluid style={{ width: "60px", height: "60px" }} /></td> */}
+                                                <td>title</td>
+                                                <td>total time</td>
 
-                        <Form onSubmit={submitHandler}>
-                            <h1>Please submit this from to Enroll.</h1>
-                            <br />
-                            <p>Please submit your actual information below. This data will be used for your certificate.</p>
+                                                <td>
+                                                    {enrollment?.courseFeePaid ? (
+                                                        <FaCheck style={{ color: "green" }} />
+                                                    ) : (
+                                                        <FaTimes style={{ color: "red" }} />
+                                                    )}
+                                                </td>
+                                                <td>{enrollment?.performance}</td>
 
-                            <Form.Group controlId="firstName" className="my-3">
-                                <Form.Label>First Name</Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    placeholder="First Name"
-                                    value={firstName}
-                                    onChange={(e) => setFirstName(e.target.value)}
-                                />
-                            </Form.Group>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </Table>
+                            </Card.Body>
+                        </Card>
+                    )
+                    )}
 
-                            <Form.Group controlId="lastName" className="my-3">
-                                <Form.Label>Last Name</Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    placeholder="Last Name"
-                                    value={lastName}
-                                    onChange={(e) => setLastName(e.target.value)}
-                                />
-                            </Form.Group>
-                            <Form.Group controlId="fatherName" className="my-3">
-                                <Form.Label>Father Name</Form.Label>
-                                <Form.Control
-                                    type="text"
-                                    placeholder="Father Name"
-                                    value={fatherName}
-                                    onChange={(e) => setFatherName(e.target.value)}
-                                />
-                            </Form.Group>
-                            <Form.Group className="my-4">
-                                <Form.Label>Selected Courses</Form.Label>
-                                {admissionBatch?.courses?.map((course, index) => {
-                                    return (
-                                        <Form.Check
-                                            key={course?._id}
-                                            type="checkbox"
-                                            id={`course-checkbox-${course?.courseId?.title}`}
-                                            label={course?.courseId?.title}
-                                            onChange={(e) => {
-                                                if (e.target.checked) {
-                                                    setCourses([...courses, course?._id]);
-                                                } else {
-                                                    setCourses(
-                                                        courses.filter(
-                                                            (selectedCourse) => selectedCourse !== course?._id
-                                                        )
-                                                    );
-                                                }
-                                            }}
-                                        />
-                                    );
-                                })}
-                                {/* {course.isEnrolled ? (
-                                    <Button variant="primary" disabled>
-                                        Enrolled
-                                    </Button>
-                                ) : ( */}
-                                <Button
-                                    variant="primary"
-                                    type="submit"
-                                    className="my-3"
-                                    disabled={loadingEnroll}
-                                // onClick={() => handleEnrollCourse(course?.courseId?._id)}
-                                >
-                                    {loadingEnroll ? "Enrolling..." : "Enroll"}
-                                </Button>
-                                {/* )} */}
-                            </Form.Group>
-                        </Form>
-
-
-                    </Card.Body>
-                </Card>
+                </div>
             )}
         </Container>
     )

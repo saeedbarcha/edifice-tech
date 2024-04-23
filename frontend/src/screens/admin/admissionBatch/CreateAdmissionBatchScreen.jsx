@@ -16,7 +16,7 @@ const CreateAdmissionBatchScreen = () => {
   const [image, setImage] = useState("");
   const [lastDateToApply, setLastDateToApply] = useState("");
   const [certificate, setCertificate] = useState(false);
-  const [courses, setCourses] = useState([]);
+  const [selectedCourses, setSelectedCourses] = useState([]);
   const [isActive, setIsActive] = useState(false);
 
 
@@ -45,7 +45,7 @@ const CreateAdmissionBatchScreen = () => {
         image,
         lastDateToApply,
         certificate,
-        courses,
+        selectedCourses,
         isActive
       };
       const res = await createAdmissionBatch(admissionBatch);
@@ -178,11 +178,11 @@ const CreateAdmissionBatchScreen = () => {
                     label={course.title}
                     onChange={(e) => {
                       if (e.target.checked) {
-                        setCourses([...courses, course._id]);
+                        setSelectedCourses([...selectedCourses, course._id]);
                       } else {
-                        setCourses(
-                          courses.filter(
-                            (selectedCourse) => selectedCourse !== course._id
+                        setSelectedCourses(
+                          selectedCourses.filter(
+                            (sCourse) => sCourse !== selectedCourses._id
                           )
                         );
                       }

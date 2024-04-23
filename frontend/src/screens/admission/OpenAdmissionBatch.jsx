@@ -146,62 +146,19 @@
 
 /////////////////////////////////////////////////////////////
 import React, { useState, useEffect } from "react";
-import { Container, Row, Col, Carousel, Card, Image, Button, Badge, Table } from "react-bootstrap";
+import { Container, Row, Col, Carousel, Image, Button, Table } from "react-bootstrap";
 import Message from "./../../components/Message";
 import Loader from "./../../components/Loader";
 import { LinkContainer } from "react-router-bootstrap";
-import { FaEdit, FaTrash } from "react-icons/fa";
-import {
-  useUpdateAdmissionBatchToEnrollMutation,
-} from "./../../slices/admissionBatchApiSlice";
 import { useGetRecentAdmissionBatchQuery } from "./../../slices/admissionBatchApiSlice";
-import { toast } from "react-toastify";
 import "./style.css"
 
 const OpenAdmissionBatch = () => {
-
-
-  const [admissionBatchId, setAdmissionBatchId] = useState(null);
-
-
   const {
     data: admissionBatch,
     isLoading,
     error,
   } = useGetRecentAdmissionBatchQuery();
-
-  const [enrollCourse, { isLoading: loadingEnroll }] =
-    useUpdateAdmissionBatchToEnrollMutation();
-
-  const [enrollmentError, setEnrollmentError] = useState(null);
-  useEffect(() => {
-    if (admissionBatch) {
-      setAdmissionBatchId(admissionBatch?._id);
-    }
-  }, [admissionBatch]);
-
-  const handleEnrollCourse = async (courseId) => {
-    try {
-      const dummyData = {
-        admissionBatchId: admissionBatchId,
-        courseId: courseId,
-        userId: "dummyUserId",
-      };
-
-      const res = await enrollCourse(dummyData);
-
-      if (res && res.error) {
-        setEnrollmentError(
-          res.error.data.message || "Failed to enroll in course"
-        );
-      } else {
-        toast.success("Enrolled in course successfully");
-      }
-    } catch (err) {
-      setEnrollmentError(err?.data?.message || err.error);
-    }
-  };
-
 
   return (
     <React.Fragment>
@@ -212,7 +169,7 @@ const OpenAdmissionBatch = () => {
           {error?.data?.message || error?.data || error?.error}
         </Message>
       ) : (
-        <section className="admission-section">
+        <section className="admission-section bg-danger">
           <Container>
 
             <Row className="align-items-center">
@@ -221,46 +178,27 @@ const OpenAdmissionBatch = () => {
                 <div className="section-title">
                   <h2>Admission</h2>
                   <p>Admission Open Now</p>
-                  {/* <p>{admissionBatch?.title}</p> */}
 
                 </div>
                 <div className="heading-text">
                   {/* <p className="enroll-info">Enroll yourself today and start your journey towards success!</p> */}
                   <h1 className="admission-title">{admissionBatch?.title}</h1>
-
                 </div>
                 <Image src={admissionBatch?.image} alt="Course" fluid />
-                activeadmissionbatch
                 <LinkContainer to={`/activeadmissionbatch/${admissionBatch?._id}`}>
                   <Button className="btn-sm m-3">
-                  Enroll Now
+                    Enroll Now
                   </Button>
                 </LinkContainer>
               </Col>
               <Col md={5}>
                 <Carousel className="course-carousel" interval={3000} indicators={false}>
-                  {admissionBatch?.courses?.map((course) => (
+                  {admissionBatch?.selectedCourses?.map((course) => (
                     <Carousel.Item key={course?.courseId}>
                       <div className="card">
                         <Image src={course?.courseId?.image} alt="Course" fluid />
                         <div className="card-body">
                           <h3>{course?.courseId?.title}</h3>
-                          <div className="d-flex justify-content-center">
-                            {course.isEnrolled ? (
-                              <Button variant="primary" disabled>
-                                Enrolled
-                              </Button>
-                            ) : (
-                              <Button
-                                variant="primary"
-                                className="enroll-button"
-                                disabled={loadingEnroll}
-                                onClick={() => handleEnrollCourse(course?.courseId?._id)}
-                              >
-                                {loadingEnroll ? "Enrolling..." : "Enroll"}
-                              </Button>
-                            )}
-                          </div>
                         </div>
                       </div>
                     </Carousel.Item>

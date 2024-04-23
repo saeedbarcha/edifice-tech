@@ -8,6 +8,8 @@ import AdmissionBatch from "../models/admissionBatchModel.js"
 const newEnrollment = asyncHandler(async (req, res) => {
     const { admissionBatchId, courses, firstName, lastName, fatherName } = req.body;
 
+
+    console.log("kkkkkkkkkk.....", req.body)
     const userId = req.user._id;
 
     try {
@@ -93,15 +95,13 @@ const newEnrollment = asyncHandler(async (req, res) => {
 
 // @desc    Get all admission batches and their enrolled courses for a user
 // @route   GET /api/admission-batches/enrollments
-// @access  Private
-const getUserAdmissionBatches = asyncHandler(async (req, res) => {
+// @access  Private/admin
+const getAllAdmissionBatchesWithEnrolments = asyncHandler(async (req, res) => {
     const userId = req.user._id;
 
     try {
-        // Find all admission batches where the user is enrolled
         const userEnrollments = await Enrollment.find({ user: userId });
 
-        // Group enrollments by admission batch id
         const enrollmentGroups = {};
         userEnrollments.forEach(enrollment => {
             if (!enrollmentGroups[enrollment.admissionBatchId]) {
@@ -110,10 +110,8 @@ const getUserAdmissionBatches = asyncHandler(async (req, res) => {
             enrollmentGroups[enrollment.admissionBatchId].push(enrollment);
         });
 
-        // Get admission batches and populate them with their enrolled courses
         const admissionBatches = await AdmissionBatch.find().populate('courses');
 
-        // Create the desired array structure
         const result = admissionBatches.map(batch => {
             const batchEnrollments = enrollmentGroups[batch._id] || [];
             return {
@@ -128,6 +126,76 @@ const getUserAdmissionBatches = asyncHandler(async (req, res) => {
         res.status(400).json({ message: error.message });
     }
 });
+
+
+// @desc    Get all admission batches and their enrolled courses for a user
+// @route   GET /api/admission-batches/enrollments
+// @access  Private
+const getUserAdmissionBatches = asyncHandler(async (req, res) => {
+    const userId = req.user._id;
+
+    try {
+        const userEnrollments = await Enrollment.find({ user: userId }).populate('courseId');
+        const userEnrolledBatchIds = userEnrollments.map(enrollment => enrollment.admissionBatchId);
+        const admissionBatches = await AdmissionBatch.find({ _id: { $in: userEnrolledBatchIds } }).populate('selectedCourses.courseId');
+        const result = admissionBatches.map(batch => {
+            const batchEnrollments = userEnrollments.filter(enrollment => enrollment.admissionBatchId.toString() === batch._id.toString());
+            return {
+                batch,
+                enrollments: batchEnrollments
+            };
+        });
+        res.status(200).json({ admissionBatches: result });
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+});
+
+// const getUserAdmissionBatches = asyncHandler(async (req, res) => {
+//     const userId = req.user._id;
+
+//     try {
+//         const userEnrollments = await Enrollment.find({ user: userId }).populate('courseId');
+
+//         const userEnrolledBatchIds = userEnrollments.map(enrollment => enrollment.admissionBatchId);
+
+//         const admissionBatches = await AdmissionBatch.find({ _id: { $in: userEnrolledBatchIds } });
+
+//         const result = admissionBatches.map(batch => {
+//             const batchEnrollments = userEnrollments.filter(enrollment => enrollment.admissionBatchId.toString() === batch._id.toString());
+            
+            
+//             return {
+//                 batch,
+//                 enrollments: batchEnrollments
+//             };
+//         });
+//         res.status(200).json({ admissionBatches: result });
+//     } catch (error) {
+//         res.status(400).json({ message: error.message });
+//     }
+// });
+
+// const getUserAdmissionBatches = asyncHandler(async (req, res) => {
+//     const userId = req.user._id;
+
+//     try {
+//         // const userEnrollments = await Enrollment.find({ user: userId });
+//         const userEnrollments = await Enrollment.find({ user: userId }).populate('courseId');
+//         const userEnrolledBatchIds = userEnrollments.map(enrollment => enrollment.admissionBatchId);
+//         const admissionBatches = await AdmissionBatch.find({ _id: { $in: userEnrolledBatchIds } });
+//         const result = admissionBatches.map(batch => {
+//             const batchEnrollments = userEnrollments.filter(enrollment => enrollment.admissionBatchId.toString() === batch._id.toString());
+//             return {
+//                 batch,
+//                 enrollments: batchEnrollments
+//             };
+//         });
+//         res.status(200).json({ admissionBatches: result });
+//     } catch (error) {
+//         res.status(400).json({ message: error.message });
+//     }
+// });
 
 
 // @desc    Delete enrollment
@@ -168,4 +236,4 @@ const updateEnrollment = asyncHandler(async (req, res) => {
     }
 });
 
-export { deleteEnrollment, updateEnrollment, newEnrollment, getUserAdmissionBatches };
+export { deleteEnrollment, updateEnrollment, newEnrollment,getAllAdmissionBatchesWithEnrolments, getUserAdmissionBatches };

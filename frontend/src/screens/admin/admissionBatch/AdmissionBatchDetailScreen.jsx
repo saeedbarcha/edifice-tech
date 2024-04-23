@@ -53,7 +53,7 @@ const AdmissionBatchDetailScreen = () => {
           {error?.data?.message || error?.data || error?.error}
         </Message>
       ) : (
-        <Card>
+        <Card className="my-4">
           <Card.Body>
             <Card.Title className="mb-4">{admissionBatch?.title}</Card.Title>
             <Card.Text>
@@ -135,7 +135,7 @@ const AdmissionBatchDetailScreen = () => {
                     </tr>
                   ))} */}
 
-                  {admissionBatch?.courses.map((course) => (
+                  {admissionBatch?.selectedCourses?.map((course) => (
                     <tr key={course?.courseId}>
                       <td>{course?.courseId?.title}</td>
                       <td>

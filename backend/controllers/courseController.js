@@ -7,19 +7,6 @@ import Course from "../models/courseModel.js";
 const getCourses = asyncHandler(async (req, res) => {
   const courses = await Course.find({});
   res.status(200).json(courses);
-
-  // const pageSize = process.env.PAGINATION_LIMIT;
-  // const page = Number(req.query.pageNumber) || 1;
-
-  // const keyword = req.query.keyword ? { name:{$regex: req.query.keyword,
-  // $options:"i"} } : {};
-
-  // // find number of courses
-  // const count = await Course.countDocuments({...keyword});
-
-  // const courses = await Course.find({...keyword}).limit(pageSize).skip(pageSize * (page - 1));
-
-  // res.json({courses, page, pages: Math.ceil(count / pageSize)});
 });
 
 // @desc    Fetch all active courses
@@ -46,20 +33,52 @@ const getCourseById = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc    Create course
+// @desc    Create a new course
 // @route   POST /api/courses
 // @access  Private/Admin
-const createCourse = asyncHandler(async (req, res) => {
-  const course = await Course({
-    name: "Sample",
-    user: req.user._id,
-    image: "/images/sample.jpg",
-    description: "sample description",
-    duration: 1,
-  });
+const createNewCourse = asyncHandler(async (req, res) => {
+  const {
+  
+    title,
+    price,
+    discount,
+    skillSet,
+    preRequisites,
+    description,
+    image,
+    hoursInDay,
+    daysInWeek,
+    totalDuration,
+    certificate,
+    isActive,
+  } = req.body;
 
-  const createCourse = await course.save();
-  res.status(201).json(createCourse);
+  try {
+    // Create a new course instance
+    const newCourse = new Course({
+      user:req.user._id,
+      title,
+      price,
+      discount,
+      skillSet,
+      preRequisites,
+      description,
+      image,
+      hoursInDay,
+      daysInWeek,
+      totalDuration,
+      certificate,
+      isActive,
+    });
+
+    // Save the new course to the database
+    const createdCourse = await newCourse.save();
+
+    res.status(201).json(createdCourse); // Return the newly created course
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server Error" });
+  }
 });
 
 // @desc    Update course
@@ -140,7 +159,7 @@ export {
   getCourses,
   getAllActiveCourses,
   getCourseById,
-  createCourse,
+  createNewCourse,
   updateCourse,
   deleteCourse,
   // getTopCourses
