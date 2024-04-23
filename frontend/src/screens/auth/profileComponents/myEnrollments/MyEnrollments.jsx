@@ -1,21 +1,23 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { Container, Row, Col, Form, Carousel, Card, Image, Button, Badge, Table } from "react-bootstrap";
-import Message from "./../../components/Message";
-import Loader from "./../../components/Loader";
+import Message from "../../../../components/Message";
+import Loader from "../../../../components/Loader";
 import {
     useUpdateAdmissionBatchToEnrollMutation,
-} from "./../../slices/admissionBatchApiSlice";
+} from "../../../../slices/admissionBatchApiSlice";
 import {
     useCreateEnrollmentMutation
-} from "./../../slices/enrollmentApiSlice"
+} from "../../../../slices/enrollmentApiSlice"
 import { toast } from "react-toastify";
 import {
     useGetAdmissionBatchDetailsQuery,
-} from "./../../slices/admissionBatchApiSlice";
+} from "../../../../slices/admissionBatchApiSlice";
+import {
+    useGetMyEnrolmentsQuery,
+} from "../../../../slices/enrollmentApiSlice";
 
-
-const EnrollAdmissionBatchScreen = () => {
+const MyEnrollments = () => {
     const { id } = useParams();
     const [courses, setCourses] = useState([]);
     const [firstName, setFirstName] = useState("");
@@ -29,8 +31,10 @@ const EnrollAdmissionBatchScreen = () => {
         data: admissionBatch,
         isLoading,
         error,
-    } = useGetAdmissionBatchDetailsQuery(id);
+    } = useGetMyEnrolmentsQuery(id);
 
+
+    console.log("ssssssssssssssssss.........", admissionBatch)
 
     const [enrollCourse, { isLoading: loadingEnroll }] =
         useCreateEnrollmentMutation();
@@ -187,4 +191,12 @@ const EnrollAdmissionBatchScreen = () => {
     )
 }
 
-export default EnrollAdmissionBatchScreen;
+export default MyEnrollments;
+
+
+
+
+
+
+
+

@@ -13,6 +13,9 @@ export const GALLERY_URL='/api/gallery';
 export const COURSE_URL='/api/course';
 export const ABOUT_COMPANY_URL='/api/about-company';
 export const ADMISSION_BATCH_URL='/api/admission-batch';
+export const ENROLLMENT_URL='/api/enrollment';
+
+
 
 
 

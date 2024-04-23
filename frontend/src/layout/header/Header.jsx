@@ -76,11 +76,10 @@ const Header = () => {
           <div className="contact-info d-flex align-items-center">
             <CgMail />
             <a
-              href={`mailto:${
-                CompanyData?.emailAddress
+              href={`mailto:${CompanyData?.emailAddress
                   ? CompanyData.emailAddress
                   : "contact@example.com"
-              }`}
+                }`}
             >
               {CompanyData?.emailAddress
                 ? CompanyData.emailAddress
@@ -133,9 +132,8 @@ const Header = () => {
       <Navbar
         id="header"
         expand="md"
-        className={`${scrolled ? "scrolled" : ""} ${
-          isMenuOpen ? "menu-open" : ""
-        }`}
+        className={`${scrolled ? "scrolled" : ""} ${isMenuOpen ? "menu-open" : ""
+          }`}
       >
         <Container fluid className="navContainer" >
           <div id="logo" >
@@ -217,7 +215,7 @@ const Header = () => {
                       Blog
                     </Nav.Link>
                   </LinkContainer>
-                  
+
                   <LinkContainer to="/admin/admissionbatchlist">
                     <Nav.Link
                       className="justify-content-start dropdown-item"
@@ -248,6 +246,13 @@ const Header = () => {
                     >
                       <CgProfile className="mx-2" />
                       Profile
+                    </Nav.Link>
+                  </LinkContainer>
+
+                  <LinkContainer to={`/my-enrollments/${userInfo._id}`}>
+                    <Nav.Link smooth className="justify-content-start dropdown-item">
+                      <FaBookOpen className="mx-2" />
+                      Courses
                     </Nav.Link>
                   </LinkContainer>
 

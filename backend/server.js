@@ -15,6 +15,8 @@ import projectRoutes from "./routes/projectRoutes.js"
 import galleryRoutes from "./routes/galleyRoutes.js"
 import aboutCompanyRoutes from "./routes/aboutCompanyRoutes.js"
 import admissionBatch from "./routes/admissionBatchRoutes.js"
+import enrollment from "./routes/enrollmentRoutes.js"
+
 
 
 
@@ -44,6 +46,7 @@ app.use("/api/gallery", galleryRoutes);
 app.use("/api/course", courseRoutes);
 app.use("/api/about-company", aboutCompanyRoutes);
 app.use("/api/admission-batch", admissionBatch);
+app.use("/api/enrollment", enrollment)
 
 
 

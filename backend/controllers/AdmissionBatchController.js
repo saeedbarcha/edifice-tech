@@ -213,20 +213,80 @@ const updateAdmissionBatch = asyncHandler(async (req, res) => {
 //     throw new Error("Internal server error");
 //   }
 // });
+// const updateToEnrollAdmissionBatch = asyncHandler(async (req, res) => {
+//   const { admissionBatchId, firstName, lastName, fatherName, courses } = req.body;
+
+//   try {
+//     let admissionBatch = await AdmissionBatch.findById(admissionBatchId);
+//     if (!admissionBatch) {
+//       res.status(404);
+//       throw new Error("Admission batch not found");
+//     }
+
+//     admissionBatch?.courses?.map(course => {
+
+//       courses.map((c) => {
+//         if (c == course._id.toString()) {
+//           course.enrolledUsers.push({
+//             user: req.user._id,
+//             firstName,
+//             lastName,
+//             fatherName,
+//             completed: false,
+//             courseFeePaid: false,
+//             performance: "Average",
+//           });
+//         }
+//       }
+//       )
+//     }
+//     );
+
+//     const updatedAdmissionBatch = await admissionBatch.save();
+//     res.status(200).json(updatedAdmissionBatch);
+//   } catch (error) {
+//     console.error("Error:", error);
+//     res.status(500).json({ error: "Internal server error" });
+//   }
+// });
+
+
 const updateToEnrollAdmissionBatch = asyncHandler(async (req, res) => {
   const { admissionBatchId, firstName, lastName, fatherName, courses } = req.body;
+  console.log("ccccccccccc", courses.length == 0)
 
   try {
     let admissionBatch = await AdmissionBatch.findById(admissionBatchId);
     if (!admissionBatch) {
       res.status(404);
-      throw new Error("Admission batch not found");
-    }
-
-    admissionBatch.courses.map(course => {
-
-      courses.map((c) => {
-        if (c == course._id.toString()) {
+      return res.json({ error: "Admission batch not found" }); // Return early after sending the response
+    }else if (!firstName){
+      res.status(400);
+      return res.json({ error: "First name is required" });
+  
+    }else if (!lastName){
+      res.status(400);
+      return res.json({ error: "Last name is required" });
+    }else if (!fatherName){
+      res.status(400);
+      return res.json({ error: "Father name is required" });
+    }else if (courses.length == 0){
+      res.status(400);
+      return res.json({ error: "Select atleast 1 course to Enroll"});
+    }else{
+      for (const courseId of courses) {
+        const course = admissionBatch.courses.find(course => courseId === course._id.toString());       
+        if (!course) {
+          res.status(404);
+          return res.json({ error: "Course not found" }); 
+        }
+  
+        const isEnrolled = course.enrolledUsers.some(user => user.user.toString() === req.user._id.toString());
+        
+        if (isEnrolled) {
+          res.status(400);
+          return res.json({ error: "You are already enrolled in this course" });
+        }else{
           course.enrolledUsers.push({
             user: req.user._id,
             firstName,
@@ -237,18 +297,22 @@ const updateToEnrollAdmissionBatch = asyncHandler(async (req, res) => {
             performance: "Average",
           });
         }
+  
+       
       }
-      )
+  
+      await admissionBatch.save();
+      res.status(200).json({ message: "Enrolled successfully" }); 
     }
-    );
 
-    const updatedAdmissionBatch = await admissionBatch.save();
-    res.status(200).json(updatedAdmissionBatch);
+  
   } catch (error) {
     console.error("Error:", error);
-    res.status(500).json({ error: "Internal server error" });
+    res.status(500).json({ error: "Internal server error" }); // Handle other errors
   }
 });
+
+
 
 // // @desc    Update Admission Batch including course enrollment
 // // @route   PUT /api/admission-batches/:id/enroll

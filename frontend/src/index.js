@@ -49,6 +49,7 @@ import CreateAdmissionBatchScreen from "./screens/admin/admissionBatch/CreateAdm
 import EditCoursesScreen from "./screens/admin/course/EditCoursesScreen";
 import EditAdmissionBatchScreen from "./screens/admin/admissionBatch/EditAdmissionBatchScreen";
 import EnrollAdmissionBatchScreen from "./screens/admission/EnrollAdmissionBatchScreen";
+import MyEnrollments from "./screens/auth/profileComponents/myEnrollments/MyEnrollments";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -80,6 +81,7 @@ const router = createBrowserRouter(
 
       <Route path="" element={<PrivateRoute />}>
         <Route path="/profile" element={<ProfileScreen />} />
+        <Route path="/my-enrollments/:id" element={<MyEnrollments />} />
       </Route>
 
       <Route path="" element={<AdminRoute />}>
