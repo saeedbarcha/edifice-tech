@@ -21,13 +21,6 @@ import {
 
 const MyEnrollments = () => {
     const { id } = useParams();
-    const [courses, setCourses] = useState([]);
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [fatherName, setFatherName] = useState("");
-    const [admissionBatchId, setAdmissionBatchId] = useState(null);
-
-    const navigate = useNavigate();
 
     const {
         data: admissionBatches,
@@ -36,37 +29,8 @@ const MyEnrollments = () => {
     } = useGetMyEnrolmentsQuery(id);
 
 
-    console.log("ssssssssssssssssss.........", admissionBatches)
 
-    const [enrollCourse, { isLoading: loadingEnroll }] =
-        useCreateEnrollmentMutation();
-
-    useEffect(() => {
-        if (admissionBatches) {
-            setAdmissionBatchId(admissionBatches._id);
-        }
-    }, [admissionBatches]);
-
-    const submitHandler = async (e) => {
-        e.preventDefault();
-        try {
-            const enrollUser = {
-                admissionBatchId,
-                firstName,
-                lastName,
-                fatherName,
-                courses
-            };
-            const result = await enrollCourse(enrollUser);
-            if (result.error) {
-                toast.error(result.error.data.error);
-            } else {
-                toast.success(result.data.message);
-            }
-        } catch (err) {
-            toast.error(err?.data?.message || err.error);
-        }
-    };
+   
 
     return (
         <Container>
@@ -126,9 +90,8 @@ const MyEnrollments = () => {
                                         {admissionB?.enrollments?.map((enrollment) => (
                                             <tr >
                                                 {/* <td><Image src={blog.image} fluid style={{ width: "60px", height: "60px" }} /></td> */}
-                                                <td>title</td>
-                                                <td>total time</td>
-
+                                                <td>{enrollment?.courseId?.title}</td>
+                                                <td>{enrollment?.courseId?.totalDuration}</td>
                                                 <td>
                                                     {enrollment?.courseFeePaid ? (
                                                         <FaCheck style={{ color: "green" }} />

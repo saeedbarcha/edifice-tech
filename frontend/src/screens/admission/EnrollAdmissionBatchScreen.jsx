@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { Container, Row, Col, Form, Carousel, Card, Image, Button, Badge, Table } from "react-bootstrap";
+import {  useNavigate, useParams } from "react-router-dom";
+import { Container, Form,  Card,  Button, Badge } from "react-bootstrap";
 import Message from "./../../components/Message";
 import Loader from "./../../components/Loader";
-import {
-    useUpdateAdmissionBatchToEnrollMutation,
-} from "./../../slices/admissionBatchApiSlice";
 import {
     useCreateEnrollmentMutation
 } from "./../../slices/enrollmentApiSlice"
@@ -151,7 +148,7 @@ const EnrollAdmissionBatchScreen = () => {
                                             label={course?.courseId?.title}
                                             onChange={(e) => {
                                                 if (e.target.checked) {
-                                                    setCourses([...courses, course?._id]);
+                                                    setCourses([...courses, course?.courseId?._id]);
                                                 } else {
                                                     setCourses(
                                                         courses.filter(
