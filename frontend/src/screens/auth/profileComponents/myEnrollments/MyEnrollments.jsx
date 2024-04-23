@@ -1,23 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { LinkContainer } from "react-router-bootstrap";
-import { Container, Row, Col, Form, Carousel, Card, Image, Button, Badge, Table } from "react-bootstrap";
-import { FaTimes, FaTrash, FaEdit, FaCheck } from "react-icons/fa";
+import { useParams } from "react-router-dom";
+import { Container, Card, Image, Button, Badge, Table } from "react-bootstrap";
+import { FaTimes, FaCheck } from "react-icons/fa";
+import jsPDF from "jspdf";
 import Message from "../../../../components/Message";
 import Loader from "../../../../components/Loader";
 import {
-    useUpdateAdmissionBatchToEnrollMutation,
-} from "../../../../slices/admissionBatchApiSlice";
-import {
-    useCreateEnrollmentMutation
-} from "../../../../slices/enrollmentApiSlice"
-import { toast } from "react-toastify";
-import {
-    useGetAdmissionBatchDetailsQuery,
-} from "../../../../slices/admissionBatchApiSlice";
-import {
     useGetMyEnrolmentsQuery,
 } from "../../../../slices/enrollmentApiSlice";
+import cerPic from "./certificate.png"
 
 const MyEnrollments = () => {
     const { id } = useParams();
@@ -28,9 +19,37 @@ const MyEnrollments = () => {
         error,
     } = useGetMyEnrolmentsQuery(id);
 
+    let downloadTxtFile = (enrollment) => {
+        console.log("res............", enrollment);
+        var doc = new jsPDF('p', 'pt');
+        const imgData = 'https://picsum.photos/800/600';
+    
+        doc.addImage(imgData, 'JPEG', 0, 0, doc.internal.pageSize.getWidth(), doc.internal.pageSize.getHeight());
+    
+        const titleText = 'This is the first title.';
+        const patientInfo = `
+            Patient Name: ${enrollment.courseId.title}\n
+            Age :\n
+            Gender :\n
+            Illness :\n
+            Status : ....
+        `;
+    
+        // Calculate vertical position for text
+        const titleVerticalPosition = 50;
+        const patientInfoVerticalPosition = 100;
+    
+        // Add title text
+        doc.text(titleText, doc.internal.pageSize.getWidth() / 2, titleVerticalPosition, { align: 'center' });
+    
+        // Add patient information
+        doc.text(patientInfo, doc.internal.pageSize.getWidth() / 2, patientInfoVerticalPosition, { align: 'center' });
+    
+        // Save the PDF
+        doc.save('demo.pdf');
+    }
+    
 
-
-   
 
     return (
         <Container>
@@ -81,7 +100,7 @@ const MyEnrollments = () => {
                                     <thead>
                                         <tr>
                                             <th>COURSE TITLE</th>
-                                            <th>TOTAL DURATION</th>                                            
+                                            <th>TOTAL DURATION</th>
                                             <th>COURSE FEE</th>
                                             <th>PERFORMANCE</th>
                                         </tr>
@@ -100,7 +119,8 @@ const MyEnrollments = () => {
                                                     )}
                                                 </td>
                                                 <td>{enrollment?.performance}</td>
-
+                                                <td> {id ? <Button onClick={() => {downloadTxtFile(enrollment)}}>llllGenerate Report</Button> : <Button style={{ background: "#393a3f" }}>Generate Report</Button>}
+                                                </td>
                                             </tr>
                                         ))}
                                     </tbody>
