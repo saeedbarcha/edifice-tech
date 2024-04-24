@@ -1,25 +1,26 @@
-*{
-    margin: 0px;
-    padding: 0px;
+* {
+  margin: 0px;
+  padding: 0px;
 }
 
-main{
-    min-height: 60vh;
-    /* background-color: aqua; */
+main {
+  min-height: 60vh;
+  /* background-color: aqua; */
 }
 
-body{
-    /* background-color: #EEEEEE; */
-    font-family: 'Times New Roman', Times, serif;
-    /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
+body {
+  /* background-color: #EEEEEE; */
+  font-family: 'Times New Roman', Times, serif;
+  /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
 }
-.carousel-caption{
-    position: absolute;
-    width: 100%;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.5);
+
+.carousel-caption {
+  position: absolute;
+  width: 100%;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
 }
 
 
@@ -28,70 +29,71 @@ body{
 # Sections General
 --------------------------------------------------------------*/
 section {
-    padding: 60px 0;
-    overflow: hidden;
-  }
-  
-  .section-title {
-    padding-bottom: 40px;
-  }
-  .section-title h2 {
-    font-size: 14px;
-    font-weight: 500;
-    padding: 0;
-    line-height: 1px;
-    margin: 0 0 5px 0;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    color: #aaaaaa;
-    font-family: "Poppins", sans-serif;
-  }
-  .section-title h2::after {
-    content: "";
-    width: 120px;
-    height: 1px;
-    display: inline-block;
-    background: var(--blueThemeColor);
-    margin: 4px 10px;
-  }
-  .section-title p {
-    margin: 0;
-    margin: 0;
-    font-size: 36px;
-    font-weight: 700;
-    text-transform: uppercase;
-    font-family: "Poppins", sans-serif;
-    color: #151515;
-  }
+  padding: 60px 0;
+  overflow: hidden;
+}
+
+.section-title {
+  padding-bottom: 40px;
+}
+
+.section-title h2 {
+  font-size: 14px;
+  font-weight: 500;
+  padding: 0;
+  line-height: 1px;
+  margin: 0 0 5px 0;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #aaaaaa;
+  font-family: "Poppins", sans-serif;
+}
+
+.section-title h2::after {
+  content: "";
+  width: 120px;
+  height: 1px;
+  display: inline-block;
+  background: var(--blueThemeColor);
+  margin: 4px 10px;
+}
+
+.section-title p {
+  margin: 0;
+  margin: 0;
+  font-size: 36px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-family: "Poppins", sans-serif;
+  color: #151515;
+}
 
 
 
-  /* css for button use in all screens */
-  .btnAllScreen{
-    margin: 49px 0px;
-    padding: 10px 30px;
-    background: var(--blueThemeColor);
-    border: none;
-    cursor: pointer;
-  }
-  .btnAllScreen:hover {
-    background: var(--blueThemeColor);
-    opacity: .8;
-  }
-  .btnAllScreen:active {
-    background: var(--blueThemeColor);
-    opacity: .8;
-  }
-  .btnAllScreen::after {
-    background: var(--blueThemeColor);
-    opacity: .8;
-  }
+/* css for button use in all screens */
+.btnAllScreen {
+  margin: 49px 0px;
+  padding: 10px 30px;
+  background: var(--blueThemeColor);
+  border: none;
+  cursor: pointer;
+}
 
+.btnAllScreen:hover {
+  background: var(--blueThemeColor);
+  opacity: .8;
+}
 
+.btnAllScreen:active {
+  background: var(--blueThemeColor);
+  opacity: .8;
+}
 
+.btnAllScreen::after {
+  background: var(--blueThemeColor);
+  opacity: .8;
+}
 
-
-
-
-
-
+td {
+  vertical-align: middle;
+}
