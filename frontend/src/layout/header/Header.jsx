@@ -216,6 +216,17 @@ const Header = () => {
                     </Nav.Link>
                   </LinkContainer>
 
+
+                  
+                  <LinkContainer to="/admin/enrollment-List">
+                    <Nav.Link
+                      className="justify-content-start dropdown-item"
+                      smooth
+                    >
+                      <FaImage className="mx-2" />
+                      Enrollments
+                    </Nav.Link>
+                  </LinkContainer>
                   <LinkContainer to="/admin/admissionbatchlist">
                     <Nav.Link
                       className="justify-content-start dropdown-item"
