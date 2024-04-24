@@ -73,7 +73,7 @@ const CourseListScreen = () => {
           </Col>
           <Col className="text-end">
             <LinkContainer to={`/admin/createcourse`}>
-              <Button className="btn-sm m-3">
+              <Button className="btn-sm m-3 btnAllScreen">
                 <FaEdit /> Create Course
               </Button>
             </LinkContainer>

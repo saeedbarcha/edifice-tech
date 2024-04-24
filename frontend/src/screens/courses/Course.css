@@ -12,8 +12,8 @@
 
 /* @tag --Container/Row/Col/div */
 .wrapper .showCourcesCard {
-  padding: 20px;
-  padding-top: 55px;
+  /* padding: 20px; */
+  /* padding-top: 55px; */
   background: #f8f9fa;
   border-radius: 0  20px 20px 20px;
   transition: transform 0.8s;

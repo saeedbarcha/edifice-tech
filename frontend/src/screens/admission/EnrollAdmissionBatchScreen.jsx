@@ -168,7 +168,7 @@ const EnrollAdmissionBatchScreen = () => {
                                 <Button
                                     variant="primary"
                                     type="submit"
-                                    className="my-3"
+                                    className="my-3 btnAllScreen"
                                     disabled={loadingEnroll}
                                 // onClick={() => handleEnrollCourse(course?.courseId?._id)}
                                 >

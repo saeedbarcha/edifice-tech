@@ -78,7 +78,7 @@ const GalleryList = () => {
             handleClose={handleCloseGalleryModal}
             editGallery={selectedGallery}
           />
-          <Button variant="light" className="btn-sm"
+          <Button className="btn-sm btnAllScreen"
             onClick={() => {
               handleOpenGalleryModal(true);
             }}>

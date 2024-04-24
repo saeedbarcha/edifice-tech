@@ -1,33 +1,36 @@
 .admission-heading {
-    font-size: 28px;
-    color: #333;
-    margin-bottom: 20px;
-  }
-  
-  .intro-text {
-    font-size: 16px;
-    color: #666;
-    margin-bottom: 20px;
-  }
-  
-  .admission-title {
-    font-size: 25px;
-    color: #555;
-    margin-bottom: 20px;
-  }
-  
-  .enroll-button {
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    font-size: 18px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .enroll-button:hover {
-    background-color: #0056b3;
-  }
-  
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.intro-text {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.admission-title {
+  font-size: 25px;
+  color: #555;
+}
+
+.heading-text {
+  display: flex;
+  align-items: center;
+}
+
+.enroll-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 18px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.enroll-button:hover {
+  background-color: #0056b3;
+}

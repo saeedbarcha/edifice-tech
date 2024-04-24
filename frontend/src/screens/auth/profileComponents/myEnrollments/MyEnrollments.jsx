@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { Container, Card, Image, Button, Badge, Table } from "react-bootstrap";
+import { Container, Card, Button, Badge, Table } from "react-bootstrap";
 import { FaTimes, FaCheck } from "react-icons/fa";
 import jsPDF from "jspdf";
 import Message from "../../../../components/Message";
@@ -8,7 +8,8 @@ import Loader from "../../../../components/Loader";
 import {
     useGetMyEnrolmentsQuery,
 } from "../../../../slices/enrollmentApiSlice";
-import cerPic from "./certificate.png"
+
+import certificateImage from "./certificate.png"
 
 const MyEnrollments = () => {
     const { id } = useParams();
@@ -19,37 +20,34 @@ const MyEnrollments = () => {
         error,
     } = useGetMyEnrolmentsQuery(id);
 
-    let downloadTxtFile = (enrollment) => {
-        console.log("res............", enrollment);
-        var doc = new jsPDF('p', 'pt');
-        const imgData = 'https://picsum.photos/800/600';
-    
-        doc.addImage(imgData, 'JPEG', 0, 0, doc.internal.pageSize.getWidth(), doc.internal.pageSize.getHeight());
-    
-        const titleText = 'This is the first title.';
-        const patientInfo = `
-            Patient Name: ${enrollment.courseId.title}\n
-            Age :\n
-            Gender :\n
-            Illness :\n
-            Status : ....
-        `;
-    
-        // Calculate vertical position for text
-        const titleVerticalPosition = 50;
-        const patientInfoVerticalPosition = 100;
-    
-        // Add title text
-        doc.text(titleText, doc.internal.pageSize.getWidth() / 2, titleVerticalPosition, { align: 'center' });
-    
-        // Add patient information
-        doc.text(patientInfo, doc.internal.pageSize.getWidth() / 2, patientInfoVerticalPosition, { align: 'center' });
-    
-        // Save the PDF
-        doc.save('demo.pdf');
-    }
-    
+    const downloadTxtFile = (enrollment) => {
+        const doc = new jsPDF('portrait', 'in', 'letter');
 
+        doc.addImage(certificateImage, 'PNG', 0, 0, 8.5, 11);
+
+        // Add first text block
+        const firstText = `${enrollment.firstName} ${enrollment.lastName}`;
+        doc.setFont('Allura');
+        doc.setFontSize(46);
+        const firstTextWidth = doc.getStringUnitWidth(firstText) * doc.internal.getFontSize() / doc.internal.scaleFactor;
+        const firstTextX = (8.5 - firstTextWidth) / 2;
+        const firstTextY = 4.9;
+        doc.text(firstText, firstTextX, firstTextY);
+
+        // Add second text block
+        const secondText = `For her great achievements and being the Outstanding \n Sales Manager to the company Larana, Inc.
+    for the month of May 2022`;
+        doc.setFont('Noto Serif');
+        doc.setFontSize(17);
+        const secondTextWidth = (doc.internal.pageSize.getWidth() * 70.7) / doc.internal.scaleFactor;
+        const secondTextX = (doc.internal.pageSize.getWidth() - secondTextWidth) / 2;
+        const secondTextY = 6.5; 
+
+        doc.text(secondText, secondTextX, secondTextY, { maxWidth: secondTextWidth });
+
+        // Save the PDF
+        doc.save('certificate.pdf');
+    };
 
     return (
         <Container>
@@ -119,7 +117,7 @@ const MyEnrollments = () => {
                                                     )}
                                                 </td>
                                                 <td>{enrollment?.performance}</td>
-                                                <td> {id ? <Button onClick={() => {downloadTxtFile(enrollment)}}>llllGenerate Report</Button> : <Button style={{ background: "#393a3f" }}>Generate Report</Button>}
+                                                <td> {id ? <Button onClick={() => { downloadTxtFile(enrollment) }}>llllGenerate Report</Button> : <Button style={{ background: "#393a3f" }}>Generate Report</Button>}
                                                 </td>
                                             </tr>
                                         ))}

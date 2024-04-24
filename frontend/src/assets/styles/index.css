@@ -63,3 +63,35 @@ section {
     font-family: "Poppins", sans-serif;
     color: #151515;
   }
+
+
+
+  /* css for button use in all screens */
+  .btnAllScreen{
+    margin: 49px 0px;
+    padding: 10px 30px;
+    background: var(--blueThemeColor);
+    border: none;
+    cursor: pointer;
+  }
+  .btnAllScreen:hover {
+    background: var(--blueThemeColor);
+    opacity: .8;
+  }
+  .btnAllScreen:active {
+    background: var(--blueThemeColor);
+    opacity: .8;
+  }
+  .btnAllScreen::after {
+    background: var(--blueThemeColor);
+    opacity: .8;
+  }
+
+
+
+
+
+
+
+
+

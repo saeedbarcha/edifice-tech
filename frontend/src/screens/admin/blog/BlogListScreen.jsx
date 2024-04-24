@@ -78,7 +78,7 @@ const BlogListScreen = () => {
             <h1>Blogs</h1>
           </Col>
           <Col className="text-end">
-            <Button className="btn-sm m-3" onClick={createBlogHandler}>
+            <Button className="btn-sm m-3 btnAllScreen" onClick={createBlogHandler}>
             {/* <Link to={"/admin/createblog"}> */}
               <FaEdit /> Create Blog
             {/* </Link> */}

@@ -222,7 +222,7 @@ const CreateCourseScreen = () => {
               {loadingUpload && <Loader />}
 
               <div style={{ textAlign: "right" }}>
-                <Button type="submit" variant="primary" className="my-2">
+                <Button type="submit"  className="my-2 btnAllScreen">
                   Create Course
                 </Button>
               </div>

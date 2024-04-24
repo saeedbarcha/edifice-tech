@@ -260,7 +260,7 @@ const EditCoursesScreen = () => {
               {loadingUpload && <Loader />}
 
               <div style={{ textAlign: "right" }}>
-                <Button type="submit" variant="primary" className="my-2">
+                <Button type="submit" className="btn my-2 btnAllScreen">
                   Update
                 </Button>
               </div>

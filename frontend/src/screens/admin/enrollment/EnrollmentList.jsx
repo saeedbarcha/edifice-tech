@@ -34,17 +34,13 @@ const EnrollmentList = () => {
             Status : ....
         `;
     
-        // Calculate vertical position for text
         const titleVerticalPosition = 50;
         const patientInfoVerticalPosition = 100;
     
-        // Add title text
         doc.text(titleText, doc.internal.pageSize.getWidth() / 2, titleVerticalPosition, { align: 'center' });
     
-        // Add patient information
         doc.text(patientInfo, doc.internal.pageSize.getWidth() / 2, patientInfoVerticalPosition, { align: 'center' });
     
-        // Save the PDF
         doc.save('demo.pdf');
     }
     
@@ -52,7 +48,6 @@ const EnrollmentList = () => {
 
     return (
         <Container>
-            <h1>sssssssssssssssssssss</h1>
             {isLoading ? (
                 <Loader />
             ) : error ? (
@@ -119,7 +114,7 @@ const EnrollmentList = () => {
                                                     )}
                                                 </td>
                                                 <td>{enrollment?.performance}</td>
-                                                <td> {id ? <Button onClick={() => {downloadTxtFile(enrollment)}}>llllGenerate Report</Button> : <Button style={{ background: "#393a3f" }}>Generate Report</Button>}
+                                                <td> {id ? <Button className="btnAllScreen" onClick={() => {downloadTxtFile(enrollment)}}>llllGenerate Report</Button> : <Button style={{ background: "#393a3f" }}>Generate Report</Button>}
                                                 </td>
                                             </tr>
                                         ))}

@@ -5,14 +5,12 @@ import Loader from "./../../components/Loader";
 import { LinkContainer } from "react-router-bootstrap";
 import { useGetRecentAdmissionBatchQuery } from "./../../slices/admissionBatchApiSlice";
 import "./style.css"
-
 const OpenAdmissionBatch = () => {
   const {
     data: admissionBatch,
     isLoading,
     error,
   } = useGetRecentAdmissionBatchQuery();
-
   return (
     <React.Fragment>
       {isLoading ? (
@@ -22,24 +20,24 @@ const OpenAdmissionBatch = () => {
           {error?.data?.message || error?.data || error?.error}
         </Message>
       ) : (
-        <section className="admission-section bg-danger">
+        <section className="admission-section ">
           <Container>
-
-            <Row className="align-items-center">
-
+            <Row className="">
               <Col md={7}>
                 <div className="section-title">
                   <h2>Admission</h2>
                   <p>Admission Open Now</p>
-
                 </div>
                 <div className="heading-text">
+                <div className="section-batch">
+                  <h2>Admission : </h2>
+                </div>
                   {/* <p className="enroll-info">Enroll yourself today and start your journey towards success!</p> */}
                   <h1 className="admission-title">{admissionBatch?.title}</h1>
                 </div>
-                <Image src={admissionBatch?.image} alt="Course" fluid />
+                {/* <Image src={admissionBatch?.image} alt="Course" fluid /> */}
                 <LinkContainer to={`/activeadmissionbatch/${admissionBatch?._id}`}>
-                  <Button className="btn-sm m-3">
+                  <Button className="btn-sm btnAllScreen">
                     Enroll Now
                   </Button>
                 </LinkContainer>
@@ -58,15 +56,21 @@ const OpenAdmissionBatch = () => {
                   ))}
                 </Carousel>
               </Col>
-
             </Row>
-
           </Container>
         </section>)}
     </React.Fragment>
-
   );
 };
-
-
 export default OpenAdmissionBatch;
+
+
+
+
+
+
+
+
+
+
+

@@ -167,7 +167,9 @@ const getAllAdmissionBatchesWithEnrolments = asyncHandler(async (req, res) => {
             enrollmentGroups[enrollment.admissionBatchId].push(enrollment);
         });
 
-        const admissionBatches = await AdmissionBatch.find().populate('courses');
+        // const admissionBatches = await AdmissionBatch.find().populate('courses');
+        const admissionBatches = await AdmissionBatch.find();
+
 
         const result = admissionBatches.map(batch => {
             const batchEnrollments = enrollmentGroups[batch._id] || [];

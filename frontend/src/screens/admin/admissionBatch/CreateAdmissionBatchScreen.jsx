@@ -72,7 +72,7 @@ const CreateAdmissionBatchScreen = () => {
 
   return (
     <Container>
-      <h2 className="my-4">Create New Admission Batch</h2>
+      <h2 className="my-4 ">Create New Admission Batch</h2>
       <Card>
         <Card.Body>
           <Form onSubmit={submitHandler}>
@@ -191,7 +191,7 @@ const CreateAdmissionBatchScreen = () => {
                 );
               })}
             </Form.Group>
-            <Button variant="primary" type="submit" disabled={loadingCreate}>
+            <Button variant="btn btnAllScreen" type="submit" disabled={loadingCreate}>
               {loadingCreate ? "Creating..." : "Create Admission Batch"}
             </Button>
           </Form>

@@ -113,7 +113,7 @@ const CreateBlogScreen = () => {
               {!isActive ? (
                 <Button
                   type="submit"
-                  variant="primary"
+                  className="btnAllScreen"
                   size="lg"
                   style={{ margin: "3% 0" }}
                 >
@@ -122,8 +122,8 @@ const CreateBlogScreen = () => {
               ) : (
                 <Button
                   type="submit"
+                  className="btnAllScreen"
                   disabled
-                  variant="primary"
                   size="lg"
                   style={{ margin: "3% 0" }}
                 >

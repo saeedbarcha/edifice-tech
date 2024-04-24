@@ -232,7 +232,7 @@ const EditAdmissionBatchScreen = () => {
                 })}
               </Form.Group>
           
-            <Button variant="primary" type="submit">
+            <Button variant="btn btnAllScreen" type="submit">
               update
             </Button>
             {/* <Button variant="primary" type="submit" disabled={loadingCreate}>
