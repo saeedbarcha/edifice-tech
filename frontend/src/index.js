@@ -50,8 +50,7 @@ import EditCoursesScreen from "./screens/admin/course/EditCoursesScreen";
 import EditAdmissionBatchScreen from "./screens/admin/admissionBatch/EditAdmissionBatchScreen";
 import EnrollAdmissionBatchScreen from "./screens/admission/EnrollAdmissionBatchScreen";
 import MyEnrollments from "./screens/auth/profileComponents/myEnrollments/MyEnrollments";
-import EnrollmentList from "./screens/admin/enrollment/EnrollmentList";
-
+import EnrollmentList from "./screens/admin/enrollment/EnrollmentList"
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -96,7 +95,8 @@ const router = createBrowserRouter(
         <Route path="/admin/courselist" element={<CourseListScreen />} />
         <Route path="/admin/createcourse" element={<CreateCourseScreen />} />
         <Route path="/admin/createadmissionbatch" element={<CreateAdmissionBatchScreen />} />
-
+        <Route path="/admin/enrollment-List" element={<EnrollmentList />} />
+         
         
 
         
@@ -111,8 +111,7 @@ const router = createBrowserRouter(
 
         <Route path="/admin/admissionbatchlist" element={<AdmissionBatchListScreen />} />
         <Route path="/admin/admission-batch/:id/edit" element={<EditAdmissionBatchScreen />} />
-        <Route path="/admin/enrollment-List" element={<EnrollmentList />} />
-         
+  
       
         <Route path="/admin/userlist" element={<UserListScreen />} />
         <Route path="/admin/user/:id/edit" element={<UserEditScreen />} />
