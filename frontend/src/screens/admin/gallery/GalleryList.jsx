@@ -82,7 +82,7 @@ const GalleryList = () => {
             onClick={() => {
               handleOpenGalleryModal(true);
             }}>
-                <FaEdit /> Add new Image
+                 Add Image
             {/* <IoMdAddCircle
               style={{ fontSize: "22px", color: "blue" }}
             

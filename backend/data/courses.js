@@ -111,7 +111,7 @@ const courses = [
     skillSet: "AWS, Azure, Google Cloud Platform",
     preRequisites: "Basic understanding of networking and virtualization",
     description: "Explore the fundamentals of cloud computing with our comprehensive course. Learn to leverage leading cloud platforms such as AWS, Azure, and Google Cloud Platform to deploy, manage, and scale applications in the cloud. Dive into topics such as virtual machines, storage, networking, and security. Gain hands-on experience through practical exercises and real-world case studies. Prepare yourself for a career in the cloud technology domain and stay ahead in today's digital landscape.",
-    image: "/images/products/cybersecurity.jpg",
+    image: "/images/course/datascience.png",
     hoursInDay: 3,
     daysInWeek: 4,
     totalDuration: "4 months",

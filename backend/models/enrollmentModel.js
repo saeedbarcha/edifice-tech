@@ -37,6 +37,10 @@ const enrollmentSchema = new Schema(
             type: Boolean,
             default: false,
         },
+        issueCertificate: {
+            type: Boolean,
+            default: false,
+        },
         performance: {
             type: String,
             enum: ['Excellent', 'Good', 'Average', 'Poor'],

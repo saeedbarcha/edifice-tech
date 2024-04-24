@@ -15,14 +15,12 @@ const MyEnrollments = () => {
     error,
   } = useGetMyEnrolmentsQuery(id);
   const downloadTxtFile = (enrollment) => {
-    // const doc = new jsPDF('landscape', 'in', 'letter');
     const doc = new jsPDF({
       orientation: "landscape",
       unit: "in",
       format: [20, 10],
     });
     doc.addImage(certificateImage, "PNG", 0, 0, 20, 11);
-    // Add first text block
     const firstText = `${enrollment.firstName} ${enrollment.lastName}`;
     doc.setFont("Noto Serif");
     doc.setFontSize(77);
@@ -33,9 +31,9 @@ const MyEnrollments = () => {
     const firstTextY = 5.1;
     doc.text(firstText, firstTextX, firstTextY);
     // Add second text block
-    const secondText = `For her great achievements and being the Outstanding Sales Manager to the company Larana, Inc.for the month of May 2022`;
+    const secondText = `For her great achievements and being the Outstanding Sales Manager  great achievements and being the Outstanding Sales Manager to the company Larana, Inc.for the month of May 2022`;
     doc.setFont("Noto Serif");
-    doc.setFontSize(30);
+    doc.setFontSize(25);
     doc.setFillColor(255, 255, 255); // Set fill color to pink (255, 25, 205)
     const secondTextWidth =
       (doc.internal.pageSize.getWidth() * 35.7) / doc.internal.scaleFactor;
@@ -100,12 +98,13 @@ const MyEnrollments = () => {
                       <th>TOTAL DURATION</th>
                       <th>COURSE FEE</th>
                       <th>PERFORMANCE</th>
+                      <th>CERTIFICATE</th>
+
                     </tr>
                   </thead>
                   <tbody>
                     {admissionB?.enrollments?.map((enrollment) => (
                       <tr>
-                        {/* <td><Image src={blog.image} fluid style={{ width: "60px", height: "60px" }} /></td> */}
                         <td>{enrollment?.courseId?.title}</td>
                         <td>{enrollment?.courseId?.totalDuration}</td>
                         <td>
@@ -116,7 +115,7 @@ const MyEnrollments = () => {
                           )}
                         </td>
                         <td>{enrollment?.performance}</td>
-                        <td>
+                        <td>{enrollment?.issueCertificate &&
                           <Button
                             className="btnAllScreen  m-1"
                             onClick={() => {
@@ -125,6 +124,8 @@ const MyEnrollments = () => {
                           >
                             Generate certificate
                           </Button>
+                        }
+
                         </td>
                       </tr>
                     ))}

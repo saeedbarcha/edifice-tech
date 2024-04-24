@@ -81,7 +81,7 @@ const AddAndUpdateGalleryModal = ({ show, handleClose, editGallery }) => {
     <Modal show={show} onHide={handleClose}>
       <Modal.Header closeButton>
         <Modal.Title>
-          {editGallery ? "Update" : "Add"} Gallery Entry
+          {editGallery ? "Update" : "Add"} Gallery
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>

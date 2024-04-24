@@ -30,8 +30,7 @@ const newEnrollment = asyncHandler(async (req, res) => {
             const existingEnrollments = await Enrollment.find({
                 user: userId,
                 admissionBatchId: admissionBatchId,
-                // courseId: { $in: courses }
-                courseId: { $in: courses.map(course => course._id) } 
+                courseId: { $in: courses }
             });
 
             if (existingEnrollments.length > 0) {
@@ -150,6 +149,34 @@ const newEnrollment = asyncHandler(async (req, res) => {
 // });
 
 
+
+// @desc    Update enrollment by admin to issue certificate
+// @route   PUT /api/enrollments/:id/issueCertificate
+// @access  Private (admin)
+const updateEnrollmentToIssueCertificate = asyncHandler(async (req, res) => {
+    const enrollmentId = req.params.id;
+
+    try {
+        // Check if the enrollment exists
+        const enrollment = await Enrollment.findById(enrollmentId);
+
+        if (!enrollment) {
+            res.status(404);
+            return res.json({ error: "Enrollment not found" });
+        }
+
+        // Update the enrollment to issue certificate
+        enrollment.issueCertificate = true;
+        await enrollment.save();
+
+        res.status(200).json({ message: "Enrollment updated successfully to issue certificate", enrollment });
+    } catch (error) {
+        res.status(400).json({ message: error.message });
+    }
+});
+
+
+
 // @desc    Get all admission batches and their enrolled courses for a user
 // @route   GET /api/admission-batches/enrollments
 // @access  Private/admin
@@ -221,8 +248,8 @@ const getUserAdmissionBatches = asyncHandler(async (req, res) => {
 
 //         const result = admissionBatches.map(batch => {
 //             const batchEnrollments = userEnrollments.filter(enrollment => enrollment.admissionBatchId.toString() === batch._id.toString());
-            
-            
+
+
 //             return {
 //                 batch,
 //                 enrollments: batchEnrollments
@@ -294,4 +321,4 @@ const updateEnrollment = asyncHandler(async (req, res) => {
     }
 });
 
-export { deleteEnrollment, updateEnrollment, newEnrollment,getAllAdmissionBatchesWithEnrolments, getUserAdmissionBatches };
+export { deleteEnrollment, updateEnrollmentToIssueCertificate, updateEnrollment, newEnrollment, getAllAdmissionBatchesWithEnrolments, getUserAdmissionBatches };

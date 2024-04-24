@@ -1,17 +1,27 @@
-import React from "react";
+import React ,{useState} from "react";
 import { useParams } from "react-router-dom";
-import { Container, Card,Button, Badge, Table } from "react-bootstrap";
+import { Container, Card, Button, Badge, Table } from "react-bootstrap";
 import { FaTimes, FaCheck } from "react-icons/fa";
 import jsPDF from "jspdf";
+import { FaEdit, FaTrash } from "react-icons/fa";
 import Message from "../../../components/Message";
 import Loader from "../../../components/Loader";
+import UpdateEnrollmentModal from "./UpdateEnrollmentModal";
+
 import {
     useGetMyEnrolmentsQuery,
 } from "../../../slices/enrollmentApiSlice";
 
 const EnrollmentList = () => {
     const { id } = useParams();
+    const [showGalleryModal, setShowGalleryModal] = useState(false);
+    const [selectedGallery, setSelectedGallery] = useState(null);
+   
+    const handleCloseGalleryModal = () => setShowGalleryModal(false);
 
+    const handleOpenGalleryModal = () => setShowGalleryModal(true);
+  
+  
     const {
         data: admissionBatches,
         isLoading,
@@ -22,9 +32,9 @@ const EnrollmentList = () => {
         console.log("res............", enrollment);
         var doc = new jsPDF('p', 'pt');
         const imgData = 'https://picsum.photos/800/600';
-    
+
         doc.addImage(imgData, 'JPEG', 0, 0, doc.internal.pageSize.getWidth(), doc.internal.pageSize.getHeight());
-    
+
         const titleText = 'This is the first title.';
         const patientInfo = `
             Patient Name: ${enrollment.courseId.title}\n
@@ -33,17 +43,17 @@ const EnrollmentList = () => {
             Illness :\n
             Status : ....
         `;
-    
+
         const titleVerticalPosition = 50;
         const patientInfoVerticalPosition = 100;
-    
+
         doc.text(titleText, doc.internal.pageSize.getWidth() / 2, titleVerticalPosition, { align: 'center' });
-    
+
         doc.text(patientInfo, doc.internal.pageSize.getWidth() / 2, patientInfoVerticalPosition, { align: 'center' });
-    
+
         doc.save('demo.pdf');
     }
-    
+
 
 
     return (
@@ -114,8 +124,19 @@ const EnrollmentList = () => {
                                                     )}
                                                 </td>
                                                 <td>{enrollment?.performance}</td>
-                                                <td> {id ? <Button className="btnAllScreen" onClick={() => {downloadTxtFile(enrollment)}}>llllGenerate Report</Button> : <Button style={{ background: "#393a3f" }}>Generate Report</Button>}
+                                                <td> {id ? <Button className="btnAllScreen" onClick={() => { downloadTxtFile(enrollment) }}>Certificate</Button> : <Button style={{ background: "#393a3f" }}>Generate Report</Button>}
                                                 </td>
+                                                <td> <UpdateEnrollmentModal
+                                                    show={showGalleryModal}
+                                                    handleClose={handleCloseGalleryModal}
+                                                    editGallery={selectedGallery}
+                                                />
+                                                    <Button className="btn-sm btnAllScreen"
+                                                        onClick={() => {
+                                                            handleOpenGalleryModal(true);
+                                                        }}>
+                                                        <FaEdit /> Update
+                                                    </Button></td>
                                             </tr>
                                         ))}
                                     </tbody>

@@ -58,7 +58,7 @@ const AdmissionBatchListScreen = () => {
           <Col className="text-end">
             <LinkContainer to={`/admin/createadmissionbatch`}>
               <Button className="btn-sm m-3 btnAllScreen">
-                <FaEdit /> Create Admission Batch
+                Create New Batch
               </Button>
             </LinkContainer>
           </Col>
