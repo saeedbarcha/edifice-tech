@@ -16,11 +16,6 @@ import Loader from "../../components/Loader";
 import Message from "../../components/Message";
 import { toast } from "react-toastify";
 import Meta from "../../components/Meta";
-// import {
-//   useGetProductDetailsQuery,
-//   useCreateReviewMutation,
-// } from "../../slices/productApiSlice";
-// import { addToCart } from "../../slices/cartSlice";
 import { useGetCourseDetailsQuery } from "../../slices/courseApiSlice";
 const CourseDetails = () => {
   const { id: courseId } = useParams();
@@ -38,31 +33,6 @@ const CourseDetails = () => {
     error,
   } = useGetCourseDetailsQuery(courseId);
 
-  // const [createReview, { isLoading: loadingProductReview }] =
-  //   useCreateReviewMutation();
-
-  // const { userInfo } = useSelector((state) => state.auth);
-  // const addToCartHandler = () => {
-  //   dispatch(addToCart({ ...product, qty }));
-  //   navigate("/cart");
-  // };
-
-  // const submitHandler = async(e) => {
-  //   e.preventDefault();
-  //   try {
-  //     await createReview({
-  //       courseId,
-  //       rating,
-  //       comment
-  //     }).unwrap();
-  //     refetch();
-  //     toast.success("Review submitted");
-  //     setRating(0);
-  //     setComment("");
-  //   } catch (err) {
-  //     toast.error(err?.data?.message || err.error);
-  //   }
-  //   }
 
   return (
     <>

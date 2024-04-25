@@ -12,9 +12,9 @@ const Meta = ({title, description, keywords}) => {
 }
 
 Meta.defaultPropd = {
-    title: "Welcome to lubick app",
-    description: "We sell the best products for cheap",
-    keywords:"electronics, buy electronics, cheap electronics"
+    title: "Welcome to Edifice Tech",
+    description: "We will rpovide best software solutions",
+    keywords:"software house, software company, software, software engineering"
 };
 
 export default Meta;

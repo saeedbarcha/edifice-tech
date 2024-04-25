@@ -1,4 +1,3 @@
-// import ListProductScreen from "./listProducts/ListProductScreen";
 import HeroCarousel from "./heroCarousel/HeroCarousel";
 import ServicesScreen from "./services/ServicesScreen";
 import ProductsCarousel from "./productsCarousel/ProductsCarousel";

@@ -35,7 +35,7 @@ import TeamMemberProfile from "./screens/auth/TeamMemberProfile";
 import CreateBlogScreen from "./screens/admin/blog/CreateBlogScreen";
 import AllBlogsScreen from "./screens/blog/AllBlogsScreen";
 import BlogDetailsScreen from "./screens/blog/BlogDetailsScreen";
-import BlogListScreen from"./screens/admin/blog/BlogListScreen";
+import BlogListScreen from "./screens/admin/blog/BlogListScreen";
 import BlogEditScreen from "./screens/admin/blog/BlogEditScreen";
 import AdminDashboard from "./screens/admin/adminDashboard/AdminDashboard";
 import GalleryList from "./screens/admin/gallery/GalleryList";
@@ -74,7 +74,7 @@ const router = createBrowserRouter(
       <Route path="/activeadmissionbatch/:id" element={<EnrollAdmissionBatchScreen />} />
 
 
-         
+
 
       <Route path="/blogs/:id" element={<BlogDetailsScreen />} />
       <Route path="/services/:id" element={<ServiceDetails />} />
@@ -96,10 +96,10 @@ const router = createBrowserRouter(
         <Route path="/admin/createcourse" element={<CreateCourseScreen />} />
         <Route path="/admin/createadmissionbatch" element={<CreateAdmissionBatchScreen />} />
         <Route path="/admin/enrollment-List" element={<EnrollmentList />} />
-         
-        
 
-        
+
+
+
         <Route
           path="/admin/productlist/:pageNumber"
           element={<ProductListScreen />}
@@ -111,11 +111,11 @@ const router = createBrowserRouter(
 
         <Route path="/admin/admissionbatchlist" element={<AdmissionBatchListScreen />} />
         <Route path="/admin/admission-batch/:id/edit" element={<EditAdmissionBatchScreen />} />
-  
-      
+
+
         <Route path="/admin/userlist" element={<UserListScreen />} />
         <Route path="/admin/user/:id/edit" element={<UserEditScreen />} />
-   
+
       </Route>
     </Route>
   )
@@ -126,7 +126,7 @@ root.render(
   <React.StrictMode>
     <HelmetProvider>
       <Provider store={store}>
-          <RouterProvider router={router} />
+        <RouterProvider router={router} />
       </Provider>
     </HelmetProvider>
   </React.StrictMode>

@@ -29,7 +29,7 @@ export const enrollmentApiSlice = apiSlice.injectEndpoints({
     }),
     updateEnrollment: builder.mutation({
       query: (data) => ({
-        url: `${ENROLLMENT_URL}/${data._id}`,
+        url: `${ENROLLMENT_URL}/update-enrollment-admin`,
         method: "PUT",
         body: data,
       }),

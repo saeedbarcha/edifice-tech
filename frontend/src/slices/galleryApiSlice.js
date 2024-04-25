@@ -36,20 +36,7 @@ export const galleryApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Gallery"],
     }),
-  //   getActiveBlogs: builder.query({
-  //     query: () => ({
-  //       url: `${BLOGS_URL}/active-blogs`,
-  //       }),
-  //     providesTags: ["Blogs"],
-  //     keepUnusedDataFor: 5,
-  //   }),
-  //   getBlogDetails: builder.query({
-  //     query: (blogId) => ({
-  //       url: `${BLOGS_URL}/${blogId}`,
-  //     }),
-  //     providesTags: ["Blogs"],
-  //     keepUnusedDataFor: 5,
-  //   }),
+ 
     deleteGalleryItem: builder.mutation({
       query:(galleryItemId) => ({
         url: `${GALLERY_URL}/${galleryItemId}`,

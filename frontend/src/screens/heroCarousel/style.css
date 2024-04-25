@@ -74,7 +74,7 @@
   #hero .icon-box:hover {
     border-color: var(--blueThemeColor);
     transform: scale(1.05);
-    box-shadow: 0px 4px 7px rgba(255, 255, 255, 0.4); /* Add shadow effect */
+    box-shadow: 0px 4px 7px rgba(255, 255, 255, 0.4);
   }
   @media (min-width: 1024px) {
     #hero {

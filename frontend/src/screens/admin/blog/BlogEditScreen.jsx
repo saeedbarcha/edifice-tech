@@ -22,7 +22,6 @@ const BlogEditScreen = () => {
 
   const { data: blog, isLoading, error } = useGetBlogDetailsQuery(blogId);
 
-  console.log("kkkkkkkkkkkkkkkkkkk", blog);
   const [updateBlog, { isLoading: loadingUpdate }] = useUpdateBlogMutation();
 
   const [uploadBlogImage, { isLoading: loadingUpload }] =

@@ -50,7 +50,6 @@ const admissionBatchSchema = new Schema(
     ],
 
   },
-  // other fields...
 
   {
     timestamps: true,

@@ -7,15 +7,11 @@ import Loader from "../../../components/Loader";
 import { toast } from "react-toastify";
 import {
   useGetAdmissionBatchsQuery,
-  useCreateAdmissionBatchMutation,
   useDeleteAdmissionBatchMutation,
 } from "../../../slices/admissionBatchApiSlice";
 
 const AdmissionBatchListScreen = () => {
   const { data, isLoading, error, refetch } = useGetAdmissionBatchsQuery();
-
-  const [createAdmissionBatch, { isLoading: loadingCreate }] =
-    useCreateAdmissionBatchMutation();
 
   const [deleteAdmissionBatch, { isLoading: loadingDelete }] =
     useDeleteAdmissionBatchMutation();
@@ -64,7 +60,6 @@ const AdmissionBatchListScreen = () => {
           </Col>
         </Row>
 
-        {loadingCreate && <Loader />}
         {loadingDelete && <Loader />}
 
         {isLoading ? (

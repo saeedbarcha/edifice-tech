@@ -32,7 +32,6 @@ const TeamMemberProfile = () => {
     error,
   } = useGetTeamMemberDetailsQuery(userId);
 
-  console.log("userInfo...........", userInfo);
   return (
     <div>
       {isLoading ? (
@@ -62,10 +61,7 @@ const TeamMemberProfile = () => {
                         {userInfo?.user?.address}
                       </p>
                       <div className="d-flex justify-content-center mb-2">
-                        {/* <Button>Follow</Button>
-                  <Button variant="outline" className="ms-1">
-                    Message
-                  </Button> */}
+                       
                       </div>
                     </Card.Body>
                   </Card>

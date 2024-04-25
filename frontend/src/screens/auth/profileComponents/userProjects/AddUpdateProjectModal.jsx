@@ -41,7 +41,6 @@ const AddUpdateProjectModal = ({ show, handleClose, editProject }) => {
       description,
       image,
     };
-    console.log("jjjjjjjjjjj", newProject)
     const result = await createProject(newProject);
     toast.success("Project added successfully");
     handleClose();

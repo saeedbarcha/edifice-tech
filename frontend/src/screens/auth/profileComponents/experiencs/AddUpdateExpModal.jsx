@@ -57,7 +57,6 @@ const AddUpdateExpModal = ({ show, handleClose, editExperience }) => {
       endingDate,
     };
 
-    // Check if any field is empty, use the existing data in that case
     for (let key in updatedExperience) {
       if (!updatedExperience[key]) {
         updatedExperience[key] = editExperience[key];

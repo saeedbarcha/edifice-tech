@@ -7,7 +7,6 @@ import Education from "../models/educationModel.js";
 // @access  Private
 const addEducation = asyncHandler(async (req, res) => {
   const { degree, course, instituteName, date } = req.body;
-  console.log("data............", req.body)
 
   // Get user ID from req.user
   const userId = req.user._id;
@@ -53,8 +52,6 @@ const deleteEducation = asyncHandler(async (req, res) => {
 // @access  Private
 const updateEducation = asyncHandler(async (req, res) => {
   const {_id, degree, course, instituteName, date,  } = req.body;
-
-  console.log("resssssssssssssssss...........", req.params)
 
   const education = await Education.findById(_id);
   if (education) {

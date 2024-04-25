@@ -2,11 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Container, Row, Col, Image } from "react-bootstrap";
 import Loader from "../../components/Loader";
-import Message from "../../components/Message";
 import { AiFillInstagram, AiFillLinkedin } from "react-icons/ai";
 import { BsFacebook } from "react-icons/bs";
 import { useGetMemberUserQuery } from "../../slices/usersApiSlice";
-import image from "./camera.jpg";
 import "./Team.css";
 
 const TeamScreen = () => {
@@ -34,26 +32,26 @@ const TeamScreen = () => {
                     <div className="member-img ">
                       <Link
                         className="m-auto"
-                        to={`/member/${user._id}`}
-                        style={{ textDecoration: "none" }} // Add this style to remove underline
-                      >
-                        <img src={user?.image} className="img-fluid" alt="" />
+                        to={`/member/${user?._id}`}
+                        style={{ textDecoration: "none" }}
+                        >
+                        <img src={user?.image ? user.image :  "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" } className="img-fluid" alt="" />
                       </Link>
                       <div className="social">
-                        <a href={user.linkedInUrl}>
+                        <a href={user?.linkedInUrl}>
                           <AiFillLinkedin />
                         </a>
-                        <a href={user.facebookUrl}>
+                        <a href={user?.facebookUrl}>
                           <BsFacebook />
                         </a>
-                        <a href={user.instagramUrl}>
+                        <a href={user?.instagramUrl}>
                           <AiFillInstagram />
                         </a>
                       </div>
                     </div>
                     <div className="member-info">
-                      <h4>{user.name}</h4>
-                      <span>{user.designation}</span>
+                      <h4>{user?.name}</h4>
+                      <span>{user?.designation}</span>
                     </div>
                   </div>
                 </Col>

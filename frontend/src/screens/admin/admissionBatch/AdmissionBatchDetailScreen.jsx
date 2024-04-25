@@ -19,9 +19,6 @@ const AdmissionBatchDetailScreen = () => {
   } = useGetAdmissionBatchDetailsQuery(id);
   const [deleteAdmissionBatch, { isLoading: loadingDelete }] =
     useDeleteAdmissionBatchMutation();
-
-  console.log("admissionBatchdddddddddddddd...", admissionBatch);
-
   const deleteHandler = async () => {
     if (
       window.confirm("Are you sure you want to delete this admission batch?")
@@ -29,16 +26,13 @@ const AdmissionBatchDetailScreen = () => {
       try {
         const res = await deleteAdmissionBatch(id);
         if (res && res.error) {
-          console.error("Error deleting admission batch:", res.error);
           toast.error(
             res.error.data.message || "Failed to delete admission batch"
           );
         } else {
-          console.log("Admission Batch deleted");
           toast.success("Admission Batch deleted");
         }
       } catch (err) {
-        console.error("Error:", err);
         toast.error(err?.data?.message || err.error);
       }
     }
@@ -101,47 +95,12 @@ const AdmissionBatchDetailScreen = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {/* {admissionBatch?.courses?.map((course) => (
-                    <tr key={course._id}>
-                      <td>{course.courseId.title}</td>
-                      <td>
-                        <table>
-                          <thead>
-                            <tr>
-                              <th>Name</th>
-                              <th>Completed</th>
-                              <th>Course Fee</th>
-                              <th>Admission Fee</th>
-                              <th>Performance</th>
-                              <th>Action</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {course.enrolledUsers.map((user) => (
-                              <tr key={user.user}>
-                                <td>{user.user}</td>
-                                <td>{user.completed.toString()}</td>
-                                <td>{user.courseFeePaid.toString()}</td>
-                                <td>{user.performance}</td>
-                                <td>
-                                  <button>Update</button>
-                                  <button>Delete</button>
-                                </td>
-                              </tr>
-                            ))}
-                          </tbody>
-                        </table>
-                      </td>
-                    </tr>
-                  ))} */}
-
+                 
                   {admissionBatch?.selectedCourses?.map((course) => (
                     <tr key={course?.courseId}>
                       <td>{course?.courseId?.title}</td>
                       <td>
                         <Table responsive>
-                          {" "}
-                          {/* Nested responsive table for enrolled users */}
                           <tbody>
                             {course?.enrolledUsers?.map((user) => (
                               <tr key={user?.user}>

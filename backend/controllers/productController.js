@@ -83,5 +83,4 @@ export {
   createProduct,
   updateProduct,
   deleteProduct,
-  // getTopProducts
 };

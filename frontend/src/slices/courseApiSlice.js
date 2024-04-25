@@ -18,20 +18,6 @@ export const courseApiSlice = apiSlice.injectEndpoints({
       providesTags: ["Course"],
       keepUnusedDataFor: 5,
     }),
-//     uploadBlogImage: builder.mutation({
-//       query: (data) => ({
-//         url: `${UPLOAD_URL}`,
-//         method: "POST",
-//         body: data,
-//       }),
-//     }),
-//     createBlog: builder.mutation({
-//       query: () => ({
-//         url: `${COURSE_URL}`,
-//         method: "POST",
-//       }),
-//       invalidatesTags: ["Course"],
-//     }),
     updateCourse: builder.mutation({
       query: (data) => ({
         url: `${COURSE_URL}/${data.courseId}/edit`,
@@ -48,13 +34,6 @@ export const courseApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Course"],
     }),
-//     getActiveBlogs: builder.query({
-//       query: () => ({
-//         url: `${COURSE_URL}/active-blogs`,
-//         }),
-//       providesTags: ["Blogs"],
-//       keepUnusedDataFor: 5,
-//     }),
     getCourseDetails: builder.query({
       query: (courseId) => ({
         url: `${COURSE_URL}/${courseId}`,

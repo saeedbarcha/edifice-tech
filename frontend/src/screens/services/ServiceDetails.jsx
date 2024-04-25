@@ -13,7 +13,6 @@ import ServicesData from "./servicesData.js";
 
 function ServiceDetails() {
   const { id } = useParams();
-  console.log("sfssssssssssssssssssssssssssssff", id);
   const filterData = ServicesData.find((val) => val._id == id);
   return (
     <div
@@ -49,7 +48,6 @@ function ServiceDetails() {
       </Navbar>
       <div className="position-relative overflow-hidden p-3 p-md-5 m-md-3 bg-light">
         <Container>
-          {/* <Row className="justify-content-md-center"> */}
           <Row className="">
             <Col md={12}>
               <h1 className="display-4 font-weight-normal">
@@ -76,15 +74,7 @@ function ServiceDetails() {
               <p className="lead">And an even wittier subheading.</p>
             </div>
             <div className=" box-shadow mx-auto">
-              {/* <img
-                src="https://plus.unsplash.com/premium_photo-1664361480105-33afc4559c40?q=80&w=1846&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                alt=""
-                style={{
-                  width: "100%",
-                  height: "54vh",
-                  borderRadius: "21px",
-                }}
-              /> */}
+              
               <div class="embed-responsive embed-responsive-16by9">
                 <iframe
                   class="embed-responsive-item"

@@ -8,13 +8,6 @@ const HeroCarousel = () => {
   const selectedElements = ServicesData.slice(0, 4);
   return (
     <>
-      {/* {!keyword && !pageNumber ? (
-         error ? (
-          <Message variant="danger">
-            {error?.data?.message || error?.error}
-          </Message>
-        ) : (
-      <> */}
         <section
           id="hero"
           className="d-flex align-items-center justify-content-center"
@@ -50,7 +43,6 @@ const HeroCarousel = () => {
                       className="icon-box"
                       style={{
                         textDecoration: "none",
-                        // backgroundColor: "transparent",
                         borderRadius: "40px",
                       }}
                     >

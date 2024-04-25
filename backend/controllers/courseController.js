@@ -71,12 +71,10 @@ const createNewCourse = asyncHandler(async (req, res) => {
       isActive,
     });
 
-    // Save the new course to the database
     const createdCourse = await newCourse.save();
 
-    res.status(201).json(createdCourse); // Return the newly created course
+    res.status(201).json(createdCourse); 
   } catch (error) {
-    console.error(error);
     res.status(500).json({ message: "Server Error" });
   }
 });
@@ -97,10 +95,9 @@ const updateCourse = asyncHandler(async (req, res) => {
     daysInWeek,
     totalDuration,
     certificate,
-    isActive, // Add isActive from request body
+    isActive, 
   } = req.body;
 
-  console.log("rrrrrrrrr", certificate, isActive);
 
   try {
     const course = await Course.findById(req.params.id);
@@ -122,12 +119,10 @@ const updateCourse = asyncHandler(async (req, res) => {
       
       const updatedCourse = await course.save();
       res.json(updatedCourse);
-      // console.log("rrrrrrrrr", updatedCourse);
     } else {
       res.status(404).json({ message: "Course not found" });
     }
   } catch (error) {
-    console.error(error);
     res.status(500).json({ message: "Server Error" });
   }
 });
@@ -147,13 +142,6 @@ const deleteCourse = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc    Get top rated courses for carousel
-// @route   GET /api/orders/top
-// @access  Public
-// const getTopCourses = asyncHandler(async (req, res) => {
-//   const courses = await Course.find({}).sort({rating:-1}).limit(3);
-//   res.status(200).json(courses);
-// });
 
 export {
   getCourses,

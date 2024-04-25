@@ -16,26 +16,26 @@ const { data, isLoading, error } = useGetProductsQuery();
     infinite: true,
     slidesToShow: 3,
     slidesToScroll: 1,
-    speed: 6000, // Transition speed in milliseconds
+    speed: 6000, 
     autoplay: true,
     arrows: true,
-    autoplaySpeed: 900, // Autoplay speed in milliseconds
+    autoplaySpeed: 900, 
     pauseOnHover: true,
     responsive: [
       {
-        breakpoint: 992, // Set a breakpoint for mobile size
+        breakpoint: 992, 
         settings: {
           slidesToShow: 2,
         },
       },
       {
-        breakpoint: 768, // Set a breakpoint for mobile size
+        breakpoint: 768, 
         settings: {
           slidesToShow: 1,
         },
       },
       {
-        breakpoint: 320, // Set a breakpoint for mobile size
+        breakpoint: 320, 
         settings: {
           slidesToShow: 1,
         },

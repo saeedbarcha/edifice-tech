@@ -33,6 +33,10 @@ const enrollmentSchema = new Schema(
             type: Boolean,
             default: false,
         },
+        admissionFeePaid: {
+            type: Boolean,
+            default: false,
+        },
         courseFeePaid: {
             type: Boolean,
             default: false,
@@ -46,7 +50,11 @@ const enrollmentSchema = new Schema(
             enum: ['Excellent', 'Good', 'Average', 'Poor'],
             default: 'Average',
         },
-
+        gender: {
+            type: String,
+            enum: ['Male', 'Female', 'Other'],
+            default: 'Male',
+        },
     },
 
     {

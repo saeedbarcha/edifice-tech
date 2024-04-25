@@ -38,10 +38,10 @@ const CourseScreen = () => {
                       <div className="showCourcesCard">
                         <img
                           style={{
-                            width: "100%", // Make the width 100% of its container
-                            height: "auto", // Let the height adjust automatically to maintain aspect ratio
-                            maxWidth: "414px", // Limit the maximum width to 414px
-                            maxHeight: "285px", // Limit the maximum height to 285px
+                            width: "100%", 
+                            height: "auto", 
+                            maxWidth: "414px", 
+                            maxHeight: "285px", 
                             borderRadius: "10px 19px 0px 0px",
                           }}
                           src={course?.image}

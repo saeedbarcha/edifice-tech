@@ -1,6 +1,6 @@
 import React, { useState } from "react"; // Import React
 import { Container, Card, Form, Button, Col } from "react-bootstrap";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useCreateAdmissionBatchMutation } from "../../../slices/admissionBatchApiSlice";
 import { useGetActiveCoursesQuery } from "../../../slices/courseApiSlice.js";
 import { toast } from "react-toastify";
@@ -53,7 +53,6 @@ const CreateAdmissionBatchScreen = () => {
         navigate("/admin/admissionbatchlist");
       }
     } catch (err) {
-      console.error("Error:", err);
       toast.error(err?.data?.message || err.error);
     }
   };

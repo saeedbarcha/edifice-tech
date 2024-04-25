@@ -5,13 +5,11 @@
 
 main {
   min-height: 60vh;
-  /* background-color: aqua; */
 }
 
 body {
   /* background-color: #EEEEEE; */
   font-family: 'Times New Roman', Times, serif;
-  /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
 }
 
 .carousel-caption {

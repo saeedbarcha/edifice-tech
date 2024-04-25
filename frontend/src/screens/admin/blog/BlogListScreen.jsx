@@ -25,15 +25,12 @@ const BlogListScreen = () => {
       try {
         const res = await deleteBlog(id);
         if (res && res.error) {
-          console.log("Error deleting blog:", res.error);
           toast.error(res.error.data.message || "Failed to delete blog");
         } else {
-          console.log("Blog deleted");
           toast.success("Blog deleted");
           refetch();
         }
       } catch (err) {
-        console.error("Error:", err);
         toast.error(err?.data?.message || err.error);
       }
     }

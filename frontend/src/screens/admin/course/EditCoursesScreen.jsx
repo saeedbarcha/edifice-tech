@@ -35,7 +35,6 @@ const EditCoursesScreen = () => {
     error,
   } = useGetCourseDetailsQuery(courseId);
 
-  console.log("ccccccccccccccc", course)
   const [updateCourse, { isLoading: loadingUpdate }] =
     useUpdateCourseMutation();
 

@@ -43,8 +43,7 @@ const updateProject = asyncHandler(async (req, res) => {
 // @access  Private
 const addProject = asyncHandler(async (req, res) => {
   const { title, url, description, image } = req.body;
- console.log("lllllllllllll...", req.body)
-  // Create a new project instance with the provided data
+  
   const newProject = new Project({
     user:req.user._id,
     title,

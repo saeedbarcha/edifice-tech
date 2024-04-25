@@ -6,14 +6,14 @@ import AdmissionBatch from "../models/admissionBatchModel.js"
 // @route   POST /api/enrollments
 // @access  Private
 const newEnrollment = asyncHandler(async (req, res) => {
-    const { admissionBatchId, courses, firstName, lastName, fatherName } = req.body;
+    const { admissionBatchId, courses, firstName, lastName, fatherName, gender } = req.body;
 
     const userId = req.user._id;
 
     try {
         if (!admissionBatchId) {
             res.status(404);
-            return res.json({ error: "Admission batch not found" }); // Return early after sending the response
+            return res.json({ error: "Admission batch not found" }); 
         } else if (!firstName) {
             res.status(400);
             return res.json({ error: "First name is required" });
@@ -23,7 +23,11 @@ const newEnrollment = asyncHandler(async (req, res) => {
         } else if (!fatherName) {
             res.status(400);
             return res.json({ error: "Father name is required" });
-        } else if (courses.length === 0) {
+        } else if (!gender) {
+            res.status(400);
+            return res.json({ error: "Gender is required" });
+        }
+        else if (courses.length === 0) {
             res.status(400);
             return res.json({ error: "Select at least 1 course to enroll" });
         } else {
@@ -49,9 +53,7 @@ const newEnrollment = asyncHandler(async (req, res) => {
                     firstName,
                     lastName,
                     fatherName,
-                    completed: false,
-                    courseFeePaid: false,
-                    performance: "Average"
+                    gender
                 });
                 const createdEnrollment = await newEnrollment.save();
                 enrollments.push(createdEnrollment);
@@ -64,97 +66,21 @@ const newEnrollment = asyncHandler(async (req, res) => {
     }
 });
 
-// const newEnrollment = asyncHandler(async (req, res) => {
-//     const { admissionBatchId, courses, firstName, lastName, fatherName } = req.body;
-
-//     const userId = req.user._id;
-
-//     try {
-//         if (!admissionBatchId) {
-//             res.status(404);
-//             return res.json({ error: "Admission batch not found" });
-//         } else if (!firstName) {
-//             res.status(400);
-//             return res.json({ error: "First name is required" });
-//         } else if (!lastName) {
-//             res.status(400);
-//             return res.json({ error: "Last name is required" });
-//         } else if (!fatherName) {
-//             res.status(400);
-//             return res.json({ error: "Father name is required" });
-//         } else if (courses.length === 0) {
-//             res.status(400);
-//             return res.json({ error: "Select at least 1 course to enroll" });
-//         } else {
-//             // Check if the user is already enrolled in any of the selected courses
-//             const existingEnrollments = await Enrollment.find({
-//                 user: userId,
-//                 admissionBatchId: admissionBatchId,
-//                 courseId: { $in: courses.map(course => course._id) } 
-//             });
-
-//             if (existingEnrollments.length > 0) {
-//                 // User is already enrolled in at least one of the selected courses
-//                 const enrolledCourses = existingEnrollments.map(enrollment => enrollment.courseId);
-//                 res.status(400);
-//                 return res.json({ error: "You are already enrolled in one of the selected courses", enrolledCourses });
-//             }
-
-//             // Proceed with enrolling the user in the selected courses
-//             const enrollments = [];
-
-//             // Loop through the courses array and create an enrollment record for each course
-//             for (const courseId of courses) {
-//                 const newEnrollment = new Enrollment({
-//                     user: userId,
-//                     admissionBatchId,
-//                     courseId: courseId._id, // Extracting _id from courseId object
-//                     firstName,
-//                     lastName,
-//                     fatherName,
-//                     completed: false,
-//                     courseFeePaid: false,
-//                     performance: "Average"
-//                 });
-//                 const createdEnrollment = await newEnrollment.save();
-//                 enrollments.push(createdEnrollment);
-//             }
-
-//             res.status(200).json({ message: "Enrolled successfully", enrollments });
-//         }
-//     } catch (error) {
-//         res.status(400).json({ message: error.message });
-//     }
-// });
-
-
-// // @desc    Get all admission batches and their enrolled courses for a user
-// // @route   GET /api/admission-batches/enrollments
-// // @access  Private
-// const getUserAdmissionBatches = asyncHandler(async (req, res) => {
-//     const userId = req.user._id;
-
-//     try {
-//         // Find all admission batches where the user is enrolled
-//         const userEnrollments = await Enrollment.find({ user: userId }).distinct('admissionBatchId');
-
-//         // Populate admission batches with their enrolled courses
-//         const admissionBatches = await AdmissionBatch.find({ _id: { $in: userEnrollments } }).populate('courses');
-
-
-//         res.status(200).json({ admissionBatches });
-//     } catch (error) {
-//         res.status(400).json({ message: error.message });
-//     }
-// });
-
-
-
 // @desc    Update enrollment by admin to issue certificate
 // @route   PUT /api/enrollments/:id/issueCertificate
 // @access  Private (admin)
 const updateEnrollmentToIssueCertificate = asyncHandler(async (req, res) => {
-    const enrollmentId = req.params.id;
+    const { enrollmentId,
+        firstName,
+        lastName,
+        fatherName,
+        gender,
+        performance,
+        issueCertificate,
+        admissionFeePaid,
+        courseFeePaid,
+        completed
+    } = req.body;
 
     try {
         // Check if the enrollment exists
@@ -163,14 +89,27 @@ const updateEnrollmentToIssueCertificate = asyncHandler(async (req, res) => {
         if (!enrollment) {
             res.status(404);
             return res.json({ error: "Enrollment not found" });
+        } else {
+            enrollment.firstName = firstName || enrollment.firstName;
+            enrollment.lastName = lastName || enrollment.lastName;
+            enrollment.fatherName = fatherName || enrollment.fatherName;
+            enrollment.performance = performance || enrollment.performance;
+            enrollment.gender = gender || enrollment.gender;
+            enrollment.issueCertificate = issueCertificate || enrollment.issueCertificate;
+            enrollment.admissionFeePaid = admissionFeePaid || enrollment.admissionFeePaid;
+            enrollment.courseFeePaid = courseFeePaid || enrollment.courseFeePaid;
+            enrollment.courseFeePaid = courseFeePaid || enrollment.courseFeePaid;
+            enrollment.completed = completed || enrollment.completed;
+
+
+
+            const updatedEnrollment = await enrollment.save();
+
+            res.status(200).json({ message: "Enrollment updated successfully to issue certificate", updatedEnrollment });
         }
 
-        // Update the enrollment to issue certificate
-        enrollment.issueCertificate = true;
-        await enrollment.save();
 
-        res.status(200).json({ message: "Enrollment updated successfully to issue certificate", enrollment });
-    } catch (error) {
+    } catch (err) {
         res.status(400).json({ message: error.message });
     }
 });
@@ -194,7 +133,6 @@ const getAllAdmissionBatchesWithEnrolments = asyncHandler(async (req, res) => {
             enrollmentGroups[enrollment.admissionBatchId].push(enrollment);
         });
 
-        // const admissionBatches = await AdmissionBatch.find().populate('courses');
         const admissionBatches = await AdmissionBatch.find();
 
 
@@ -235,52 +173,6 @@ const getUserAdmissionBatches = asyncHandler(async (req, res) => {
         res.status(400).json({ message: error.message });
     }
 });
-
-// const getUserAdmissionBatches = asyncHandler(async (req, res) => {
-//     const userId = req.user._id;
-
-//     try {
-//         const userEnrollments = await Enrollment.find({ user: userId }).populate('courseId');
-
-//         const userEnrolledBatchIds = userEnrollments.map(enrollment => enrollment.admissionBatchId);
-
-//         const admissionBatches = await AdmissionBatch.find({ _id: { $in: userEnrolledBatchIds } });
-
-//         const result = admissionBatches.map(batch => {
-//             const batchEnrollments = userEnrollments.filter(enrollment => enrollment.admissionBatchId.toString() === batch._id.toString());
-
-
-//             return {
-//                 batch,
-//                 enrollments: batchEnrollments
-//             };
-//         });
-//         res.status(200).json({ admissionBatches: result });
-//     } catch (error) {
-//         res.status(400).json({ message: error.message });
-//     }
-// });
-
-// const getUserAdmissionBatches = asyncHandler(async (req, res) => {
-//     const userId = req.user._id;
-
-//     try {
-//         // const userEnrollments = await Enrollment.find({ user: userId });
-//         const userEnrollments = await Enrollment.find({ user: userId }).populate('courseId');
-//         const userEnrolledBatchIds = userEnrollments.map(enrollment => enrollment.admissionBatchId);
-//         const admissionBatches = await AdmissionBatch.find({ _id: { $in: userEnrolledBatchIds } });
-//         const result = admissionBatches.map(batch => {
-//             const batchEnrollments = userEnrollments.filter(enrollment => enrollment.admissionBatchId.toString() === batch._id.toString());
-//             return {
-//                 batch,
-//                 enrollments: batchEnrollments
-//             };
-//         });
-//         res.status(200).json({ admissionBatches: result });
-//     } catch (error) {
-//         res.status(400).json({ message: error.message });
-//     }
-// });
 
 
 // @desc    Delete enrollment

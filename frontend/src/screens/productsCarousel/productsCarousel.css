@@ -11,7 +11,6 @@
 /* @tag --Container/Slider/div */
 .topCatContainer{
   transition: transform 0.8s;
-  /* min-width: 150px; */
 }
 
 /* @tag --Container/Slider/div */
@@ -33,7 +32,6 @@
 
 /* @tag --Container/Slider/div/div/link/div1/span */
 .productName {
-  /* background: #0f3460; */
   background-color: var(--mainThemeColor);
   border: 2px solid #f7efef;
   color: #fff;

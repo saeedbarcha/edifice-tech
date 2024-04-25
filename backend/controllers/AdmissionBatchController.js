@@ -50,9 +50,7 @@ const getAdmissionBatchById = asyncHandler(async (req, res) => {
   try {
     const admissionBatch = await AdmissionBatch.findById(req.params.id)
       .populate({
-        path: "selectedCourses.courseId",
-        // Optionally, you can populate further fields if needed
-        // populate: { path: 'enrolledUsers.user', select: 'name' }
+        path: "selectedCourses.courseId"
       });
 
     if (!admissionBatch) {
@@ -62,7 +60,6 @@ const getAdmissionBatchById = asyncHandler(async (req, res) => {
 
     return res.json(admissionBatch);
   } catch (error) {
-    console.error(error);
     res.status(500).json({ message: "Server Error" });
   }
 });

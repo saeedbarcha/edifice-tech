@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import {  useNavigate, useParams } from "react-router-dom";
-import { Container, Form,  Card,  Button, Badge } from "react-bootstrap";
+import { useNavigate, useParams } from "react-router-dom";
+import { Container, Form, Card, Button, Badge } from "react-bootstrap";
 import Message from "./../../components/Message";
 import Loader from "./../../components/Loader";
 import {
@@ -18,6 +18,7 @@ const EnrollAdmissionBatchScreen = () => {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [fatherName, setFatherName] = useState("");
+    const [gender, setGender] = useState("Male")
     const [admissionBatchId, setAdmissionBatchId] = useState(null);
 
     const navigate = useNavigate();
@@ -47,6 +48,7 @@ const EnrollAdmissionBatchScreen = () => {
                 firstName,
                 lastName,
                 fatherName,
+                gender,
                 courses
             };
             const result = await enrollCourse(enrollUser);
@@ -81,6 +83,10 @@ const EnrollAdmissionBatchScreen = () => {
                         <Card.Text>
                             <strong>Last Date To Apply:</strong>{" "}
                             {admissionBatch?.lastDateToApply}
+                        </Card.Text>
+                        <Card.Text>
+                            <strong>Admission Fee:</strong>{" "}
+                            {admissionBatch?.admissionFee}
                         </Card.Text>
                         <Card.Text>
                             <strong>Certificate Available:</strong>{" "}
@@ -136,9 +142,21 @@ const EnrollAdmissionBatchScreen = () => {
                                     onChange={(e) => setFatherName(e.target.value)}
                                 />
                             </Form.Group>
+                            <Form.Group controlId="gender" className="my-2">
+                                <Form.Label>Gender</Form.Label>
+                                <Form.Control
+                                    as="select"
+                                    value={gender}
+                                    onChange={(e) => setGender(e.target.value)}
+                                >
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                </Form.Control>
+                            </Form.Group>
                             <Form.Group className="my-4">
                                 <Form.Label>Selected Courses</Form.Label>
-                                
+
                                 {admissionBatch?.selectedCourses?.map((course, index) => {
                                     return (
                                         <Form.Check
@@ -152,7 +170,7 @@ const EnrollAdmissionBatchScreen = () => {
                                                 } else {
                                                     setCourses(
                                                         courses.filter(
-                                                            (sCourse) => sCourse !== course?._id
+                                                            (sCourse) => sCourse !== course?.courseId?._id
                                                         )
                                                     );
                                                 }
@@ -160,21 +178,14 @@ const EnrollAdmissionBatchScreen = () => {
                                         />
                                     );
                                 })}
-                                {/* {course.isEnrolled ? (
-                                    <Button variant="primary" disabled>
-                                        Enrolled
-                                    </Button>
-                                ) : ( */}
                                 <Button
                                     variant="primary"
                                     type="submit"
                                     className="my-3 btnAllScreen"
                                     disabled={loadingEnroll}
-                                // onClick={() => handleEnrollCourse(course?.courseId?._id)}
                                 >
                                     {loadingEnroll ? "Enrolling..." : "Enroll"}
                                 </Button>
-                                {/* )} */}
                             </Form.Group>
                         </Form>
 

@@ -27,9 +27,6 @@ const UserEditScreen = () => {
     error,
   } = useGetUserDetailsQuery(userId);
 
-  console.log("uuuuuuuuuu,,,,,,,", user)
-
-
   const [updateUser, { isLoading: loadingUpdate }] =
     useUpdateUserMutation();
 

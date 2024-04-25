@@ -17,9 +17,7 @@ const AddUpdateEduModal = ({ show, handleClose, editEducation }) => {
   const [updateEducation, { isLoading: loadingAdding }] =
   useUpdateEducationMutation();
 
-  console.log("hhhhhhhhhhhhhhhhhhh", useUpdateEducationMutation() )
   useEffect(() => {
-    // Update state with education details when editEducation changes
     if (editEducation) {
       setDegree(editEducation.degree || "");
       setCourse(editEducation.course || "");
@@ -42,13 +40,12 @@ const AddUpdateEduModal = ({ show, handleClose, editEducation }) => {
     };
 
     const result = await createEducation(addEdu);
-    console.log("gggggggggggggg.........", result)
   
     if (result.error) {
       toast.error(result.error);
     } else {
       toast.success("Education added successfully");
-      handleClose(); // Close modal after updating
+      handleClose();
     }
   };
   const handleUpdate = async (e) => {
@@ -61,14 +58,13 @@ const AddUpdateEduModal = ({ show, handleClose, editEducation }) => {
       date
     };
   
-    console.log("hhhhhhhhhhhhhh", updatedEdu )
     const result = await updateEducation(updatedEdu);
   
     if (result.error) {
       toast.error(result.error);
     } else {
       toast.success("Education updated successfully");
-      handleClose(); // Close modal after updating
+      handleClose(); 
     }
   };
 

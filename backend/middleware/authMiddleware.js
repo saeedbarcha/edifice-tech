@@ -16,7 +16,6 @@ const protect = asyncHandler ( async (req, res, next) => {
             req.user = await User.findById(decoded.userId).select('-password');
             next();
         }catch (error) {
-            // console.log('Error :', error);
             res.status(401);
             throw new Error('Not authorized, token failed');
         }
@@ -29,7 +28,6 @@ const protect = asyncHandler ( async (req, res, next) => {
 
 // Admin middleware
 const admin = (req, res, next) => {
-    // console.log("user", req.user)
     if(req.user && req.user.isAdmin){
         next();
     }else{

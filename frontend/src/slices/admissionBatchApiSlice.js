@@ -49,13 +49,6 @@ export const admissionBatchApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Admission Batch"],
     }),
-    // getActiveAdmissionBatchs: builder.query({
-    //   query: () => ({
-    //     url: `${ADMISSION_BATCH_URL}/active-admissionBatchs`,
-    //   }),
-    //   providesTags: ["Admission Batch"],
-    //   keepUnusedDataFor: 5,
-    // }),
     getAdmissionBatchDetails: builder.query({
       query: (admissionBatchId) => ({
         url: `${ADMISSION_BATCH_URL}/${admissionBatchId}`,

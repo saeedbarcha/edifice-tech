@@ -53,14 +53,6 @@ const ProjectElement = () => {
             >
               <IoMdAddCircle style={{ fontSize: "22px", color: "blue" }} />
             </Button>
-
-          {/* <Button
-            variant="light"
-            className="btn-sm"
-            onClick={() => handleOpenProjectModal(null)} // Open modal for adding a new project
-          >
-            Add Project
-          </Button> */}
         </Card.Header>
         <Card.Body className="">
           <Row className="d-flex justify-content-between align-items-center">

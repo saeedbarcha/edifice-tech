@@ -35,7 +35,6 @@ const OpenAdmissionBatch = () => {
                   {/* <p className="enroll-info">Enroll yourself today and start your journey towards success!</p> */}
                   <h1 className="admission-title">{admissionBatch?.title}</h1>
                 </div>
-                {/* <Image src={admissionBatch?.image} alt="Course" fluid /> */}
                 <LinkContainer to={`/activeadmissionbatch/${admissionBatch?._id}`}>
                   <Button className="btn-sm btnAllScreen">
                     Enroll Now

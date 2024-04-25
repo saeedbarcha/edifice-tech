@@ -25,21 +25,10 @@ import ProjectElement from "./profileComponents/userProjects/ProjectElement";
 import UpdateGenInfoModal from "./profileComponents/updateGenInfo/UpdateGenInfoModal";
 
 import {
-  useProfileMutation,
   useGetUserDetailsQuery,
 } from "../../slices/usersApiSlice";
-// import { useDeleteProjectMutation } from "../../slices/projectApiSlice";
-import { setCredentials } from "../../slices/authSlice";
 
 const ProfileScreen = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [address, setAddress] = useState("");
-  const [phone, setPhone] = useState("");
-  const [dateOfBirth, setDateOfBirth] = useState("");
-  const [gender, setGender] = useState("");
 
   const [showUpdateProfileModal, setShowUpdateProfileModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
@@ -52,9 +41,7 @@ const ProfileScreen = () => {
     error,
   } = useGetUserDetailsQuery(userInfo._id);
 
-  console.log("gggggggggggggggggggg uuuuuuuuuuu", userInfo)
 
-  const dispatch = useDispatch();
   const handleOpenUpdateProfileModal = (project) => {
     setSelectedUser(project);
     setShowUpdateProfileModal(true);
@@ -65,44 +52,10 @@ const ProfileScreen = () => {
     setShowUpdateProfileModal(false);
   };
 
-  // const [updateProfile, { isLoading: loadingUpdateProfile }] =
-  //   useProfileMutation();
 
   useEffect(() => {
-    if (userInfo) {
-      setName(userInfo.name);
-      setEmail(userInfo.email);
-      setAddress(userInfo.address);
-      setPhone(userInfo.phone);
-      setDateOfBirth(userInfo.dateOfBirth);
-      setGender(userInfo.gender);
-    }
-  }, [userInfo, userInfo.name, userInfo.email]);
 
-  // const submitHandler = async (e) => {
-  //   e.preventDefault();
-  //   if (password !== confirmPassword) {
-  //     toast.error("Password do not match");
-  //   } else {
-  //     try {
-  //       const res = await updateProfile({
-  //         _id: userInfo._id,
-  //         name,
-  //         email,
-  //         password,
-  //         address,
-  //         phone,
-  //         dateOfBirth,
-  //         gender,
-  //       }).unwrap();
-
-  //       dispatch(setCredentials(res));
-  //       toast.success("Profile updated successfully");
-  //     } catch (err) {
-  //       toast.error(err?.data?.message || err.error);
-  //     }
-  //   }
-  // };
+  }, [userInfo]);
 
   return (
     <div>

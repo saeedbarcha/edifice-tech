@@ -31,7 +31,7 @@ const Footer = () => {
       }
     };
     window.addEventListener("load", toggleBacktotop);
-    window.addEventListener("scroll", toggleBacktotop); // Corrected line
+    window.addEventListener("scroll", toggleBacktotop); 
   }
   return (
     <>

@@ -18,7 +18,7 @@ router
   .route("/my-enrollments/:id")
   .get(protect, getUserAdmissionBatches)
   router
-  .route("issue-certificate")
+  .route("/update-enrollment-admin")
   .put(protect, admin, updateEnrollmentToIssueCertificate)
 
 export default router;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"; // Import React
 import { Container, Card, Form, Button, Col } from "react-bootstrap";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useGetAdmissionBatchDetailsQuery, useUpdateAdmissionBatchMutation } from "../../../slices/admissionBatchApiSlice";
 import {
@@ -80,18 +80,9 @@ const EditAdmissionBatchScreen = () => {
         navigate("/admin/admissionbatchlist");
       }
     } catch (err) {
-      console.error("Error:", err);
       toast.error(err?.data?.message || err.error);
     }
   };
-
-  // const handleCourseChange = (courseId, checked) => {
-  //   if (checked) {
-  //     setCourses([...courses, courseId]);
-  //   } else {
-  //     setCourses(courses?.filter(course => course !== courseId));
-  //   }
-  // };
 
   const handleCourseChange = (courseId, checked) => {
     setSelectedCourses(prevCourses => {
@@ -232,12 +223,9 @@ const EditAdmissionBatchScreen = () => {
                 })}
               </Form.Group>
           
-            <Button variant="btn btnAllScreen" type="submit">
-              update
+            <Button variant="btn btnAllScreen" type="submit" disabled={loadingUpdate}>
+            {loadingUpdate ? "Updating..." : "Update"}
             </Button>
-            {/* <Button variant="primary" type="submit" disabled={loadingCreate}>
-              {loadingCreate ? "Updating..." : "Update"}
-            </Button> */}
           </Form>
         </Card.Body>
       </Card>

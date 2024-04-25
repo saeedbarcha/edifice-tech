@@ -180,7 +180,6 @@ const getUserProfile = asyncHandler(async (req, res) => {
 // @route   PUT /api/users/profile
 // @access  Private
 const updateUserProfile = asyncHandler(async (req, res) => {
- console.log("gggggggggggggg", req.body)
   const user = await User.findById(req.user._id);
 
   if (user) {
@@ -223,22 +222,6 @@ const getUsers = asyncHandler(async (req, res) => {
   res.status(200).json(users);
 });
 
-// @desc    Get user by ID
-// @route   GET /api/users/:id
-// @access  Private/Admin
-// const getUserById = asyncHandler(async (req, res) => {
-
-//   console.log("lllllllllllllllllll")
-
-//   const user = await User.findById(req.params.id).select("-password");
-
-//   if (user) {
-//     res.status(200).json(user);
-//   } else {
-//     res.status(404);
-//     throw new Error("User not found");
-//   }
-// });
 
 // @desc    Get user profile
 // @route   GET /api/users/profile
@@ -306,8 +289,6 @@ const deleteUser = asyncHandler(async (req, res) => {
 // @route   PUT /api/users/:id
 // @access  Private/Admin
 const updateUser = asyncHandler(async (req, res) => {
-  
-  console.log("ssssssssssssssssss", req.body)
   const user = await User.findById(req.params.id);
 
   if (user) {

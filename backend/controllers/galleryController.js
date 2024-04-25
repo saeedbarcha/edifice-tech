@@ -14,19 +14,15 @@ const getGallarys = asyncHandler(async (req, res) => {
 // @access  Private
 const addGalleryItem = asyncHandler(async (req, res) => {
   const { caption, image } = req.body;
-  
-  // Get user ID from req.user
   const userId = req.user._id;
 
   try {
-    // Create a new gallery instance
     const newGalleryItem = new Gallery({
       user: userId,
       caption,
       image
     });
 
-    // Save the new gallery instance to the database
     const createdGalleryItem = await newGalleryItem.save();
 
     res.status(201).json(createdGalleryItem);
@@ -53,7 +49,6 @@ const deleteGalleryItem = asyncHandler(async (req, res) => {
 // @route   PUT /api/experience/:id
 // @access  Private
 const updateGalleryItem = asyncHandler(async (req, res) => {
-  console.log("jjjjjjjjjjjjjjj")
   const { caption, image , isActive } = req.body;
 
   try {

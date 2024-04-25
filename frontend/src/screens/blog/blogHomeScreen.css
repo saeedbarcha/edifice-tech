@@ -9,17 +9,12 @@
     justify-content: center;
 }
 .blodImgHome{
-    /* background-color: brown;
-    border: 20px red solid; */
     min-height: 400px;
 }
 .blodTextContentHome{
     padding: 15px;
 }
 
-/* .blogTitleHome{
-
-} */
 .blogContentHome {
     height: 140px;
     padding: 15px 0px;

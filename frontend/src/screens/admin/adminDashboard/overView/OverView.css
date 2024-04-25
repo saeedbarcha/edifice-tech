@@ -1,11 +1,8 @@
 .overView .selectButton {
-    /* color: var(--fontColorForPara); */
     color: #fff;
     height: 30px;
     width: 120px;
-    /* background-color:var(--mainThemeColor); */
     background-color: var(--mainBgColor);
-    /* background-color: #f4f7fe; */
     border: none;
     border-radius: 8px 8px 0px 8px;
     padding: 5px;
@@ -14,23 +11,19 @@
   .overView .selectButton  option {
     background-color: #fff;
     color: var(--fontColorForPara);
-    /* background-color: var(--mainBgColor); */
   }
   
   .overView .selectButton  option:hover {
     color: red;
   }
   
-  .overView .topCartCont {
-    /* background-color: #f8f9fa; */
-  
+  .overView .topCartCont {  
     height: 76px;
     width: 100%;
     border-radius: 20px;
     display: flex;
     align-items: center;
     margin-bottom: 15px;
-    /* border: 1px solid var(--mainThemeColor) ; */
     background-color: #f4f7fe;
   }
   

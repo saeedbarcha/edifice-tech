@@ -29,7 +29,6 @@ const EnrollmentList = () => {
     } = useGetMyEnrolmentsQuery(id);
 
     let downloadTxtFile = (enrollment) => {
-        console.log("res............", enrollment);
         var doc = new jsPDF('p', 'pt');
         const imgData = 'https://picsum.photos/800/600';
 
@@ -81,9 +80,13 @@ const EnrollmentList = () => {
                                     {admissionB?.batch?.lastDateToApply}
                                 </Card.Text>
                                 <Card.Text>
+                                    <strong>Admission Fee:</strong>{" "}
+                                    {admissionB?.batch?.admissionFee}
+                                </Card.Text>
+                                <Card.Text>
                                     <strong>Certificate Available:</strong>{" "}
                                     <Badge
-                                        bg={admissionB?.certificate ? "success" : "danger"}
+                                        bg={admissionB?.batch?.certificate ? "success" : "danger"}
                                     >
                                         {admissionB?.batch?.certificate ? "Yes" : "No"}
                                     </Badge>
@@ -100,7 +103,7 @@ const EnrollmentList = () => {
 
                                 <hr />
                                 <br />
-                                <h1>Track your courses record.</h1>
+                                <h1>Track Enrollment record.</h1>
                                 <Table striped hover responsive className="table-sm">
                                     <thead>
                                         <tr>
@@ -113,7 +116,6 @@ const EnrollmentList = () => {
                                     <tbody>
                                         {admissionB?.enrollments?.map((enrollment) => (
                                             <tr >
-                                                {/* <td><Image src={blog.image} fluid style={{ width: "60px", height: "60px" }} /></td> */}
                                                 <td>{enrollment?.courseId?.title}</td>
                                                 <td>{enrollment?.courseId?.totalDuration}</td>
                                                 <td>
@@ -129,7 +131,7 @@ const EnrollmentList = () => {
                                                 <td> <UpdateEnrollmentModal
                                                     show={showGalleryModal}
                                                     handleClose={handleCloseGalleryModal}
-                                                    editGallery={selectedGallery}
+                                                    updateEnrollUser={enrollment}
                                                 />
                                                     <Button className="btn-sm btnAllScreen"
                                                         onClick={() => {

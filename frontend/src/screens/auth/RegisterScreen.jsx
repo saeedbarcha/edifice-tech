@@ -13,9 +13,7 @@ const RegisterScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  // const [address, setAddress] = useState("");
   // const [phone, setPhone] = useState("");
-  // const [dateOfBirth, setDateOfBirth] = useState("");
   const [gender, setGender] = useState("Male");
 
   const dispatch = useDispatch();
@@ -37,44 +35,44 @@ const RegisterScreen = () => {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    if (!name){
+    if (!name) {
       toast.error("Name is required");
       return;
-    }else if ( !email){
+    } else if (!email) {
       toast.error("E-mail is required");
       return;
-    }else if ( !password ){
+    } else if (!password) {
       toast.error("Password is required");
       return;
-    }else if ( !confirmPassword ){
+    } else if (!confirmPassword) {
       toast.error("Confirm password is required");
       return;
-    }else if (password !== confirmPassword) {
+    } else if (password !== confirmPassword) {
       toast.error("Password do not match");
       return;
     } else {
       try {
         const res = await register(
-          
+
           // 
           {
             name,
             email,
             password,
-            phone:"",
-            dateOfBirth:"",
+            phone: "",
+            dateOfBirth: "",
             gender,
-            address:"",
-            designation:"",
-            description:"",
-            fiverrUrl:"",
-            upworkUrl:"",
-            facebookUrl:"",
-            instagramUrl:"",
-            linkedInUrl:"",
+            address: "",
+            designation: "",
+            description: "",
+            fiverrUrl: "",
+            upworkUrl: "",
+            facebookUrl: "",
+            instagramUrl: "",
+            linkedInUrl: "",
           }
           // 
-         ).unwrap();
+        ).unwrap();
         dispatch(setCredentials({ ...res }));
         navigate(redirect);
       } catch (err) {
@@ -139,44 +137,27 @@ const RegisterScreen = () => {
             ></Form.Control>
           </Form.Group>
 
-          <Form.Group controlId="dateOfBirth" className="my-3">
-            <Form.Label>Date Of Birth</Form.Label>
-            <Form.Control
-              type="date"
-              placeholder="Enter Date-Of-Birth"
-              value={dateOfBirth}
-              onChange={(e) => setDateOfBirth(e.target.value)}
-            ></Form.Control>
-          </Form.Group> */}
+          */}
 
           <Form.Group controlId="gender" className="my-3">
             <Form.Label>Gender</Form.Label>
             <Form.Control
-                as="select"
-                value={gender}
-                onChange={(e) => setGender(e.target.value)}
-              >
-                  <option value="Male">
-                   Male
-                  </option>
-                  <option value="Female">
-                   Female
-                  </option> 
-                  <option value="Other">
-                   Other
-                  </option>
-              </Form.Control>
+              as="select"
+              value={gender}
+              onChange={(e) => setGender(e.target.value)}
+            >
+              <option value="Male">
+                Male
+              </option>
+              <option value="Female">
+                Female
+              </option>
+              <option value="Other">
+                Other
+              </option>
+            </Form.Control>
           </Form.Group>
 
-          {/* <Form.Group controlId="address" className="my-3">
-            <Form.Label>Address</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter Address"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-            ></Form.Control>
-          </Form.Group> */}
           <Button
             type="submit"
             variant="primary"

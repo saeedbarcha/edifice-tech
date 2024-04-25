@@ -4,7 +4,6 @@ import { toast } from "react-toastify";
 import { useUpdateUserProfileMutation } from "../../../../slices/usersApiSlice";
 
 const UpdateGenInfoModal = ({ show, handleClose, userInfo }) => {
-console.log("uuuuuuuuuu", userInfo)
 
   const [formData, setFormData] = useState({
     name: "",
@@ -92,6 +91,7 @@ console.log("uuuuuuuuuu", userInfo)
               name="email"
               value={formData.email}
               onChange={handleChange}
+              disabled
             />
           </Form.Group>
           <Form.Group controlId="phone">

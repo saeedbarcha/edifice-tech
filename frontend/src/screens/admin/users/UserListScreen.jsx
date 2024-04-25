@@ -10,7 +10,6 @@ import { useGetUsersQuery, useDeleteUserMutation } from "../../../slices/usersAp
 const UserListScreen = () => {
   const { id: userId } = useParams();
   const { data: users, refetch, isLoading, error } = useGetUsersQuery();
-  console.log("eeeeeeee", error)
 
   const [deleteUser, { isLoading: loadingDelete }] = useDeleteUserMutation();
  
