@@ -95,3 +95,12 @@ section {
 td {
   vertical-align: middle;
 }
+
+.dropdown-item.active, .dropdown-item:active{
+  background-color: rgb(236, 229, 229);
+}
+
+.form-check-input:checked {
+  background-color: var(--blueThemeColor);
+  border-color:var(--blueThemeColor);
+}

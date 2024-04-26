@@ -133,14 +133,3 @@ root.render(
 );
 
 reportWebVitals();
-
-
-// saeed123456789saeed
-// test-app
-
-// url: https://cobyijyqxqupfeynvctu.supabase.co
-// https://cobyijyqxqupfeynvctu.supabase.co
-//  jwt: eUMyJZKQ0uiJZSjqjVu51C6FmbKHPFnh0yW+ML33iuv2liAKnU4KCZFEqqo+Jo87XnxhkTHs13QjtZCMQYRx6w==
-//  service role = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNvYnlpanlxeHF1cGZleW52Y3R1Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcwOTkwOTg0OCwiZXhwIjoyMDI1NDg1ODQ4fQ.Pb3IT3VaF9y6xaP4gkxoxbFKXQAEw88Q0hjns2_gXME
-
-//  pk: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNvYnlpanlxeHF1cGZleW52Y3R1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDk5MDk4NDgsImV4cCI6MjAyNTQ4NTg0OH0.bOuYD4URzCVx9C-X_J78XEI0aj_iu1ON7_NFjH5Bnz4

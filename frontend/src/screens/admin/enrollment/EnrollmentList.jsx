@@ -1,57 +1,28 @@
-import React ,{useState} from "react";
-import { useParams } from "react-router-dom";
+import React, { useState } from "react";
 import { Container, Card, Button, Badge, Table } from "react-bootstrap";
 import { FaTimes, FaCheck } from "react-icons/fa";
-import jsPDF from "jspdf";
-import { FaEdit, FaTrash } from "react-icons/fa";
+import { FaEdit } from "react-icons/fa";
 import Message from "../../../components/Message";
 import Loader from "../../../components/Loader";
 import UpdateEnrollmentModal from "./UpdateEnrollmentModal";
-
+import { downloadCertificate } from '../../../common/certificate.js';
 import {
-    useGetMyEnrolmentsQuery,
+    useGetAllEnrolmentByAdminQuery,
 } from "../../../slices/enrollmentApiSlice";
 
 const EnrollmentList = () => {
-    const { id } = useParams();
     const [showGalleryModal, setShowGalleryModal] = useState(false);
-    const [selectedGallery, setSelectedGallery] = useState(null);
-   
+
     const handleCloseGalleryModal = () => setShowGalleryModal(false);
 
     const handleOpenGalleryModal = () => setShowGalleryModal(true);
-  
-  
+
+
     const {
         data: admissionBatches,
         isLoading,
         error,
-    } = useGetMyEnrolmentsQuery(id);
-
-    let downloadTxtFile = (enrollment) => {
-        var doc = new jsPDF('p', 'pt');
-        const imgData = 'https://picsum.photos/800/600';
-
-        doc.addImage(imgData, 'JPEG', 0, 0, doc.internal.pageSize.getWidth(), doc.internal.pageSize.getHeight());
-
-        const titleText = 'This is the first title.';
-        const patientInfo = `
-            Patient Name: ${enrollment.courseId.title}\n
-            Age :\n
-            Gender :\n
-            Illness :\n
-            Status : ....
-        `;
-
-        const titleVerticalPosition = 50;
-        const patientInfoVerticalPosition = 100;
-
-        doc.text(titleText, doc.internal.pageSize.getWidth() / 2, titleVerticalPosition, { align: 'center' });
-
-        doc.text(patientInfo, doc.internal.pageSize.getWidth() / 2, patientInfoVerticalPosition, { align: 'center' });
-
-        doc.save('demo.pdf');
-    }
+    } = useGetAllEnrolmentByAdminQuery();
 
 
 
@@ -104,20 +75,31 @@ const EnrollmentList = () => {
                                 <hr />
                                 <br />
                                 <h1>Track Enrollment record.</h1>
-                                <Table striped hover responsive className="table-sm">
+                                <Table  hover responsive className="table-sm">
                                     <thead>
                                         <tr>
-                                            <th>COURSE TITLE</th>
-                                            <th>TOTAL DURATION</th>
-                                            <th>COURSE FEE</th>
-                                            <th>PERFORMANCE</th>
+                                            <th>Course Title</th>
+                                            <th>Total Duration</th>
+                                            <th>F-Name</th>
+                                            <th>L-Name</th>
+                                            <th>Father Name</th>
+                                            <th>Course Fee</th>
+                                            <th>Performance</th>
+                                            <th>Certificate</th>
+                                            <th></th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
+
                                         {admissionB?.enrollments?.map((enrollment) => (
-                                            <tr >
+                                            <tr>
                                                 <td>{enrollment?.courseId?.title}</td>
                                                 <td>{enrollment?.courseId?.totalDuration}</td>
+                                                <td>{enrollment?.firstName}</td>
+                                                <td>{enrollment?.lastName}</td>
+                                                <td>{enrollment?.fatherName}</td>
+
                                                 <td>
                                                     {enrollment?.courseFeePaid ? (
                                                         <FaCheck style={{ color: "green" }} />
@@ -126,19 +108,33 @@ const EnrollmentList = () => {
                                                     )}
                                                 </td>
                                                 <td>{enrollment?.performance}</td>
-                                                <td> {id ? <Button className="btnAllScreen" onClick={() => { downloadTxtFile(enrollment) }}>Certificate</Button> : <Button style={{ background: "#393a3f" }}>Generate Report</Button>}
+                                                <td>{enrollment?.issueCertificate &&
+                                                    <Button
+                                                        className="btnAllScreen  m-1"
+                                                        onClick={() => {
+                                                            downloadCertificate(admissionB, enrollment);
+                                                        }}
+                                                    >
+                                                        Download
+                                                    </Button>
+                                                }
+
                                                 </td>
+
                                                 <td> <UpdateEnrollmentModal
                                                     show={showGalleryModal}
                                                     handleClose={handleCloseGalleryModal}
                                                     updateEnrollUser={enrollment}
                                                 />
-                                                    <Button className="btn-sm btnAllScreen"
+                                                    <Button
+                                                    variant="light"
+                                                    className="btn-sm"
                                                         onClick={() => {
                                                             handleOpenGalleryModal(true);
                                                         }}>
-                                                        <FaEdit /> Update
+                                                        <FaEdit />
                                                     </Button></td>
+
                                             </tr>
                                         ))}
                                     </tbody>

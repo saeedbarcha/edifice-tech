@@ -1,9 +1,9 @@
 import { LinkContainer } from "react-router-bootstrap";
-import { Link, useParams } from "react-router-dom";
 import { Container, Table, Button, Row, Col, Image } from "react-bootstrap";
 import { FaTimes, FaTrash, FaEdit, FaCheck } from "react-icons/fa";
 import Message from "../../../components/Message";
 import Loader from "../../../components/Loader";
+import { formatDateWithTime } from '../../../common/formatDate.js';
 import { toast } from "react-toastify";
 import {
   useGetBlogsQuery,
@@ -52,21 +52,7 @@ const BlogListScreen = () => {
     }
   };
 
-  function formatDateString(dateString) {
-    var date = new Date(dateString);
-    var month = (date.getMonth() + 1).toString().padStart(2, "0");
-    var day = date.getDate().toString().padStart(2, "0");
-    var year = date.getFullYear().toString();
-    var hours = date.getHours();
-    var minutes = date.getMinutes();
-    var period = hours < 12 ? "AM" : "PM";
-    hours = hours % 12 || 12;
-    minutes = minutes.toString().padStart(2, "0");
-    var formattedDate = `${month}/${day}/${year} ${hours}:${minutes} ${period}`;
-
-    return formattedDate;
-  }
-
+  
   return (
     <>
       <Container className="py-3">
@@ -109,7 +95,7 @@ const BlogListScreen = () => {
                     <td><Image src={blog.image} fluid style={{ width: "60px", height: "60px" }} /></td>
 
                     <td>{blog.title}</td>
-                    <td>{formatDateString(blog.createdAt)}</td>
+                    <td>{formatDateWithTime(blog.createdAt)}</td>
                     <td>
                       {blog.isActive ? (
                         <FaCheck style={{ color: "green" }} />

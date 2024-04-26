@@ -8,7 +8,9 @@ import {
 } from "react-bootstrap";
 import Loader from "../../components/Loader";
 import Message from "../../components/Message";
+import { formatDateWithTime } from '../../common/formatDate.js';
 import { useGetBlogDetailsQuery } from "../../slices/blogApiSlice";
+
 const BlogDetailsScreen = () => {
   const { id: blogId } = useParams();
   const {
@@ -18,19 +20,7 @@ const BlogDetailsScreen = () => {
     error,
   } = useGetBlogDetailsQuery(blogId);
 
-  function formatDateString(dateString) {
-    var date = new Date(dateString);
-    var month = (date.getMonth() + 1).toString().padStart(2, "0");
-    var day = date.getDate().toString().padStart(2, "0");
-    var year = date.getFullYear().toString();
-    var hours = date.getHours();
-    var minutes = date.getMinutes();
-    var period = hours < 12 ? "AM" : "PM";
-    hours = hours % 12 || 12;
-    minutes = minutes.toString().padStart(2, "0");
-    var formattedDate = `${month}/${day}/${year} ${hours}:${minutes} ${period}`;
-    return formattedDate;
-  }
+
   return (
     <React.Fragment>
       {isLoading ? (
@@ -112,7 +102,7 @@ const BlogDetailsScreen = () => {
                 </p>
               </Col>
               <small className="text-muted">
-                {formatDateString(blog.updatedAt)}
+                {formatDateWithTime(blog.updatedAt)}
               </small>
             </Row>
           </Row>

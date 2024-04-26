@@ -12,14 +12,10 @@ import {
 
 const UserEditScreen = () => {
   const { id: userId } = useParams();
-
-
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [isAdmin, setIsAdmin] = useState(false);
   const [isTeamMember, setIsTeamMember] = useState(false);
-
-
   const {
     data: user,
     isLoading,
@@ -55,7 +51,6 @@ const UserEditScreen = () => {
     }
 
   }
-
 
   return (
     <>
@@ -117,7 +112,7 @@ const UserEditScreen = () => {
              </Form.Check>
             </Form.Group>
 
-            <Button type="submit" variant="primary" className="my-2">
+            <Button type="submit" variant="primary" className="my-2 btnAllScreen">
               Update
             </Button>
           </Form>

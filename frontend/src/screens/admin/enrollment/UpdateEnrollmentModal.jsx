@@ -14,10 +14,6 @@ const UpdateEnrollmentModal = ({ show, handleClose, updateEnrollUser }) => {
   const [admissionFeePaid, setAdmissionFeePaid] = useState(false)
   const [issueCertificate, setIssueCertificate] = useState(false);
   const [completed, setCompleted] = useState(false);
-
-  
-
-  console.log("lss...............", updateEnrollUser)
   const [updateEnrollment, { isLoading: loadingUpdate }] =
     useUpdateEnrollmentMutation();
 
@@ -179,10 +175,10 @@ const UpdateEnrollmentModal = ({ show, handleClose, updateEnrollUser }) => {
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="secondary" onClick={handleClose}>
+        <Button variant="secondary" className="btn" onClick={handleClose}>
           Close
         </Button>
-        <Button variant="primary" onClick={handleUpdate}>
+        <Button variant="primary" className="btn-sm btnAllScreen" onClick={handleUpdate}>
           Update
         </Button>
       </Modal.Footer>

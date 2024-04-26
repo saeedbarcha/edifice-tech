@@ -1,3 +1,7 @@
+import React from "react";
+import { useGetActiveBlogsQuery } from "../../slices/blogApiSlice";
+import Loader from "../../components/Loader";
+import Message from "../../components/Message";
 import {
   Container,
   Row,
@@ -5,27 +9,12 @@ import {
   CardImg,
   CardTitle,
 } from "react-bootstrap";
-import { useGetActiveBlogsQuery } from "../../slices/blogApiSlice";
-import Loader from "../../components/Loader";
-import Message from "../../components/Message";
 import "./blogHomeScreen.css";
-import React from "react";
+import { formatDateWithTime } from '../../common/formatDate.js';
+
 const BlogHomeScreen = () => {
   const { data, isLoading, error } = useGetActiveBlogsQuery();
 
-  function formatDateString(dateString) {
-    var date = new Date(dateString);
-    var month = (date.getMonth() + 1).toString().padStart(2, "0");
-    var day = date.getDate().toString().padStart(2, "0");
-    var year = date.getFullYear().toString();
-    var hours = date.getHours();
-    var minutes = date.getMinutes();
-    var period = hours < 12 ? "AM" : "PM";
-    hours = hours % 12 || 12;
-    minutes = minutes.toString().padStart(2, "0");
-    var formattedDate = `${month}/${day}/${year} ${hours}:${minutes} ${period}`;
-    return formattedDate;
-  }
   function getFiveHunderedCharacters(inputString) {
     if (inputString?.length <= 300) {
       return inputString + "...";
@@ -33,6 +22,7 @@ const BlogHomeScreen = () => {
       return inputString?.slice(0, 300) + "...";
     }
   }
+
   return (
     <React.Fragment>
       {isLoading ? (
@@ -66,7 +56,7 @@ const BlogHomeScreen = () => {
                     <div className="d-flex align-items-center">
                       <img
                         src={data[data?.length - 1]?.user?.image}
-                        style={{ width: "50px", marginRight:"15px" }}
+                        style={{ width: "50px", marginRight: "15px" }}
                       />
                       <small className="ml-2">
                         <a
@@ -80,7 +70,7 @@ const BlogHomeScreen = () => {
                           {data[data?.length - 1]?.user?.email}
                         </small>
                       </small>
-                  
+
                     </div>
                   </div>
                 </Col>
@@ -125,7 +115,7 @@ const BlogHomeScreen = () => {
                   </p>
                 </Col>
                 <small className="text-muted">
-                  {formatDateString(data[data?.length - 1]?.updatedAt)}
+                  {formatDateWithTime(data[data?.length - 1]?.updatedAt)}
                 </small>
               </Row>
             </Row>

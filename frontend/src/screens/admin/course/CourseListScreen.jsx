@@ -49,21 +49,6 @@ const CourseListScreen = () => {
   };
   
 
-  function formatDateString(dateString) {
-    var date = new Date(dateString);
-    var month = (date.getMonth() + 1).toString().padStart(2, "0");
-    var day = date.getDate().toString().padStart(2, "0");
-    var year = date.getFullYear().toString();
-    var hours = date.getHours();
-    var minutes = date.getMinutes();
-    var period = hours < 12 ? "AM" : "PM";
-    hours = hours % 12 || 12;
-    minutes = minutes.toString().padStart(2, "0");
-    var formattedDate = `${month}/${day}/${year} ${hours}:${minutes} ${period}`;
-
-    return formattedDate;
-  }
-
   return (
     <>
       <Container className="py-3">

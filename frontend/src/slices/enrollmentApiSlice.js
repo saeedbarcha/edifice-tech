@@ -13,6 +13,15 @@ export const enrollmentApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Enrollment"],
     }),
+
+    getAllEnrolmentByAdmin: builder.query({
+      query: () => ({
+        url: `${ENROLLMENT_URL}/`,
+      }),
+      providesTags: ["Enrollment"],
+      keepUnusedDataFor: 5,
+    }),
+
     getMyEnrolments: builder.query({
       query: (userId) => ({
         url: `${ENROLLMENT_URL}/my-enrollments/${userId}`,
@@ -40,7 +49,7 @@ export const enrollmentApiSlice = apiSlice.injectEndpoints({
 
 
 export const {
-  
+  useGetAllEnrolmentByAdminQuery,
   useCreateEnrollmentMutation,
   useUpdateEnrollmentMutation,
   useDeleteEnrollmentMutation,

@@ -127,18 +127,6 @@ const RegisterScreen = () => {
             ></Form.Control>
           </Form.Group>
 
-          {/* <Form.Group controlId="phone" className="my-3">
-            <Form.Label>Phone</Form.Label>
-            <Form.Control
-              type="number"
-              placeholder="Enter Phone"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
-
-          */}
-
           <Form.Group controlId="gender" className="my-3">
             <Form.Label>Gender</Form.Label>
             <Form.Control
@@ -161,7 +149,7 @@ const RegisterScreen = () => {
           <Button
             type="submit"
             variant="primary"
-            className="mt-2  "
+            className="mt-2 btnAllScreen "
             disabled={isLoading}
           >
             Sign Up

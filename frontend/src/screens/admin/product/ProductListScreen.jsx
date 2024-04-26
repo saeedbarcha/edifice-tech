@@ -4,7 +4,6 @@ import {Container, Table, Button, Row, Col, Image } from "react-bootstrap";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import Message from "../../../components/Message";
 import Loader from "../../../components/Loader";
-import Paginate from "../../../components/Paginate";
 import { toast } from "react-toastify";
 import {
   useGetProductsQuery,
@@ -102,7 +101,7 @@ const ProductListScreen = () => {
 
                     <Button
                       variant="danger"
-                      className="btn-sm"
+                      className="btn-sm "
                       onClick={() => deleteHandler(product._id)}
                     >
                       <FaTrash style={{ color: "white" }} />

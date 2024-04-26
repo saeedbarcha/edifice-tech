@@ -14,24 +14,12 @@ import { useGetActiveBlogsQuery } from "../../slices/blogApiSlice";
 import { Link } from "react-router-dom";
 import Loader from "../../components/Loader";
 import Message from "../../components/Message";
+import { formatDateWithTime } from '../../common/formatDate.js';
 function AllBlogsScreen() {
   const { data, isLoading, error } = useGetActiveBlogsQuery();
   console.log("blog data", data);
 
-  function formatDateString(dateString) {
-    var date = new Date(dateString);
-    var month = (date.getMonth() + 1).toString().padStart(2, "0");
-    var day = date.getDate().toString().padStart(2, "0");
-    var year = date.getFullYear().toString();
-    var hours = date.getHours();
-    var minutes = date.getMinutes();
-    var period = hours < 12 ? "AM" : "PM";
-    hours = hours % 12 || 12;
-    minutes = minutes.toString().padStart(2, "0");
-    var formattedDate = `${month}/${day}/${year} ${hours}:${minutes} ${period}`;
-    return formattedDate;
-  }
-  
+
   return (
     <section id="gallery" className="gallery">
       <Container data-aos="fade-up">
@@ -70,7 +58,7 @@ function AllBlogsScreen() {
                           </Card.Text>
                           <Card.Text>
                             <small className="text-muted">
-                            {formatDateString(blog.createdAt)}
+                            {formatDateWithTime(blog.createdAt)}
                             </small>
                           </Card.Text>
                         </Card.Body>

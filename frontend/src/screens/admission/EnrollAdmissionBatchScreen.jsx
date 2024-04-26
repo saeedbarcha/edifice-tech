@@ -62,6 +62,7 @@ const EnrollAdmissionBatchScreen = () => {
         }
     };
 
+    
     return (
         <Container>
             {isLoading ? (

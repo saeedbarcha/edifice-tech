@@ -1,6 +1,5 @@
 import { useParams, useState } from "react-router-dom";
 import { Container, Card, Button, Badge, Table } from "react-bootstrap";
-import { FaEdit, FaTrash } from "react-icons/fa";
 import Message from "../../../components/Message";
 import Loader from "../../../components/Loader";
 import {

@@ -74,7 +74,7 @@ const ProfileScreen = () => {
                   <Button
                     variant="light"
                     className="btn-sm"
-                    onClick={() => handleOpenUpdateProfileModal(userInfo)} // Open modal for updating the project
+                    onClick={() => handleOpenUpdateProfileModal(userInfo)}
                   >
                     <FaEdit />
                   </Button>

@@ -5,6 +5,7 @@ import { FaTimes, FaTrash, FaEdit, FaCheck } from "react-icons/fa";
 import Message from "../../../components/Message";
 import Loader from "../../../components/Loader";
 import { toast } from "react-toastify";
+import { formatDate } from '../../../common/formatDate.js';
 import {
   useGetAdmissionBatchsQuery,
   useDeleteAdmissionBatchMutation,
@@ -23,26 +24,10 @@ const AdmissionBatchListScreen = () => {
         toast.success("Admission Batch deleted");
         refetch();
       } catch (err) {
-        toast.error(err?.data?.message || err.error);
+        toast.error(err?.data?.message || err?.error);
       }
     }
   };
-  function formatDateString(dateString) {
-    var date = new Date(dateString);
-    var month = (date.getMonth() + 1).toString().padStart(2, "0");
-    var day = date.getDate().toString().padStart(2, "0");
-    var year = date.getFullYear().toString();
-    var hours = date.getHours();
-    var minutes = date.getMinutes();
-    var period = hours < 12 ? "AM" : "PM";
-    hours = hours % 12 || 12;
-    minutes = minutes.toString().padStart(2, "0");
-    // var formattedDate = `${month}/${day}/${year} ${hours}:${minutes} ${period}`;
-    var formattedDate = `${month}/${day}/${year}`;
-
-
-    return formattedDate;
-  }
 
   return (
     <>
@@ -83,25 +68,25 @@ const AdmissionBatchListScreen = () => {
               </thead>
               <tbody>
                 {data?.map((admissionBatch) => (
-                  <tr key={admissionBatch._id}>
+                  <tr key={admissionBatch?._id}>
                     <td>
-                      <Link to={`/admissionbatch/${admissionBatch._id}`}>
-                        {admissionBatch.title}
+                      <Link to={`/admissionbatch/${admissionBatch?._id}`}>
+                        {admissionBatch?.title}
                       </Link>
                     </td>
-                    <td>{admissionBatch.admissionFee}</td>
-                    <td>{formatDateString(admissionBatch.startDate)}</td>
-                    <td>{formatDateString(admissionBatch.endDate)}</td>
-                    <td>{formatDateString(admissionBatch.lastDateToApply)}</td>
+                    <td>{admissionBatch?.admissionFee}</td>
+                    <td>{formatDate(admissionBatch?.startDate)}</td>
+                    <td>{formatDate(admissionBatch?.endDate)}</td>
+                    <td>{formatDate(admissionBatch?.lastDateToApply)}</td>
                     <td>
-                      {admissionBatch.certificate ? (
+                      {admissionBatch?.certificate ? (
                         <FaCheck style={{ color: "green" }} />
                       ) : (
                         <FaTimes style={{ color: "red" }} />
                       )}
                     </td>
                     <td>
-                      {admissionBatch.isActive ? (
+                      {admissionBatch?.isActive ? (
                         <FaCheck style={{ color: "green" }} />
                       ) : (
                         <FaTimes style={{ color: "red" }} />
@@ -109,7 +94,7 @@ const AdmissionBatchListScreen = () => {
                     </td>
                     <td>
                       <LinkContainer
-                        to={`/admin/admission-batch/${admissionBatch._id}/edit`}
+                        to={`/admin/admission-batch/${admissionBatch?._id}/edit`}
                       >
                         <Button variant="light" className="btn-sm mx-2">
                           <FaEdit />
@@ -119,7 +104,7 @@ const AdmissionBatchListScreen = () => {
                       <Button
                         variant="danger"
                         className="btn-sm"
-                        onClick={() => deleteHandler(admissionBatch._id)}
+                        onClick={() => deleteHandler(admissionBatch?._id)}
                       >
                         <FaTrash style={{ color: "white" }} />
                       </Button>

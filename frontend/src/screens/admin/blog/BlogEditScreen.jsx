@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Form, Button, Card, Image } from "react-bootstrap";
 import { toast } from "react-toastify";
 import Message from "../../../components/Message";
@@ -9,7 +9,6 @@ import {
   useGetBlogDetailsQuery,
   useUpdateBlogMutation,
 } from "../../../slices/blogApiSlice";
-import PicImg from "./g-img-1.jpg";
 
 const BlogEditScreen = () => {
   const { id: blogId } = useParams();

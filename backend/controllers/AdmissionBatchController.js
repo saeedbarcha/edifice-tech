@@ -23,7 +23,6 @@ const getRecentAdmissionBatch = asyncHandler(async (req, res) => {
     .limit(1); // Limit to only the last batch
 
   const lastBatch = admissionBatches[0]; // Extract the first (and only) element
-
   res.status(200).json(lastBatch);
 });
 

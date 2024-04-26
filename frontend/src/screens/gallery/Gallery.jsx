@@ -7,7 +7,6 @@ import Message from "../../components/Message";
 import Loader from "../../components/Loader";
 import { useGetGalleryQuery } from "../../slices/galleryApiSlice";
 import "./Gallery.css";
-import image from "./setImage2.png";
 
 const Gallery = () => {
   const { data: galleryData, isLoading, error } = useGetGalleryQuery();

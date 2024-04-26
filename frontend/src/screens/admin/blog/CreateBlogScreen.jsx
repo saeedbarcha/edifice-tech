@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Form, Button, Card } from "react-bootstrap";
 import { toast } from "react-toastify";
 import {
@@ -64,6 +64,8 @@ const CreateBlogScreen = () => {
     }
     
   };
+
+
   return (
     <div>
       <div className="space" style={{ paddingTop: "3%", paddingBottom: "3%" }}>

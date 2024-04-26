@@ -1,7 +1,6 @@
 import HeroCarousel from "./heroCarousel/HeroCarousel";
 import ServicesScreen from "./services/ServicesScreen";
 import ProductsCarousel from "./productsCarousel/ProductsCarousel";
-import WhoWeAre from "./whoWeAre/WhoWeAre";
 import TeamScreen from "./team/TeamScreen";
 import BlogHomeScreen from "./blog/BlogHomeScreen";
 import ContactScreen from "./contact/ContactScreen";
