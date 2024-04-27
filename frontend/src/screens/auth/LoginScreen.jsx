@@ -70,7 +70,7 @@ const LoginScreen = () => {
                 </Form.Control>
             </Form.Group>
 
-            <Button type="submit" variant="primary" className="mt-2 btnAllScreen " disabled={isLoading}>
+            <Button type="submit" variant="primary" className="btn my-2 btnAllScreen" disabled={isLoading}>
                 Sign In
             </Button>
 

@@ -70,25 +70,24 @@ section {
 
 /* css for button use in all screens */
 .btnAllScreen {
-  margin: 49px 0px;
+  /* margin: 49px 0px; */
   padding: 10px 30px;
-  background: var(--blueThemeColor);
+  background: var(--blueThemeColor) !important;
   border: none;
   cursor: pointer;
 }
 
 .btnAllScreen:hover {
-  background: var(--blueThemeColor);
+  background: var(--blueThemeColor) !important;
   opacity: .8;
 }
-
 .btnAllScreen:active {
-  background: var(--blueThemeColor);
+  background: var(--blueThemeColor) !important;
   opacity: .8;
 }
 
 .btnAllScreen::after {
-  background: var(--blueThemeColor);
+  background: var(--blueThemeColor) !important;
   opacity: .8;
 }
 
