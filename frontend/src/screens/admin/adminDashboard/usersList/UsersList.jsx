@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Card } from "react-bootstrap";
-// import logo from "../../../assets/logo.png";
 import "./UsersList.css";
 
 const UsersList = ({data, title}) => {

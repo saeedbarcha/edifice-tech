@@ -3,10 +3,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Form, Button, Card } from "react-bootstrap";
 import { toast } from "react-toastify";
 import {
-  useUploadBlogImageMutation,
   useGetBlogDetailsQuery,
   useUpdateBlogMutation,
 } from "../../../slices/blogApiSlice";
+import {useUploadImageMutation} from "../../../slices/uploadImageApiSlice";
+
 
 const CreateBlogScreen = () => {
   const { id: blogId } = useParams();
@@ -21,7 +22,7 @@ const CreateBlogScreen = () => {
   const [updateBlog, { isLoading: loadingUpdate }] = useUpdateBlogMutation();
 
   const [uploadBlogImage, { isLoading: loadingUpload }] =
-    useUploadBlogImageMutation();
+  useUploadImageMutation();
 
   const navigate = useNavigate();
 

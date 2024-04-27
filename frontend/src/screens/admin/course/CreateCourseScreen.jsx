@@ -5,11 +5,8 @@ import { toast } from "react-toastify";
 import {
   useCreateCourseMutation,
 } from "../../../slices/courseApiSlice";
-
-import {
-  useUploadBlogImageMutation
-} from "../../../slices/blogApiSlice";
 import Loader from "../../../components/Loader";
+import {useUploadImageMutation} from "../../../slices/uploadImageApiSlice";
 
 const CreateCourseScreen = () => {
   const [title, setTitle] = useState("");
@@ -29,7 +26,7 @@ const CreateCourseScreen = () => {
   const [createCourse, { isLoading: loadingUpdate }] = useCreateCourseMutation();
 
   const [uploadBlogImage, { isLoading: loadingUpload }] =
-    useUploadBlogImageMutation();
+  useUploadImageMutation();
 
   const navigate = useNavigate();
 

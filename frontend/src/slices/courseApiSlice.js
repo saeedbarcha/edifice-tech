@@ -11,6 +11,7 @@ export const courseApiSlice = apiSlice.injectEndpoints({
       providesTags: ["Course"],
       keepUnusedDataFor: 5,
     }),
+    
     getActiveCourses: builder.query({
       query: () => ({
         url: `${COURSE_URL}/active-courses`,
@@ -18,6 +19,7 @@ export const courseApiSlice = apiSlice.injectEndpoints({
       providesTags: ["Course"],
       keepUnusedDataFor: 5,
     }),
+
     updateCourse: builder.mutation({
       query: (data) => ({
         url: `${COURSE_URL}/${data.courseId}/edit`,
@@ -26,6 +28,7 @@ export const courseApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Course"],
     }),
+
     createCourse: builder.mutation({
       query: (data) => ({
         url: `${COURSE_URL}`,
@@ -34,6 +37,7 @@ export const courseApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Course"],
     }),
+
     getCourseDetails: builder.query({
       query: (courseId) => ({
         url: `${COURSE_URL}/${courseId}`,
@@ -41,6 +45,7 @@ export const courseApiSlice = apiSlice.injectEndpoints({
       providesTags: ["Course"],
       keepUnusedDataFor: 5,
     }),
+
     deleteCourse: builder.mutation({
       query:(courseId) => ({
         url: `${COURSE_URL}/${courseId}`,

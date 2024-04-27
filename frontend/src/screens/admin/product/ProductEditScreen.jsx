@@ -8,8 +8,8 @@ import { toast } from "react-toastify";
 import {
   useUpdateProductMutation,
   useGetProductDetailsQuery,
-  useUploadProductImageMutation,
 } from "../../../slices/productApiSlice";
+import { useUploadImageMutation } from "../../../slices/uploadImageApiSlice";
 
 const ProductEditScreen = () => {
   const { id: productId } = useParams();
@@ -28,7 +28,7 @@ const ProductEditScreen = () => {
     useUpdateProductMutation();
 
   const [uploadProductImage, { isLoading: loadingUpload }] =
-    useUploadProductImageMutation();
+    useUploadImageMutation();
 
   const navigate = useNavigate();
 
@@ -111,26 +111,20 @@ const ProductEditScreen = () => {
                 ></Form.Control>
               </Form.Group>
 
-              <Form.Group controlId="image" className="my-2">
+              <Form.Group controlId="image" className="mt-3">
                 <Form.Label>Image</Form.Label>
-
                 <Form.Control
                   type="file"
                   label="Choose file"
                   onChange={uploadFileHandler}
                 ></Form.Control>
-
-                <Form.Control
-                  type="text"
-                  className="mt-2"
-                  placeholder="Enter image url"
-                  value={image}
-                  onChange={(e) => setImage}
-                ></Form.Control>
               </Form.Group>
 
+              {image &&
+                <Form.Group className="mt-3">
+                  <img src={image} alt="Selected" className="w-100" />
+                </Form.Group>}
               {loadingUpload && <Loader />}
-
               <Form.Group controlId="description" className="my-2">
                 <Form.Label>Description</Form.Label>
                 <Form.Control

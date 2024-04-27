@@ -11,13 +11,7 @@ export const blogApiSlice = apiSlice.injectEndpoints({
       providesTags: ["Blogs"],
       keepUnusedDataFor: 5,
     }),
-    uploadBlogImage: builder.mutation({
-      query: (data) => ({
-        url: `${UPLOAD_URL}`,
-        method: "POST",
-        body: data,
-      }),
-    }),
+
     createBlog: builder.mutation({
       query: () => ({
         url: `${BLOGS_URL}`,
@@ -25,14 +19,16 @@ export const blogApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Blogs"],
     }),
+
     updateBlog: builder.mutation({
       query: (data) => ({
         url: `${BLOGS_URL}/${data.blogId}`,
         method: "PUT",
         body: data,
       }),
-      invalidatesTags: ["Products"],
+      invalidatesTags: ["Blogs"],
     }),
+
     getActiveBlogs: builder.query({
       query: () => ({
         url: `${BLOGS_URL}/active-blogs`,
@@ -40,6 +36,7 @@ export const blogApiSlice = apiSlice.injectEndpoints({
       providesTags: ["Blogs"],
       keepUnusedDataFor: 5,
     }),
+
     getBlogDetails: builder.query({
       query: (blogId) => ({
         url: `${BLOGS_URL}/${blogId}`,
@@ -47,6 +44,7 @@ export const blogApiSlice = apiSlice.injectEndpoints({
       providesTags: ["Blogs"],
       keepUnusedDataFor: 5,
     }),
+
     deleteBlog: builder.mutation({
       query:(blogId) => ({
         url: `${BLOGS_URL}/${blogId}`,
@@ -63,6 +61,5 @@ export const {
   useGetBlogDetailsQuery,
   useCreateBlogMutation,
   useDeleteBlogMutation,
-  useUploadBlogImageMutation,
   useUpdateBlogMutation
 } = blogApiSlice;

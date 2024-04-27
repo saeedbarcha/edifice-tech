@@ -10,7 +10,7 @@ import {
   CardTitle,
 } from "react-bootstrap";
 import "./blogHomeScreen.css";
-import { formatDateWithTime } from '../../common/formatDate.js';
+import { formatDateWithTime } from '../../common-functions/formatDate.js';
 
 const BlogHomeScreen = () => {
   const { data, isLoading, error } = useGetActiveBlogsQuery();

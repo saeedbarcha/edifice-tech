@@ -11,13 +11,6 @@ export const aboutCopmanyApiSlice = apiSlice.injectEndpoints({
       providesTags: ["About Company"],
       keepUnusedDataFor: 5,
     }),
-    uploadLogoImage: builder.mutation({
-      query: (data) => ({
-        url: `${UPLOAD_URL}`,
-        method: "POST",
-        body: data,
-      }),
-    }),
     updateAboutCompany: builder.mutation({
       query: (data) => ({
         url: `${ABOUT_COMPANY_URL}/${data.blogId}`,

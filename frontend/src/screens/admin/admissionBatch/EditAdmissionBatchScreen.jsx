@@ -3,10 +3,10 @@ import { Container, Card, Form, Button, Col } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useGetAdmissionBatchDetailsQuery, useUpdateAdmissionBatchMutation } from "../../../slices/admissionBatchApiSlice";
-import {
-  useUploadProductImageMutation,
-} from "../../../slices/productApiSlice";
+import {useUploadImageMutation} from "../../../slices/uploadImageApiSlice";
 import { useGetActiveCoursesQuery } from "../../../slices/courseApiSlice";
+
+
 const EditAdmissionBatchScreen = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -28,7 +28,7 @@ const EditAdmissionBatchScreen = () => {
     // error,
   } = useGetActiveCoursesQuery();
   const [uploadAdmissionBacthImage, { isLoading: loadingUpload }] =
-  useUploadProductImageMutation();
+  useUploadImageMutation();
   const {
     data: admissionBatch,
     isLoading,

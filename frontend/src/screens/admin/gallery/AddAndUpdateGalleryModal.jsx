@@ -3,9 +3,10 @@ import { Modal, Button, Form } from "react-bootstrap";
 import { toast } from "react-toastify";
 import {
   useUpdateGalleryItemMutation,
-  useUploadGallaryImageMutation,
   useCreateGalleryMutation,
 } from "../../../slices/galleryApiSlice";
+import {useUploadImageMutation} from "../../../slices/uploadImageApiSlice";
+
 
 const AddAndUpdateGalleryModal = ({ show, handleClose, editGallery }) => {
   const [caption, setCaption] = useState("");
@@ -18,7 +19,7 @@ const AddAndUpdateGalleryModal = ({ show, handleClose, editGallery }) => {
   const [updateGallery, { isLoading: loadingAdding }] =
     useUpdateGalleryItemMutation();
     const [uploadBlogImage, { isLoading: loadingUpload }] =
-    useUploadGallaryImageMutation();
+    useUploadImageMutation();
   useEffect(() => {
     if (editGallery) {
       setCaption(editGallery.caption || "");

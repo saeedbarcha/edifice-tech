@@ -12,13 +12,6 @@ export const galleryApiSlice = apiSlice.injectEndpoints({
       keepUnusedDataFor: 5,
     }),
 
-    uploadGallaryImage: builder.mutation({
-      query: (data) => ({
-        url: `${UPLOAD_URL}`,
-        method: "POST",
-        body: data,
-      }),
-    }),
     createGallery: builder.mutation({
       query: (data) => ({
         url: `${GALLERY_URL}`,
@@ -49,7 +42,6 @@ export const galleryApiSlice = apiSlice.injectEndpoints({
 
 export const {
 useGetGalleryQuery,
-useUploadGallaryImageMutation,
 useUpdateGalleryItemMutation,
 useDeleteGalleryItemMutation,
 useCreateGalleryMutation,

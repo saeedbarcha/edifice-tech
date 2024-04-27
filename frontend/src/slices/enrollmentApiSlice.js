@@ -5,6 +5,7 @@ import { apiSlice } from "./apiSlice";
 
 export const enrollmentApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
+    
     createEnrollment: builder.mutation({
       query: (data) => ({
         url: `${ENROLLMENT_URL}/`,
@@ -36,6 +37,7 @@ export const enrollmentApiSlice = apiSlice.injectEndpoints({
         method: "DELETE"
        }),
     }),
+
     updateEnrollment: builder.mutation({
       query: (data) => ({
         url: `${ENROLLMENT_URL}/update-enrollment-admin`,

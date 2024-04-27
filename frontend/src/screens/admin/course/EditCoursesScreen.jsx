@@ -9,10 +9,7 @@ import {
   useUpdateCourseMutation,
   useGetCourseDetailsQuery,
 } from "../../../slices/courseApiSlice";
-import {
-
-  useUploadProductImageMutation,
-} from "../../../slices/productApiSlice";
+import {useUploadImageMutation} from "../../../slices/uploadImageApiSlice";
 
 const EditCoursesScreen = () => {
   const { id: courseId } = useParams();
@@ -39,7 +36,7 @@ const EditCoursesScreen = () => {
     useUpdateCourseMutation();
 
   const [uploadCourseImage, { isLoading: loadingUpload }] =
-    useUploadProductImageMutation();
+  useUploadImageMutation();
 
 
   useEffect(() => {

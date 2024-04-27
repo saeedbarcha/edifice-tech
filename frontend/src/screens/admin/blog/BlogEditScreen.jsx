@@ -5,10 +5,10 @@ import { toast } from "react-toastify";
 import Message from "../../../components/Message";
 import Loader from "../../../components/Loader";
 import {
-  useUploadBlogImageMutation,
   useGetBlogDetailsQuery,
   useUpdateBlogMutation,
 } from "../../../slices/blogApiSlice";
+import {useUploadImageMutation} from "../../../slices/uploadImageApiSlice";
 
 const BlogEditScreen = () => {
   const { id: blogId } = useParams();
@@ -24,7 +24,7 @@ const BlogEditScreen = () => {
   const [updateBlog, { isLoading: loadingUpdate }] = useUpdateBlogMutation();
 
   const [uploadBlogImage, { isLoading: loadingUpload }] =
-    useUploadBlogImageMutation();
+  useUploadImageMutation();
 
   const navigate = useNavigate();
 

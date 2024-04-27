@@ -14,7 +14,9 @@ import { useGetActiveBlogsQuery } from "../../slices/blogApiSlice";
 import { Link } from "react-router-dom";
 import Loader from "../../components/Loader";
 import Message from "../../components/Message";
-import { formatDateWithTime } from '../../common/formatDate.js';
+import { formatDateWithTime } from '../../common-functions/formatDate.js';
+
+
 function AllBlogsScreen() {
   const { data, isLoading, error } = useGetActiveBlogsQuery();
   console.log("blog data", data);

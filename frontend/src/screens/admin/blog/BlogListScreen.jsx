@@ -3,7 +3,7 @@ import { Container, Table, Button, Row, Col, Image } from "react-bootstrap";
 import { FaTimes, FaTrash, FaEdit, FaCheck } from "react-icons/fa";
 import Message from "../../../components/Message";
 import Loader from "../../../components/Loader";
-import { formatDateWithTime } from '../../../common/formatDate.js';
+import { formatDateWithTime } from '../../../common-functions/formatDate.js';
 import { toast } from "react-toastify";
 import {
   useGetBlogsQuery,

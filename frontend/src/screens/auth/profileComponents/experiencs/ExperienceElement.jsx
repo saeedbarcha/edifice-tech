@@ -2,7 +2,6 @@ import { useState } from "react";
 import { Col, Card, Button } from "react-bootstrap";
 import { IoMdAddCircle } from "react-icons/io";
 import { FaEdit, FaTrash } from "react-icons/fa";
-
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useGetUserDetailsQuery } from "../../../../slices/usersApiSlice";

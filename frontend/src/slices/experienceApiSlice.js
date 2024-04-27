@@ -12,6 +12,7 @@ export const experienceApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Experience"],
     }),
+
     updateExperience: builder.mutation({
       query: (data) => ({
         url: `${EXPERIENCE_URL}/${data._id}`,
@@ -20,6 +21,7 @@ export const experienceApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Experience"],
     }),
+    
     deleteExperience: builder.mutation({
       query:(experienceId) => ({
        url:`${EXPERIENCE_URL}/${experienceId}`,

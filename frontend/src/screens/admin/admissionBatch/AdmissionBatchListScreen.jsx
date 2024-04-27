@@ -5,7 +5,7 @@ import { FaTimes, FaTrash, FaEdit, FaCheck } from "react-icons/fa";
 import Message from "../../../components/Message";
 import Loader from "../../../components/Loader";
 import { toast } from "react-toastify";
-import { formatDate } from '../../../common/formatDate.js';
+import { formatDate } from '../../../common-functions/formatDate.js';
 import {
   useGetAdmissionBatchsQuery,
   useDeleteAdmissionBatchMutation,

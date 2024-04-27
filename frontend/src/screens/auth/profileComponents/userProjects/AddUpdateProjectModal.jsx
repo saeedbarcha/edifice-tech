@@ -6,7 +6,9 @@ import {
   useUpdateProjectMutation,
   useCreateProjectMutation,
 } from "../../../../slices/projectApiSlice";
-import { useUploadProductImageMutation } from "../../../../slices/productApiSlice";
+import {useUploadImageMutation} from "../../../../slices/uploadImageApiSlice";
+
+
 const AddUpdateProjectModal = ({ show, handleClose, editProject }) => {
   const [title, setTitle] = useState("");
   const [url, setUrl] = useState("");
@@ -21,7 +23,7 @@ const AddUpdateProjectModal = ({ show, handleClose, editProject }) => {
     useUpdateProjectMutation();
 
   const [uploadProjectImage, { isLoading: loadingUploadImg }] =
-    useUploadProductImageMutation();
+  useUploadImageMutation();
 
   useEffect(() => {
     if (editProject) {

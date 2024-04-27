@@ -4,10 +4,11 @@ import { FaEdit, FaTrash } from "react-icons/fa";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { IoMdAddCircle } from "react-icons/io";
-
 import { useDeleteProjectMutation } from "../../../../slices/projectApiSlice";
 import AddUpdateProjectModal from "./AddUpdateProjectModal"; 
 import { useGetUserDetailsQuery } from "../../../../slices/usersApiSlice";
+
+
 const ProjectElement = () => {
 
   const [showProjectModal, setShowProjectModal] = useState(false);

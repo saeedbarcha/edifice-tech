@@ -5,7 +5,7 @@ import { FaEdit } from "react-icons/fa";
 import Message from "../../../components/Message";
 import Loader from "../../../components/Loader";
 import UpdateEnrollmentModal from "./UpdateEnrollmentModal";
-import { downloadCertificate } from '../../../common/certificate.js';
+import { downloadCertificate } from '../../../common-functions/certificate.js';
 import {
     useGetAllEnrolmentByAdminQuery,
 } from "../../../slices/enrollmentApiSlice";

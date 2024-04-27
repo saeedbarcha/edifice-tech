@@ -1,12 +1,10 @@
-import React, { useState } from "react"; // Import React
+import React, { useState } from "react";
 import { Container, Card, Form, Button, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useCreateAdmissionBatchMutation } from "../../../slices/admissionBatchApiSlice";
 import { useGetActiveCoursesQuery } from "../../../slices/courseApiSlice.js";
 import { toast } from "react-toastify";
-import {
-  useUploadProductImageMutation,
-} from "../../../slices/productApiSlice";
+import {useUploadImageMutation} from "../../../slices/uploadImageApiSlice";
 const CreateAdmissionBatchScreen = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
@@ -32,7 +30,7 @@ const CreateAdmissionBatchScreen = () => {
     useCreateAdmissionBatchMutation();
 
     const [uploadAdmissionBacthImage, { isLoading: loadingUpload }] =
-    useUploadProductImageMutation();
+    useUploadImageMutation();
   const submitHandler = async (e) => {
     e.preventDefault();
     try {

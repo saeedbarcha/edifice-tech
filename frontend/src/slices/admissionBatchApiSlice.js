@@ -18,13 +18,6 @@ export const admissionBatchApiSlice = apiSlice.injectEndpoints({
       providesTags: ["Admission Batch"],
       keepUnusedDataFor: 5,
     }),
-    uploadAdmissionBatchImage: builder.mutation({
-      query: (data) => ({
-        url: `${UPLOAD_URL}`,
-        method: "POST",
-        body: data,
-      }),
-    }),
     createAdmissionBatch: builder.mutation({
       query: (data) => ({
         url: `${ADMISSION_BATCH_URL}`,

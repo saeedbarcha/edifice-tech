@@ -17,6 +17,8 @@ import Message from "../../components/Message";
 import { toast } from "react-toastify";
 import Meta from "../../components/Meta";
 import { useGetCourseDetailsQuery } from "../../slices/courseApiSlice";
+
+
 const CourseDetails = () => {
   const { id: courseId } = useParams();
 

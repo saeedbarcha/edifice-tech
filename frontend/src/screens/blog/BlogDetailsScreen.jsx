@@ -8,7 +8,7 @@ import {
 } from "react-bootstrap";
 import Loader from "../../components/Loader";
 import Message from "../../components/Message";
-import { formatDateWithTime } from '../../common/formatDate.js';
+import { formatDateWithTime } from '../../common-functions/formatDate.js';
 import { useGetBlogDetailsQuery } from "../../slices/blogApiSlice";
 
 const BlogDetailsScreen = () => {

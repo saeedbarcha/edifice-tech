@@ -72,10 +72,6 @@ const router = createBrowserRouter(
       <Route path="/blogs" element={<AllBlogsScreen />} />
       <Route path="/admissionbatch/:id" element={<AdmissionBatchDetailScreen />} />
       <Route path="/activeadmissionbatch/:id" element={<EnrollAdmissionBatchScreen />} />
-
-
-
-
       <Route path="/blogs/:id" element={<BlogDetailsScreen />} />
       <Route path="/services/:id" element={<ServiceDetails />} />
       <Route path="/course/:id" element={<CourseDetails />} />

@@ -5,7 +5,7 @@ import { FaTimes, FaCheck } from "react-icons/fa";
 import Message from "../../../../components/Message";
 import Loader from "../../../../components/Loader";
 import { useGetMyEnrolmentsQuery } from "../../../../slices/enrollmentApiSlice";
-import { downloadCertificate } from '../../../../common/certificate.js';
+import { downloadCertificate } from '../../../../common-functions/certificate.js';
 
 const MyEnrollments = () => {
   const { id } = useParams();

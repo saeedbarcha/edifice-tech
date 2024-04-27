@@ -5,6 +5,7 @@ import { apiSlice } from "./apiSlice";
 
 export const educationApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
+    
     createEducation: builder.mutation({
       query: (data) => ({
         url: `${EDUCATION_URL}`,
@@ -13,12 +14,14 @@ export const educationApiSlice = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["Education"],
     }),
+
     deleteEducation: builder.mutation({
        query:(educationId) => ({
         url:`${EDUCATION_URL}/${educationId}`,
         method: "DELETE"
        }),
     }),
+
     updateEducation: builder.mutation({
       query: (data) => ({
         url: `${EDUCATION_URL}/${data._id}`,
