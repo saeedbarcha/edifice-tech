@@ -72,8 +72,8 @@ const GalleryList = () => {
             <Table striped hover responsive className="table-sm">
               <thead>
                 <tr>
-                  <th>IMAGE</th>
-                  <th>CAPTION</th>
+                  <th>Image</th>
+                  <th>Caption</th>
                   <th>Action</th>
                 </tr>
               </thead>

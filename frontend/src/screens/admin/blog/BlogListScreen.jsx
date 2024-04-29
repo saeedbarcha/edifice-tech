@@ -83,10 +83,10 @@ const BlogListScreen = () => {
               <thead>
                 <tr>
                   <th>Image</th>
-                  <th>TITLE</th>
-                  <th>DATE</th>
-                  <th>ACTIVE</th>
-                  <th>ACTION</th>
+                  <th>Title</th>
+                  <th>Date</th>
+                  <th>Active</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody>

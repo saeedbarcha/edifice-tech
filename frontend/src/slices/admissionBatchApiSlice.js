@@ -1,4 +1,4 @@
-import { ADMISSION_BATCH_URL, UPLOAD_URL } from "../constants";
+import { ADMISSION_BATCH_URL} from "../constants";
 import { apiSlice } from "./apiSlice";
 
 export const admissionBatchApiSlice = apiSlice.injectEndpoints({

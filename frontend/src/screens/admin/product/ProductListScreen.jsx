@@ -80,9 +80,9 @@ const ProductListScreen = () => {
             <thead>
               <tr>
                 <th>Image</th>
-                <th>NAME</th>
-                <th>URL</th>
-                <th>ACTION</th>
+                <th>Name</th>
+                <th>Url</th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>

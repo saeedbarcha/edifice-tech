@@ -11,6 +11,8 @@ import blogs from "./data/blog.js";
 import gallery from "./data/gallery.js";
 import aboutCopmany from "./data/aboutCompany.js";
 import admissionBatch from "./data/admissionBatch.js";
+import service from "./data/service.js";
+import faqs from "./data/faq.js";
 
 
 import User from "./models/userModel.js";
@@ -24,6 +26,8 @@ import Gallery from "./models/galleryModel.js";
 import AboutCompany from "./models/aboutCompanyModel.js";
 import AdmissionBatch from "./models/admissionBatchModel.js";
 import Enrollment from "./models/enrollmentModel.js";
+import Service from "./models/serviceModel.js";
+import Faqs from "./models/faqsModel.js";
 import connectDB from "./config/db.js";
 
 dotenv.config();
@@ -43,8 +47,10 @@ const importData = async () => {
     await Project.deleteMany();
     await Gallery.deleteMany();
     await Enrollment.deleteMany();
+    await Service.deleteMany();
+    await Faqs.deleteMany();
 
-    
+
     const createdUsers = await User.insertMany(users);
 
     const adminUser = createdUsers[0]._id;
@@ -97,12 +103,24 @@ const importData = async () => {
     });
     await Gallery.insertMany(sampleGallery);
 
-     //    insetring gallery image
-     const sampleAdmissionBatch = admissionBatch.map((admissionbacha) => {
+    //    insetring gallery image
+    const sampleAdmissionBatch = admissionBatch.map((admissionbacha) => {
       return { ...admissionbacha, user: adminUser };
     });
     await AdmissionBatch.insertMany(sampleAdmissionBatch);
 
+    //    insetring service 
+    const sampleService = service.map((ser) => {
+      return { ...ser, user: adminUser };
+    });
+    await Service.insertMany(sampleService);
+
+
+    //    insetring faqs 
+    const sampleFaq = faqs.map((faq) => {
+      return { ...faq, user: adminUser };
+    });
+    await Faqs.insertMany(sampleFaq);
 
     console.log("Data Imporded!".green.inverse);
     process.exit();
@@ -126,6 +144,8 @@ const destroyData = async () => {
     await Project.deleteMany();
     await Gallery.deleteMany();
     await Enrollment.deleteMany();
+    await Service.deleteMany();
+    await Faqs.deleteMany();
 
     console.log("Data Destroyed!".red.inverse);
     process.exit();

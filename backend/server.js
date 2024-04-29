@@ -14,10 +14,10 @@ import experienceRoutes from "./routes/experienceRoutes.js"
 import projectRoutes from "./routes/projectRoutes.js"
 import galleryRoutes from "./routes/galleyRoutes.js"
 import aboutCompanyRoutes from "./routes/aboutCompanyRoutes.js"
-import admissionBatch from "./routes/admissionBatchRoutes.js"
-import enrollment from "./routes/enrollmentRoutes.js"
-
-
+import admissionBatchRoutes from "./routes/admissionBatchRoutes.js"
+import enrollmentRoutes from "./routes/enrollmentRoutes.js"
+import serviceRoutes from "./routes/serviceRoutes.js"
+import faqsRoutes from "./routes/faqsRoutes.js";
 
 
 import uploadRoutes from "./routes/uploadRoutes.js";
@@ -45,17 +45,13 @@ app.use("/api/project", projectRoutes);
 app.use("/api/gallery", galleryRoutes);
 app.use("/api/course", courseRoutes);
 app.use("/api/about-company", aboutCompanyRoutes);
-app.use("/api/admission-batch", admissionBatch);
-app.use("/api/enrollment", enrollment)
-
-
-
-
-
-
-
-
+app.use("/api/admission-batch", admissionBatchRoutes);
+app.use("/api/enrollment", enrollmentRoutes)
 app.use("/api/blogs", blogRoutes);
+app.use("/api/service", serviceRoutes)
+app.use("/api/faqs", faqsRoutes);
+
+
 
 const __dirname = path.resolve(); 
 app.use("/uploads", express.static(path.join(__dirname, "/uploads")));

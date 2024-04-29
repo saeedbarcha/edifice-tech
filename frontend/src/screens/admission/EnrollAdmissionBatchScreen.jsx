@@ -5,7 +5,7 @@ import Message from "./../../components/Message";
 import Loader from "./../../components/Loader";
 import {
     useCreateEnrollmentMutation
-} from "./../../slices/enrollmentApiSlice"
+} from "./../../slices/enrollmentApiSlice";
 import { toast } from "react-toastify";
 import {
     useGetAdmissionBatchDetailsQuery,

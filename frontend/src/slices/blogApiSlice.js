@@ -1,4 +1,4 @@
-import { BLOGS_URL, UPLOAD_URL } from "../constants";
+import { BLOGS_URL } from "../constants";
 import { apiSlice } from "./apiSlice";
 
 export const blogApiSlice = apiSlice.injectEndpoints({

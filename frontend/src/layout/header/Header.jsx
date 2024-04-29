@@ -218,6 +218,27 @@ const Header = () => {
 
 
                   
+                  <LinkContainer to="/admin/service-List">
+                    <Nav.Link
+                      className="justify-content-start dropdown-item"
+                      smooth
+                    >
+                      <FaImage className="mx-2" />
+                      Services
+                    </Nav.Link>
+                  </LinkContainer>
+                  
+                  
+                  <LinkContainer to="/admin/faqs-List">
+                    <Nav.Link
+                      className="justify-content-start dropdown-item"
+                      smooth
+                    >
+                      <FaImage className="mx-2" />
+                      Faqs
+                    </Nav.Link>
+                  </LinkContainer>
+
                   <LinkContainer to="/admin/enrollment-List">
                     <Nav.Link
                       className="justify-content-start dropdown-item"

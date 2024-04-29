@@ -48,11 +48,11 @@ const UserListScreen = () => {
           <thead>
             <tr>
               <th>Image</th>
-              <th>NAME</th>
-              <th>EMAIL</th>
-              <th>ADMIN</th>
-              <th>TEAM MEMBER</th>
-              <th>ACTION</th>
+              <th>Name</th>
+              <th>E-mail</th>
+              <th>Admin</th>
+              <th>Team Member</th>
+              <th>Action</th>
 
             </tr>
           </thead>

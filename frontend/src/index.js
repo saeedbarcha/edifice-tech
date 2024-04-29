@@ -50,7 +50,13 @@ import EditCoursesScreen from "./screens/admin/course/EditCoursesScreen";
 import EditAdmissionBatchScreen from "./screens/admin/admissionBatch/EditAdmissionBatchScreen";
 import EnrollAdmissionBatchScreen from "./screens/admission/EnrollAdmissionBatchScreen";
 import MyEnrollments from "./screens/auth/profileComponents/myEnrollments/MyEnrollments";
-import EnrollmentList from "./screens/admin/enrollment/EnrollmentList"
+import EnrollmentList from "./screens/admin/enrollment/EnrollmentList";
+import CreateServiceScreen from "./screens/admin/service/CreateServiceScreen";
+import ServiceListScreen from "./screens/admin/service/ServiceListScreen";
+import EditSerciveScreen from "./screens/admin/service/EditSerciveScreen";
+import FaqsListScreen from "./screens/admin/faq/FaqsListScreen";
+import CreateFaqsScreen from "./screens/admin/faq/CreateFaqsScreen";
+import EditFaqsScreen from "./screens/admin/faq/EditFaqsScreen";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -85,13 +91,21 @@ const router = createBrowserRouter(
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
         <Route path="/admin/productlist" element={<ProductListScreen />} />
         <Route path="/admin/createblog" element={<CreateBlogScreen />} />
+        <Route path="/admin/createservice" element={<CreateServiceScreen />} />
+        <Route path="/admin/service-List" element={<ServiceListScreen />} />
+ 
+       
+        
 
         <Route path="/admin/bloglist" element={<BlogListScreen />} />
         <Route path="/admin/gallerylist" element={<GalleryList />} />
         <Route path="/admin/courselist" element={<CourseListScreen />} />
         <Route path="/admin/createcourse" element={<CreateCourseScreen />} />
         <Route path="/admin/createadmissionbatch" element={<CreateAdmissionBatchScreen />} />
+        <Route path="/admin/create-faqs" element={<CreateFaqsScreen />} />
+       
         <Route path="/admin/enrollment-List" element={<EnrollmentList />} />
+        <Route path="/admin/faqs-List" element={<FaqsListScreen />} />
 
 
 
@@ -103,8 +117,10 @@ const router = createBrowserRouter(
         <Route path="/admin/product/:id/edit" element={<ProductEditScreen />} />
         <Route path="/admin/blog/:id/edit" element={<BlogEditScreen />} />
         <Route path="/admin/course/:id/edit" element={<EditCoursesScreen />} />
+        <Route path="/admin/service/:id/edit" element={<EditSerciveScreen />} />
+        <Route path="/admin/faqs/:id/edit" element={<EditFaqsScreen />} />
 
-
+        
         <Route path="/admin/admissionbatchlist" element={<AdmissionBatchListScreen />} />
         <Route path="/admin/admission-batch/:id/edit" element={<EditAdmissionBatchScreen />} />
 
