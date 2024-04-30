@@ -23,19 +23,24 @@ const TeamScreen = () => {
           ) : (
             <>
               {users?.map((user, index) => (
-                <Col lg={3} md={6} className="d-flex align-items-stretch">
+                <Col lg={3} md={6} className="d-flex align-items-stretch justify-content-around">
                   <div
                     className="member"
-                    data-aos="fade-up"
-                    data-aos-delay="100"
                   >
                     <div className="member-img ">
                       <Link
                         className="m-auto"
                         to={`/member/${user?._id}`}
                         style={{ textDecoration: "none" }}
-                        >
-                        <img src={user?.image ? user.image :  "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" } className="img-fluid" alt="" />
+                      >
+                         <Image
+                          src={user?.image ? user?.image : `https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava${user.gender === "Male" ? 3 : 4}.webp`}
+                          className="img-fluid"
+                          style={{maxWidth:"216px"}}
+                          fluid
+                          alt="♀️"
+                        />
+
                       </Link>
                       <div className="social">
                         <a href={user?.linkedInUrl}>

@@ -90,7 +90,7 @@ const ProfileScreen = () => {
                   <Card className="mb-4">
                     <Card.Body className="text-center">
                       <Card.Img
-                        src={user.user.image ? user.user.image : "https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"}
+                        src={user?.user?.image ? user?.user?.image : `https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava${user.gender === "Male" ? 3 : 4}.webp`}  
                         alt="avatar"
                         className="rounded-circle"
                         style={{ width: "150px" }}
@@ -204,7 +204,7 @@ const ProfileScreen = () => {
                   <Card className="mb-4">
                     <p
                       className="p-3 text-muted"
-                      style={{ height: "184px", overflow: "auto" }}
+                      style={{ height: "210px", overflow: "auto" }}
                     >
                       <sup>
                         {" "}

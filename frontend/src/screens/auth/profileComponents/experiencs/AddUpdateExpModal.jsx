@@ -5,6 +5,8 @@ import {
   useCreateExperienceMutation,
   useUpdateExperienceMutation,
 } from "../../../../slices/experienceApiSlice";
+import { formatDateMothFormat } from '../../../../common-functions/formatDate.js';
+
 
 const AddUpdateExpModal = ({ show, handleClose, editExperience }) => {
   const [designation, setDesignation] = useState("");
@@ -22,8 +24,8 @@ const AddUpdateExpModal = ({ show, handleClose, editExperience }) => {
     if (editExperience) {
       setDesignation(editExperience.designation || "");
       setInstituteName(editExperience.instituteName || "");
-      setJoiningDate(editExperience.joiningDate || "");
-      setEndingDate(editExperience.endingDate || "");
+      setJoiningDate(formatDateMothFormat(editExperience.joiningDate) || "");
+      setEndingDate(formatDateMothFormat(editExperience.endingDate) || "");
       setId(editExperience._id || "");
     }
   }, [editExperience]);
@@ -103,7 +105,7 @@ const AddUpdateExpModal = ({ show, handleClose, editExperience }) => {
           <Form.Group controlId="joiningDate">
             <Form.Label>Joining Date</Form.Label>
             <Form.Control
-              type="text"
+              type="date"
               placeholder="Enter joining date"
               value={joiningDate}
               onChange={(e) => setJoiningDate(e.target.value)}
@@ -112,7 +114,7 @@ const AddUpdateExpModal = ({ show, handleClose, editExperience }) => {
           <Form.Group controlId="endingDate">
             <Form.Label>Ending Date</Form.Label>
             <Form.Control
-              type="text"
+              type="date"
               placeholder="Enter ending date"
               value={endingDate}
               onChange={(e) => setEndingDate(e.target.value)}

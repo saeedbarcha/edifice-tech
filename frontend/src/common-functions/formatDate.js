@@ -28,4 +28,15 @@
     return formattedDate;
   }
   
-  export { formatDateWithTime , formatDate};
+  const formatDateMothFormat = (dateString) => {
+    var date = new Date(dateString);
+    var monthNames = ["January", "February", "March", "April", "May", "June",
+                      "July", "August", "September", "October", "November", "December"];
+    var month = monthNames[date.getMonth()];
+    var day = date.getDate().toString().padStart(2, "0");
+    var year = date.getFullYear().toString();
+    var formattedDate = `${month} ${day}, ${year}`;
+    return formattedDate;
+}
+
+  export { formatDateWithTime , formatDate, formatDateMothFormat};

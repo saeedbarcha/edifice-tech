@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import { toast } from "react-toastify";
 import { useUpdateEducationMutation, useCreateEducationMutation} from "../../../../slices/educationApiSlice";
+import { formatDateMothFormat } from '../../../../common-functions/formatDate.js';
 
 
 const AddUpdateEduModal = ({ show, handleClose, editEducation }) => { 
@@ -22,7 +23,7 @@ const AddUpdateEduModal = ({ show, handleClose, editEducation }) => {
       setDegree(editEducation.degree || "");
       setCourse(editEducation.course || "");
       setInstituteName(editEducation.instituteName || "");
-      setDate(editEducation.date || "");
+      setDate(formatDateMothFormat(editEducation.date) || "");
       setId(editEducation._id || ""); 
     }
   }, [editEducation]);
@@ -105,7 +106,7 @@ const AddUpdateEduModal = ({ show, handleClose, editEducation }) => {
           <Form.Group controlId="date">
             <Form.Label>Date</Form.Label>
             <Form.Control
-              type="text"
+              type="date"
               placeholder="Enter date"
               value={date}
               onChange={(e) => setDate(e.target.value)}

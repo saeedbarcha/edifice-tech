@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useGetUserDetailsQuery } from "../../../../slices/usersApiSlice";
 import { useDeleteEducationMutation } from "../../../../slices/educationApiSlice";
+import { formatDateMothFormat } from '../../../../common-functions/formatDate.js';
 import AddUpdateEduModal from "./AddUpdateEduModal";
 
 const EducationElement = () => {
@@ -66,7 +67,7 @@ const EducationElement = () => {
         </Card.Header>
         <Card.Body
           className="scrollerCont"
-          style={{ height: "190px", overflowY: "auto" }}
+          style={{ height: "225px", overflowY: "auto" }}
         >
           <Card.Text className="mb-4">
             {user?.education?.map((edu, index) => (
@@ -106,7 +107,7 @@ const EducationElement = () => {
                         {edu.instituteName}
                       </span>
                     </p>
-                    <p>Date: {edu.date}</p>
+                    <p>Date: {formatDateMothFormat(edu.date)}</p>
                   </Card.Text>
                 </Card.Body>
               </Card>

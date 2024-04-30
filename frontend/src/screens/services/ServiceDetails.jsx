@@ -8,11 +8,15 @@ import {
   Button,
 } from "react-bootstrap";
 import { Link, useParams } from "react-router-dom";
-import ServicesData from "./servicesData.js";
+import { useGetServiceDetailsQuery, useGetActiveServicesQuery } from "../../slices/serviceApiSlice.js";
+
 
 function ServiceDetails() {
   const { id } = useParams();
-  const filterData = ServicesData.find((val) => val._id == id);
+  const { data: service,  } = useGetServiceDetailsQuery(id);
+  const { data: allService, isLoading, error, refetch } = useGetActiveServicesQuery();
+
+
   return (
     <div
       style={{
@@ -32,13 +36,13 @@ function ServiceDetails() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ml-auto">
-              {ServicesData.map((service) => (
+              {allService?.map((service) => (
                 <Link
-                  to={`/services/${service._id}`}
-                  key={service._id}
+                  to={`/services/${service?._id}`}
+                  key={service?._id}
                   style={{ textDecoration: "none" }}
                 >
-                  {service.title}
+                  {service?.title}
                 </Link>
               ))}
             </Nav>
@@ -50,10 +54,10 @@ function ServiceDetails() {
           <Row className="">
             <Col md={12}>
               <h1 className="display-4 font-weight-normal">
-                {filterData.title}
+                {service?.title}
               </h1>
               <p className="lead font-weight-normal">
-                {filterData.description}
+                {service?.description}
               </p>
             </Col>
           </Row>
@@ -68,7 +72,7 @@ function ServiceDetails() {
           >
             <div className="my-3 py-1">
               <h1 className="display-4 font-weight-normal">
-                {filterData.title}
+                {service?.title}
               </h1>
               <p className="lead">And an even wittier subheading.</p>
             </div>
@@ -77,7 +81,7 @@ function ServiceDetails() {
               <div class="embed-responsive embed-responsive-16by9">
                 <iframe
                   class="embed-responsive-item"
-                  src={filterData.youtubeUrl}
+                  src={service?.youtubeVideoUrl}
                   style={{
                     width: "100%",
                     height: "54vh",
@@ -92,8 +96,8 @@ function ServiceDetails() {
             className="bg-light pt-3 px-3 pt-md-5 px-md-5 text-center"
           >
             <div className="my-3 p-3">
-              <h1 className="display-4 font-weight-normal">
-                {filterData.title}
+              <h1 className="display-6 font-weight-normal">
+                {service?.title}
               </h1>
               <p className="lead">And an even wittier subheading.</p>
             </div>
@@ -105,7 +109,7 @@ function ServiceDetails() {
               }}
             >
               <img
-                src={filterData.image}
+                src={service?.bannerImage}
                 alt=""
                 style={{
                   width: "100%",

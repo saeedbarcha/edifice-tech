@@ -3,6 +3,7 @@ const router = express.Router();
 import {
     getServices,
     getAllActiveServices,
+    getActiveService,
     getServiceById,
     createService,
     updateService,
@@ -21,8 +22,11 @@ router
   .get(getServiceById)
   .delete(protect, admin, checkObjectId, deleteService);
 
-  router
+  router.route("/active-services").get(getActiveService)
+
+router
   .route("/:id/edit")
   .put(protect, admin, updateService)
+  
 
 export default router;

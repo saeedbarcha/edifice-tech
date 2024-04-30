@@ -6,6 +6,7 @@ import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { useGetUserDetailsQuery } from "../../../../slices/usersApiSlice";
 import { useDeleteExperienceMutation } from "../../../../slices/experienceApiSlice";
+import { formatDateMothFormat } from '../../../../common-functions/formatDate.js';
 import AddUpdateExpModal from "./AddUpdateExpModal";
 
 const ExperienceElement = () => {
@@ -59,7 +60,7 @@ const ExperienceElement = () => {
           </Card.Header>
           <Card.Body
             className="scrollerCont"
-            style={{ height: "190px", overflowY: "auto" }}
+            style={{ height: "225px", overflowY: "auto" }}
           >
             {user?.experience.map((exp, index) => (
               <Card className="my-4" key={index}>
@@ -96,7 +97,7 @@ const ExperienceElement = () => {
                       </span>
                     </p>
                     <p>
-                      From: {exp.joiningDate} to: {exp.endingDate}
+                      From: {formatDateMothFormat(exp.joiningDate)} to: {formatDateMothFormat(exp.endingDate)}
                     </p>
                   </Card.Text>
                 </Card.Body>

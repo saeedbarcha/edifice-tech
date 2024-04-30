@@ -6,7 +6,7 @@ import {
   useUpdateProjectMutation,
   useCreateProjectMutation,
 } from "../../../../slices/projectApiSlice";
-import {useUploadImageMutation} from "../../../../slices/uploadImageApiSlice";
+import { useUploadImageMutation } from "../../../../slices/uploadImageApiSlice";
 
 
 const AddUpdateProjectModal = ({ show, handleClose, editProject }) => {
@@ -23,7 +23,7 @@ const AddUpdateProjectModal = ({ show, handleClose, editProject }) => {
     useUpdateProjectMutation();
 
   const [uploadProjectImage, { isLoading: loadingUploadImg }] =
-  useUploadImageMutation();
+    useUploadImageMutation();
 
   useEffect(() => {
     if (editProject) {
@@ -101,7 +101,7 @@ const AddUpdateProjectModal = ({ show, handleClose, editProject }) => {
             />
           </Form.Group>
 
-          <Form.Group controlId="image" className="my-2">
+          {/* <Form.Group controlId="image" className="my-2">
             <Form.Label>Image</Form.Label>
 
             <Form.Control
@@ -118,7 +118,21 @@ const AddUpdateProjectModal = ({ show, handleClose, editProject }) => {
               onChange={(e) => setImage}
               disabled
             ></Form.Control>
+          </Form.Group> */}
+          <Form.Group controlId="image" className="mt-3">
+            <Form.Label>Image</Form.Label>
+            <Form.Control
+              type="file"
+              label="Choose file"
+              onChange={uploadFileHandler}
+            ></Form.Control>
           </Form.Group>
+
+          {image &&
+            <Form.Group className="mt-3">
+              <img src={image} alt="Selected" className="w-100" />
+            </Form.Group>}
+
           <Form.Group controlId="description">
             <Form.Label>Description</Form.Label>
             <Form.Control

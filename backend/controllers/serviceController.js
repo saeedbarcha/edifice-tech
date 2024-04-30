@@ -100,6 +100,15 @@ const updateService = asyncHandler(async (req, res) => {
   }
 });
 
+
+// @desc    Fetch all active Service
+// @route   GET /api/Service
+// @access  Public
+const getActiveService = asyncHandler(async (req, res) => {
+  const service = await Service.find({isActive:true})
+  res.status(201).json(service);
+});
+
 // @desc    Delete a Service
 // @route   DELETE /api/Services/:id
 // @access  Private/Admin
@@ -118,6 +127,7 @@ const deleteService = asyncHandler(async (req, res) => {
 export {
   getServices,
   getAllActiveServices,
+  getActiveService,
   getServiceById,
   createService,
   updateService,
