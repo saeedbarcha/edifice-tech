@@ -18,7 +18,7 @@ import admissionBatchRoutes from "./routes/admissionBatchRoutes.js"
 import enrollmentRoutes from "./routes/enrollmentRoutes.js"
 import serviceRoutes from "./routes/serviceRoutes.js"
 import faqsRoutes from "./routes/faqsRoutes.js";
-
+import reviewRoutes from "./models/reviewModel.js";
 
 import uploadRoutes from "./routes/uploadRoutes.js";
 
@@ -50,6 +50,8 @@ app.use("/api/enrollment", enrollmentRoutes)
 app.use("/api/blogs", blogRoutes);
 app.use("/api/service", serviceRoutes)
 app.use("/api/faqs", faqsRoutes);
+app.use("/api/reviews", reviewRoutes);
+
 
 
 
