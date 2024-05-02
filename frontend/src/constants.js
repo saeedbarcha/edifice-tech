@@ -16,6 +16,7 @@ export const ADMISSION_BATCH_URL='/api/admission-batch';
 export const ENROLLMENT_URL='/api/enrollment';
 export const SERVICE_URL='/api/service';
 export const FAQS_URL='/api/faqs';
+export const REVIEW_URL='/api/reviews'
 
 
 

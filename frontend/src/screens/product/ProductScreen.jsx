@@ -18,8 +18,10 @@ import { toast } from "react-toastify";
 import Meta from "../../components/Meta";
 import {
   useGetProductDetailsQuery,
-  useCreateReviewMutation,
 } from "../../slices/productApiSlice";
+import {
+  useCreateReviewMutation,
+} from "../../slices/reviewApiSlice";
 
 const ProductScreen = () => {
   const { id: productId } = useParams();
@@ -70,7 +72,7 @@ const ProductScreen = () => {
         {isLoading ? (
           <Loader />
         ) : error ? (
-          <Message variant="danger"> { error?.data?.message || error?.data || error?.error }</Message>
+          <Message variant="danger"> {error?.data?.message || error?.data || error?.error}</Message>
 
         ) : (
           <>
@@ -113,9 +115,22 @@ const ProductScreen = () => {
                     <p>{review.comment}</p>
                   </ListGroup.Item>
                 ))} */}
+                  <ListGroup.Item >
+                    <strong>name</strong>
+                    <Rating value={4} />
+                    <p style={{ fontSize: "12px" }}>2-20-2122</p>
+                    <p>hahaha</p>
+                  </ListGroup.Item>
 
-                  <ListGroup.Item>
-                    <h3>Write a Customer Review</h3>
+                  <ListGroup.Item >
+                    <strong>name</strong>
+                    <Rating value={4} />
+                    <p style={{ fontSize: "12px" }}>2-20-2122</p>
+                    <p>hahaha</p>
+                  </ListGroup.Item>
+
+                  <ListGroup.Item className="mt-4">
+                    <h3>Write a Review</h3>
 
                     {loadingProductReview && <Loader />}
 

@@ -55,6 +55,16 @@ const courseSchema = new mongoose.Schema(
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
       }],
+      rating:{
+        type:Number,
+        required:true,
+        default:0,
+    },
+    numReviews:{
+        type:Number,
+        required:true,
+        default:0,
+    },
     isActive: {
         type: Boolean,
         required: true,

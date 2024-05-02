@@ -18,7 +18,7 @@ import admissionBatchRoutes from "./routes/admissionBatchRoutes.js"
 import enrollmentRoutes from "./routes/enrollmentRoutes.js"
 import serviceRoutes from "./routes/serviceRoutes.js"
 import faqsRoutes from "./routes/faqsRoutes.js";
-import reviewRoutes from "./models/reviewModel.js";
+import reviewRoutes from "./routes/reviewRoutes.js";
 
 import uploadRoutes from "./routes/uploadRoutes.js";
 

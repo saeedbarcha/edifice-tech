@@ -5,11 +5,9 @@ import { FaTimes, FaTrash, FaEdit, FaCheck } from "react-icons/fa";
 import Message from "../../../components/Message";
 import Loader from "../../../components/Loader";
 import { toast } from "react-toastify";
-import {useGetServicesQuery, useCreateServiceMutation, useDeleteServiceMutation, useUpdateServiceMutation} from "../../../slices/serviceApiSlice";
+import {useGetServicesQuery,  useDeleteServiceMutation, } from "../../../slices/serviceApiSlice";
 const ServiceListScreen = () => {
   const { data: allService, isLoading, error, refetch } = useGetServicesQuery();
-
-  const [createService, { isLoading: loadingCreate }] = useCreateServiceMutation();
 
   const [deleteService, { isLoading: loadingDelete }] = useDeleteServiceMutation();
 
@@ -47,7 +45,6 @@ const ServiceListScreen = () => {
           </Col>
         </Row>
 
-        {loadingCreate && <Loader />}
         {loadingDelete && <Loader />}
 
         {isLoading ? (

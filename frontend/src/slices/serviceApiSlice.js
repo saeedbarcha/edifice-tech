@@ -1,7 +1,7 @@
 import { SERVICE_URL } from "../constants";
 import { apiSlice } from "./apiSlice";
 
-export const ServiceApiSlice = apiSlice.injectEndpoints({
+export const serviceApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
    
     getServices: builder.query({
@@ -64,4 +64,4 @@ export const {
  useCreateServiceMutation,
  useGetServiceDetailsQuery,
  useDeleteServiceMutation
-} = ServiceApiSlice;
+} = serviceApiSlice;

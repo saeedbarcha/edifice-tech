@@ -17,17 +17,17 @@ import Message from "../../components/Message";
 import { toast } from "react-toastify";
 import Meta from "../../components/Meta";
 import { useGetCourseDetailsQuery } from "../../slices/courseApiSlice";
-
+import {useCreateReviewMutation, useGetReviewsQuery } from "../../slices/reviewApiSlice"
 
 const CourseDetails = () => {
   const { id: courseId } = useParams();
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState("");
 
+  const { userInfo } = useSelector((state) => state.auth);
   const {
     data: course,
     isLoading,
@@ -35,7 +35,30 @@ const CourseDetails = () => {
     error,
   } = useGetCourseDetailsQuery(courseId);
 
+  const {
+    data: reviews,
+    isLoading:loadingReviews
+  } = useGetReviewsQuery(courseId);
 
+  const [createReview, { isLoading: loadingProductReview }] =
+  useCreateReviewMutation();
+
+    const submitHandler = async(e) => {
+      e.preventDefault();
+      try {
+        await createReview({
+          courseId,
+          rating,
+          comment
+        }).unwrap();
+        refetch();
+        toast.success("Review submitted");
+        setRating(0);
+        setComment("");
+      } catch (err) {
+        toast.error(err?.data?.message || err.error);
+      }
+      }
   return (
     <>
       <Container>
@@ -66,12 +89,12 @@ const CourseDetails = () => {
                     <h3>{course.name}</h3>
                   </ListGroup.Item>
 
-                  {/* <ListGroup.Item>
+                  <ListGroup.Item>
                   <Rating
                     value={course.rating}
                     text={`${course.numReviews} reviews`}
                   />
-                </ListGroup.Item> */}
+                </ListGroup.Item>
 
                   <ListGroup.Item>
                     <h1>{course.title}</h1>
@@ -127,27 +150,9 @@ const CourseDetails = () => {
                       </Row>
                     </ListGroup.Item>
 
-                    {course.countInStock > 0 && (
-                      <ListGroup.Item>
-                        <Row>
-                          <Col>Qty</Col>
-                          <Form.Control
-                            as="select"
-                            // value={qty}
-                            // onChange={(e) => setQty(Number(e.target.value))}
-                          >
-                            {[...Array(course.countInStock).keys()].map((x) => (
-                              <option key={x + 1} value={x + 1}>
-                                {" "}
-                                {x + 1}{" "}
-                              </option>
-                            ))}
-                          </Form.Control>
-                        </Row>
-                      </ListGroup.Item>
-                    )}
+                 
 
-                    <ListGroup.Item>
+                    {/* <ListGroup.Item>
                       <Button
                         className="btn-block btnAllScreen"
                         type="button"
@@ -156,7 +161,7 @@ const CourseDetails = () => {
                       >
                         Enroll now
                       </Button>
-                    </ListGroup.Item>
+                    </ListGroup.Item> */}
                   </ListGroup>
                 </Card>
               </Col>
@@ -164,67 +169,70 @@ const CourseDetails = () => {
             <Row className="my-4">
               <h5>{course.description}</h5>
             </Row>
+
             <Row className="review my-5">
               <Col md={6}>
                 <h2>Reviews</h2>
-                {/* {course.reviews.length === 0 && <Message>No Reviews</Message>} */}
+                {/* {reviews.length === 0 && <Message>No Reviews</Message>} */}
 
                 <ListGroup variant="flush">
-                  {/* {course.reviews.map((review) => (
+                  {reviews?.map((review) => (
                   <ListGroup.Item key={review._id}>
                     <strong>{review.name}</strong>
                     <Rating value={review.rating} />
                     <p style={{fontSize:"12px"}}>{review.createdAt.substring(0, 10)}</p>
                     <p>{review.comment}</p>
                   </ListGroup.Item>
-                ))} */}
+                ))}
+                  
 
-                  <ListGroup.Item>
-                    {/* <h3>Write a Customer Review</h3> */}
+                  <ListGroup.Item className="mt-4">
+                    <h3>Write a Review</h3>
 
-                    {/* {loadingProductReview && <Loader />} */}
+                    {loadingProductReview && <Loader />}
 
-                    {/* {userInfo ? (
-                    <Form onSubmit={submitHandler}>
-                      <Form.Group controlId="rating" className="my-2">
-                        <Form.Label>Rating</Form.Label>
-                        <Form.Control
-                          as="select"
-                          value={rating}
-                          onChange={(e) => setRating(Number(e.target.value))}
+                    {userInfo ? (
+                      <Form onSubmit={submitHandler}>
+                        <Form.Group controlId="rating" className="my-2">
+                          <Form.Label>Rating</Form.Label>
+                          <Form.Control
+                            as="select"
+                            value={rating}
+                            onChange={(e) => setRating(Number(e.target.value))}
+                          >
+                            <option value="">Select</option>
+                            <option value="1">1 - Poor</option>
+                            <option value="2">2 - Fair</option>
+                            <option value="3">3 - Good</option>
+                            <option value="4">4 - Very Good</option>
+                            <option value="5">5 - Excellent</option>
+                          </Form.Control>
+                        </Form.Group>
+
+                        <Form.Group controlId="comment" className="my-2">
+                          <Form.Label>Comment</Form.Label>
+                          <Form.Control
+                            as="textarea"
+                            rows="3"
+                            value={comment}
+                            onChange={(e) => setComment(e.target.value)}
+                          ></Form.Control>
+                        </Form.Group>
+
+                        <Button
+                          disabled={loadingProductReview}
+                          type="submit"
+                          variant="primary"
                         >
-                          <option value="">Select</option>
-                          <option value="1">1 - Poor</option>
-                          <option value="2">2 - Fair</option>
-                          <option value="3">3 - Good</option>
-                          <option value="4">4 - Very Good</option>
-                          <option value="4">5 - Excellent</option>
-                        </Form.Control>
-                      </Form.Group>
-
-                      <Form.Group controlId="comment" className="my-2">
-                        <Form.Label>Comment</Form.Label>
-                        <Form.Control
-                          as="textarea"
-                          rows="3"
-                          value={comment}
-                          onChange={(e) => setComment(e.target.value)}
-                        ></Form.Control>
-                      </Form.Group>
-
-                      <Button
-                        disabled={loadingProductReview}
-                        type="submit"
-                        variant="primary"
-                      >
-                        Submit
-                      </Button>
-                    </Form>
-                  ) : (
-                    <Message>
-                      Please <Link to="/login">sign in</Link> to write a review
-                    </Message>
-                  )} */}
+                          Submit
+                        </Button>
+                      </Form>
+                    ) : (
+                      <Message>
+                        Please <Link to="/login">sign in</Link> to write a
+                        review
+                      </Message>
+                    )}
                   </ListGroup.Item>
                 </ListGroup>
               </Col>

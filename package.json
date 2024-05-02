@@ -1,8 +1,8 @@
 {
-  "name": "lubick",
+  "name": "edifice-tech",
   "version": "1.0.0",
   "type": "module",
-  "description": "lubick an e commerse application",
+  "description": "edifice-tech is a software solution for software companies",
   "main": "server.js",
   "scripts": {
     "start": "node backend/server.js",

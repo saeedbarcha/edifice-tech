@@ -190,7 +190,7 @@ const Footer = () => {
               <Col>
                 <div className="copyright text-center">
                   <p>
-                    &copy; Copyright <strong>3Beez</strong>. All Rights Reserved
+                    &copy; Copyright <strong>Edifice Tech</strong>. All Rights Reserved
                   </p>
                 </div>
               </Col>
