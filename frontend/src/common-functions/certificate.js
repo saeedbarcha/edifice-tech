@@ -1,7 +1,10 @@
 import jsPDF from "jspdf";
 import certificateImage from "./certificate.png";
+import{formatDateMothFormat} from "./formatDate.js"
+
 
 const downloadCertificate = (admissionB, enrollment) => {
+
 
     const doc = new jsPDF({
       orientation: "landscape",
@@ -18,7 +21,9 @@ const downloadCertificate = (admissionB, enrollment) => {
     const firstTextX = (19.5 - firstTextWidth) / 2;
     const firstTextY = 5.1;
     doc.text(firstText, firstTextX, firstTextY);
-    const secondText = `For ${enrollment?.gender === "Male" ? "his" : "her"} great achievements and being the Outstanding Sales Manager ${admissionB.batch.startDate}  great achievements and being the Outstanding Sales Manager to the company Larana, Inc.for the month of May 2022`;
+    const secondText = `${enrollment?.gender === "Male" ? "Son" : "Daughter"} of  ${enrollment.fatherName} for successful complition for the course of ${enrollment?.courseId?.title} from  ${formatDateMothFormat(admissionB?.batch?.startDate)} to ${formatDateMothFormat(admissionB?.batch?.endDate)}`;
+    
+    
     doc.setFont("Noto Serif");
     doc.setFontSize(22);
     doc.setFillColor(255, 255, 255);

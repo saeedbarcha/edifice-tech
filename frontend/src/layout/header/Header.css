@@ -7,6 +7,7 @@
   opacity: 0;
   right: 15px;
   bottom: 15px;
+  color: white;
   z-index: 996;
   background:  var(--blueThemeColor);
   width: 40px;
@@ -18,7 +19,7 @@
   font-size: 30px;
 }
 .back-to-top:hover {
-  background: #71dfbe;
+  background: #4ea0ff;
   color: #fff;
 }
 .back-to-top.active {

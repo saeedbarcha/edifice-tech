@@ -191,6 +191,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
     user.gender = req.body.gender || user.gender;
     user.address = req.body.address || user.address;
     user.skill = req.body.skill || user.skill;
+    user.image = req.body.image || user.image;
     user.designation = req.body.designation || user.designation;
     user.description = req.body.description || user.description;
     user.fiverrUrl = req.body.fiverrUrl || user.fiverrUrl;

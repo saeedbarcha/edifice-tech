@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { LinkContainer } from "react-router-bootstrap";
-import { Container, Row, Col, Card, Button, ListGroup } from "react-bootstrap";
+import { Container, Row, Col, Card, Button, ListGroup, Image } from "react-bootstrap";
 import { IoMdAddCircle } from "react-icons/io";
 import {
   FaGithub,
@@ -12,7 +12,7 @@ import {
   FaEdit,
   FaTrash,
 } from "react-icons/fa";
-
+import { Upload, message } from 'antd';
 import { BiLogoUpwork } from "react-icons/bi";
 import { TbBrandFiverr } from "react-icons/tb";
 import { useDispatch, useSelector } from "react-redux";
@@ -23,15 +23,18 @@ import EducationElement from "./profileComponents/education/EducationElement";
 import ExperienceElement from "./profileComponents/experiencs/ExperienceElement";
 import ProjectElement from "./profileComponents/userProjects/ProjectElement";
 import UpdateGenInfoModal from "./profileComponents/updateGenInfo/UpdateGenInfoModal";
-
 import {
   useGetUserDetailsQuery,
 } from "../../slices/usersApiSlice";
+import ImageCrop from "../../components/image-crope/ImageCrop";
+import { useUpdateUserProfileMutation } from "../../slices/usersApiSlice";
 
 const ProfileScreen = () => {
 
   const [showUpdateProfileModal, setShowUpdateProfileModal] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
+  const [updateProfile, { isLoading: loadingUpdate }] = useUpdateUserProfileMutation();
+
 
   const { userInfo } = useSelector((state) => state.auth);
   const {
@@ -54,7 +57,6 @@ const ProfileScreen = () => {
 
 
   useEffect(() => {
-
   }, [userInfo]);
 
   return (
@@ -69,8 +71,9 @@ const ProfileScreen = () => {
         <>
           <section style={{ backgroundColor: "#eee" }}>
             <Container className="py-5">
-            <Row className="my-1">
-                <Col style={{display:"flex", justifyContent:"end"}}>
+
+              <Row className="my-1">
+                <Col style={{ display: "flex", justifyContent: "end" }}>
                   <Button
                     variant="light"
                     className="btn-sm"
@@ -89,13 +92,9 @@ const ProfileScreen = () => {
                 <Col lg="4">
                   <Card className="mb-4">
                     <Card.Body className="text-center">
-                      <Card.Img
-                        src={user?.user?.image ? user?.user?.image : `https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava${user.gender === "Male" ? 3 : 4}.webp`}  
-                        alt="avatar"
-                        className="rounded-circle"
-                        style={{ width: "150px" }}
-                        fluid
-                      />
+
+                      <ImageCrop image={user?.user?.image}   updatefunction={updateProfile}  loadingUpdate={loadingUpdate} size={{width:250, height:250}}/>
+                     
                       <h3>{user?.user?.name}</h3>
                       <p>{user?.user?.designation}</p>
                       <p className="text-muted mb-1">{user?.user?.skill}</p>

@@ -103,3 +103,19 @@ td {
   background-color: var(--blueThemeColor);
   border-color:var(--blueThemeColor);
 }
+.img-crop-control{
+  padding: 0px;
+}
+
+
+#shadow-host-companion{
+  padding: 0px;
+}
+
+.ant-modal-wrap {
+  z-index: 1050; /* Ensure cropping modal appears above other modals */
+}
+
+.ant-upload-list-item-container{
+  border-radius: 1130px;
+}

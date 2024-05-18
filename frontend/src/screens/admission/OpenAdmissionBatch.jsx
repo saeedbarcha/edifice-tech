@@ -4,6 +4,8 @@ import Message from "./../../components/Message";
 import Loader from "./../../components/Loader";
 import { LinkContainer } from "react-router-bootstrap";
 import { useGetRecentAdmissionBatchQuery } from "./../../slices/admissionBatchApiSlice";
+import {formatDateWithTime } from '../../common-functions/formatDate.js';
+
 import "./style.css"
 const OpenAdmissionBatch = () => {
   const {
@@ -11,6 +13,8 @@ const OpenAdmissionBatch = () => {
     isLoading,
     error,
   } = useGetRecentAdmissionBatchQuery();
+
+  console.log("llllllllll.........", admissionBatch?.lastDateToApply)
   return (
     <React.Fragment>
       {isLoading ? (
@@ -30,13 +34,15 @@ const OpenAdmissionBatch = () => {
                 </div>
                 <div className="heading-text">
                 <div className="section-batch">
-                  <h2>Admission : </h2>
+                 
                 </div>
                   {/* <p className="enroll-info">Enroll yourself today and start your journey towards success!</p> */}
-                  <h1 className="admission-title">{admissionBatch?.title}</h1>
+                  <h1 className="admission-title my-3">{admissionBatch?.title}</h1>
                 </div>
+                <h5 className="">{formatDateWithTime(admissionBatch?.lastDateToApply)}</h5>
+
                 <LinkContainer to={`/activeadmissionbatch/${admissionBatch?._id}`}>
-                  <Button className="btn-sm btnAllScreen">
+                  <Button className="btn-sm my-3 btnAllScreen">
                     Enroll Now
                   </Button>
                 </LinkContainer>

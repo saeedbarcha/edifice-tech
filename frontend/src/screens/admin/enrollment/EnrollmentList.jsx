@@ -10,6 +10,7 @@ import {
     useGetAllEnrolmentByAdminQuery,
 } from "../../../slices/enrollmentApiSlice";
 
+
 const EnrollmentList = () => {
     const [showGalleryModal, setShowGalleryModal] = useState(false);
 

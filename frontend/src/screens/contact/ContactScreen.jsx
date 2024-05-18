@@ -93,7 +93,7 @@ const ContactScreen = () => {
                 </div>
               </div>
               <div className="text-center">
-                <Button type="submit">Send Message</Button>
+                <Button type="submit" className="btnAllScreen">Send Message</Button>
               </div>
             </Form>
           </Col>
