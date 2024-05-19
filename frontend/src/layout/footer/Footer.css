@@ -91,12 +91,17 @@
   transition: all 0.4s ease 0s;
   width: 70px;
 }
-.footrBottomCont {
-  padding: 15px 0;
+.footerBottomCont {
+  padding-top: 15px;
+  padding-bottom: 15px;
+
 }
 .copyright-text a:hover {
   text-decoration: underline;
   color: var(--blueThemeColor);
+}
+.copyright > p{
+font-size: 12px;
 }
 .copyright-text a {
   color: #444;

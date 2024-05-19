@@ -36,7 +36,7 @@ const TeamScreen = () => {
                          <Image
                           src={user?.image ? user?.image : `https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava${user.gender === "Male" ? 3 : 4}.webp`}
                           className="img-fluid"
-                          style={{maxWidth:"216px"}}
+                          style={{width:"216px" }}
                           fluid
                           alt="♀️"
                         />

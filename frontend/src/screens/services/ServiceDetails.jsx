@@ -95,17 +95,15 @@ function ServiceDetails() {
             md={6}
             className="bg-light pt-3 px-3 pt-md-5 px-md-5 text-center"
           >
-            <div className="my-3 p-3">
-              <h1 className="display-6 font-weight-normal">
-                {service?.title}
-              </h1>
-              <p className="lead">And an even wittier subheading.</p>
-            </div>
+          
             <div
-              className=" box-shadow mx-auto"
+              className=" box-shadow mx-auto "
               style={{
                 width: "80%",
-                height: "300px",
+                height: "100%",
+                display:"flex",
+                alignItems:"center",
+                justifyContent:"center"
               }}
             >
               <img
@@ -113,8 +111,10 @@ function ServiceDetails() {
                 alt=""
                 style={{
                   width: "100%",
-                  height: "54vh",
+                  height: "auto",
                   borderRadius: "21px",
+                  margin:"auto",
+                 
                 }}
               />
             </div>

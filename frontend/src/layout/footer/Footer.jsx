@@ -185,11 +185,11 @@ const Footer = () => {
               </Col>
             </Row>
           </Container>
-          <Container className="footrBottomCont">
+          <Container className="footerBottomCont">
             <Row className="">
               <Col>
                 <div className="copyright text-center">
-                  <p>
+                  <p >
                     &copy; Copyright <strong>Edifice Tech</strong>. All Rights Reserved
                   </p>
                 </div>
