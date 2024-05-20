@@ -17,6 +17,8 @@ const ProductEditScreen = () => {
   const [url, setUrl] = useState("");
   const [image, setImage] = useState("");
   const [description, setDescription] = useState("");
+  const [isActive, setIsActive] = useState(false);
+
 
   const {
     data: product,
@@ -38,6 +40,7 @@ const ProductEditScreen = () => {
       setUrl(product.url);
       setImage(product.image);
       setDescription(product.description);
+      setIsActive(product.isActive)
     }
   }, [product]);
 
@@ -49,6 +52,7 @@ const ProductEditScreen = () => {
       url,
       image,
       description,
+      isActive
     };
 
     const result = await updateProduct(updatedProduct);
@@ -135,7 +139,14 @@ const ProductEditScreen = () => {
                   onChange={(e) => setDescription(e.target.value)}
                 ></Form.Control>
               </Form.Group>
-
+              <Form.Group controlId="isActive" className="my-3">
+                <Form.Check
+                  type="checkbox"
+                  label="Is Active"
+                  checked={isActive}
+                  onChange={(e) => setIsActive(e.target.checked)}
+                />
+              </Form.Group>
               <div style={{ textAlign: "right" }}>
                 <Button type="submit" variant="primary" className="my-2 btnAllScreen">
                   Update

@@ -35,6 +35,8 @@ const getProductById = asyncHandler(async (req, res) => {
         url: "www.google.com",
         description: "sample description",
         image: "/images/sample.jpg",
+        isActive: false
+        
     });
   
     const createProduct = await product.save();
@@ -45,15 +47,17 @@ const getProductById = asyncHandler(async (req, res) => {
 // @route   PUT /api/products/:id
 // @access  Private/Admin
 const updateProduct = asyncHandler(async (req, res) => {
-  const { name, url, description, image } = req.body;
+  const { name, url, description, image , isActive} = req.body;
+  console.log("rrrrrrrrrrrr", req.body)
   
   const product = await Product.findById(req.params.id);
   if (product) {
     user: req.user._id;
-    product.name = name;
-    product.url = url;
-    product.description = description;
-    product.image = image;    
+    product.name = name || product.name;
+    product.url = url || product.url;
+    product.description = description || product.description;
+    product.image = image || product.image;
+    product.isActive = isActive ;    
     const updateProduct = await product.save();
     res.status(200).json(updateProduct);
   } else {

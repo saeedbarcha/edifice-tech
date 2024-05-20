@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Upload, message } from 'antd';
+import {Button} from "react-bootstrap";
 import ImgCrop from 'antd-img-crop';
 import { useUploadImageMutation } from "../../slices/uploadImageApiSlice";
 import { useUpdateUserProfileMutation } from "../../slices/usersApiSlice";
@@ -60,7 +61,7 @@ const ImageCrop = ({ image , updatefunction , loadingUpdate, size }) => {
   };
 
   return (
-    <div className="d-flex justify-content-center">
+    <div className="d-flex flex-column align-items-center justify-content-center">
       <ImgCrop  
         modalWidth={size.width} 
         modalHeight={size.height} 
@@ -76,9 +77,9 @@ const ImageCrop = ({ image , updatefunction , loadingUpdate, size }) => {
         </Upload>
       </ImgCrop>
       {isImageReadyForUpload && (
-        <button onClick={handleImageUpload} disabled={loadingUpload || loadingUpdate}>
+        <Button className="btn-sm btnAllScreen py-1 px-3 mt-2 mb-3" onClick={handleImageUpload} disabled={loadingUpload || loadingUpdate}>
           {loadingUpload || loadingUpdate ? 'Uploading...' : 'Upload'}
-        </button>
+        </Button>
       )}
     </div>
   );

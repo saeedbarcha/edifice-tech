@@ -1,7 +1,7 @@
 import { LinkContainer } from "react-router-bootstrap";
 import { useParams } from "react-router-dom";
 import {Container, Table, Button, Row, Col, Image } from "react-bootstrap";
-import { FaEdit, FaTrash } from "react-icons/fa";
+import { FaTimes, FaTrash, FaEdit, FaCheck } from "react-icons/fa";
 import Message from "../../../components/Message";
 import Loader from "../../../components/Loader";
 import { toast } from "react-toastify";
@@ -82,6 +82,7 @@ const ProductListScreen = () => {
                 <th>Image</th>
                 <th>Name</th>
                 <th>Url</th>
+                <th>Is Active</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -91,7 +92,13 @@ const ProductListScreen = () => {
                   <td><Image src={product.image} fluid style={{width:"60px", height:"60px"}} /></td>
                   <td>{product.name}</td>
                   <td>{product.url}</td>
-                  
+                  <td>
+                      {product?.isActive ? (
+                        <FaCheck style={{ color: "green" }} />
+                      ) : (
+                        <FaTimes style={{ color: "red" }} />
+                      )}
+                    </td>
                   <td>
                     <LinkContainer to={`/admin/product/${product._id}/edit`}>
                       <Button variant="light" className="btn-sm mx-2">

@@ -70,7 +70,7 @@ const ProfileScreen = () => {
       ) : (
         <>
           <section style={{ backgroundColor: "#eee" }}>
-            <Container className="py-5">
+            <Container className="py-1">
 
               <Row className="my-1">
                 <Col style={{ display: "flex", justifyContent: "end" }}>

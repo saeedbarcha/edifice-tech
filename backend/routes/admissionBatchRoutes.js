@@ -7,7 +7,7 @@ import {
   createAdmissionBatch,
   deleteAdmissionBatch,
   getRecentAdmissionBatch
-} from "../controllers/AdmissionBatchController.js";
+} from "../controllers/admissionBatchController.js";
 import { protect, admin } from "../middleware/authMiddleware.js";
 import checkObjectId from "../middleware/checkObjectId.js";
 router

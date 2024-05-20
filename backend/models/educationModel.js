@@ -19,6 +19,7 @@ const educationSchema = new mongoose.Schema(
     date: {
       type: Date,
     },
+    
   },
   {
     timestamps: true,

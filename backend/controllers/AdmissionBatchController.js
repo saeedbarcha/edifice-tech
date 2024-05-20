@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import asyncHandler from "../middleware/asyncHandler.js";
 import AdmissionBatch from "../models/admissionBatchModel.js";
 

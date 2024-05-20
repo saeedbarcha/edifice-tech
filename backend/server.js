@@ -19,7 +19,7 @@ import enrollmentRoutes from "./routes/enrollmentRoutes.js"
 import serviceRoutes from "./routes/serviceRoutes.js"
 import faqsRoutes from "./routes/faqsRoutes.js";
 import reviewRoutes from "./routes/reviewRoutes.js";
-
+import adminDashboardRoutes from "./routes/adminDashboardRoutes.js"
 import uploadRoutes from "./routes/uploadRoutes.js";
 
 
@@ -51,6 +51,7 @@ app.use("/api/blogs", blogRoutes);
 app.use("/api/service", serviceRoutes)
 app.use("/api/faqs", faqsRoutes);
 app.use("/api/reviews", reviewRoutes);
+app.use("/api/admin-dashboard", adminDashboardRoutes)
 
 
 

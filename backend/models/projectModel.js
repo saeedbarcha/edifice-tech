@@ -21,6 +21,10 @@ const projectSchema = new mongoose.Schema({
     image:{
         type:String,
     },
+    isActive: {
+        type: Boolean,
+        default: true,
+      },
 },{
     timestamps:true
 });
