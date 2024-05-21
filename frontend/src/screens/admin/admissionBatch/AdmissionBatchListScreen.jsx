@@ -32,6 +32,9 @@ const AdmissionBatchListScreen = () => {
   return (
     <>
       <Container className="py-3">
+        <Link className="btn btn-light my-3" to="/admin/dashboard">
+          Go Back
+        </Link>
         <Row className="align-items-center">
           <Col>
             <h1>Admission Batches</h1>

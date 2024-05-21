@@ -89,7 +89,7 @@ const MyEnrollments = () => {
                         <td>{enrollment?.firstName}</td>
 
                         <td>
-                          {enrollment?.courseFeePaid ? (
+                        {enrollment?.courseId?.price} {enrollment?.courseFeePaid ? (
                             <FaCheck style={{ color: "green" }} />
                           ) : (
                             <FaTimes style={{ color: "red" }} />

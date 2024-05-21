@@ -2,10 +2,23 @@ import { useState } from "react";
 import { Table, Button } from "react-bootstrap";
 import { FaTimes } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-
 import { LinkContainer } from "react-router-bootstrap";
 import Message from "../../../components/Message";
 import Loader from "../../../components/Loader";
+import BarChartComp from "./Graphics/BarChartComp";
+import PieChartComp from "./Graphics/PieChartComp";
+import {
+  useGetBogQuery,
+  useGetCourseQuery,
+  useGetGalleriesQuery,
+  useGetServiceQuery,
+  useGetProductQuery,
+  useGetFaqQuery,
+  useGetAdmissionBatcheQuery,
+  useGetUserQuery,
+  useGetEnrollmentQuery,
+  useGetUserRoleBaseQuery
+} from "../../../slices/adminDashboardApiSlice"
 
 import { Container, Row, Col } from "react-bootstrap";
 import OverView from "./overView/OverView";
@@ -14,28 +27,18 @@ import UsersList from "./usersList/UsersList";
 import { FaEdit, FaTrash } from "react-icons/fa";
 
 const AdminDashboard = () => {
-  const [filter, setFilter] = useState("Till Now");
-  // const { data: orders, isLoading, error } = useGetOrdersQuery();
 
-  // let filteredOrders = orders;
-  // const oneDay = 24 * 60 * 60 * 1000;
-  // const currentDate = new Date();
+  const { data: blogs, isLoading: loadingBlog, error: errorBlog } = useGetBogQuery();
+  const { data: products, isLoading: loadingProduct, error: errorProduct } = useGetProductQuery();
+  const { data: courses, isLoading: loadingCourse, error: errorCourse } = useGetCourseQuery();
+  const { data: faqs, isLoading: loadingFaq, error: errorFaq } = useGetFaqQuery();
+  const { data: galleries, isLoading: loadingGallery, error: errorGallery } = useGetGalleriesQuery();
+  const { data: services, isLoading: loadingService, error: errorService } = useGetServiceQuery();
+  const { data: admissionBatches, isLoading: loadingAdmissionBatche, error: errorAdmissionBatche } = useGetAdmissionBatcheQuery();
+  const { data: users, isLoading: loadingUser, error: errorUser } = useGetUserQuery();
+  const { data: enrollments, isLoading: loadingEnrollment, error: errorEnrollment } = useGetEnrollmentQuery();
+  const { data: rollBaseUsers, isLoading: loadingRollBaseUsers, error: errorRollBaseUsers } = useGetUserRoleBaseQuery();
 
-  // if (filter === "Last Week") {
-  //   const oneWeekAgo = new Date(currentDate - 7 * oneDay);
-  //   filteredOrders = orders?.filter(
-  //     (order) => new Date(order.createdAt) > oneWeekAgo
-  //   );
-  // } else if (filter === "Last Month") {
-  //   const oneMonthAgo = new Date(
-  //     currentDate.setMonth(currentDate.getMonth() - 1)
-  //   );
-  //   filteredOrders = orders?.filter(
-  //     (order) => new Date(order.createdAt) > oneMonthAgo
-  //   );
-  // }
-
-  // console.log("orders Admin", orders);
   return (
     <>
       <section id="contact" className="contact">
@@ -44,30 +47,103 @@ const AdminDashboard = () => {
             <h2>Dashboard</h2>
             <p>Admin Dashboard</p>
           </div>
-          {/* <Container fluid className="adminDashboard"> */}
-          {/* {isLoading ? (
-          <Loader />
-        ) : error ? (
-        <Message variant="danger"> { error?.data?.message || error?.data || error?.error }</Message>
+          {(
+            loadingBlog || loadingProduct || loadingCourse || loadingFaq || loadingGallery || loadingService || loadingAdmissionBatche || loadingUser || loadingEnrollment || loadingRollBaseUsers
+          ) ? (
+            <Loader />
+          ) : (
+            errorBlog ||
+            errorProduct ||
+            errorCourse ||
+            errorFaq ||
+            errorGallery ||
+            errorService ||
+            errorAdmissionBatche ||
+            errorUser ||
+            errorEnrollment ||
+            errorRollBaseUsers
+          ) ? (
+            <Message variant="danger"> {
+              (errorBlog ||
+              errorProduct ||
+              errorCourse ||
+              errorFaq ||
+              errorGallery ||
+              errorService ||
+              errorAdmissionBatche ||
+              errorUser ||
+              errorEnrollment ||
+              errorRollBaseUsers)?.data?.message || 
+              (errorBlog ||
+                errorProduct ||
+                errorCourse ||
+                errorFaq ||
+                errorGallery ||
+                errorService ||
+                errorAdmissionBatche ||
+                errorUser ||
+                errorEnrollment ||
+                errorRollBaseUsers)?.data || 
+                
+                (errorBlog ||
+                  errorProduct ||
+                  errorCourse ||
+                  errorFaq ||
+                  errorGallery ||
+                  errorService ||
+                  errorAdmissionBatche ||
+                  errorUser ||
+                  errorEnrollment ||
+                  errorRollBaseUsers)?.error}</Message>
 
-        ) : ( */}
-          <>
-            <Row>
-              <Col md={12}>
-                <OverView />
+          ) : (
+            <>
+              <Row>
+                <h2>Over View</h2>
+                <Col md={12}>
 
-                <Row className="mb-2 mt-3">
-                  <Col lg={6}>
-                    <UsersList title={"All Users"}/>
-                  </Col>
-                  <Col lg={6}>
-                  <UsersList title={"Team Members"}/>
-                  </Col>
-                </Row>
-              </Col>
-            </Row>
-          </>
-          {/* )} */}
+                  <OverView
+                    blogs={blogs}
+                    products={products}
+                    courses={courses}
+                    faqs={faqs}
+                    galleries={galleries}
+                    services={services}
+                    admissionBatches={admissionBatches}
+                    users={users}
+                    enrollments={enrollments}
+                  />
+
+
+                </Col>
+
+              </Row>
+              <Row className="my-4">
+                <h2>Users</h2>
+                <Col lg={4}>
+                  <UsersList title={"Admins"} data={rollBaseUsers?.admins} />
+                </Col>
+                <Col lg={4}>
+                  <UsersList title={"Team Members"} data={rollBaseUsers?.members} />
+                </Col>
+                <Col lg={4}>
+                  <UsersList title={"Normal User"} data={rollBaseUsers?.users} />
+                </Col>
+              </Row>
+              <Row
+                class="my-5"
+                style={{ display: "flex", justifyContent: "center" }}
+              >
+                <h2>Admission Batches</h2>
+                <Col md={6}>
+                  <PieChartComp />
+                </Col>
+                {/* <Col md={6}>
+                    <BarChartComp />
+                  </Col> */}
+              </Row>
+            </>
+          )}
         </Container>
       </section>
     </>

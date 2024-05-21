@@ -1,16 +1,10 @@
 import { useState } from "react";
-
-import { AiFillDollarCircle } from "react-icons/ai";
-import { FaUsers, FaBlogger, FaBookMedical } from "react-icons/fa";
-import {  MdProductionQuantityLimits, MdMedicalServices } from "react-icons/md";
-import { BsFillCartCheckFill } from "react-icons/bs";
-import { BiCategoryAlt } from "react-icons/bi";
-import { RiTeamLine } from "react-icons/ri";
-// import { useGetOrdersQuery } from "../../../slices/orderApiSlice";
+import OverCard from "./OverCard";
 import { Row, Col } from "react-bootstrap";
 import "./OverView.css";
 
-const OverView = () => {
+const OverView = ({ blogs, products, courses, faqs, galleries, services, admissionBatches, users , enrollments}) => {
+  console.log("blogs..", blogs)
   const [filter, setFilter] = useState("Till Now");
   // const { data: orders, isLoading, error } = useGetOrdersQuery();
 
@@ -37,76 +31,16 @@ const OverView = () => {
     <>
       <div class="overView">
         <Row>
-          <Col sm={6} lg={3}>
-            <div class="topCartCont">
-              <div className="iconAdminCont">
-                <RiTeamLine className="adminCartIcons" />{" "}
-              </div>
-              <div className="titleAndValueCont">
-                <p class="topCartTitle">Members</p>
-                <h2 class="topCartValue">100 </h2>
-              </div>
-            </div>
-          </Col>
-          <Col sm={6} lg={3}>
-            <div class="topCartCont">
-              <div className="iconAdminCont">
-                <FaUsers className="adminCartIcons" />
-              </div>
-              <div className="titleAndValueCont">
-                <p class="topCartTitle">Users</p>
-                <h2 class="topCartValue">12 </h2>
-              </div>
-            </div>
-          </Col>
-          <Col sm={6} lg={3}>
-            <div class="topCartCont">
-              <div className="iconAdminCont">
-                {" "}
-                <FaBlogger className="adminCartIcons" />
-              </div>
-              <div className="titleAndValueCont">
-                <p class="topCartTitle">Blogs</p>
-                <h2 class="topCartValue">100</h2>
-              </div>
-            </div>
-          </Col>
-          <Col sm={6} lg={3}>
-            <div class="topCartCont">
-              <div className="iconAdminCont">
-                <MdProductionQuantityLimits className="adminCartIcons" />
-              </div>
-              <div className="titleAndValueCont">
-                <p class="topCartTitle">Products</p>
-                <h2 class="topCartValue">100</h2>
-              </div>
-            </div>
-          </Col>
-          <Col sm={6} lg={3}>
-            <div class="topCartCont">
-              <div className="iconAdminCont">
-                {" "}
-                <FaBookMedical className="adminCartIcons" />
-              </div>
-              <div className="titleAndValueCont">
-                <p class="topCartTitle">Courses</p>
-                <h2 class="topCartValue">44</h2>
-              </div>
-            </div>
-          </Col>
-          <Col sm={6} lg={3}>
-            <div class="topCartCont">
-              <div className="iconAdminCont">
-                {" "}
-                <MdMedicalServices className="adminCartIcons" />
-              </div>
-              <div className="titleAndValueCont">
-                <p class="topCartTitle">Services</p>
-                <h2 class="topCartValue">44</h2>
-              </div>
-            </div>
-          </Col>
-       
+          <OverCard title="Users" data={users} icon="FaUsers" link="/admin/userlist" />
+          <OverCard title="Admission Batches" data={admissionBatches} icon="FaBookOpenReader" link="/admin/admissionbatchlist" />
+          <OverCard title="Courses" data={courses} icon="FaBookMedical" link="/admin/courselist"/>
+          <OverCard title="Services" data={services} icon="FaServicestack" link="/admin/service-List"/>
+          <OverCard title="Blogs" data={blogs} icon="FaBlogger" link="/admin/bloglist"/>
+          <OverCard title="Products" data={products} icon="FaProductHunt" link="/admin/productlist"/>
+          <OverCard title="FAQs" data={faqs} icon="BsFillQuestionSquareFill" link="/admin/faqs-List" />
+          <OverCard title="Gallery" data={galleries} icon="MdImage"  link="/admin/gallerylist"/>
+          <OverCard title="Enrollments" data={enrollments} icon="MdImage"  link="/admin/enrollment-List"/>
+      
         </Row>
       </div>
     </>

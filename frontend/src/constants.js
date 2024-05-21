@@ -17,6 +17,7 @@ export const ENROLLMENT_URL='/api/enrollment';
 export const SERVICE_URL='/api/service';
 export const FAQS_URL='/api/faqs';
 export const REVIEW_URL='/api/reviews'
+export const ADMIN_DASHBOARD_URL='/api/admin-dashboard'
 
 
 

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {Link} from "react-router-dom";
 import { Container, Card, Button, Badge, Table } from "react-bootstrap";
 import { FaTimes, FaCheck } from "react-icons/fa";
 import { FaEdit } from "react-icons/fa";
@@ -26,6 +27,7 @@ const EnrollmentList = () => {
     } = useGetAllEnrolmentByAdminQuery();
 
 
+    console.log("admissionBatches...", admissionBatches)
 
     return (
         <Container>
@@ -36,7 +38,11 @@ const EnrollmentList = () => {
                     {error?.data?.message || error?.data || error?.error}
                 </Message>
             ) : (
+
                 <div>
+                    <Link className="btn btn-light my-3" to="/admin/dashboard">
+                        Go Back
+                    </Link>
                     {admissionBatches?.admissionBatches.map((admissionB) => (
                         <Card className="my-4">
                             <Card.Body>
@@ -76,7 +82,7 @@ const EnrollmentList = () => {
                                 <hr />
                                 <br />
                                 <h1>Track Enrollment record.</h1>
-                                <Table  hover responsive className="table-sm">
+                                <Table hover responsive className="table-sm">
                                     <thead>
                                         <tr>
                                             <th>Course Title</th>
@@ -102,7 +108,7 @@ const EnrollmentList = () => {
                                                 <td>{enrollment?.fatherName}</td>
 
                                                 <td>
-                                                    {enrollment?.courseFeePaid ? (
+                                                {enrollment?.courseId?.price} {enrollment?.courseFeePaid ? (
                                                         <FaCheck style={{ color: "green" }} />
                                                     ) : (
                                                         <FaTimes style={{ color: "red" }} />
@@ -128,8 +134,8 @@ const EnrollmentList = () => {
                                                     updateEnrollUser={enrollment}
                                                 />
                                                     <Button
-                                                    variant="light"
-                                                    className="btn-sm"
+                                                        variant="light"
+                                                        className="btn-sm"
                                                         onClick={() => {
                                                             handleOpenGalleryModal(true);
                                                         }}>

@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import {
   useCreateBlogMutation,
 } from "../../../slices/blogApiSlice";
-import { useGetCoursesQuery , useDeleteCourseMutation} from "../../../slices/courseApiSlice.js";
+import { useGetCoursesQuery, useDeleteCourseMutation } from "../../../slices/courseApiSlice.js";
 const CourseListScreen = () => {
   const { data: allCourses, isLoading, error, refetch } = useGetCoursesQuery();
 
@@ -16,9 +16,9 @@ const CourseListScreen = () => {
 
   const [deleteCourse, { isLoading: loadingDelete }] = useDeleteCourseMutation();
 
-  const deleteHandler = async(id) => {
-    if(window.confirm("Are you sure?")){
-      try{
+  const deleteHandler = async (id) => {
+    if (window.confirm("Are you sure?")) {
+      try {
         const res = await deleteCourse(id);
         if (res && res.error) {
           toast.error(res.error.data.message || "Failed to delete Course");
@@ -26,7 +26,7 @@ const CourseListScreen = () => {
           toast.success("Course deleted");
           refetch();
         }
-      } catch(err){
+      } catch (err) {
         toast.error(err?.data?.message || err.error);
       }
     }
@@ -47,11 +47,14 @@ const CourseListScreen = () => {
       }
     }
   };
-  
+
 
   return (
     <>
       <Container className="py-3">
+        <Link className="btn btn-light my-3" to="/admin/dashboard">
+          Go Back
+        </Link>
         <Row className="align-items-center">
           <Col>
             <h1>Courses</h1>
@@ -59,10 +62,10 @@ const CourseListScreen = () => {
           <Col className="text-end">
             <LinkContainer to={`/admin/createcourse`}>
               <Button className="btn-sm m-3 btnAllScreen">
-               Create Course
+                Create Course
               </Button>
             </LinkContainer>
-        
+
           </Col>
         </Row>
 
@@ -72,7 +75,7 @@ const CourseListScreen = () => {
         {isLoading ? (
           <Loader />
         ) : error ? (
-        <Message variant="danger"> { error?.data?.message || error?.data || error?.error }</Message>
+          <Message variant="danger"> {error?.data?.message || error?.data || error?.error}</Message>
 
         ) : (
           <>

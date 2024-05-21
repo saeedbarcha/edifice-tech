@@ -1,4 +1,5 @@
 import { LinkContainer } from "react-router-bootstrap";
+import { Link } from "react-router-dom";
 import { Container, Table, Button, Row, Col, Image } from "react-bootstrap";
 import { FaTimes, FaTrash, FaEdit, FaCheck } from "react-icons/fa";
 import Message from "../../../components/Message";
@@ -52,19 +53,22 @@ const BlogListScreen = () => {
     }
   };
 
-  
+
   return (
     <>
       <Container className="py-3">
+        <Link className="btn btn-light my-3" to="/admin/dashboard">
+          Go Back
+        </Link>
         <Row className="align-items-center">
           <Col>
             <h1>Blogs</h1>
           </Col>
           <Col className="text-end">
             <Button className="btn-sm m-3 btnAllScreen" onClick={createBlogHandler}>
-            {/* <Link to={"/admin/createblog"}> */}
+              {/* <Link to={"/admin/createblog"}> */}
               <FaEdit /> Create Blog
-            {/* </Link> */}
+              {/* </Link> */}
             </Button>
           </Col>
         </Row>

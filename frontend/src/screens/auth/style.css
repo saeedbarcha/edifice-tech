@@ -4,15 +4,10 @@
   }
   
 
-  /* .scrollerCont::-webkit-scrollbar-track {
-    background: red; 
-  } */
-   
+
 
   .scrollerCont::-webkit-scrollbar-thumb {
     background: var(--mainThemeColor); 
   }
   
-  /* .scrollerCont::-webkit-scrollbar-thumb:hover {
-    background: #555; 
-  } */
+ 

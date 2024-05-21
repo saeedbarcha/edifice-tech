@@ -3,6 +3,7 @@ import asyncHandler from "../middleware/asyncHandler.js";
 import Blog from "../models/blogModel.js";
 import Course from "../models/courseModel.js";
 import Faqs from "../models/faqsModel.js";
+import Enrollment from "../models/enrollmentModel.js";
 import Service from "../models/serviceModel.js";
 import AdmissionBatch from "../models/admissionBatchModel.js";
 import Gallery from "../models/galleryModel.js";
@@ -88,7 +89,7 @@ const getUsers = asyncHandler(async (req, res) => {
   const [admin, members, users, total] = await Promise.all([
     User.countDocuments({ isAdmin: true }),
     User.countDocuments({ isTeamMember: true }),
-    User.countDocuments({ isAdmin: false, isTeamMember: false  }),
+    User.countDocuments({ isAdmin: false, isTeamMember: false }),
     User.countDocuments()
   ]);
 
@@ -96,9 +97,83 @@ const getUsers = asyncHandler(async (req, res) => {
     throw new Error(`User not found`);
   }
 
-  res.status(200).json({ admin, members, users, total});
+  res.status(200).json({ admin, members, users, total });
 
 });
+
+// @desc    Fetch all enrollment
+// @route   GET /api/admin-dashboard/enrollment
+// @access  Private/Admin
+const getEnrollments = asyncHandler(async (req, res) => {
+  const [total] = await Promise.all([
+    Enrollment.countDocuments()
+  ]);
+
+  if (!total) {
+    throw new Error(`Enrollment not found`);
+  }
+
+  res.status(200).json({ total });
+
+});
+
+// // @desc    Fetch the most recent admission batch with enrollments
+// // @route   GET /api/admin-dashboard/admission-batch-details
+// // @access  Private/Admin
+const getAdmissionDetails = asyncHandler(async (req, res) => {
+  try {
+    const admissionBatches = await AdmissionBatch.find().lean();
+
+    if (!admissionBatches.length) {
+      return res.status(404).json({ message: 'No admission batches found' });
+    }
+
+    const allAdmissionDetails = await Promise.all(admissionBatches.map(async (batch) => {
+      const enrollments = await Enrollment.find({ admissionBatchId: batch._id }).populate('courseId').lean();
+
+      const coursesWithEnrollments = batch.selectedCourses.map((course) => {
+        const courseEnrollments = enrollments.filter((enrollment) => enrollment.courseId._id.equals(course.courseId));
+        return {
+          name: courseEnrollments.length > 0 ? courseEnrollments[0].courseId.title : 'Unknown Course',
+          enrollments: courseEnrollments.length
+        };
+      });
+
+      return {
+        admissionBatchName: batch.title,
+        totalEnrollmentsInThisBatch: enrollments.length,
+        courses: coursesWithEnrollments
+      };
+    }));
+
+    res.status(200).json(allAdmissionDetails);
+  } catch (error) {
+    console.error('Error fetching admission details:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+
+// @desc    Fetch all enrollment
+// @route   GET /api/admin-dashboard/user-rolles
+// @access  Private/Admin
+const getUserRole = asyncHandler(async (req, res) => {
+  const [admins, members, users, total] = await Promise.all([
+    User.find({ isAdmin: true }).select('name image isAdmin email isTeamMember'),
+    User.find({ isAdmin: false, isTeamMember: true }).select('name image isAdmin email isTeamMember'),
+    User.find({ isAdmin: false, isTeamMember: false }).select('name image isAdmin email isTeamMember'),
+    User.countDocuments()
+  ]);
+
+  if (!total) {
+    throw new Error(`Admin or Member not found`);
+  }
+
+  res.status(200).json({ admins, members, users, total });
+});
+
+
+
 
 
 export {
@@ -109,6 +184,8 @@ export {
   getAdmissionBatches,
   getGallery,
   getProducts,
-  getUsers
-  
+  getUsers,
+  getEnrollments,
+  getUserRole,
+  getAdmissionDetails
 };

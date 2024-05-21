@@ -9,14 +9,10 @@ import { CgProfile, CgMail } from "react-icons/cg";
 import { BsGrid3X3GapFill } from "react-icons/bs";
 import {
   FaUser,
-  FaImage,
   FaSignOutAlt,
-  FaUsers,
   FaPhoneAlt,
   FaBookOpen,
-  FaBlogger,
 } from "react-icons/fa";
-import { BiLogoProductHunt } from "react-icons/bi";
 import {
   AiFillTwitterCircle,
   AiFillFacebook,
@@ -178,94 +174,7 @@ const Header = () => {
                       <BsGrid3X3GapFill className="mx-2" />
                       Dashborad
                     </Nav.Link>
-                  </LinkContainer>
-                  <LinkContainer to="/admin/courselist">
-                    <Nav.Link
-                      smooth
-                      className="justify-content-start dropdown-item"
-                    >
-                      <FaBookOpen className="mx-2" />
-                      Cources
-                    </Nav.Link>
-                  </LinkContainer>
-                  <LinkContainer to="/admin/productlist">
-                    <Nav.Link
-                      smooth
-                      className="justify-content-start dropdown-item"
-                    >
-                      <BiLogoProductHunt className="mx-2" />
-                      Products
-                    </Nav.Link>
-                  </LinkContainer>
-                  <LinkContainer to="/admin/userlist">
-                    <Nav.Link
-                      className="justify-content-start dropdown-item"
-                      smooth
-                    >
-                      <FaUsers className="mx-2" />
-                      Users
-                    </Nav.Link>
-                  </LinkContainer>
-                  <LinkContainer to="/admin/bloglist">
-                    <Nav.Link
-                      className="justify-content-start dropdown-item"
-                      smooth
-                    >
-                      <FaBlogger className="mx-2" />
-                      Blog
-                    </Nav.Link>
-                  </LinkContainer>
-
-
-                  
-                  <LinkContainer to="/admin/service-List">
-                    <Nav.Link
-                      className="justify-content-start dropdown-item"
-                      smooth
-                    >
-                      <FaImage className="mx-2" />
-                      Services
-                    </Nav.Link>
-                  </LinkContainer>
-                  
-                  
-                  <LinkContainer to="/admin/faqs-List">
-                    <Nav.Link
-                      className="justify-content-start dropdown-item"
-                      smooth
-                    >
-                      <FaImage className="mx-2" />
-                      Faqs
-                    </Nav.Link>
-                  </LinkContainer>
-
-                  <LinkContainer to="/admin/enrollment-List">
-                    <Nav.Link
-                      className="justify-content-start dropdown-item"
-                      smooth
-                    >
-                      <FaImage className="mx-2" />
-                      Enrollments
-                    </Nav.Link>
-                  </LinkContainer>
-                  <LinkContainer to="/admin/admissionbatchlist">
-                    <Nav.Link
-                      className="justify-content-start dropdown-item"
-                      smooth
-                    >
-                      <FaImage className="mx-2" />
-                      Admission batch
-                    </Nav.Link>
-                  </LinkContainer>
-                  <LinkContainer to="/admin/gallerylist">
-                    <Nav.Link
-                      className="justify-content-start dropdown-item"
-                      smooth
-                    >
-                      <FaImage className="mx-2" />
-                      Gallery
-                    </Nav.Link>
-                  </LinkContainer>
+                  </LinkContainer>                
                 </NavDropdown>
               )}
 
@@ -284,7 +193,7 @@ const Header = () => {
                   <LinkContainer to={`/my-enrollments/${userInfo._id}`}>
                     <Nav.Link smooth className="justify-content-start dropdown-item">
                       <FaBookOpen className="mx-2" />
-                      Courses
+                      Enrollment
                     </Nav.Link>
                   </LinkContainer>
 

@@ -34,7 +34,10 @@ const UserListScreen = () => {
     <>
       <Container className="py-3">
 
-
+      <Link className="btn btn-light my-3" to="/admin/dashboard">
+          Go Back
+        </Link>
+        
         <h1>Users</h1>
 
         {loadingDelete && <Loader />}

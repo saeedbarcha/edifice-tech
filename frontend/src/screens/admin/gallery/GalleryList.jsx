@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { LinkContainer } from "react-router-bootstrap";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { Container, Table, Button, Row, Col, Image } from "react-bootstrap";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import Message from "../../../components/Message";
@@ -43,6 +43,9 @@ const GalleryList = () => {
   return (
     <>
       <Container className="py-3">
+      <Link className="btn btn-light my-3" to="/admin/dashboard">
+          Go Back
+        </Link>
         <Row className="align-items-center">
           <Col>
             <h1>Gallery</h1>
