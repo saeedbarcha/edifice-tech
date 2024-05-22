@@ -41,6 +41,7 @@ const OverView = ({ blogs, products, courses, faqs, galleries, services, admissi
           <OverCard title="FAQs" data={faqs} icon="BsFillQuestionSquareFill" link="/admin/faqs-List" />
           <OverCard title="Gallery" data={galleries} icon="MdImage"  link="/admin/gallerylist"/>
         </Row>
+        {/* sssssssssss */}
       </div>
     </>
   );
