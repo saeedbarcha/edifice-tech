@@ -52,51 +52,6 @@ const AdminDashboard = () => {
           ) ? (
             <Loader />
           ) : (
-            errorBlog ||
-            errorProduct ||
-            errorCourse ||
-            errorFaq ||
-            errorGallery ||
-            errorService ||
-            errorAdmissionBatche ||
-            errorUser ||
-            errorEnrollment ||
-            errorRollBaseUsers
-          ) ? (
-            <Message variant="danger"> {
-              (errorBlog ||
-              errorProduct ||
-              errorCourse ||
-              errorFaq ||
-              errorGallery ||
-              errorService ||
-              errorAdmissionBatche ||
-              errorUser ||
-              errorEnrollment ||
-              errorRollBaseUsers)?.data?.message || 
-              (errorBlog ||
-                errorProduct ||
-                errorCourse ||
-                errorFaq ||
-                errorGallery ||
-                errorService ||
-                errorAdmissionBatche ||
-                errorUser ||
-                errorEnrollment ||
-                errorRollBaseUsers)?.data || 
-                
-                (errorBlog ||
-                  errorProduct ||
-                  errorCourse ||
-                  errorFaq ||
-                  errorGallery ||
-                  errorService ||
-                  errorAdmissionBatche ||
-                  errorUser ||
-                  errorEnrollment ||
-                  errorRollBaseUsers)?.error}</Message>
-
-          ) : (
             <>
               <Row>
                 <h2>Over View</h2>
