@@ -7,6 +7,7 @@ import Message from "../../../components/Message";
 import Loader from "../../../components/Loader";
 import UpdateEnrollmentModal from "./UpdateEnrollmentModal";
 import { downloadCertificate } from '../../../common-functions/certificate.js';
+import { formatDate } from '../../../common-functions/formatDate.js';
 import {
     useGetAllEnrolmentByAdminQuery,
 } from "../../../slices/enrollmentApiSlice";
@@ -48,14 +49,14 @@ const EnrollmentList = () => {
                             <Card.Body>
                                 <Card.Title className="mb-4">{admissionB?.batch?.title}</Card.Title>
                                 <Card.Text>
-                                    <strong>Start Date:</strong> {admissionB?.batch?.startDate}
+                                    <strong>Start Date:</strong> {formatDate(admissionB?.batch?.startDate)}
                                 </Card.Text>
                                 <Card.Text>
-                                    <strong>End Date:</strong> {admissionB?.batch?.endDate}
+                                    <strong>End Date:</strong> {formatDate(admissionB?.batch?.endDate)}
                                 </Card.Text>
                                 <Card.Text>
                                     <strong>Last Date To Apply:</strong>{" "}
-                                    {admissionB?.batch?.lastDateToApply}
+                                    {formatDate(admissionB?.batch?.lastDateToApply)}
                                 </Card.Text>
                                 <Card.Text>
                                     <strong>Admission Fee:</strong>{" "}
