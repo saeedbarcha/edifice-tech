@@ -3,6 +3,8 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Container, Form, Card, Button, Badge } from "react-bootstrap";
 import Message from "./../../components/Message";
 import Loader from "./../../components/Loader";
+import { formatDate } from '../../common-functions/formatDate.js';
+
 import {
     useCreateEnrollmentMutation
 } from "./../../slices/enrollmentApiSlice";
@@ -76,14 +78,14 @@ const EnrollAdmissionBatchScreen = () => {
                     <Card.Body>
                         <Card.Title className="mb-4">{admissionBatch?.title}</Card.Title>
                         <Card.Text>
-                            <strong>Start Date:</strong> {admissionBatch?.startDate}
+                            <strong>Start Date:</strong> {formatDate(admissionBatch?.startDate)}
                         </Card.Text>
                         <Card.Text>
-                            <strong>End Date:</strong> {admissionBatch?.endDate}
+                            <strong>End Date:</strong> {formatDate(admissionBatch?.endDate)}
                         </Card.Text>
                         <Card.Text>
                             <strong>Last Date To Apply:</strong>{" "}
-                            {admissionBatch?.lastDateToApply}
+                            {formatDate(admissionBatch?.lastDateToApply)}
                         </Card.Text>
                         <Card.Text>
                             <strong>Admission Fee:</strong>{" "}

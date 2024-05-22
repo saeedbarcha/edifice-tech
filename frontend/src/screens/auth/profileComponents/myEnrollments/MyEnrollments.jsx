@@ -4,6 +4,7 @@ import { Container, Card, Button, Badge, Table } from "react-bootstrap";
 import { FaTimes, FaCheck } from "react-icons/fa";
 import Message from "../../../../components/Message";
 import Loader from "../../../../components/Loader";
+import { formatDate } from "../../../../common-functions/formatDate.js";
 import { useGetMyEnrolmentsQuery } from "../../../../slices/enrollmentApiSlice";
 import { downloadCertificate } from '../../../../common-functions/certificate.js';
 
@@ -33,14 +34,14 @@ const MyEnrollments = () => {
                   {admissionB?.batch?.title}
                 </Card.Title>
                 <Card.Text>
-                  <strong>Start Date:</strong> {admissionB?.batch?.startDate}
+                  <strong>Start Date:</strong> {formatDate(admissionB?.batch?.startDate)}
                 </Card.Text>
                 <Card.Text>
-                  <strong>End Date:</strong> {admissionB?.batch?.endDate}
+                  <strong>End Date:</strong> {formatDate(admissionB?.batch?.endDate)}
                 </Card.Text>
                 <Card.Text>
                   <strong>Last Date To Apply:</strong>{" "}
-                  {admissionB?.batch?.lastDateToApply}
+                  {formatDate(admissionB?.batch?.lastDateToApply)}
                 </Card.Text>
                 <Card.Text>
                   <strong>Admission Fee:</strong>{" "}
@@ -89,7 +90,7 @@ const MyEnrollments = () => {
                         <td>{enrollment?.firstName}</td>
 
                         <td>
-                        {enrollment?.courseId?.price} {enrollment?.courseFeePaid ? (
+                          {enrollment?.courseId?.price} {enrollment?.courseFeePaid ? (
                             <FaCheck style={{ color: "green" }} />
                           ) : (
                             <FaTimes style={{ color: "red" }} />
