@@ -30,6 +30,11 @@
     color: #151515;
     margin-left: 50px;
   }
+  .achivementCards{
+    border: 1px var(--blueThemeColor) solid;
+    border-radius: 15px;
+    margin: 8px;
+  }
   .counts .content .count-box p {
     padding: 15px 0 0 0;
     margin: 0 0 0 50px;

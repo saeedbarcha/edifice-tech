@@ -35,7 +35,7 @@ const CourseScreen = () => {
               {allActiveCourses?.map((course, index) => (
                 <Col sm={6} lg={3} className="mt-4" key={index}>
                   <Link to={`/course/${course._id}`} style={{ textDecoration: "none" }}>
-                  <Card className="my-3 p-2 pt-4 rounded showCourcesCard">
+                  <Card className="my-3 p-2 pt-4  showCourcesCard">
                     <div className="image-container">
 
                       <Card.Img src={course?.image} fluid variant="top" className="course-image" />

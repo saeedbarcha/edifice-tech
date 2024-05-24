@@ -23,7 +23,7 @@ const TeamScreen = () => {
           ) : (
             <>
               {users?.map((user, index) => (
-                <Col lg={3} md={6} className="d-flex align-items-stretch justify-content-around">
+                <Col md={4}  lg={3}  className="d-flex align-items-stretch justify-content-around ">
                   <div
                     className="member"
                   >
@@ -36,7 +36,7 @@ const TeamScreen = () => {
                          <Image
                           src={user?.image ? user?.image : `https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava${user.gender === "Male" ? 3 : 4}.webp`}
                           className="img-fluid"
-                          style={{width:"216px" }}
+                          style={{width:"316px" }}
                           fluid
                           alt="♀️"
                         />

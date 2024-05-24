@@ -1,3 +1,4 @@
+import React from 'react';
 import { Col, Container, Row, Image } from 'react-bootstrap';
 import "./CountsSection.css";
 import backImg from "./counts-img.jpg";
@@ -5,50 +6,51 @@ import { ImHappy } from "react-icons/im";
 import { GrProjects } from "react-icons/gr";
 import { LiaAwardSolid } from "react-icons/lia";
 import { GiGiftOfKnowledge } from "react-icons/gi";
+
 const CountsSection = () => {
   return (
     <section id="counts" className="counts">
       <Container data-aos="fade-up">
         <Row className="no-gutters">
-          <Col xl={5} className="d-flex align-items-stretch justify-content-center justify-content-lg-start" data-aos="fade-right" data-aos-delay="100">
-          <Image src={backImg} fluid/>
+          <Col xl={6} className="d-flex align-items-stretch justify-content-center justify-content-lg-start" data-aos="fade-right" data-aos-delay="100">
+            <Image src={backImg} fluid/>
           </Col>
-          <Col xl={7} className="ps-0 ps-lg-5 pe-lg-1 d-flex align-items-stretch" data-aos="fade-left" data-aos-delay="100">
+          <Col xl={6} className="px-4 d-flex align-items-stretch" data-aos="fade-left" data-aos-delay="100">
             <div className="content d-flex flex-column justify-content-center">
-              <h3>Voluptatem dignissimos provident quasi</h3>
+              <h3>Achievements</h3>
               <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
+                Over the years, we've achieved significant milestones and received recognition for our dedication to excellence. Here are some of our proudest achievements:
               </p>
-              <Row>
-                <Col md={6} className="d-md-flex align-items-md-stretch">
+              <Row >
+                <Col md={5} className="d-md-flex align-items-md-stretch achivementCards">
                   <div className="count-box">
                     <ImHappy className="iconInCount" />
-                    <span >4</span>
-                    <p><strong>Happy Clients</strong> consequuntur voluptas nostrum aliquid ipsam architecto ut.</p>
+                    <span >100+</span>
+                    <p><strong>Happy Clients</strong> have trusted us with their projects and solutions, ensuring their satisfaction and success.</p>
                   </div>
                 </Col>
 
-                <Col md={6} className="d-md-flex align-items-md-stretch">
+                <Col md={5} className="d-md-flex align-items-md-stretch achivementCards">
                   <div className="count-box">
                     <GrProjects className="iconInCount" />
-                    <span >4</span>
-                    <p><strong>Projects</strong> adipisci atque cum quia aspernatur totam laudantium et quia dere tan</p>
+                    <span >50+</span>
+                    <p><strong>Projects Completed</strong> ranging from bespoke software development to comprehensive digital transformations.</p>
                   </div>
                 </Col>
 
-                <Col md={6} className="d-md-flex align-items-md-stretch">
+                <Col md={5} className="d-md-flex align-items-md-stretch achivementCards">
                   <div className="count-box">
                     <GiGiftOfKnowledge className="iconInCount" />
-                    <span >4</span>
-                    <p><strong>Years of experience</strong> aut commodi quaerat modi aliquam nam ducimus aut voluptate non vel</p>
+                    <span >10+</span>
+                    <p><strong>Years of Experience</strong> in the tech industry, honing our expertise and refining our approach to deliver excellence.</p>
                   </div>
                 </Col>
 
-                <Col md={6} className="d-md-flex align-items-md-stretch">
+                <Col md={5} className="d-md-flex align-items-md-stretch achivementCards">
                   <div className="count-box">
                     <LiaAwardSolid className="iconInCount" />
-                    <span >4</span>
-                    <p><strong>Awards</strong> rerum asperiores dolor alias quo reprehenderit eum et nemo pad der</p>
+                    <span >20+</span>
+                    <p><strong>Awards and Recognitions</strong> acknowledging our commitment to innovation, quality, and client satisfaction.</p>
                   </div>
                 </Col>
               </Row>

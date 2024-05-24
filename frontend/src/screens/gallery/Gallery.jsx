@@ -45,7 +45,7 @@ const Gallery = () => {
                 <div className="gallery-wrap">
                   <Image src={ele?.image} fluid alt="" loading="lazy" />
                   <div className="gallery-info">
-                    <h4>{ele?.caption}</h4>
+                    <p>{ele?.caption}</p>
                     <div className="gallery-links">
                       <a className="gallery-lightbox" title="App 1">
                         <FaPlus

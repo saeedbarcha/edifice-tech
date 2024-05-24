@@ -137,7 +137,7 @@ const Header = () => {
               <Link to="/">
                 {/* <Image className="logoImg" src={CompanyData?.logoImage ?  CompanyData.logoImage : logoImg} /> */}
 
-                <Image className="logoImg" src={CompanyData.logoImage} />
+                <Image className="logoImg" src={CompanyData?.logoImage} />
                 {/* <h2>
                 3Beez<span>Tech</span>
               </h2> */}
