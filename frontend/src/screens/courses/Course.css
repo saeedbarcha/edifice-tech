@@ -1,91 +1,58 @@
-/* @dev  saeed barcha */
-/* @file Cources.jsx */
 
-/* @tag --Container/Row/div */
-.wrapper  {
-  margin-top: 30px;
-  margin-bottom: 100px;
-
+.rating svg{
+  color: #f8e825;
 }
-
-/* @tag --Container/Row/Col/div */
-.wrapper .showCourcesCard {
-  background: #f8f9fa;
-  border-radius: 0  20px 20px 20px;
+.rating-text{
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding-left: 0.5rem;
+}
+.showCourcesCard{  
   transition: transform 0.8s;
-  border: 1px solid  var(--mainBgColor);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-  position: relative;
+
 }
 
-.discountPara{
-  min-width: 75px;
-  padding: 8px;
+.showCourcesCard:hover{
+  transform: scale(1.03);
+}
+
+.titleCources{
+  height: 2rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   font-size: 20px;
-  font-weight: bolder;
-  border-radius: 0 0 30px 0;
-  color: rgb(255, 255, 255);
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: rgb(255, 79, 79);
-  /* background-color: var(--blueThemeColor); */
-
 }
 
-
-/* @tag --Container/Row/Col/div */
-.wrapper .showCourcesCard:hover {
-  cursor: pointer;
-  transform: scale(1.02);
-}
-
-/* @tag --Container/Row/Col/div/h4 */
-.wrapper .showCourcesCard .titleCources {
-  color: var(--mainBgColor);
-  height: 2.5rem;
+.skillAndDuration{
+  height: 2.8rem;
   overflow: hidden;
+  color: #6C757D;
   text-overflow: ellipsis;
   white-space: nowrap;
+  font-size: 14px;
 }
 
-.serviceHeading {
-  /* color: var(--mainThemeColor); */
-  /* color: var(--mainBgColor); */
-  color: #6c757d;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.certificateCont{
-  background-color: var(--mainBgColor);
-  color: #ffffff;
-  padding: 7px;
-  border-radius: 8px 0px 0px 8px;
-  position: absolute;
-  font-size: large;
-  bottom: 0;
-  right: 0;
-  font-size: 18px;
-
+.review button{
+  margin-top: 10px;
 }
 
 
-/*---------media query-----------*/
-@media screen and (max-width: 992px) {
-  /* @tag --Container */
-.wrapper  {
-  margin-top: 40px;
-  margin-bottom: 40px;
+
+.course-image {
+  width: 100%;
+  height: 170px;
 }
 
-  /* @tag --Container/Row/div/h1 */
 
-.wrapper .showCourcesCard  .titleCources {
+.certificate-icon {
+  width: 35px;
+  height: 35px;
+  background-color: aliceblue;
   color: var(--blueThemeColor);
-  margin-top: 20px;
-  font-size: 36px;
-  
- }
-
+  border-radius: 50%;
+  cursor: pointer;
+  display:flex ;
+  align-items: center;
+  justify-content: center;
 }

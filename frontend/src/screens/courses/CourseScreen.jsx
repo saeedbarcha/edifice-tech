@@ -1,23 +1,27 @@
 import React from "react";
-import { Container, Row, Col } from "react-bootstrap";
-import "./Course.css";
+import { Container, Row, Col, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import Rating from "../../components/rating/Rating.jsx";
 import { useGetActiveCoursesQuery } from "../../slices/courseApiSlice.js";
 import Loader from "../../components/Loader.jsx";
 import Message from "../../components/Message.jsx";
+import { FaHeart } from "react-icons/fa";
+import { LiaCertificateSolid } from "react-icons/lia";
+import "./Course.css";
+
 const CourseScreen = () => {
   const {
     data: allActiveCourses,
     isLoading,
     error,
   } = useGetActiveCoursesQuery();
+
   return (
     <React.Fragment>
       {isLoading ? (
         <Loader />
       ) : error ? (
         <Message variant="danger">
-          {" "}
           {error?.data?.message || error?.data || error?.error}
         </Message>
       ) : (
@@ -28,51 +32,47 @@ const CourseScreen = () => {
               <p>CHECK OUR COURSES</p>
             </div>
             <Row className="wrapper">
-              {allActiveCourses?.map((course, index) => {
-                return (
-                  <Col sm={6} lg={4} className="mt-4" key={index}>
-                    <Link
-                      to={`/course/${course._id}`}
-                      style={{ textDecoration: "none" }}
-                    >
-                      <div className="showCourcesCard">
-                        <img
-                          style={{
-                            width: "100%", 
-                            height: "auto", 
-                            maxWidth: "414px", 
-                            maxHeight: "285px", 
-                            borderRadius: "10px 19px 0px 0px",
-                          }}
-                          src={course?.image}
-                          alt=""
-                        />
-                        <div style={{ padding: "10px" }}>
-                          <p className="discountPara">
-                            {course?.discount}% <sup>0ff</sup>
-                          </p>
-                          <h4 className="titleCources">{course?.title}</h4>
-                          <p className="serviceHeading">{course?.skillSet}</p>
-                          <p className="serviceHeading">
-                            Duration: {course?.totalDuration}
-                          </p>
-                          <h4 className="titleCources">
-                            Price: {course?.price}
-                          </h4>
+              {allActiveCourses?.map((course, index) => (
+                <Col sm={6} lg={3} className="mt-4" key={index}>
+                  <Link to={`/course/${course._id}`} style={{ textDecoration: "none" }}>
+                  <Card className="my-3 p-2 pt-4 rounded showCourcesCard">
+                    <div className="image-container">
+
+                      <Card.Img src={course?.image} fluid variant="top" className="course-image" />
+
+                    </div>
+                    <Card.Body>
+                      <Card.Title as="div" className="titleCources">
+                        <strong>{course?.title}</strong>
+                      </Card.Title>
+                      <Card.Title as="div" className="skillAndDuration">
+                        <strong><span style={{ fontSize: "14px" }}>Skills: </span>{course?.skillSet}</strong>
+                        <br />
+                        <strong><span style={{ fontSize: "14px" }}>Duration: </span>{course?.totalDuration}</strong>
+                      </Card.Title>
+                      <Card.Text as="div" className="my-2">
+                        <Rating value={course?.rating} text={`${course?.numReviews} reviews`} />
+                      </Card.Text>
+                      <Card.Text as="h4" style={{ display: 'flex', justifyContent: "space-between", alignItems: "center" }}>
+                        <div>
+                          <span style={{ fontSize: "18px" }}>PKR:</span> {course?.price}
                         </div>
-                        <p className="certificateCont">
-                          certificate {course?.certificate}
-                        </p>
-                      </div>
-                    </Link>
-                  </Col>
-                );
-              })}
-            </Row>
-          </Container>
+                        <div className="certificate-icon">
+                          <LiaCertificateSolid style={{ width: "40px", height: "40px" }} />
+                        </div>
+                      </Card.Text>
+                    </Card.Body>
+                  </Card>
+                </Link>
+                </Col>
+              ))}
+          </Row>
+        </Container>
         </section>
-      )}
-    </React.Fragment>
+  )
+}
+    </React.Fragment >
   );
 };
+
 export default CourseScreen;
