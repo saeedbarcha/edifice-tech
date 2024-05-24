@@ -12,7 +12,7 @@ const { data, isLoading, error } = useGetProductsQuery();
 
 
   const settings = {
-    dots: false,
+    dots: true,
     infinite: true,
     slidesToShow: 3,
     slidesToScroll: 1,
