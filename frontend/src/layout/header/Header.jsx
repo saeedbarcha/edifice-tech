@@ -126,9 +126,10 @@ const Header = () => {
           </div>
         </div>
       </section>
+      
       <Navbar
         id="header"
-        expand="md"
+        expand="xl"
         className={`${scrolled ? "scrolled" : ""} ${isMenuOpen ? "menu-open" : ""
           }`}
       >
@@ -160,9 +161,15 @@ const Header = () => {
               </LinkContainer>
 
 
-              <LinkContainer to="/policy">
-                <Nav.Link smooth>Policy</Nav.Link>
+              <LinkContainer to="/course/page/1">
+                <Nav.Link smooth>Courses</Nav.Link>
               </LinkContainer>
+
+              <LinkContainer to="/service/page/1">
+                <Nav.Link smooth>Services</Nav.Link>
+              </LinkContainer>
+              
+
               <LinkContainer to="/blogs">
                 <Nav.Link smooth>Blog</Nav.Link>
               </LinkContainer>

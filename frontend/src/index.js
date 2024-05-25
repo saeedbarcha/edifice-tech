@@ -59,12 +59,16 @@ import CreateFaqsScreen from "./screens/admin/faq/CreateFaqsScreen";
 import EditFaqsScreen from "./screens/admin/faq/EditFaqsScreen";
 import AllCoursesScreen from "./screens/courses/AllCoursesScreen";
 import AllGallery from "./screens/gallery/AllGallery";
+import AllServices from "./screens/services/AllServices";
+
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route index={true} path="/" element={<HomeScreen />} />
       <Route path="/course/:keyword?/page/:pageNumber?" element={<AllCoursesScreen />} />
       <Route path="/gallery/:keyword?/page/:pageNumber?" element={<AllGallery />} />
+      <Route path="/service/:keyword?/page/:pageNumber?" element={<AllServices />} />
       <Route path="/product/:id" element={<ProductScreen />} />
       <Route path="/login" element={<LoginScreen />} />
       <Route path="/register" element={<RegisterScreen />} />

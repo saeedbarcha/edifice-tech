@@ -13,10 +13,25 @@ const getServices = asyncHandler(async (req, res) => {
 // @route   GET /api/Services/active
 // @access  Public
 const getAllActiveServices = asyncHandler(async (req, res) => {
-  const activeServices = await Service.find({ isActive: true });
-  res.status(200).json(activeServices);
+  const pageSize = process.env.PAGINATION_LIMIT;
+  const page = Number(req.query.pageNumber) || 1;
 
-  // If you need pagination, you can implement it here as well
+  const keyword = req.query.keyword ? {
+    title: {
+      $regex: req.query.keyword,
+      $options: "i"
+    }
+  } : {};
+
+  const count = await Service.countDocuments({ ...keyword, isActive: true });
+  const activeServices = await Service.find({ ...keyword, isActive: true }).limit(pageSize).skip(pageSize * (page - 1));
+
+  if (!activeServices) {
+    res.status(404).json({ message: "Service not found" });
+  }
+  res.status(200).json({ activeServices, page, pages: Math.ceil(count / pageSize) });
+
+
 });
 
 // @desc    Fetch a single Service by id
@@ -105,7 +120,7 @@ const updateService = asyncHandler(async (req, res) => {
 // @route   GET /api/Service
 // @access  Public
 const getActiveService = asyncHandler(async (req, res) => {
-  const service = await Service.find({isActive:true})
+  const service = await Service.find({ isActive: true })
   res.status(201).json(service);
 });
 
