@@ -5,8 +5,11 @@ export const serviceApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
    
     getServices: builder.query({
-      query: () => ({
+      query: ({ pageNumber = 1 }) => ({
         url: `${SERVICE_URL}/`,
+        params: {
+          pageNumber: pageNumber || 1,   
+        },
         }),
       providesTags: ["Service"],
       keepUnusedDataFor: 5,

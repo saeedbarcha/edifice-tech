@@ -5,8 +5,16 @@ import Service from "../models/serviceModel.js";
 // @route   GET /api/Services
 // @access  Public
 const getServices = asyncHandler(async (req, res) => {
-  const Services = await Service.find({});
-  res.status(200).json(Services);
+  const pageSize = process.env.PAGINATION_LIMIT;
+  const page = Number(req.query.pageNumber) || 1;
+
+  const count = await Service.countDocuments();
+  const allServices = await Service.find({}).limit(pageSize).skip(pageSize * (page - 1));
+
+  if (!allServices) {
+    res.status(404).json({ message: "Service not found" });
+  }
+  res.status(200).json({ allServices, page, pages: Math.ceil(count / pageSize) });
 });
 
 // @desc    Fetch all active Services

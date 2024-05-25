@@ -69,6 +69,7 @@ const router = createBrowserRouter(
       <Route path="/course/:keyword?/page/:pageNumber?" element={<AllCoursesScreen />} />
       <Route path="/gallery/:keyword?/page/:pageNumber?" element={<AllGallery />} />
       <Route path="/service/:keyword?/page/:pageNumber?" element={<AllServices />} />
+      
       <Route path="/product/:id" element={<ProductScreen />} />
       <Route path="/login" element={<LoginScreen />} />
       <Route path="/register" element={<RegisterScreen />} />
@@ -93,7 +94,8 @@ const router = createBrowserRouter(
         <Route path="/admin/productlist" element={<ProductListScreen />} />
         <Route path="/admin/createblog" element={<CreateBlogScreen />} />
         <Route path="/admin/createservice" element={<CreateServiceScreen />} />
-        <Route path="/admin/service-List" element={<ServiceListScreen />} />
+        {/* <Route path="/admin/service-List" element={<ServiceListScreen />} /> */}
+        <Route path="/admin/service-List/page/1" element={<ServiceListScreen />} />
 
 
 

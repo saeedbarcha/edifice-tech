@@ -35,13 +35,12 @@ const OverView = ({ blogs, products, courses, faqs, galleries, services, admissi
           <OverCard title="Admission Batches" data={admissionBatches} icon="FaBookOpenReader" link="/admin/admissionbatchlist" />
           <OverCard title="Enrollments" data={enrollments} icon="MdImage"  link="/admin/enrollment-List"/>
           <OverCard title="Courses" data={courses} icon="FaBookMedical" link="/admin/courselist"/>
-          <OverCard title="Services" data={services} icon="FaServicestack" link="/admin/service-List"/>
+          <OverCard title="Services" data={services} icon="FaServicestack" link="/admin/service-List/page/1"/>
           <OverCard title="Blogs" data={blogs} icon="FaBlogger" link="/admin/bloglist"/>
           <OverCard title="Products" data={products} icon="FaProductHunt" link="/admin/productlist"/>
           <OverCard title="FAQs" data={faqs} icon="BsFillQuestionSquareFill" link="/admin/faqs-List" />
           <OverCard title="Gallery" data={galleries} icon="MdImage"  link="/admin/gallerylist"/>
         </Row>
-        {/* sssssssssss */}
       </div>
     </>
   );
