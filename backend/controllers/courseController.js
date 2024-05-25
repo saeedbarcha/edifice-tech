@@ -29,7 +29,6 @@ const getAllActiveCoursesWithPagination = asyncHandler(async (req, res) => {
   res.status(200).json({activeCourses, page, pages: Math.ceil(count / pageSize)});
 
 
-  // If you need pagination, you can implement it here as well
 });
 
 

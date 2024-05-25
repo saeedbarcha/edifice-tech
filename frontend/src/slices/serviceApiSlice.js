@@ -14,8 +14,12 @@ export const serviceApiSlice = apiSlice.injectEndpoints({
     
     
     getActiveServices: builder.query({
-      query: () => ({
+      query: ({ keyword = '', pageNumber = 1 }) => ({
         url: `${SERVICE_URL}/active-services`,
+        params: {
+          keyword: keyword || undefined, 
+          pageNumber: pageNumber || 1,   
+        },
         }),
       providesTags: ["Service"],
       keepUnusedDataFor: 5,
