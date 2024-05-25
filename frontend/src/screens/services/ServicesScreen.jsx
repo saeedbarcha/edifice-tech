@@ -16,7 +16,7 @@ const ServicesScreen = () => {
   const { keyword, pageNumber } = useParams();
   const page = pageNumber || 1;
 
-  const { data: responseData, isLoading, error, refetch } = useGetActiveServicesQuery({ pageNumber: 1 });
+  const { data: responseData, isLoading, error, refetch } = useGetActiveServicesQuery({ pageNumber: page });
   const iconStyle = {
     width: "45px",
     height: "45px",

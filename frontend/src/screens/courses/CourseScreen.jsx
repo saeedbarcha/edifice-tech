@@ -1,6 +1,7 @@
 import React from "react";
 import { Container, Row, Col, Card, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Rating from "../../components/rating/Rating.jsx";
 import { useGetActiveCoursesQuery } from "../../slices/courseApiSlice.js";
 import Loader from "../../components/Loader.jsx";
@@ -10,11 +11,13 @@ import { LiaCertificateSolid } from "react-icons/lia";
 import "./Course.css";
 
 const CourseScreen = () => {
+  const { pageNumber } = useParams();
+  const page = pageNumber || 1;
   const {
     data: responseData,
     isLoading,
     error,
-  } = useGetActiveCoursesQuery({ pageNumber: 1 });
+  } = useGetActiveCoursesQuery({ pageNumber: page });
 
 
   return (

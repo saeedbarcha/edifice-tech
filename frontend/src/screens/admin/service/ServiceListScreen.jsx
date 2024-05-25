@@ -1,14 +1,18 @@
 
 import { LinkContainer } from "react-router-bootstrap";
 import {Link} from "react-router-dom"
+import { useParams } from "react-router-dom";
 import { Container, Table, Button, Row, Col, Image } from "react-bootstrap";
 import { FaTimes, FaTrash, FaEdit, FaCheck } from "react-icons/fa";
 import Message from "../../../components/Message";
 import Loader from "../../../components/Loader";
 import { toast } from "react-toastify";
+import Paginate from "../../../components/Paginate";
 import {useGetServicesQuery,  useDeleteServiceMutation, } from "../../../slices/serviceApiSlice";
 const ServiceListScreen = () => {
-  const { data: allService, isLoading, error, refetch } = useGetServicesQuery();
+  const { pageNumber } = useParams();
+  const page = pageNumber || 1;
+  const { data: responseData, isLoading, error, refetch } = useGetServicesQuery({ pageNumber: page });
 
   const [deleteService, { isLoading: loadingDelete }] = useDeleteServiceMutation();
 
@@ -69,9 +73,9 @@ const ServiceListScreen = () => {
                 </tr>
               </thead>
               <tbody>
-              {allService?.length === 0 &&
+              {responseData?.allServices?.length === 0 &&
                 <p>No any service found</p>}
-                {allService?.map((service) => (
+                {responseData?.allServices?.map((service) => (
                   <tr key={service?._id}>
                     <td>{service?.title}</td>
                     <td>{service?.description}</td>
@@ -101,6 +105,11 @@ const ServiceListScreen = () => {
                     </td>
                   </tr>
                 ))}
+                 {responseData?.allServices?.length > 0 &&
+                <div style={{ display: "flex", marginTop:"25px", justifyContent: "center" }}>
+                  <Paginate screen="/admin/service-List" pages={responseData.pages} page={parseInt(page)} />
+                </div>
+              }
               </tbody>
             </Table>
           </>

@@ -11,7 +11,9 @@ import { useGetAllActiveGalleriesQuery } from "../../slices/galleryApiSlice";
 import "./Gallery.css";
 
 const Gallery = () => {
-  const { data: responseData, isLoading, error } = useGetAllActiveGalleriesQuery({ pageNumber:1 });
+  const { pageNumber } = useParams();
+  const page = pageNumber || 1;
+  const { data: responseData, isLoading, error } = useGetAllActiveGalleriesQuery({ pageNumber:page });
   
   const [isOpen, setIsOpen] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
