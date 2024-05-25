@@ -12,6 +12,19 @@ export const galleryApiSlice = apiSlice.injectEndpoints({
       keepUnusedDataFor: 5,
     }),
 
+    getAllActiveGalleries: builder.query({
+      query: ({ keyword = '', pageNumber = 1 }) => ({
+        url: `${GALLERY_URL}/all-active`,
+        params: {
+          keyword: keyword || undefined,
+          pageNumber: pageNumber || 1,
+        },
+      }),
+
+      providesTags: ["Gallery"],
+      keepUnusedDataFor: 5,
+    }),
+
     createGallery: builder.mutation({
       query: (data) => ({
         url: `${GALLERY_URL}`,
@@ -42,6 +55,7 @@ export const galleryApiSlice = apiSlice.injectEndpoints({
 
 export const {
 useGetGalleryQuery,
+useGetAllActiveGalleriesQuery,
 useUpdateGalleryItemMutation,
 useDeleteGalleryItemMutation,
 useCreateGalleryMutation,

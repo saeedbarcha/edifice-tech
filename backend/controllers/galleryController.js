@@ -5,8 +5,29 @@ import Gallery from "../models/galleryModel.js";
 // @route   GET /api/Gallarys
 // @access  Public
 const getGallarys = asyncHandler(async (req, res) => {
-  const blogs = await Gallery.find({});
-  res.status(200).json(blogs);
+  const gallerys = await Gallery.find({});
+  res.status(200).json(gallerys);
+});
+
+// @desc    Fetch all Gallary
+// @route   GET /api/Gallarys
+// @access  Public
+const getActiveGallarys = asyncHandler(async (req, res) => {
+  const pageSize = process.env.PAGINATION_LIMIT;
+  const page = Number(req.query.pageNumber) || 1;
+
+  const keyword = req.query.keyword ? { caption:{$regex: req.query.keyword,
+    $options:"i"} } : {};
+
+  const count = await Gallery.countDocuments({...keyword, isActive: true});
+  
+  const activeGalleries = await Gallery.find({...keyword, isActive: true}).limit(pageSize).skip(pageSize * (page - 1));
+
+  if(!activeGalleries){
+    res.status(404).json({ message: "No Image found" });
+  }
+
+  res.status(200).json({activeGalleries, page, pages: Math.ceil(count / pageSize)});
 });
 
 // @desc    Add gallery item
@@ -74,6 +95,7 @@ const updateGalleryItem = asyncHandler(async (req, res) => {
 
 export {
   getGallarys,
+  getActiveGallarys,
   addGalleryItem,
   updateGalleryItem,
   deleteGalleryItem

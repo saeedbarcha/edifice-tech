@@ -71,8 +71,8 @@ const CourseScreen = () => {
               ))}
 
               {responseData?.activeCourses?.length > 0 &&
-                <Link to={`/course-page/${1}`} style={{ display: "flex", justifyContent: "center", textDecoration:"none" }}>
-                  <Button className="btn-sm my-3 btnAllScreen px-5 m-auto">
+                <Link to={`/course/page/${1}`} style={{ display: "flex", justifyContent: "center", textDecoration:"none" }}>
+                  <Button className="btn-sm my-3 btnSeeMore px-3 m-auto">
                     See More
                   </Button>
                 </Link>

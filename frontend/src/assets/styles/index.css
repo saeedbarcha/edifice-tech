@@ -91,6 +91,32 @@ section {
   opacity: .8;
 }
 
+btnSeeMore
+/* css for button use in all screens */
+.btnSeeMore {
+  /* margin: 49px 0px; */
+  padding: 10px 20px;
+  background: var(--blueThemeColor) !important;
+  border: none;
+  margin-top: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.btnSeeMore:hover {
+  background: var(--blueThemeColor) !important;
+  opacity: .8;
+}
+.btnSeeMore:active {
+  background: var(--blueThemeColor) !important;
+  opacity: .8;
+}
+
+.btnSeeMore::after {
+  background: var(--blueThemeColor) !important;
+  opacity: .8;
+}
+
 td {
   vertical-align: middle;
 }
