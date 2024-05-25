@@ -40,23 +40,28 @@ const OpenAdmissionBatch = () => {
                   <h2>Admission</h2>
                   <p>Admission Open Now</p>
                 </div>
-                <div className="heading-text">
-                  <div className="section-batch">
+                {admissionBatch == undefined ? <p>No any active Admission batch found</p> : (
+                  <div>
+                    <div className="heading-text">
+                      <h1 className="admission-title my-3">{admissionBatch?.title}</h1>
+                    </div>
+                    <h5 className="">Last Date to Apply: {formatDate(admissionBatch?.lastDateToApply)}</h5>
 
+                    <Button className="btn-sm my-3 btnAllScreen" onClick={() => enrollHandler(admissionBatch?._id)}>
+                      Enroll Now
+                    </Button>
                   </div>
-                  <h1 className="admission-title my-3">{admissionBatch?.title}</h1>
-                </div>
-                <h5 className="">Last Date to Apply: {formatDate(admissionBatch?.lastDateToApply)}</h5>
 
-                <Button className="btn-sm my-3 btnAllScreen" onClick={() => enrollHandler(admissionBatch?._id)}>
-                  Enroll Now
-                </Button>
+                )}
               </Col>
               <Col md={5}>
+                {admissionBatch == !undefined &&
                 <Carousel className="course-carousel" interval={3000} indicators={false}>
                   {admissionBatch?.selectedCourses?.map((course) => (
+                    
                     <Carousel.Item key={course?.courseId} >
-                      <Card className="m-auto" style={{width:"75%"}}>
+
+                      <Card className="m-auto" style={{ width: "75%" }}>
                         <div className="image-container">
 
                           <Card.Img src={course?.courseId?.image} fluid variant="top" className="course-image" />
@@ -87,6 +92,7 @@ const OpenAdmissionBatch = () => {
                     </Carousel.Item>
                   ))}
                 </Carousel>
+                }
               </Col>
             </Row>
           </Container>

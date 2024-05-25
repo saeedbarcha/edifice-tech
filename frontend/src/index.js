@@ -57,16 +57,18 @@ import EditSerciveScreen from "./screens/admin/service/EditSerciveScreen";
 import FaqsListScreen from "./screens/admin/faq/FaqsListScreen";
 import CreateFaqsScreen from "./screens/admin/faq/CreateFaqsScreen";
 import EditFaqsScreen from "./screens/admin/faq/EditFaqsScreen";
+import AllCoursesScreen from "./screens/courses/AllCoursesScreen";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
       <Route index={true} path="/" element={<HomeScreen />} />
-      <Route path="/search/:keyword" element={<HomeScreen />} />
-      <Route path="/page/:pageNumber" element={<HomeScreen />} />
+      <Route path="/course-search/:keyword" element={<AllCoursesScreen />} />
+      <Route path="/course-page/:pageNumber" element={<AllCoursesScreen />} />
+
       <Route
-        path="/search/:keyword/page/:pageNumber"
-        element={<HomeScreen />}
+        path="/course-search/:keyword/page/:pageNumber"
+        element={<AllCoursesScreen />}
       />
       <Route path="/product/:id" element={<ProductScreen />} />
       <Route path="/login" element={<LoginScreen />} />
@@ -93,9 +95,9 @@ const router = createBrowserRouter(
         <Route path="/admin/createblog" element={<CreateBlogScreen />} />
         <Route path="/admin/createservice" element={<CreateServiceScreen />} />
         <Route path="/admin/service-List" element={<ServiceListScreen />} />
- 
-       
-        
+
+
+
 
         <Route path="/admin/bloglist" element={<BlogListScreen />} />
         <Route path="/admin/gallerylist" element={<GalleryList />} />
@@ -103,7 +105,7 @@ const router = createBrowserRouter(
         <Route path="/admin/createcourse" element={<CreateCourseScreen />} />
         <Route path="/admin/createadmissionbatch" element={<CreateAdmissionBatchScreen />} />
         <Route path="/admin/create-faqs" element={<CreateFaqsScreen />} />
-       
+
         <Route path="/admin/enrollment-List" element={<EnrollmentList />} />
         <Route path="/admin/faqs-List" element={<FaqsListScreen />} />
 
@@ -120,7 +122,7 @@ const router = createBrowserRouter(
         <Route path="/admin/service/:id/edit" element={<EditSerciveScreen />} />
         <Route path="/admin/faqs/:id/edit" element={<EditFaqsScreen />} />
 
-        
+
         <Route path="/admin/admissionbatchlist" element={<AdmissionBatchListScreen />} />
         <Route path="/admin/admission-batch/:id/edit" element={<EditAdmissionBatchScreen />} />
 

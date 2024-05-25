@@ -45,7 +45,7 @@
 .wrapper .showCardCont {
   padding: 30px;
   background: #f8f9fa;
-  border-radius: 5%;
+  border-radius: 14px;
   transition: transform 0.8s;
   border: 1px solid  var(--blueThemeColor);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 

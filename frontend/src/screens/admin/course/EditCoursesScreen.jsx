@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import { Container, Form, Button } from "react-bootstrap";
 import Message from "../../../components/Message";
 import Loader from "../../../components/Loader";
@@ -25,6 +25,8 @@ const EditCoursesScreen = () => {
   const [daysInWeek, setDaysInWeek] = useState(0);
   const [totalDuration, setTotalDuration] = useState("");
   const [certificate, setCertificate] = useState(false);
+
+  const navigate = useNavigate();
 
   const {
     data: course,
@@ -80,7 +82,9 @@ const EditCoursesScreen = () => {
       toast.error(result.error);
     } else {
       toast.success("Course updated successfully");
-
+      setTimeout(() => {
+        navigate(`/admin/courselist`);
+      }, 1000);
     }
   };
 
@@ -105,8 +109,6 @@ const EditCoursesScreen = () => {
 
         <FormContainer>
           <h1>Edit Course</h1>
-
-          {loadingUpdate && <Loader />}
 
           {isLoading ? (
             <Loader />
@@ -239,7 +241,7 @@ const EditCoursesScreen = () => {
 
               <div style={{ textAlign: "right" }}>
                 <Button type="submit" className="btn my-2 btnAllScreen">
-                  Update
+                {loadingUpdate ? "Updating..." : "Update"}
                 </Button>
               </div>
             </Form>

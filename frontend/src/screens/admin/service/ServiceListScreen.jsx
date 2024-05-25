@@ -42,7 +42,7 @@ const ServiceListScreen = () => {
           <Col className="text-end">
             <LinkContainer to={`/admin/createservice`}>
               <Button className="btn-sm m-3 btnAllScreen">
-               Create Service
+               Create
               </Button>
             </LinkContainer>
         
@@ -69,6 +69,8 @@ const ServiceListScreen = () => {
                 </tr>
               </thead>
               <tbody>
+              {allService?.length === 0 &&
+                <p>No any service found</p>}
                 {allService?.map((service) => (
                   <tr key={service?._id}>
                     <td>{service?.title}</td>

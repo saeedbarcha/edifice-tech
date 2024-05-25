@@ -12,7 +12,6 @@ const getReviewsForCourse = asyncHandler(async (req, res) => {
     const reviews = await Review.find({ course: courseId });
     res.status(200).json(reviews);
   } catch (error) {
-    console.error(error);
     res.status(500).json({ message: "Server Error" });
   }
 });
@@ -50,7 +49,6 @@ const createCourseReview = asyncHandler(async (req, res) => {
     await course.save();
     res.status(201).json(review);
   } catch (error) {
-    console.error(error);
     res.status(500).json({ message: "Server Error" });
   }
 });
@@ -145,7 +143,6 @@ const updateCourseReview = asyncHandler(async (req, res) => {
 
     res.status(200).json({ message: "Review updated successfully", review });
   } catch (error) {
-    console.error(error);
     res.status(500).json({ message: "Server Error" });
   }
 });
@@ -191,7 +188,6 @@ const deleteCourseReview = asyncHandler(async (req, res) => {
 
     res.status(200).json({ message: "Review deleted successfully" });
   } catch (error) {
-    console.error(error);
     res.status(500).json({ message: "Server Error" });
   }
 });

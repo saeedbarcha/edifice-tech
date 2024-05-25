@@ -2,6 +2,7 @@ import express from "express";
 const router = express.Router();
 import {
   getCourses,
+  getAllActiveCoursesWithPagination,
   getAllActiveCourses,
   getCourseById,
   createNewCourse,
@@ -13,7 +14,10 @@ import checkObjectId from "../middleware/checkObjectId.js";
 
 
 router.route("/").get(getCourses).post(protect, admin, createNewCourse);
-router.route("/active-courses").get(getAllActiveCourses);
+router.route("/active-courses").get(getAllActiveCoursesWithPagination);
+router.route("/active-all").get(getAllActiveCourses);
+
+
 
 
 router

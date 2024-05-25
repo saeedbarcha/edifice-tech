@@ -11,7 +11,7 @@ const SearchBox = () => {
         e.preventDefault();
         if(keyword.trim()){
             setKeyword("");
-            navigate(`/search/${keyword}`);
+            navigate(`/course-search/${keyword}`);
         }else{
             navigate('/')
         }
@@ -19,24 +19,26 @@ const SearchBox = () => {
 
   
   return (
-    <Form onSubmit={submitHandler} className="d-flex" style={{ height:"35px", width:"350px"}}>
+    <Form onSubmit={submitHandler} className="d-flex" style={{ height:"35px", width:"250px"}}>
         <Form.Control
         type='text'
         name='q'
         onChange={(e)=> setKeyword(e.target.value)}
         value={keyword}
-        placeholder='Search Products...'
-        className="mr-sm-2 ml-sm-5"
+        placeholder='Search Course...'
+        // className="mr-sm-2 ml-sm-5"
         style={{
             borderRadius:"30px"
         }}
         ></Form.Control>
 
-        <Button type='submit' variant="outline-light" className=" mx-2"     style={{
+        <Button type='submit' variant="outline-light" className="mx-1"     style={{
             borderRadius:"30px",
+            color:"white",
+            backgroundColor:"var(--blueThemeColor)",
             padding:"0px",
-            paddingRight:"10px",
-            paddingLeft:"10px"
+            paddingRight:"8px",
+            paddingLeft:"8px"
         }}>
             Search
         </Button>

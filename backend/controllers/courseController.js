@@ -3,18 +3,63 @@ import Course from "../models/courseModel.js";
 
 // @desc    Fetch all courses
 // @route   GET /api/courses
-// @access  Public
+// @access  Public/admin
 const getCourses = asyncHandler(async (req, res) => {
   const courses = await Course.find({});
   res.status(200).json(courses);
 });
+// // @desc    Fetch all courses
+// // @route   GET /api/courses
+// // @access  Public
+// const getCourses = asyncHandler(async (req, res) => {
+  // const pageSize = process.env.PAGINATION_LIMIT;
+  // const page = Number(req.query.pageNumber) || 1;
+  // const keyword = req.query.keyword ? { name:{$regex: req.query.keyword,
+  //   $options:"i"} } : {};
+
+  //  const count = await Course.countDocuments({...keyword});
+
+  // const courses = await Course.find({...keyword}).limit(pageSize).skip(pageSize * (page - 1));
+
+  // res.status(200).json({courses, page, pages: Math.ceil(count / pageSize)});
+
+// });
 
 // @desc    Fetch all active courses
 // @route   GET /api/courses/active
 // @access  Public
+const getAllActiveCoursesWithPagination = asyncHandler(async (req, res) => {
+  const pageSize = process.env.PAGINATION_LIMIT;
+  const page = Number(req.query.pageNumber) || 1;
+  const keyword = req.query.keyword ? { title:{$regex: req.query.keyword,
+    $options:"i"} } : {};
+
+   const count = await Course.countDocuments({...keyword, isActive: true});
+
+  const activeCourses = await Course.find({...keyword, isActive: true}).limit(pageSize).skip(pageSize * (page - 1));
+
+  if(!activeCourses){
+    res.status(404).json({ message: "Course not found" });
+  }
+  res.status(200).json({activeCourses, page, pages: Math.ceil(count / pageSize)});
+
+
+  // If you need pagination, you can implement it here as well
+});
+
+
+// @desc    Fetch all active courses
+// @route   GET /api/courses/active-all
+// @access  Public
 const getAllActiveCourses = asyncHandler(async (req, res) => {
-  const activeCourses = await Course.find({ isActive: true });
+
+  const activeCourses = await Course.find({isActive: true});
+
+  if(!activeCourses){
+    res.status(404).json({ message: "Course not found" });
+  }
   res.status(200).json(activeCourses);
+
 
   // If you need pagination, you can implement it here as well
 });
@@ -145,6 +190,7 @@ const deleteCourse = asyncHandler(async (req, res) => {
 
 export {
   getCourses,
+  getAllActiveCoursesWithPagination,
   getAllActiveCourses,
   getCourseById,
   createNewCourse,

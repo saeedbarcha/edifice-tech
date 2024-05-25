@@ -22,19 +22,21 @@ const TeamScreen = () => {
             <Loader />
           ) : (
             <>
+             {users?.length === 0 &&
+                <p>No any active team member found</p>}
               {users?.map((user, index) => (
                 <Col md={4}  lg={3}  className="d-flex align-items-stretch justify-content-around ">
                   <div
                     className="member"
                   >
-                    <div className="member-img ">
+                    <div className="member-img">
                       <Link
                         className="m-auto"
                         to={`/member/${user?._id}`}
                         style={{ textDecoration: "none" }}
                       >
                          <Image
-                          src={user?.image ? user?.image : `https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava${user.gender === "Male" ? 3 : 4}.webp`}
+                          src={user?.image ? user?.image : `https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava${user?.gender === "Male" ? 3 : 4}.webp`}
                           className="img-fluid"
                           style={{width:"316px" }}
                           fluid

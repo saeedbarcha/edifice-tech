@@ -40,7 +40,9 @@ const CreateServiceScreen = () => {
       toast.error(result.error)
     } else {
       toast.success("Service created successfully");
-      navigate("/admin/service-list");
+      setTimeout(() => {
+        navigate("/admin/service-list");
+      }, 1000);
     }
 
   }
@@ -149,7 +151,7 @@ const CreateServiceScreen = () => {
 
               <div style={{ textAlign: "right" }}>
                 <Button type="submit" className="my-2 btnAllScreen">
-                  Create Service
+                {loadingCreate ? "Creating..." : "Create"}
                 </Button>
               </div>
             </Form>

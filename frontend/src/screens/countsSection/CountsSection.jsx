@@ -15,7 +15,7 @@ const CountsSection = () => {
           <Col xl={6} className="d-flex align-items-stretch justify-content-center justify-content-lg-start" data-aos="fade-right" data-aos-delay="100">
             <Image src={backImg} fluid/>
           </Col>
-          <Col xl={6} className="px-4 d-flex align-items-stretch" data-aos="fade-left" data-aos-delay="100">
+          <Col xl={6} className=" d-flex align-items-stretch" data-aos="fade-left" data-aos-delay="100">
             <div className="content d-flex flex-column justify-content-center">
               <h3>Achievements</h3>
               <p>

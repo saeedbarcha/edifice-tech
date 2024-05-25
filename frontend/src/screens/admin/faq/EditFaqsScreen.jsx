@@ -22,7 +22,7 @@ const EditFaqsScreen = () => {
   } = useGetFaqDetailsQuery(faqId);
 
 
-  const [updateFaq, { isLoading: loadingCreate }] = useUpdateFaqMutation();
+  const [updateFaq, { isLoading: loadingUpdate }] = useUpdateFaqMutation();
 
   const navigate = useNavigate();
 
@@ -81,7 +81,6 @@ const EditFaqsScreen = () => {
                 />
               </Form.Group>
 
-              {loadingCreate && <Loader />}
 
               <Form.Group controlId="isActive" className="my-2">
                 <Form.Check
@@ -95,7 +94,7 @@ const EditFaqsScreen = () => {
 
               <div style={{ textAlign: "right" }}>
                 <Button type="submit" className="my-2 btnAllScreen">
-                  Create Faq
+                  {loadingUpdate ? "Updating..." : "Update"}
                 </Button>
               </div>
             </Form>

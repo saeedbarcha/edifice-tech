@@ -13,7 +13,7 @@ const newEnrollment = asyncHandler(async (req, res) => {
     try {
         if (!admissionBatchId) {
             res.status(404);
-            return res.json({ error: "Admission batch not found" }); 
+            return res.json({ error: "Admission batch not found" });
         } else if (!firstName) {
             res.status(400);
             return res.json({ error: "First name is required" });
@@ -82,6 +82,7 @@ const updateEnrollmentToIssueCertificate = asyncHandler(async (req, res) => {
         completed
     } = req.body;
 
+
     try {
         // Check if the enrollment exists
         const enrollment = await Enrollment.findById(enrollmentId);
@@ -95,12 +96,10 @@ const updateEnrollmentToIssueCertificate = asyncHandler(async (req, res) => {
             enrollment.fatherName = fatherName || enrollment.fatherName;
             enrollment.performance = performance || enrollment.performance;
             enrollment.gender = gender || enrollment.gender;
-            enrollment.issueCertificate = issueCertificate || enrollment.issueCertificate;
-            enrollment.admissionFeePaid = admissionFeePaid || enrollment.admissionFeePaid;
-            enrollment.courseFeePaid = courseFeePaid || enrollment.courseFeePaid;
-            enrollment.courseFeePaid = courseFeePaid || enrollment.courseFeePaid;
-            enrollment.completed = completed || enrollment.completed;
-
+            enrollment.issueCertificate = (issueCertificate !== undefined) ? issueCertificate : enrollment.issueCertificate;
+            enrollment.admissionFeePaid = (admissionFeePaid !== undefined) ? admissionFeePaid : enrollment.admissionFeePaid;
+            enrollment.courseFeePaid = (courseFeePaid !== undefined) ? courseFeePaid : enrollment.courseFeePaid;
+            enrollment.completed = (completed !== undefined) ? completed : enrollment.completed;
 
 
             const updatedEnrollment = await enrollment.save();

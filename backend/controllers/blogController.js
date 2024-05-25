@@ -42,10 +42,10 @@ const getBlogById = asyncHandler(async (req, res) => {
 const createBlog = asyncHandler(async (req, res) => {
   const blog = await Blog({
     user: req.user._id,
-    title: "facebook",
+    title: "Blog title",
     image: "/images/sample.jpg",
     content:
-      "A user is a casual name given to an individual who interacts with a website, online service, app or platform in any way. For example, the user of a website is someone who visits the site. The user of a mobile app is someone who downloads the mobile app.",
+      "Blog description",
     isActive: false,
   });
 

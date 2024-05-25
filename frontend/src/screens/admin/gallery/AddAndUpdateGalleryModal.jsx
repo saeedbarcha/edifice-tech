@@ -16,7 +16,7 @@ const AddAndUpdateGalleryModal = ({ show, handleClose, editGallery }) => {
 
   const [createGallery, { isLoading: loadingCreate }] =
     useCreateGalleryMutation();
-  const [updateGallery, { isLoading: loadingAdding }] =
+  const [updateGallery, { isLoading: loadingUpdate }] =
     useUpdateGalleryItemMutation();
     const [uploadBlogImage, { isLoading: loadingUpload }] =
     useUploadImageMutation();
@@ -131,7 +131,7 @@ const AddAndUpdateGalleryModal = ({ show, handleClose, editGallery }) => {
           variant="primary"
           onClick={editGallery ? handleUpdate : handelAddGallery}
         >
-          {editGallery ? "Update" : "Add"}
+          {editGallery ? (loadingUpdate ? "Updating..." : "Update") : (loadingCreate ? "Creating..." : "Create")}
         </Button>
       </Modal.Footer>
     </Modal>

@@ -60,7 +60,7 @@ const GalleryList = () => {
               onClick={() => {
                 handleOpenGalleryModal(true);
               }}>
-              Add Image
+              Create 
             </Button>
           </Col>
         </Row>
@@ -81,6 +81,9 @@ const GalleryList = () => {
                 </tr>
               </thead>
               <tbody>
+              {data?.length === 0 &&
+                <p>No any Gallery found</p>}
+
                 {data?.map((imageItem) => (
                   <tr key={imageItem._id}>
                     <td><Image src={imageItem.image} fluid style={{ width: "60px", height: "60px" }} /></td>

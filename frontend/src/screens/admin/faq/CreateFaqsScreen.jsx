@@ -29,7 +29,10 @@ const CreateFaqsScreen = () => {
       toast.error(result.error)
     } else {
       toast.success("Faq created successfully");
-      navigate("/admin/faqs-list");
+      
+      setTimeout(() => {
+        navigate("/admin/faqs-list");
+      }, 1000);
     }
 
   }
@@ -61,7 +64,6 @@ const CreateFaqsScreen = () => {
                 />
               </Form.Group>
 
-              {loadingCreate && <Loader />}
 
               <Form.Group controlId="isActive" className="my-2">
                 <Form.Check
@@ -75,7 +77,7 @@ const CreateFaqsScreen = () => {
 
               <div style={{ textAlign: "right" }}>
                 <Button type="submit" className="my-2 btnAllScreen">
-                  Create Faq
+                {loadingCreate ? "Creating..." : "Create"}
                 </Button>
               </div>
             </Form>

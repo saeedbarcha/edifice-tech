@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Container, Card, Button, Badge, Table } from "react-bootstrap";
 import { FaTimes, FaCheck } from "react-icons/fa";
 import { FaEdit } from "react-icons/fa";
@@ -44,6 +44,8 @@ const EnrollmentList = () => {
                     <Link className="btn btn-light my-3" to="/admin/dashboard">
                         Go Back
                     </Link>
+                    {admissionBatches?.admissionBatches?.length === 0 &&
+                        <p>No any admission Batche with an Enrollment found found</p>}
                     {admissionBatches?.admissionBatches.map((admissionB) => (
                         <Card className="my-4">
                             <Card.Body>
@@ -109,7 +111,7 @@ const EnrollmentList = () => {
                                                 <td>{enrollment?.fatherName}</td>
 
                                                 <td>
-                                                {enrollment?.courseId?.price} {enrollment?.courseFeePaid ? (
+                                                    {enrollment?.courseId?.price} {enrollment?.courseFeePaid ? (
                                                         <FaCheck style={{ color: "green" }} />
                                                     ) : (
                                                         <FaTimes style={{ color: "red" }} />

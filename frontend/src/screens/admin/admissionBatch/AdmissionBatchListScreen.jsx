@@ -42,7 +42,7 @@ const AdmissionBatchListScreen = () => {
           <Col className="text-end">
             <LinkContainer to={`/admin/createadmissionbatch`}>
               <Button className="btn-sm m-3 btnAllScreen">
-                Create New Batch
+                Create
               </Button>
             </LinkContainer>
           </Col>
@@ -70,6 +70,8 @@ const AdmissionBatchListScreen = () => {
                 </tr>
               </thead>
               <tbody>
+              {data?.length === 0 &&
+                <p>No any Admission Batch found</p>}
                 {data?.map((admissionBatch) => (
                   <tr key={admissionBatch?._id}>
                     <td>

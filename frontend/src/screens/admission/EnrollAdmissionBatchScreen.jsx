@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Container, Form, Card, Button, Badge } from "react-bootstrap";
 import Message from "./../../components/Message";
+import { useSelector, useDispatch } from "react-redux";
 import Loader from "./../../components/Loader";
 import { formatDate } from '../../common-functions/formatDate.js';
 
@@ -22,6 +23,8 @@ const EnrollAdmissionBatchScreen = () => {
     const [fatherName, setFatherName] = useState("");
     const [gender, setGender] = useState("Male")
     const [admissionBatchId, setAdmissionBatchId] = useState(null);
+
+    const { userInfo } = useSelector((state) => state.auth);
 
     const navigate = useNavigate();
 
@@ -55,9 +58,10 @@ const EnrollAdmissionBatchScreen = () => {
             };
             const result = await enrollCourse(enrollUser);
             if (result.error) {
-                toast.error(result.error.data.error);
+                toast.error(result?.error?.data?.error);
             } else {
-                toast.success(result.data.message);
+                toast.success(result?.data?.message);
+                navigate(`/my-enrollments/${userInfo?._id}`)
             }
         } catch (err) {
             toast.error(err?.data?.message || err.error);

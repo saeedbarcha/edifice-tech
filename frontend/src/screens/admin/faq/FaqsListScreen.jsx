@@ -41,7 +41,7 @@ const FaqsListScreen = () => {
           <Col className="text-end">
             <LinkContainer to={`/admin/create-faqs`}>
               <Button className="btn-sm m-3 btnAllScreen">
-               Create Faqs
+               Create
               </Button>
             </LinkContainer>
         
@@ -68,6 +68,8 @@ const FaqsListScreen = () => {
                 </tr>
               </thead>
               <tbody>
+              {allFaqs?.length === 0 &&
+                <p>No any FAQ found</p>}
                 {allFaqs?.map((faq) => (
                   <tr key={faq?._id}>
                     <td>{faq?.question}</td>
