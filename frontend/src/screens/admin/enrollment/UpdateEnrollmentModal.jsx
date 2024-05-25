@@ -103,8 +103,6 @@ const UpdateEnrollmentModal = ({ show, handleClose, updateEnrollUser }) => {
               <option value="Other">Other</option>
             </Form.Control>
           </Form.Group>
-
-
           <Form.Group controlId="performance" className="my-2">
             <Form.Label>Performance</Form.Label>
             <Form.Control
@@ -119,58 +117,48 @@ const UpdateEnrollmentModal = ({ show, handleClose, updateEnrollUser }) => {
             </Form.Control>
           </Form.Group>
           <Form.Group controlId="issueCertificate" className="my-3">
-            <Form.Check
-              type="checkbox"
-              id="issueCertificateCheckbox"
-              label={
-                <span onClick={() => setIssueCertificate(!issueCertificate)}>
-                  Issue Certificate
-                </span>
-              }
-              checked={issueCertificate}
-              onChange={(e) => setIssueCertificate(e.target.checked)}
-            />
+            <label className="d-flex">
+              <Form.Check
+                type="checkbox"
+                id="issueCertificateCheckbox"
+                checked={issueCertificate}
+                onChange={(e) => setIssueCertificate(e.target.checked)}
+              />
+              <span style={{ marginLeft: '8px' }}>Issue Certificate</span>
+            </label>
           </Form.Group>
           <Form.Group controlId="admissionFeePaid" className="my-3">
-            <Form.Check
-              type="checkbox"
-              id="admissionFeePaid"
-              label={
-                <span onClick={() => setAdmissionFeePaid(!admissionFeePaid)}>
-                  Admission Fee Paid
-                </span>
-              }
-              checked={admissionFeePaid}
-              onChange={(e) => setAdmissionFeePaid(e.target.checked)}
-            />
+            <label className="d-flex">
+              <Form.Check
+                type="checkbox"
+                id="admissionFeePaid"
+                checked={admissionFeePaid}
+                onChange={(e) => setAdmissionFeePaid(e.target.checked)}
+              />
+              <span style={{ marginLeft: '8px' }}>Admission Fee Paid</span>
+            </label>
           </Form.Group>
-
           <Form.Group controlId="courseFeePaid" className="my-3">
-            <Form.Check
-              type="checkbox"
-              id="courseFeePaid"
-              label={
-                <span onClick={() => setCourseFeePaid(!courseFeePaid)}>
-                  Course Fee Paid
-                </span>
-              }
-              checked={courseFeePaid}
-              onChange={(e) => setCourseFeePaid(e.target.checked)}
-            />
+            <label className="d-flex">
+              <Form.Check
+                type="checkbox"
+                id="courseFeePaid"
+                checked={courseFeePaid}
+                onChange={(e) => setCourseFeePaid(e.target.checked)}
+              />
+              <span style={{ marginLeft: '8px' }}>Course Fee Paid</span>
+            </label>
           </Form.Group>
-
           <Form.Group controlId="completed" className="my-3">
-            <Form.Check
-              type="checkbox"
-              id="completed"
-              label={
-                <span onClick={() => setCompleted(!completed)}>
-                  Course Completed
-                </span>
-              }
-              checked={completed}
-              onChange={(e) => setCompleted(e.target.checked)}
-            />
+            <label className="d-flex">
+              <Form.Check
+                type="checkbox"
+                id="completed"
+                checked={completed}
+                onChange={(e) => setCompleted(e.target.checked)}
+              />
+              <span style={{ marginLeft: '8px' }}>Course Completed</span>
+            </label>
           </Form.Group>
         </Form>
       </Modal.Body>

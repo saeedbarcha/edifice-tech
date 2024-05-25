@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Container, Card, Form, Button, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useCreateAdmissionBatchMutation } from "../../../slices/admissionBatchApiSlice";
-import { useGetActiveCoursesQuery } from "../../../slices/courseApiSlice.js";
+import { useGetActiveAllCoursesQuery } from "../../../slices/courseApiSlice.js";
 import { toast } from "react-toastify";
 import {useUploadImageMutation} from "../../../slices/uploadImageApiSlice";
 const CreateAdmissionBatchScreen = () => {
@@ -24,7 +24,7 @@ const CreateAdmissionBatchScreen = () => {
     data: allActiveCourses,
     isLoading,
     error,
-  } = useGetActiveCoursesQuery();
+  } = useGetActiveAllCoursesQuery();
 
   const [createAdmissionBatch, { isLoading: loadingCreate }] =
     useCreateAdmissionBatchMutation();
@@ -189,7 +189,7 @@ const CreateAdmissionBatchScreen = () => {
               })}
             </Form.Group>
             <Button variant="btn btnAllScreen" type="submit" disabled={loadingCreate}>
-              {loadingCreate ? "Creating..." : "Create Admission Batch"}
+              {loadingCreate ? "Creating..." : "Create"}
             </Button>
           </Form>
         </Card.Body>

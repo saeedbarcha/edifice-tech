@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Container, Form, Button } from "react-bootstrap";
 import Message from "../../../components/Message";
 import Loader from "../../../components/Loader";
@@ -24,6 +25,9 @@ const EditSerciveScreen = () => {
     isLoading,
     error,
   } = useGetServiceDetailsQuery(serviceId);
+
+  const navigate = useNavigate();
+
 
   const [updateService, { isLoading: loadingUpdate }] =
     useUpdateServiceMutation();
@@ -56,11 +60,13 @@ const EditSerciveScreen = () => {
 
     const result = await updateService(updatedservice);
 
-    if (result.error) {
-      toast.error(result.error);
+    if (result?.error) {
+      toast.error(result?.error);
     } else {
       toast.success("Service updated successfully");
-
+      setTimeout(() => {
+        navigate("/admin/service-list");
+      }, 1000);
     }
   };
 
@@ -182,7 +188,7 @@ const EditSerciveScreen = () => {
 
               <div style={{ textAlign: "right" }}>
                 <Button type="submit" className="btn my-2 btnAllScreen">
-                  Update
+                  {loadingUpdate ? "Updating..." : "Update"}
                 </Button>
               </div>
             </Form>

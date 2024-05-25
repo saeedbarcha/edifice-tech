@@ -7,6 +7,7 @@ import { useLogoutMutation } from "../../slices/usersApiSlice";
 import { logout } from "../../slices/authSlice";
 import { CgProfile, CgMail } from "react-icons/cg";
 import { BsGrid3X3GapFill } from "react-icons/bs";
+import SearchBox from "../../components/SearchBox";
 import {
   FaUser,
   FaSignOutAlt,
@@ -73,8 +74,8 @@ const Header = () => {
             <CgMail />
             <a
               href={`mailto:${CompanyData?.emailAddress
-                  ? CompanyData.emailAddress
-                  : "contact@example.com"
+                ? CompanyData.emailAddress
+                : "contact@example.com"
                 }`}
             >
               {CompanyData?.emailAddress
@@ -145,18 +146,19 @@ const Header = () => {
             </Navbar.Brand>
           </div>
 
+
+
+
           <Navbar.Toggle className="" onClick={toggleMenu}>
             {isMenuOpen ? <AiOutlineClose /> : <AiOutlineMenu />}
           </Navbar.Toggle>
           <Navbar.Collapse id="basic-navbar-nav" className="flex-grow-0" >
+            <SearchBox />
             <Nav>
               <LinkContainer to="/">
                 <Nav.Link smooth>Home</Nav.Link>
               </LinkContainer>
 
-              <LinkContainer to="/about">
-                <Nav.Link smooth>About</Nav.Link>
-              </LinkContainer>
 
               <LinkContainer to="/policy">
                 <Nav.Link smooth>Policy</Nav.Link>
@@ -174,7 +176,7 @@ const Header = () => {
                       <BsGrid3X3GapFill className="mx-2" />
                       Dashborad
                     </Nav.Link>
-                  </LinkContainer>                
+                  </LinkContainer>
                 </NavDropdown>
               )}
 

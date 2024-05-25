@@ -53,7 +53,9 @@ const BlogEditScreen = () => {
       toast.error(result.error);
     } else {
       toast.success("Blog updated successfully");
-      navigate("/admin/bloglist");
+      setTimeout(() => {
+        navigate("/admin/bloglist");
+      }, 1000);
     }
   };
 
@@ -73,7 +75,6 @@ const BlogEditScreen = () => {
   return (
     <div>
       <div className="space" style={{ paddingTop: "3%", paddingBottom: "3%" }}>
-        {loadingUpdate && <Loader />}
 
         {isLoading ? (
           <Loader />
@@ -121,32 +122,18 @@ const BlogEditScreen = () => {
                     onChange={(e) => setContent(e.target.value)}
                   />
                 </Form.Group>
-                <Form.Group controlId="isActive" className="mt-3">
-                  <Form.Label>Is Active?</Form.Label>
-                  <div className="d-flex">
-                    <Form.Check
-                      type="radio"
-                      label="Yes"
-                      name="isActive"
-                      id="isActiveYes"
-                      checked={isActive}
-                      onChange={() => setIsActive(true)}
-                    />
-                    <Form.Check
-                      className="mx-5"
-                      type="radio"
-                      label="No"
-                      name="isActive"
-                      id="isActiveNo"
-                      checked={!isActive}
-                      onChange={() => setIsActive(false)}
-                    />
-                  </div>
-                </Form.Group>
+                <Form.Group controlId="isActive" className="mt-4">
+                <Form.Check
+                  type="checkbox"
+                  label="Is Active"
+                  checked={isActive}
+                  onChange={(e) => setIsActive(e.target.checked)}
+                />
+              </Form.Group>
 
                 <div style={{ textAlign: "right" }}>
                   <Button type="submit"  className="my-2 btnAllScreen">
-                    Update
+                  {loadingUpdate ? "Updating..." : "Update"}
                   </Button>
                 </div>
               </Form>

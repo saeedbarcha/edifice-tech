@@ -13,8 +13,20 @@ export const courseApiSlice = apiSlice.injectEndpoints({
     }),
     
     getActiveCourses: builder.query({
-      query: () => ({
+      query: ({ keyword = '', pageNumber = 1 }) => ({
         url: `${COURSE_URL}/active-courses`,
+        params: {
+          keyword: keyword || undefined, 
+          pageNumber: pageNumber || 1,   
+        },
+        }),
+      providesTags: ["Course"],
+      keepUnusedDataFor: 5,
+    }),
+
+    getActiveAllCourses: builder.query({
+      query: () => ({
+        url: `${COURSE_URL}/active-all`,
         }),
       providesTags: ["Course"],
       keepUnusedDataFor: 5,
@@ -59,6 +71,7 @@ export const courseApiSlice = apiSlice.injectEndpoints({
 export const {
  useGetCoursesQuery,
  useGetActiveCoursesQuery,
+ useGetActiveAllCoursesQuery,
  useUpdateCourseMutation,
  useCreateCourseMutation,
  useGetCourseDetailsQuery,

@@ -67,7 +67,7 @@ const BlogListScreen = () => {
           <Col className="text-end">
             <Button className="btn-sm m-3 btnAllScreen" onClick={createBlogHandler}>
               {/* <Link to={"/admin/createblog"}> */}
-              <FaEdit /> Create Blog
+              Create
               {/* </Link> */}
             </Button>
           </Col>
@@ -94,6 +94,9 @@ const BlogListScreen = () => {
                 </tr>
               </thead>
               <tbody>
+              {data?.length === 0 &&
+                <p>No any blog found</p>}
+
                 {data?.map((blog) => (
                   <tr key={blog._id}>
                     <td><Image src={blog.image} fluid style={{ width: "60px", height: "60px" }} /></td>

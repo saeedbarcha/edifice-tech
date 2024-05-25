@@ -12,6 +12,9 @@ const FaqsScreen = () => {
           <h2>FAQs</h2>
           <p>Frequently Asked Questions</p>
         </div>
+        {activeFaqs?.length === 0 &&
+                <p>No any active faq found</p>}
+
         {activeFaqs?.map((faq, index) => (
           <Accordion className="my-3">
             <Card key={index}>

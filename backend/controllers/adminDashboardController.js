@@ -36,7 +36,6 @@ const fetchModelData = async (model) => {
 
     return { active: active || 0, inactive: inactive || 0, total: total || 0 };
   } catch (error) {
-    // Handle potential errors, e.g., log the error
     console.error(`Error fetching data for ${model.modelName}:`, error);
     return { active: 0, inactive: 0, total: 0 };
   }

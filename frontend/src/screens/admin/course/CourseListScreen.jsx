@@ -5,14 +5,10 @@ import { FaTimes, FaTrash, FaEdit, FaCheck } from "react-icons/fa";
 import Message from "../../../components/Message";
 import Loader from "../../../components/Loader";
 import { toast } from "react-toastify";
-import {
-  useCreateBlogMutation,
-} from "../../../slices/blogApiSlice";
 import { useGetCoursesQuery, useDeleteCourseMutation } from "../../../slices/courseApiSlice.js";
 const CourseListScreen = () => {
   const { data: allCourses, isLoading, error, refetch } = useGetCoursesQuery();
 
-  const [createBlog, { isLoading: loadingCreate }] = useCreateBlogMutation();
 
   const [deleteCourse, { isLoading: loadingDelete }] = useDeleteCourseMutation();
 
@@ -32,21 +28,7 @@ const CourseListScreen = () => {
     }
   };
 
-  const createBlogHandler = async () => {
-    if (window.confirm("Are you sure you want to create a new blog?")) {
-      try {
-        const res = await createBlog();
-        if (res && res.error) {
-          toast.error(res.error.data.message || "Failed to create blog");
-        } else {
-          toast.success("Blog created successfully");
-          refetch();
-        }
-      } catch (err) {
-        toast.error(err?.data?.message || err.error);
-      }
-    }
-  };
+
 
 
   return (
@@ -62,14 +44,13 @@ const CourseListScreen = () => {
           <Col className="text-end">
             <LinkContainer to={`/admin/createcourse`}>
               <Button className="btn-sm m-3 btnAllScreen">
-                Create Course
+                Create
               </Button>
             </LinkContainer>
 
           </Col>
         </Row>
 
-        {loadingCreate && <Loader />}
         {loadingDelete && <Loader />}
 
         {isLoading ? (
@@ -91,6 +72,8 @@ const CourseListScreen = () => {
                 </tr>
               </thead>
               <tbody>
+              {allCourses?.length === 0 &&
+                <p>No any course found</p>}
                 {allCourses?.map((course) => (
                   <tr key={course._id}>
                     <td>{course.title}</td>

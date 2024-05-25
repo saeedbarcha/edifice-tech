@@ -39,6 +39,8 @@ function AllBlogsScreen() {
               </Message>
             ) : (
               <Row md={12}>
+                {data?.length === 0 &&
+                <p>No any blog found</p>}
                 {data.map((blog) => (
                   <Col md={6} lg={4} className="d-flex mb-4">
                     <Link

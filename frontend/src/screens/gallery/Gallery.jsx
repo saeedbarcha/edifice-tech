@@ -40,26 +40,33 @@ const Gallery = () => {
           ) : isLoading ? (
             <Loader />
           ) : (
-            galleryData?.map((ele, index) => (
-              <Col key={ele?._id} lg={3} md={4} className="gallery-item">
-                <div className="gallery-wrap">
-                  <Image src={ele?.image} fluid alt="" loading="lazy" />
-                  <div className="gallery-info">
-                    <p>{ele?.caption}</p>
-                    <div className="gallery-links">
-                      <a className="gallery-lightbox" title="App 1">
-                        <FaPlus
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            openLightbox(ele);
-                          }}
-                        />
-                      </a>
+            <div>
+              {galleryData?.length === 0 &&
+                <p>No any active gallery found</p>}
+              {
+                galleryData?.map((ele, index) => (
+                  <Col key={ele?._id} lg={3} md={4} className="gallery-item">
+                    <div className="gallery-wrap">
+                      <Image src={ele?.image} fluid alt="" loading="lazy" />
+                      <div className="gallery-info">
+                        <p>{ele?.caption}</p>
+                        <div className="gallery-links">
+                          <a className="gallery-lightbox" title="App 1">
+                            <FaPlus
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                openLightbox(ele);
+                              }}
+                            />
+                          </a>
+                        </div>
+                      </div>
                     </div>
-                  </div>
-                </div>
-              </Col>
-            ))
+                  </Col>))
+              }
+            </div>
+
+
           )}
         </Row>
 

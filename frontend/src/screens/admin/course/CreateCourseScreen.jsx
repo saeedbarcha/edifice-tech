@@ -23,7 +23,7 @@ const CreateCourseScreen = () => {
   const [certificate, setCertificate] = useState(false);
 
 
-  const [createCourse, { isLoading: loadingUpdate }] = useCreateCourseMutation();
+  const [createCourse, { isLoading: loadingCreate }] = useCreateCourseMutation();
 
   const [uploadBlogImage, { isLoading: loadingUpload }] =
   useUploadImageMutation();
@@ -53,7 +53,9 @@ const CreateCourseScreen = () => {
       toast.error(result.error)
     } else {
       toast.success("Course created successfully");
-      navigate("/admin/courselist");
+      setTimeout(() => {
+        navigate(`/admin/courselist`);
+      }, 1000);
     }
 
   }
@@ -202,7 +204,7 @@ const CreateCourseScreen = () => {
 
               <div style={{ textAlign: "right" }}>
                 <Button type="submit"  className="my-2 btnAllScreen">
-                  Create Course
+                {loadingCreate ? "Creating..." : "Create"}
                 </Button>
               </div>
             </Form>

@@ -26,6 +26,8 @@ const ServicesScreen = () => {
           <p>CHECK OUR SERVICES</p>
         </div>
         <Row className="wrapper">
+        {allService?.length === 0 &&
+                <p>No any active service found</p>}
           {allService?.map((service, index) => {
             return (
               <Col sm={6} lg={3} className="mt-4" key={index}>

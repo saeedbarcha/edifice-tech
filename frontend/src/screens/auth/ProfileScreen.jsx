@@ -92,8 +92,7 @@ const ProfileScreen = () => {
                 <Col lg="4">
                   <Card className="mb-4">
                     <Card.Body className="text-center">
-
-                      <ImageCrop image={user?.user?.image}   updatefunction={updateProfile}  loadingUpdate={loadingUpdate} size={{width:250, height:250}}/>
+                      <ImageCrop image={user?.user?.image ? user?.user?.image : `https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava${user?.user?.gender === "Male" ? 3 : 4}.webp`}   updatefunction={updateProfile}  loadingUpdate={loadingUpdate} size={{width:250, height:250}}/>
                      
                       <h3>{user?.user?.name}</h3>
                       <p>{user?.user?.designation}</p>

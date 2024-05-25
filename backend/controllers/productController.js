@@ -48,7 +48,6 @@ const getProductById = asyncHandler(async (req, res) => {
 // @access  Private/Admin
 const updateProduct = asyncHandler(async (req, res) => {
   const { name, url, description, image , isActive} = req.body;
-  console.log("rrrrrrrrrrrr", req.body)
   
   const product = await Product.findById(req.params.id);
   if (product) {
