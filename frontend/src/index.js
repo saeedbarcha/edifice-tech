@@ -94,13 +94,13 @@ const router = createBrowserRouter(
         <Route path="/admin/productlist" element={<ProductListScreen />} />
         <Route path="/admin/createblog" element={<CreateBlogScreen />} />
         <Route path="/admin/createservice" element={<CreateServiceScreen />} />
-        {/* <Route path="/admin/service-List" element={<ServiceListScreen />} /> */}
-        <Route path="/admin/service-List/page/1" element={<ServiceListScreen />} />
+        <Route path="/admin/blog-list/:keyword?/page/:pageNumber?" element={<BlogListScreen />} />
+        <Route path="/admin/service-List/:keyword?/page/:pageNumber?" element={<ServiceListScreen />} />
 
 
 
 
-        <Route path="/admin/bloglist" element={<BlogListScreen />} />
+        {/* <Route path="/admin/bloglist" element={<BlogListScreen />} /> */}
         <Route path="/admin/gallerylist" element={<GalleryList />} />
         <Route path="/admin/courselist" element={<CourseListScreen />} />
         <Route path="/admin/createcourse" element={<CreateCourseScreen />} />

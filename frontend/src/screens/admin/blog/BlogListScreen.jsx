@@ -1,9 +1,11 @@
 import { LinkContainer } from "react-router-bootstrap";
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Container, Table, Button, Row, Col, Image } from "react-bootstrap";
 import { FaTimes, FaTrash, FaEdit, FaCheck } from "react-icons/fa";
 import Message from "../../../components/Message";
 import Loader from "../../../components/Loader";
+import Paginate from "../../../components/Paginate";
 import { formatDateWithTime } from '../../../common-functions/formatDate.js';
 import { toast } from "react-toastify";
 import {
@@ -13,8 +15,13 @@ import {
 } from "../../../slices/blogApiSlice";
 
 const BlogListScreen = () => {
+  
+  const { keyword, pageNumber } = useParams();
+  const page = pageNumber || 1;
 
-  const { data, isLoading, error, refetch } = useGetBlogsQuery();
+  const { data: responseData, isLoading, error, refetch } = useGetBlogsQuery({keyword:"", pageNumber: page });
+
+  console.log("ssssss...", responseData)
 
   const [createBlog, { isLoading: loadingCreate }] =
     useCreateBlogMutation();
@@ -94,10 +101,10 @@ const BlogListScreen = () => {
                 </tr>
               </thead>
               <tbody>
-              {data?.length === 0 &&
+              {responseData?.allBolgs?.length === 0 &&
                 <p>No any blog found</p>}
 
-                {data?.map((blog) => (
+                {responseData?.allBlogs?.map((blog) => (
                   <tr key={blog._id}>
                     <td><Image src={blog.image} fluid style={{ width: "60px", height: "60px" }} /></td>
 
@@ -128,7 +135,19 @@ const BlogListScreen = () => {
                   </tr>
                 ))}
               </tbody>
+             
             </Table>
+            {responseData?.allBolgs?.length > 0 &&
+                <div style={{ display: "flex", marginTop:"25px", justifyContent: "center" }}>
+                  <Paginate screen="admin/blog-list" pages={responseData?.pages} page={parseInt(page)} keyword={keyword} />
+                </div>
+               } 
+
+                {responseData?.allBolgs?.length > 0 &&
+                <div style={{ display: "flex", marginTop:"25px", justifyContent: "center" }}>
+                  <Paginate screen="admin/blog-list" pages={responseData?.pages} page={parseInt(page)} keyword={keyword} />
+                </div>
+               } 
           </>
         )}
       </Container>

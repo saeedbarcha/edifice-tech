@@ -10,9 +10,9 @@ import { toast } from "react-toastify";
 import Paginate from "../../../components/Paginate";
 import {useGetServicesQuery,  useDeleteServiceMutation, } from "../../../slices/serviceApiSlice";
 const ServiceListScreen = () => {
-  const { pageNumber } = useParams();
+  const { keyword, pageNumber } = useParams();
   const page = pageNumber || 1;
-  const { data: responseData, isLoading, error, refetch } = useGetServicesQuery({ pageNumber: page });
+  const { data: responseData, isLoading, error, refetch } = useGetServicesQuery({keyword:"", pageNumber: page });
 
   const [deleteService, { isLoading: loadingDelete }] = useDeleteServiceMutation();
 
@@ -105,13 +105,14 @@ const ServiceListScreen = () => {
                     </td>
                   </tr>
                 ))}
-                 {responseData?.allServices?.length > 0 &&
-                <div style={{ display: "flex", marginTop:"25px", justifyContent: "center" }}>
-                  <Paginate screen="/admin/service-List" pages={responseData.pages} page={parseInt(page)} />
-                </div>
-              }
+              
               </tbody>
             </Table>
+            {responseData?.allServices?.length > 0 &&
+                <div style={{ display: "flex", marginTop:"25px", justifyContent: "center" }}>
+                  <Paginate screen="admin/service-list" pages={responseData?.pages} page={parseInt(page)} keyword={keyword} />
+                </div>
+              }
           </>
         )}
       </Container>

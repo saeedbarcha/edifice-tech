@@ -5,9 +5,10 @@ export const serviceApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
    
     getServices: builder.query({
-      query: ({ pageNumber = 1 }) => ({
+      query: ({keyword = '', pageNumber = 1 }) => ({
         url: `${SERVICE_URL}/`,
         params: {
+          keyword: keyword || undefined, 
           pageNumber: pageNumber || 1,   
         },
         }),
