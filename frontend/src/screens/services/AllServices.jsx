@@ -36,9 +36,9 @@ const AllServices = () => {
           {responseData?.activeServices?.map((service, index) => {
             return (
               <Col sm={6} lg={3} className="mt-4" key={index}>
-                <Link to={`/service/${service._id}`} style={{ textDecoration: "none" }}>
+                <Link  to={`/services/${service._id}`} style={{ textDecoration: "none" }}>
+                
                   <div className="showCardCont">
-                    {/* <div className="iconCont"><Image style={{width:"100%" , borderRadius:"inherit"}} src={service.iconImage} /> {}</div> */}
                     <div className="iconCont"> <MdAppSettingsAlt style={iconStyle} /></div>
                     <h4 className="serviceHeading">{service?.title}</h4>
                   </div>

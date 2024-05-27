@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { LinkContainer } from "react-router-bootstrap";
 import { useParams, Link } from "react-router-dom";
-import { Container, Table, Button, Row, Col, Image } from "react-bootstrap";
+import { Container, Table, Button, Row, Col, Image, Modal } from "react-bootstrap";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import Message from "../../../components/Message";
 import Loader from "../../../components/Loader";
@@ -10,46 +10,47 @@ import { toast } from "react-toastify";
 import AddAndUpdateGalleryModal from "./AddAndUpdateGalleryModal";
 import { useGetGalleryQuery, useDeleteGalleryItemMutation } from "../../../slices/galleryApiSlice";
 
-
 const GalleryList = () => {
-  
   const { keyword, pageNumber } = useParams();
   const page = pageNumber || 1;
 
   const [showGalleryModal, setShowGalleryModal] = useState(false);
   const [selectedGallery, setSelectedGallery] = useState(null);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [galleryToDelete, setGalleryToDelete] = useState(null);
 
-  const { data:responseData, isLoading, error, refetch } = useGetGalleryQuery({ keyword: "", pageNumber: page });
-
+  const { data: responseData, isLoading, error, refetch } = useGetGalleryQuery({ keyword: "", pageNumber: page });
 
   const handleCloseGalleryModal = () => setShowGalleryModal(false);
-
   const handleOpenGalleryModal = () => setShowGalleryModal(true);
 
+  const handleCloseDeleteModal = () => setShowDeleteModal(false);
+  const handleShowDeleteModal = (id) => {
+    setGalleryToDelete(id);
+    setShowDeleteModal(true);
+  };
 
- 
   const [deleteProduct, { isLoading: loadingDelete }] = useDeleteGalleryItemMutation();
 
-  const deleteHandler = async (id) => {
-    if (window.confirm("Are you sure?")) {
-      try {
-        const res = await deleteProduct(id);
-        if (res && res.error) {
-          toast.error(res.error.data.message || "Failed to delete product");
-        } else {
-          toast.success("Product deleted");
-          refetch();
-        }
-      } catch (err) {
-        toast.error(err?.data?.message || err.error);
+  const deleteHandler = async () => {
+    try {
+      const res = await deleteProduct(galleryToDelete);
+      if (res && res.error) {
+        toast.error(res.error.data.message || "Failed to delete product");
+      } else {
+        toast.success("Product deleted");
+        refetch();
       }
+    } catch (err) {
+      toast.error(err?.data?.message || err.error);
     }
+    handleCloseDeleteModal();
   };
 
   return (
     <>
       <Container className="py-3">
-      <Link className="btn btn-light my-3" to="/admin/dashboard">
+        <Link className="btn btn-light my-3" to="/admin/dashboard">
           Go Back
         </Link>
         <Row className="align-items-center">
@@ -62,11 +63,8 @@ const GalleryList = () => {
               handleClose={handleCloseGalleryModal}
               editGallery={selectedGallery}
             />
-            <Button className="btn-sm btnAllScreen"
-              onClick={() => {
-                handleOpenGalleryModal(true);
-              }}>
-              Create 
+            <Button className="btn-sm btnAllScreen" onClick={() => handleOpenGalleryModal(true)}>
+              Create
             </Button>
           </Col>
         </Row>
@@ -74,8 +72,7 @@ const GalleryList = () => {
         {isLoading ? (
           <Loader />
         ) : error ? (
-          <Message variant="danger"> {error?.data?.message || error?.data || error?.error}</Message>
-
+          <Message variant="danger">{error?.data?.message || error?.data || error?.error}</Message>
         ) : (
           <>
             <Table striped hover responsive className="table-sm">
@@ -87,18 +84,18 @@ const GalleryList = () => {
                 </tr>
               </thead>
               <tbody>
-              {responseData?.allGalleries?.length === 0 &&
-                <p>No any Gallery found</p>}
-
+                {responseData?.allGalleries?.length === 0 && <p>No any Gallery found</p>}
                 {responseData?.allGalleries?.map((imageItem) => (
                   <tr key={imageItem._id}>
-                    <td><Image src={imageItem.image} fluid style={{ width: "60px", height: "60px" }} /></td>
+                    <td>
+                      <Image src={imageItem.image} fluid style={{ width: "60px", height: "60px" }} />
+                    </td>
                     <td>{imageItem.caption}</td>
                     <td>
                       <Button
                         variant="danger"
                         className="btn-sm"
-                        onClick={() => deleteHandler(imageItem._id)}
+                        onClick={() => handleShowDeleteModal(imageItem._id)}
                       >
                         <FaTrash style={{ color: "white" }} />
                       </Button>
@@ -108,14 +105,30 @@ const GalleryList = () => {
               </tbody>
             </Table>
 
-            {responseData?.allGalleries?.length > 0 &&
+            {responseData?.allGalleries?.length > 0 && (
               <div style={{ display: "flex", marginTop: "25px", justifyContent: "center" }}>
                 <Paginate screen="admin/galleries-list" pages={responseData?.pages} page={parseInt(page)} keyword={keyword} />
               </div>
-            }
+            )}
           </>
         )}
       </Container>
+
+      {/* Delete Gallery Item Modal */}
+      <Modal show={showDeleteModal} onHide={handleCloseDeleteModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Confirm Delete Gallery Item</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Are you sure you want to delete this gallery item?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseDeleteModal}>
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={deleteHandler}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 };

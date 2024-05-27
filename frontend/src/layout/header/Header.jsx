@@ -66,6 +66,13 @@ const Header = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+
+  const ensureUrlProtocol = (url) => {
+    if (url && !/^https?:\/\//i.test(url)) {
+      return `https://${url}`;
+    }
+    return url;
+  };
   return (
     <>
       <section id="topbar" className="d-flex align-items-center">
@@ -77,6 +84,7 @@ const Header = () => {
                 ? CompanyData.emailAddress
                 : "contact@example.com"
                 }`}
+                
             >
               {CompanyData?.emailAddress
                 ? CompanyData.emailAddress
@@ -89,36 +97,45 @@ const Header = () => {
             </span>
           </div>
           <div className="social-links d-none d-md-flex align-items-center">
+          
             <a
               href={
-                CompanyData?.facebookPageUrl ? CompanyData.facebookPageUrl : "#"
+                ensureUrlProtocol(CompanyData?.twitterPageUrl ? CompanyData.twitterPageUrl : "#")
               }
+              target="_blank"
+              rel="noopener noreferrer"
               className="twitter"
             >
               <AiFillTwitterCircle />
             </a>
             <a
               href={
-                CompanyData?.facebookPageUrl ? CompanyData.facebookPageUrl : "#"
+                ensureUrlProtocol( CompanyData?.facebookPageUrl ? CompanyData.facebookPageUrl : "#")
               }
+              target="_blank"
+              rel="noopener noreferrer"
               className="facebook"
             >
               <AiFillFacebook />
             </a>
             <a
               href={
-                CompanyData?.instagramPageUrl
+                ensureUrlProtocol(  CompanyData?.instagramPageUrl
                   ? CompanyData.instagramPageUrl
-                  : "#"
+                  : "#")
               }
+              target="_blank"
+              rel="noopener noreferrer"
               className="instagram"
             >
               <AiFillInstagram />
             </a>
             <a
               href={
-                CompanyData?.linkedInPageUrl ? CompanyData.linkedInPageUrl : "#"
+                ensureUrlProtocol( CompanyData?.linkedInPageUrl ? CompanyData.linkedInPageUrl : "#")
               }
+              target="_blank"
+              rel="noopener noreferrer"
               className="linkedin"
             >
               <AiFillLinkedin />

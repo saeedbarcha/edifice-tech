@@ -14,7 +14,7 @@ import { useGetServiceDetailsQuery, useGetActiveServicesQuery } from "../../slic
 function ServiceDetails() {
   const { id } = useParams();
   const { data: service,  } = useGetServiceDetailsQuery(id);
-  const { data: allService, isLoading, error, refetch } = useGetActiveServicesQuery();
+  // const { data: allService, isLoading, error, refetch } = useGetActiveServicesQuery();
 
 
   return (
@@ -26,7 +26,7 @@ function ServiceDetails() {
         minHeight: "100vh",
       }}
     >
-      <Navbar
+      {/* <Navbar
         className="site-header sticky-top py-1"
         bg="light"
         expand="md"
@@ -48,7 +48,7 @@ function ServiceDetails() {
             </Nav>
           </Navbar.Collapse>
         </Container>
-      </Navbar>
+      </Navbar> */}
       <div className="position-relative overflow-hidden p-3 p-md-5 m-md-3 bg-light">
         <Container>
           <Row className="">
@@ -121,7 +121,6 @@ function ServiceDetails() {
           </Col>
         </Row>
       </Container>
-      {/* Other sections */}
     </div>
   );
 }

@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useGetAdmissionBatchDetailsQuery, useUpdateAdmissionBatchMutation } from "../../../slices/admissionBatchApiSlice";
 import {useUploadImageMutation} from "../../../slices/uploadImageApiSlice";
-import { useGetActiveCoursesQuery } from "../../../slices/courseApiSlice";
+import { useGetActiveAllCoursesQuery } from "../../../slices/courseApiSlice";
 
 
 const EditAdmissionBatchScreen = () => {
@@ -23,10 +23,11 @@ const EditAdmissionBatchScreen = () => {
 
   const navigate = useNavigate();
   const {
-    data: allActiveCourses,
-    // isLoading:isLoadingAllActiveCourses,
-    // error,
-  } = useGetActiveCoursesQuery();
+    data: allActiveCourses
+  } = useGetActiveAllCoursesQuery();
+
+  console.log("allActiveCourses...........", allActiveCourses)
+
   const [uploadAdmissionBacthImage, { isLoading: loadingUpload }] =
   useUploadImageMutation();
   const {
@@ -77,7 +78,7 @@ const EditAdmissionBatchScreen = () => {
       const res = await updateAdmissionBatch(admissionBatch);
 
       if (res.data) {
-        navigate("/admin/admissionbatchlist");
+        navigate("/admin/admission-batches-list/page/1");
       }
     } catch (err) {
       toast.error(err?.data?.message || err.error);
@@ -223,7 +224,7 @@ const EditAdmissionBatchScreen = () => {
                 })}
               </Form.Group>
           
-            <Button variant="btn btnAllScreen" type="submit" disabled={loadingUpdate}>
+            <Button className="btn-sm m-3 btnAllScreen" type="submit" disabled={loadingUpdate}>
             {loadingUpdate ? "Updating..." : "Update"}
             </Button>
           </Form>

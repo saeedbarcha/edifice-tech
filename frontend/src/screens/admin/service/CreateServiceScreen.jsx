@@ -41,7 +41,7 @@ const CreateServiceScreen = () => {
     } else {
       toast.success("Service created successfully");
       setTimeout(() => {
-        navigate("/admin/service-list");
+        navigate("/admin/services-List/page/1");
       }, 1000);
     }
 
@@ -150,7 +150,7 @@ const CreateServiceScreen = () => {
               {loadingUpload && <Loader />}
 
               <div style={{ textAlign: "right" }}>
-                <Button type="submit" className="my-2 btnAllScreen">
+                <Button type="submit" className="btn-sm m-3 btnAllScreen">
                 {loadingCreate ? "Creating..." : "Create"}
                 </Button>
               </div>

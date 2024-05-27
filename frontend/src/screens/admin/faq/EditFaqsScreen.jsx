@@ -6,7 +6,6 @@ import {
   useGetFaqDetailsQuery,
   useUpdateFaqMutation
 } from "../../../slices/faqsApiSlice";
-import Loader from "../../../components/Loader";
 
 
 const EditFaqsScreen = () => {
@@ -49,7 +48,10 @@ const EditFaqsScreen = () => {
       toast.error(result.error)
     } else {
       toast.success("Faq updated successfully");
-      navigate("/admin/faqs-list");
+      setTimeout(() => {
+        navigate("/admin/faqs-list/page/1");
+      }, 1000);
+     
     }
 
   }
@@ -93,7 +95,7 @@ const EditFaqsScreen = () => {
 
 
               <div style={{ textAlign: "right" }}>
-                <Button type="submit" className="my-2 btnAllScreen">
+                <Button type="submit" className="btn-sm m-3 btnAllScreen">
                   {loadingUpdate ? "Updating..." : "Update"}
                 </Button>
               </div>

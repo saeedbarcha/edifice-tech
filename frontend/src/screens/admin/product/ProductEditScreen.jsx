@@ -62,7 +62,7 @@ const ProductEditScreen = () => {
     } else {
       toast.success("Product updated successfully");
       setTimeout(() => {
-        navigate("/admin/productlist");
+        navigate("/admin/products-list/page/1");
       }, 1000);
       
     }
@@ -149,7 +149,7 @@ const ProductEditScreen = () => {
                 />
               </Form.Group>
               <div style={{ textAlign: "right" }}>
-                <Button type="submit" variant="primary" className="my-2 btnAllScreen">
+                <Button type="submit" variant="primary" className="btn-sm m-3 btnAllScreen">
                  {loadingUpdate ? "Updating..." : "Update"} 
                 </Button>
               </div>

@@ -18,6 +18,7 @@ const OpenAdmissionBatch = () => {
     error,
   } = useGetRecentAdmissionBatchQuery();
 
+
   const enrollHandler = (id) => {
     navigate(`/login?redirect=/activeadmissionbatch/${id}`)
 
@@ -55,7 +56,7 @@ const OpenAdmissionBatch = () => {
                 )}
               </Col>
               <Col md={5}>
-                {admissionBatch == !undefined &&
+              {admissionBatch?.selectedCourses?.length == 0 ? <p>No any active Admission batch found</p> :
                 <Carousel className="course-carousel" interval={3000} indicators={false}>
                   {admissionBatch?.selectedCourses?.map((course) => (
                     
@@ -92,7 +93,7 @@ const OpenAdmissionBatch = () => {
                     </Carousel.Item>
                   ))}
                 </Carousel>
-                }
+}
               </Col>
             </Row>
           </Container>

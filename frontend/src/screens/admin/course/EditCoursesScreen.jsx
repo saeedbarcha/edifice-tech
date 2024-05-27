@@ -83,7 +83,7 @@ const EditCoursesScreen = () => {
     } else {
       toast.success("Course updated successfully");
       setTimeout(() => {
-        navigate(`/admin/courselist`);
+        navigate(`/admin/courses-List/page/1`);
       }, 1000);
     }
   };
@@ -240,7 +240,7 @@ const EditCoursesScreen = () => {
               {loadingUpload && <Loader />}
 
               <div style={{ textAlign: "right" }}>
-                <Button type="submit" className="btn my-2 btnAllScreen">
+                <Button type="submit" className="btn-sm m-3 btnAllScreen">
                 {loadingUpdate ? "Updating..." : "Update"}
                 </Button>
               </div>

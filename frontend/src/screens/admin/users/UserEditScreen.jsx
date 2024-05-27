@@ -45,7 +45,7 @@ const UserEditScreen = () => {
       await updateUser({userId, isAdmin, isTeamMember});
       toast.success("User updated successfully");
       refetch();
-      navigate('/admin/userlist');
+      navigate('/admin/users-list/page/1');
     } catch (err) {
       toast.error(err?.data?.message || err.error);
     }
@@ -112,7 +112,7 @@ const UserEditScreen = () => {
              </Form.Check>
             </Form.Group>
 
-            <Button type="submit" variant="primary" className="my-2 btnAllScreen">
+            <Button type="submit" variant="primary" className="btn-sm m-3 btnAllScreen">
               Update
             </Button>
           </Form>
