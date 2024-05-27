@@ -4,8 +4,12 @@ import { apiSlice } from "./apiSlice";
 export const faqsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getFaqs: builder.query({
-      query: () => ({
+      query: ({ keyword = '', pageNumber = 1 }) => ({
         url: `${FAQS_URL}`,
+        params: {
+          keyword: keyword || undefined,
+          pageNumber: pageNumber || 1,
+        },
         }),
       providesTags: ["Faqs"],
       keepUnusedDataFor: 5,

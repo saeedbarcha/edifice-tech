@@ -4,12 +4,15 @@ import { Container, Table, Button, Image } from "react-bootstrap";
 import { FaTimes, FaTrash, FaEdit, FaCheck } from "react-icons/fa";
 import Message from "../../../components/Message";
 import Loader from "../../../components/Loader";
+import Paginate from "../../../components/Paginate";
 import { toast } from "react-toastify";
 import { useGetUsersQuery, useDeleteUserMutation } from "../../../slices/usersApiSlice";
 
 const UserListScreen = () => {
-  const { id: userId } = useParams();
-  const { data: users, refetch, isLoading, error } = useGetUsersQuery();
+  const { keyword, pageNumber } = useParams();
+  const page = pageNumber || 1;
+
+  const { data: responseData, refetch, isLoading, error } = useGetUsersQuery({ keyword: "", pageNumber: page });
 
   const [deleteUser, { isLoading: loadingDelete }] = useDeleteUserMutation();
 
@@ -47,6 +50,7 @@ const UserListScreen = () => {
         ) : error ? (
           <Message variant="danger"> {error?.data?.message || error?.data || error?.error}</Message>
         ) : (
+          <>
           <Table striped hover responsive className="table-sm">
             <thead>
               <tr>
@@ -60,7 +64,10 @@ const UserListScreen = () => {
               </tr>
             </thead>
             <tbody>
-              {users?.map((user) => (
+            {responseData?.allUsers?.length === 0 &&
+                  <p>No any User found</p>}
+
+              {responseData?.allUsers?.map((user) => (
                 <tr key={user._id}>
                   <td><Image src={user?.image ? user.image : `https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava${user.gender === "Male" ? 3 : 4}.webp`}
                     fluid style={{ width: "60px", height: "60px" }} /></td>
@@ -99,6 +106,12 @@ const UserListScreen = () => {
               ))}
             </tbody>
           </Table>
+           {responseData?.allUsers?.length > 0 &&
+            <div style={{ display: "flex", marginTop: "25px", justifyContent: "center" }}>
+              <Paginate screen="admin/users-list" pages={responseData?.pages} page={parseInt(page)} keyword={keyword} />
+            </div>
+          }
+         </>
         )}
       </Container>
     </>

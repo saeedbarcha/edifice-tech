@@ -5,8 +5,12 @@ export const blogApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
    
     getBlogs: builder.query({
-      query: () => ({
+      query: ({keyword = '', pageNumber = 1 }) => ({
         url: BLOGS_URL,
+        params: {
+          keyword: keyword || undefined, 
+          pageNumber: pageNumber || 1,   
+        },
         }),
       providesTags: ["Blogs"],
       keepUnusedDataFor: 5,

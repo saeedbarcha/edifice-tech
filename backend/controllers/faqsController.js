@@ -5,8 +5,21 @@ import Faqs from "../models/faqsModel.js";
 // @route   GET /api/faqs
 // @access  Public
 const getFaqs = asyncHandler(async (req, res) => {
-    const faqs = await Faqs.find({})
-    res.status(201).json(faqs);
+    const pageSize = process.env.PAGINATION_LIMIT;
+    const page = Number(req.query.pageNumber) || 1;
+    const keyword = req.query.keyword ? {
+      question: {
+        $regex: req.query.keyword,
+        $options: "i"
+      }
+    } : {};
+    const count = await Faqs.countDocuments({...keyword});
+    const allFaqs = await Faqs.find({...keyword}).limit(pageSize).skip(pageSize * (page - 1));
+  
+    if (!allFaqs) {
+      res.status(404).json({ message: "Faq not found" });
+    }
+    res.status(200).json({ allFaqs, page, pages: Math.ceil(count / pageSize) });
 });
 
 // @desc    Fetch all active faqs

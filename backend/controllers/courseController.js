@@ -5,8 +5,20 @@ import Course from "../models/courseModel.js";
 // @route   GET /api/courses
 // @access  Public/admin
 const getCourses = asyncHandler(async (req, res) => {
-  const courses = await Course.find({});
-  res.status(200).json(courses);
+  const pageSize = process.env.PAGINATION_LIMIT;
+  const page = Number(req.query.pageNumber) || 1;
+  const keyword = req.query.keyword ? { title:{$regex: req.query.keyword,
+    $options:"i"} } : {};
+
+   const count = await Course.countDocuments({...keyword});
+
+  const allCourses = await Course.find({...keyword}).limit(pageSize).skip(pageSize * (page - 1));
+
+  if(!allCourses){
+    res.status(404).json({ message: "Course not found" });
+  }
+  res.status(200).json({allCourses, page, pages: Math.ceil(count / pageSize)});
+
 });
 
 

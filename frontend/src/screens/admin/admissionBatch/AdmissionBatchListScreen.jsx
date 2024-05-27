@@ -1,9 +1,10 @@
 import { LinkContainer } from "react-router-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Container, Table, Button, Row, Col, Image } from "react-bootstrap";
 import { FaTimes, FaTrash, FaEdit, FaCheck } from "react-icons/fa";
 import Message from "../../../components/Message";
 import Loader from "../../../components/Loader";
+import Paginate from "../../../components/Paginate";
 import { toast } from "react-toastify";
 import { formatDate } from '../../../common-functions/formatDate.js';
 import {
@@ -12,7 +13,11 @@ import {
 } from "../../../slices/admissionBatchApiSlice";
 
 const AdmissionBatchListScreen = () => {
-  const { data, isLoading, error, refetch } = useGetAdmissionBatchsQuery();
+  const { keyword, pageNumber } = useParams();
+  const page = pageNumber || 1;
+
+
+  const { data:responseData, isLoading, error, refetch } = useGetAdmissionBatchsQuery({ keyword: "", pageNumber: page });
 
   const [deleteAdmissionBatch, { isLoading: loadingDelete }] =
     useDeleteAdmissionBatchMutation();
@@ -70,9 +75,9 @@ const AdmissionBatchListScreen = () => {
                 </tr>
               </thead>
               <tbody>
-              {data?.length === 0 &&
+              {responseData?.allAdmissionBatches?.length === 0 &&
                 <p>No any Admission Batch found</p>}
-                {data?.map((admissionBatch) => (
+                {responseData?.allAdmissionBatches?.map((admissionBatch) => (
                   <tr key={admissionBatch?._id}>
                     <td>
                       <Link to={`/admissionbatch/${admissionBatch?._id}`}>
@@ -118,6 +123,11 @@ const AdmissionBatchListScreen = () => {
                 ))}
               </tbody>
             </Table>
+            {responseData?.allAdmissionBatches?.length > 0 &&
+              <div style={{ display: "flex", marginTop: "25px", justifyContent: "center" }}>
+                <Paginate screen="admin/admission-batches-list" pages={responseData?.pages} page={parseInt(page)} keyword={keyword} />
+              </div>
+            }
           </>
         )}
       </Container>

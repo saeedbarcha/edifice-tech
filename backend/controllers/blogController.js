@@ -6,9 +6,23 @@ import Blog from "../models/blogModel.js";
 // @route   GET /api/Blogs
 // @access  Public
 const getBlogs = asyncHandler(async (req, res) => {
-  const blogs = await Blog.find({}).populate('user', 'name image email ');
-  res.status(200).json(blogs);
+  const pageSize = process.env.PAGINATION_LIMIT;
+  const page = Number(req.query.pageNumber) || 1;
+  const keyword = req.query.keyword ? {
+    title: {
+      $regex: req.query.keyword,
+      $options: "i"
+    }
+  } : {};
+  const count = await Blog.countDocuments({...keyword});
+  const allBlogs = await Blog.find({...keyword}).limit(pageSize).skip(pageSize * (page - 1));
+
+  if (!allBlogs) {
+    res.status(404).json({ message: "Blog not found" });
+  }
+  res.status(200).json({ allBlogs, page, pages: Math.ceil(count / pageSize) });
 });
+
 
 // @desc    Fetch all Active Blogs
 // @route   GET /api/blogs

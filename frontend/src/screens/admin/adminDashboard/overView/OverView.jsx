@@ -31,15 +31,15 @@ const OverView = ({ blogs, products, courses, faqs, galleries, services, admissi
     <>
       <div class="overView">
         <Row>
-          <OverCard title="Users" data={users} icon="FaUsers" link="/admin/userlist" />
-          <OverCard title="Admission Batches" data={admissionBatches} icon="FaBookOpenReader" link="/admin/admissionbatchlist" />
+          <OverCard title="Users" data={users} icon="FaUsers" link="/admin/users-list/page/1" />
+          <OverCard title="Admission Batches" data={admissionBatches} icon="FaBookOpenReader" link="/admin/admission-batches-list/page/1" />
           <OverCard title="Enrollments" data={enrollments} icon="MdImage"  link="/admin/enrollment-List"/>
-          <OverCard title="Courses" data={courses} icon="FaBookMedical" link="/admin/courselist"/>
-          <OverCard title="Services" data={services} icon="FaServicestack" link="/admin/service-List/page/1"/>
-          <OverCard title="Blogs" data={blogs} icon="FaBlogger" link="/admin/bloglist"/>
-          <OverCard title="Products" data={products} icon="FaProductHunt" link="/admin/productlist"/>
-          <OverCard title="FAQs" data={faqs} icon="BsFillQuestionSquareFill" link="/admin/faqs-List" />
-          <OverCard title="Gallery" data={galleries} icon="MdImage"  link="/admin/gallerylist"/>
+          <OverCard title="Courses" data={courses} icon="FaBookMedical" link="/admin/courses-list/page/1"/>
+          <OverCard title="Services" data={services} icon="FaServicestack" link="/admin/services-list/page/1"/>
+          <OverCard title="Blogs" data={blogs} icon="FaBlogger" link="/admin/blogs-list/page/1"/>
+          <OverCard title="Products" data={products} icon="FaProductHunt" link="/admin/products-list/page/1"/>
+          <OverCard title="FAQs" data={faqs} icon="BsFillQuestionSquareFill" link="/admin/faqs-List/page/1" />
+          <OverCard title="Gallery" data={galleries} icon="MdImage"  link="/admin/galleries-list/page/1"/>
         </Row>
       </div>
     </>

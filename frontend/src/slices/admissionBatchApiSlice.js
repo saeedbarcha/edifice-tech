@@ -4,8 +4,12 @@ import { apiSlice } from "./apiSlice";
 export const admissionBatchApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getAdmissionBatchs: builder.query({
-      query: () => ({
+      query: ({ keyword = '', pageNumber = 1 }) => ({
         url: ADMISSION_BATCH_URL,
+        params: {
+          keyword: keyword || undefined,
+          pageNumber: pageNumber || 1,
+        },
       }),
       providesTags: ["Admission Batch"],
       keepUnusedDataFor: 5,

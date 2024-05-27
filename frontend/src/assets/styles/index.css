@@ -91,15 +91,14 @@ section {
   opacity: .8;
 }
 
-btnSeeMore
+
 /* css for button use in all screens */
 .btnSeeMore {
   /* margin: 49px 0px; */
-  padding: 10px 20px;
+  padding: 5px 20px;
   background: var(--blueThemeColor) !important;
   border: none;
   margin-top: 40px;
-  border-radius: 50%;
   cursor: pointer;
 }
 
@@ -144,4 +143,20 @@ td {
 
 .ant-upload-list-item-container{
   border-radius: 1130px;
+}
+
+
+/* pagination */
+.page-link, .page-link {
+  border-radius: 50%;
+  margin-left: 3px;
+  margin-right: 3px;
+
+  /* border-color: var(--bs-pagination-active-border-color); */
+}
+
+.active>.page-link, .page-link.active {
+  border-radius: 50%;
+  background-color: var(--blueThemeColor);
+  /* border-color: var(--bs-pagination-active-border-color); */
 }

@@ -7,9 +7,14 @@ import Service from "../models/serviceModel.js";
 const getServices = asyncHandler(async (req, res) => {
   const pageSize = process.env.PAGINATION_LIMIT;
   const page = Number(req.query.pageNumber) || 1;
-
-  const count = await Service.countDocuments();
-  const allServices = await Service.find({}).limit(pageSize).skip(pageSize * (page - 1));
+  const keyword = req.query.keyword ? {
+    title: {
+      $regex: req.query.keyword,
+      $options: "i"
+    }
+  } : {};
+  const count = await Service.countDocuments({...keyword});
+  const allServices = await Service.find({...keyword}).limit(pageSize).skip(pageSize * (page - 1));
 
   if (!allServices) {
     res.status(404).json({ message: "Service not found" });
