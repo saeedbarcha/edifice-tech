@@ -26,7 +26,7 @@
   }
   #hero h1 {
     margin: 0;
-    font-size: 56px;
+    font-size: 46px;
     font-weight: 700;
     line-height: 64px;
     color: #fff;
@@ -41,7 +41,7 @@
     font-size: 24px;
   }
   #hero .icon-box {
-    padding: 30px 20px;
+    padding: 20px 20px;
     transition: ease-in-out 0.3s;
     border: 3px solid rgba(255, 255, 255, 0.3);
     height: 100%;
@@ -50,12 +50,7 @@
     background-color: #eaeff024;
     backdrop-filter: blur(.5px);
   }
-  #hero .icon-box i {
-    font-size: 32px;
-    line-height: 1;
 
-    color: var(--blueThemeColor);
-  }
   #hero .icon-box h3 {
     font-weight: 700;
     margin: 10px 0 0 0;
