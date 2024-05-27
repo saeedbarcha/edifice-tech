@@ -6,7 +6,7 @@ import Product from "../models/productModel.js";
 // @access  Public
 
 const getProducts = asyncHandler(async (req, res) => {
-  const pageSize = process.env.PAGINATION_LIMIT;
+  const pageSize = process.env.PAGINATION_LIMIT || 8;
   const page = Number(req.query.pageNumber) || 1;
   const keyword = req.query.keyword ? {
     name: {
@@ -21,6 +21,28 @@ const getProducts = asyncHandler(async (req, res) => {
     res.status(404).json({ message: "Product not found" });
   }
   res.status(200).json({ allProducts, page, pages: Math.ceil(count / pageSize) });
+});
+
+// @desc    Fetch all products
+// @route   GET /api/products
+// @access  Public
+
+const getActiveProducts = asyncHandler(async (req, res) => {
+  const pageSize = process.env.PAGINATION_LIMIT || 8;
+  const page = Number(req.query.pageNumber) || 1;
+  const keyword = req.query.keyword ? {
+    name: {
+      $regex: req.query.keyword,
+      $options: "i"
+    }
+  } : {};
+  const count = await Product.countDocuments({...keyword, isActive:true});
+  const activeProducts = await Product.find({...keyword, isActive:true}).limit(pageSize).skip(pageSize * (page - 1));
+
+  if (!activeProducts) {
+    res.status(404).json({ message: "Product not found" });
+  }
+  res.status(200).json({ activeProducts, page, pages: Math.ceil(count / pageSize) });
 });
 
 // @desc    Fetch a single Product by id
@@ -94,6 +116,7 @@ const deleteProduct = asyncHandler(async (req, res) => {
 
 export {
   getProducts,
+  getActiveProducts,
   getProductById,
   createProduct,
   updateProduct,

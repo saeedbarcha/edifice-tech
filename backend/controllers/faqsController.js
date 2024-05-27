@@ -5,7 +5,7 @@ import Faqs from "../models/faqsModel.js";
 // @route   GET /api/faqs
 // @access  Public
 const getFaqs = asyncHandler(async (req, res) => {
-    const pageSize = process.env.PAGINATION_LIMIT;
+    const pageSize = process.env.PAGINATION_LIMIT || 8;
     const page = Number(req.query.pageNumber) || 1;
     const keyword = req.query.keyword ? {
       question: {

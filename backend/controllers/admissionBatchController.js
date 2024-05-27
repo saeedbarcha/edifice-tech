@@ -5,7 +5,7 @@ import AdmissionBatch from "../models/admissionBatchModel.js";
 // @route   GET /api/admission-batches
 // @access  Public
 const getAdmissionBatches = asyncHandler(async (req, res) => {
-  const pageSize = process.env.PAGINATION_LIMIT;
+  const pageSize = process.env.PAGINATION_LIMIT || 8;
   const page = Number(req.query.pageNumber) || 1;
   const keyword = req.query.keyword ? {
     title: {

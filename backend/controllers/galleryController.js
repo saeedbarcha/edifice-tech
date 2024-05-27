@@ -7,7 +7,7 @@ import Gallery from "../models/galleryModel.js";
 const getGallarys = asyncHandler(async (req, res) => {
  
   
-  const pageSize = process.env.PAGINATION_LIMIT;
+  const pageSize = process.env.PAGINATION_LIMIT || 8;
   const page = Number(req.query.pageNumber) || 1;
   const keyword = req.query.keyword ? {
     name: {
@@ -28,7 +28,7 @@ const getGallarys = asyncHandler(async (req, res) => {
 // @route   GET /api/Gallarys
 // @access  Public
 const getActiveGallarys = asyncHandler(async (req, res) => {
-  const pageSize = process.env.PAGINATION_LIMIT;
+  const pageSize = process.env.PAGINATION_LIMIT || 8;
   const page = Number(req.query.pageNumber) || 1;
 
   const keyword = req.query.keyword ? { caption:{$regex: req.query.keyword,
