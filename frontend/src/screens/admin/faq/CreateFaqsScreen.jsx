@@ -29,9 +29,8 @@ const CreateFaqsScreen = () => {
       toast.error(result.error)
     } else {
       toast.success("Faq created successfully");
-      
       setTimeout(() => {
-        navigate("/admin/faqs-list");
+        navigate("/admin/faqs-list/page/1");
       }, 1000);
     }
 
@@ -76,7 +75,7 @@ const CreateFaqsScreen = () => {
 
 
               <div style={{ textAlign: "right" }}>
-                <Button type="submit" className="my-2 btnAllScreen">
+                <Button type="submit" className="btn-sm m-3 btnAllScreen">
                 {loadingCreate ? "Creating..." : "Create"}
                 </Button>
               </div>

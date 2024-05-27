@@ -54,7 +54,7 @@ const BlogEditScreen = () => {
     } else {
       toast.success("Blog updated successfully");
       setTimeout(() => {
-        navigate("/admin/bloglist");
+        navigate("/admin/blogs-list/page/1");
       }, 1000);
     }
   };
@@ -132,7 +132,7 @@ const BlogEditScreen = () => {
               </Form.Group>
 
                 <div style={{ textAlign: "right" }}>
-                  <Button type="submit"  className="my-2 btnAllScreen">
+                  <Button type="submit"  className="btn-sm m-3 btnAllScreen">
                   {loadingUpdate ? "Updating..." : "Update"}
                   </Button>
                 </div>

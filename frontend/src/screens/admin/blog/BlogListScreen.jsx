@@ -1,6 +1,6 @@
 import { LinkContainer } from "react-router-bootstrap";
-import { Link, useParams } from "react-router-dom";
-import { Container, Table, Button, Row, Col, Image } from "react-bootstrap";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import { Container, Table, Button, Row, Col, Image, Modal } from "react-bootstrap";
 import { FaTimes, FaTrash, FaEdit, FaCheck } from "react-icons/fa";
 import Message from "../../../components/Message";
 import Loader from "../../../components/Loader";
@@ -12,52 +12,61 @@ import {
   useCreateBlogMutation,
   useDeleteBlogMutation
 } from "../../../slices/blogApiSlice";
+import { useState } from "react";
 
 const BlogListScreen = () => {
-
+  const navigate = useNavigate();
   const { keyword, pageNumber } = useParams();
   const page = pageNumber || 1;
 
   const { data: responseData, isLoading, error, refetch } = useGetBlogsQuery({ keyword: "", pageNumber: page });
 
-
-  const [createBlog, { isLoading: loadingCreate }] =
-    useCreateBlogMutation();
-
+  const [createBlog, { isLoading: loadingCreate }] = useCreateBlogMutation();
   const [deleteBlog, { isLoading: loadingDelete }] = useDeleteBlogMutation();
 
-  const deleteHandler = async (id) => {
-    if (window.confirm("Are you sure?")) {
-      try {
-        const res = await deleteBlog(id);
-        if (res && res.error) {
-          toast.error(res.error.data.message || "Failed to delete blog");
-        } else {
-          toast.success("Blog deleted");
-          refetch();
-        }
-      } catch (err) {
-        toast.error(err?.data?.message || err.error);
-      }
-    }
+  const [showCreateModal, setShowCreateModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [blogToDelete, setBlogToDelete] = useState(null);
+
+  const handleCloseCreateModal = () => setShowCreateModal(false);
+  const handleShowCreateModal = () => setShowCreateModal(true);
+
+  const handleCloseDeleteModal = () => setShowDeleteModal(false);
+  const handleShowDeleteModal = (id) => {
+    setBlogToDelete(id);
+    setShowDeleteModal(true);
   };
 
+  const deleteHandler = async () => {
+    try {
+      const res = await deleteBlog(blogToDelete);
+      if (res && res.error) {
+        toast.error(res.error.data.message || "Failed to delete blog");
+      } else {
+        toast.success("Blog deleted");
+        refetch();
+      }
+    } catch (err) {
+      toast.error(err?.data?.message || err.error);
+    }
+    handleCloseDeleteModal();
+  };
 
   const createBlogHandler = async () => {
-    if (window.confirm("Are you sure you want to create a new blog?")) {
-      try {
-        const blog = await createBlog();
-        if (blog) {
-          toast.success("Blog created successfully");
-          refetch();
-        }
-
-      } catch (err) {
-        toast.error(err?.data?.message || err.error);
+    try {
+      const blog = await createBlog();
+      if (blog) {
+        toast.success("Blog created successfully");
+        setTimeout(() => {
+          navigate("/admin/blogs-list/page/1");
+        }, 1000);
+        refetch();
       }
+    } catch (err) {
+      toast.error(err?.data?.message || err.error);
     }
+    handleCloseCreateModal();
   };
-
 
   return (
     <>
@@ -70,10 +79,8 @@ const BlogListScreen = () => {
             <h1>Blogs</h1>
           </Col>
           <Col className="text-end">
-            <Button className="btn-sm m-3 btnAllScreen" onClick={createBlogHandler}>
-              {/* <Link to={"/admin/createblog"}> */}
+            <Button className="btn-sm m-3 btnAllScreen" onClick={handleShowCreateModal}>
               Create
-              {/* </Link> */}
             </Button>
           </Col>
         </Row>
@@ -85,7 +92,6 @@ const BlogListScreen = () => {
           <Loader />
         ) : error ? (
           <Message variant="danger"> {error?.data?.message || error?.data || error?.error}</Message>
-
         ) : (
           <>
             <Table striped hover responsive className="table-sm">
@@ -99,13 +105,10 @@ const BlogListScreen = () => {
                 </tr>
               </thead>
               <tbody>
-                {responseData?.allBolgs?.length === 0 &&
-                  <p>No any blog found</p>}
-
+                {responseData?.allBlogs?.length === 0 && <p>No blog found</p>}
                 {responseData?.allBlogs?.map((blog) => (
                   <tr key={blog._id}>
                     <td><Image src={blog.image} fluid style={{ width: "60px", height: "60px" }} /></td>
-
                     <td>{blog.title}</td>
                     <td>{formatDateWithTime(blog.createdAt)}</td>
                     <td>
@@ -121,11 +124,10 @@ const BlogListScreen = () => {
                           <FaEdit />
                         </Button>
                       </LinkContainer>
-
                       <Button
                         variant="danger"
                         className="btn-sm"
-                        onClick={() => deleteHandler(blog._id)}
+                        onClick={() => handleShowDeleteModal(blog._id)}
                       >
                         <FaTrash style={{ color: "white" }} />
                       </Button>
@@ -133,18 +135,45 @@ const BlogListScreen = () => {
                   </tr>
                 ))}
               </tbody>
-
             </Table>
-
-
-            {responseData?.allBlogs?.length > 0 &&
+            {responseData?.allBlogs?.length > 0 && (
               <div style={{ display: "flex", marginTop: "25px", justifyContent: "center" }}>
                 <Paginate screen="admin/blogs-list" pages={responseData?.pages} page={parseInt(page)} keyword={keyword} />
               </div>
-            }
+            )}
           </>
         )}
       </Container>
+
+      <Modal show={showCreateModal} onHide={handleCloseCreateModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Confirm Create Blog</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Are you sure you want to create a new blog?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseCreateModal}>
+            Cancel
+          </Button>
+          <Button variant="primary" onClick={createBlogHandler}>
+            Confirm
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      <Modal show={showDeleteModal} onHide={handleCloseDeleteModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Confirm Delete Blog</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Are you sure you want to delete this blog?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCloseDeleteModal}>
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={deleteHandler}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 };

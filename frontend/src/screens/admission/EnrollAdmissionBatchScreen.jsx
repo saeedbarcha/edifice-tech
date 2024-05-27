@@ -188,7 +188,7 @@ const EnrollAdmissionBatchScreen = () => {
                                 <Button
                                     variant="primary"
                                     type="submit"
-                                    className="my-3 btnAllScreen"
+                                    className="btn-sm m-3 btnAllScreen"
                                     disabled={loadingEnroll}
                                 >
                                     {loadingEnroll ? "Enrolling..." : "Enroll"}

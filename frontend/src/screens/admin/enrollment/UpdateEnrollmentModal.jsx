@@ -166,7 +166,7 @@ const UpdateEnrollmentModal = ({ show, handleClose, updateEnrollUser }) => {
         <Button variant="secondary" className="btn" onClick={handleClose}>
           Close
         </Button>
-        <Button variant="primary" className="btn-sm btnAllScreen" onClick={handleUpdate}>
+        <Button variant="primary" className="btn btnAllScreen" onClick={handleUpdate}>
           Update
         </Button>
       </Modal.Footer>

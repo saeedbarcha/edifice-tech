@@ -54,7 +54,7 @@ const CreateCourseScreen = () => {
     } else {
       toast.success("Course created successfully");
       setTimeout(() => {
-        navigate(`/admin/courselist`);
+        navigate(`/admin/courses-List/page/1`);
       }, 1000);
     }
 
@@ -203,7 +203,7 @@ const CreateCourseScreen = () => {
               {loadingUpload && <Loader />}
 
               <div style={{ textAlign: "right" }}>
-                <Button type="submit"  className="my-2 btnAllScreen">
+                <Button type="submit"  className="btn-sm m-3 btnAllScreen">
                 {loadingCreate ? "Creating..." : "Create"}
                 </Button>
               </div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 import {
   useUpdateGalleryItemMutation,
   useCreateGalleryMutation,
@@ -9,6 +10,8 @@ import {useUploadImageMutation} from "../../../slices/uploadImageApiSlice";
 
 
 const AddAndUpdateGalleryModal = ({ show, handleClose, editGallery }) => {
+  const navigate = useNavigate();
+ 
   const [caption, setCaption] = useState("");
   const [image, setImage] = useState("");
   const [isActive, setIsActive] = useState(true);
@@ -42,8 +45,12 @@ const AddAndUpdateGalleryModal = ({ show, handleClose, editGallery }) => {
     if (result.error) {
       toast.error(result.error);
     } else {
-      toast.success("Image successfully");
-      handleClose(); // Close modal after updating
+      toast.success("Image added successfully");
+
+      handleClose(); 
+      setTimeout(() => {
+        navigate("/admin/galleries-list/page/1");
+      }, 1000);
     }
   };
 
@@ -61,8 +68,11 @@ const AddAndUpdateGalleryModal = ({ show, handleClose, editGallery }) => {
     if (result.error) {
       toast.error(result.error);
     } else {
-      toast.success("Gallery entry updated successfully");
-      handleClose(); // Close modal after updating
+      toast.success("Image updated successfully");
+      handleClose(); 
+      setTimeout(() => {
+        navigate("/admin/galleries-list/page/1");
+      }, 1000);
     }
   };
 

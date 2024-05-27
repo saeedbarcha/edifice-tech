@@ -48,7 +48,7 @@ const CreateAdmissionBatchScreen = () => {
       };
       const res = await createAdmissionBatch(admissionBatch);
       if (res.data) {
-        navigate("/admin/admissionbatchlist");
+        navigate("/admin/admission-batches-list/page/1");
       }
     } catch (err) {
       toast.error(err?.data?.message || err.error);
@@ -188,7 +188,7 @@ const CreateAdmissionBatchScreen = () => {
                 );
               })}
             </Form.Group>
-            <Button variant="btn btnAllScreen" type="submit" disabled={loadingCreate}>
+            <Button className="btn-sm m-3 btnAllScreen" type="submit" disabled={loadingCreate}>
               {loadingCreate ? "Creating..." : "Create"}
             </Button>
           </Form>

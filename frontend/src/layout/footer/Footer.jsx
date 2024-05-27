@@ -31,8 +31,14 @@ const Footer = () => {
       }
     };
     window.addEventListener("load", toggleBacktotop);
-    window.addEventListener("scroll", toggleBacktotop); 
+    window.addEventListener("scroll", toggleBacktotop);
   }
+  const ensureUrlProtocol = (url) => {
+    if (url && !/^https?:\/\//i.test(url)) {
+      return `https://${url}`;
+    }
+    return url;
+  };
   return (
     <>
       <footer>
@@ -61,11 +67,14 @@ const Footer = () => {
                       <ul>
                         <li>
                           <a
-                            href={
+                            href={ensureUrlProtocol(
                               CompanyData.facebookPageUrl
                                 ? CompanyData.facebookPageUrl
                                 : "#"
+                            )
                             }
+                            target="_blank"
+                            rel="noopener noreferrer"
                           >
                             <BsFacebook />
                           </a>
@@ -73,10 +82,14 @@ const Footer = () => {
                         <li>
                           <a
                             href={
-                              CompanyData.instagramPageUrl
-                                ? CompanyData.instagramPageUrl
-                                : "#"
+                              ensureUrlProtocol(
+                                CompanyData.instagramPageUrl
+                                  ? CompanyData.instagramPageUrl
+                                  : "#"
+                              )
                             }
+                            target="_blank"
+                            rel="noopener noreferrer"
                           >
                             <AiFillInstagram />
                           </a>
@@ -84,33 +97,42 @@ const Footer = () => {
                         <li>
                           <a
                             href={
-                              CompanyData.facebookPageUrl
-                                ? CompanyData.facebookPageUrl
-                                : "#"
+                              ensureUrlProtocol(
+                                CompanyData.twitterPageUrl
+                                  ? CompanyData.twitterPageUrl
+                                  : "#"
+                              )
                             }
+                            target="_blank"
+                            rel="noopener noreferrer"
                           >
                             <AiFillTwitterCircle />
                           </a>
                         </li>
                         <li>
                           <a
-                            href={`mailto:${
-                              CompanyData?.emailAddress
+                            href={`mailto:${CompanyData?.emailAddress
                                 ? CompanyData.emailAddress
                                 : "contact@example.com"
-                            }`}
+                              }`}
+                            target="_blank"
+                            rel="noopener noreferrer"
                           >
+
                             <AiFillGoogleCircle />
                           </a>
                         </li>
                         <li>
                           <a
                             href={
-                              CompanyData.linkedInPageUrl
-                                ? CompanyData.linkedInPageUrl
-                                : "#"
+                              ensureUrlProtocol(
+                                CompanyData.linkedInPageUrl
+                                  ? CompanyData.linkedInPageUrl
+                                  : "#"
+                              )
                             }
                             target="_blank"
+                            rel="noopener noreferrer"
                           >
                             <AiFillLinkedin />
                           </a>
