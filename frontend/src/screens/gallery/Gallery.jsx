@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import { Container, Row, Col, Image, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import { FaPlus } from "react-icons/fa";
 import Lightbox from "react-image-lightbox";
 import "react-image-lightbox/style.css";
@@ -13,8 +14,8 @@ import "./Gallery.css";
 const Gallery = () => {
   const { pageNumber } = useParams();
   const page = pageNumber || 1;
-  const { data: responseData, isLoading, error } = useGetAllActiveGalleriesQuery({ pageNumber:page });
-  
+  const { data: responseData, isLoading, error } = useGetAllActiveGalleriesQuery({ pageNumber: page });
+
   const [isOpen, setIsOpen] = useState(false);
   const [photoIndex, setPhotoIndex] = useState(0);
 
@@ -23,6 +24,12 @@ const Gallery = () => {
     setPhotoIndex(index);
     setIsOpen(true);
   };
+
+  const cardVariants = {
+    hidden: { opacity: 0.6, y: 100 },
+    visible: { opacity: 1, y: 0, transition: { duration: 1.5 } }
+  };
+
 
   return (
     <section id="gallery" className="gallery">
@@ -53,29 +60,43 @@ const Gallery = () => {
 
             {responseData?.activeGalleries?.map((ele, index) => (
               <Col key={ele?._id} lg={3} md={4} className="gallery-item">
-                <div className="gallery-wrap" style={{ width: "100%", height: "auto" }}>
-                  <Image src={ele?.image} fluid alt="" loading="lazy" style={{ width: "100%" }} />
-                  <div className="gallery-info">
-                    <p>{ele?.caption}</p>
-                    <div className="gallery-links">
-                      <a className="gallery-lightbox" title="App 1">
-                        <FaPlus
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            openLightbox(ele);
-                          }}
-                        />
-                      </a>
+                <motion.div
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, amount: 0.3 }}
+                  variants={cardVariants}
+                >
+                  <div className="gallery-wrap" style={{ width: "100%", height: "auto" }}>
+                    <Image src={ele?.image} fluid alt="" loading="lazy" style={{ width: "100%" }} />
+                    <div className="gallery-info">
+                      <p>{ele?.caption}</p>
+                      <div className="gallery-links">
+                        <a className="gallery-lightbox" title="App 1">
+                          <FaPlus
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              openLightbox(ele);
+                            }}
+                          />
+                        </a>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               </Col>))
             }
             {responseData?.activeGalleries?.length > 0 &&
               <Link to={`/gallery/page/${1}`} style={{ display: "flex", justifyContent: "center", textDecoration: "none" }}>
-                <Button className="btn-sm my-3 btnSeeMore px-3 m-auto">
-                  See More
-                </Button>
+                <motion.div
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, amount: 0.3 }}
+                  variants={cardVariants}
+                >
+                  <Button className="btn-sm my-3 btnSeeMore px-3 m-auto">
+                    See More
+                  </Button>
+                </motion.div>
               </Link>
             }
           </Row>

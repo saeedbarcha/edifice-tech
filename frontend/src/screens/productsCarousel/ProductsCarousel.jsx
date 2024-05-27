@@ -1,14 +1,17 @@
 import React from "react";
 import Slider from "react-slick";
+import { useParams } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Link } from "react-router-dom";
 import { Container } from "react-bootstrap";
 import "./productsCarousel.css";
-import { useGetProductsQuery } from "../../slices/productApiSlice";
+import { useGetActiveProductsQuery } from "../../slices/productApiSlice";
 
 const ProductsCarousel = () => {
-  const { data, isLoading, error } = useGetProductsQuery();
+  const { pageNumber } = useParams();
+  const page = pageNumber || 1;
+  const { data:responseData, isLoading, error } = useGetActiveProductsQuery({ pageNumber: page });
 
 
   const settings = {
@@ -51,8 +54,8 @@ const ProductsCarousel = () => {
             <h2>Products</h2>
             <p>Our Software Products</p>
           </div>
-          {data?.length > 0 ? <Slider {...settings}>
-            {data?.map((product, i) => {
+          {responseData?.activeProducts?.length > 0 ? <Slider {...settings}>
+            {responseData?.activeProducts?.map((product, i) => {
               return (
                 <div className="d-flex justify-content-center   topCatContainer my-3">
                   <div className="slider my-3" style={{ width: "500px" }}>

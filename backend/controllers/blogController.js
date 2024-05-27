@@ -6,7 +6,7 @@ import Blog from "../models/blogModel.js";
 // @route   GET /api/Blogs
 // @access  Public
 const getBlogs = asyncHandler(async (req, res) => {
-  const pageSize = process.env.PAGINATION_LIMIT;
+  const pageSize = process.env.PAGINATION_LIMIT || 8;
   const page = Number(req.query.pageNumber) || 1;
   const keyword = req.query.keyword ? {
     title: {

@@ -33,7 +33,7 @@
   .achivementCards{
     border: 1px var(--blueThemeColor) solid;
     border-radius: 15px;
-    margin: 8px;
+    margin: 12px 0px;
   }
   .counts .content .count-box p {
     padding: 15px 0 0 0;
