@@ -17,7 +17,6 @@ const getBlogs = asyncHandler(async (req, res) => {
   const count = await Blog.countDocuments({...keyword});
   const allBlogs = await Blog.find({...keyword}).limit(pageSize).skip(pageSize * (page - 1));
 
-  console.log("bbbbbbbb", allBlogs)
   if (!allBlogs) {
     res.status(404).json({ message: "Blog not found" });
   }

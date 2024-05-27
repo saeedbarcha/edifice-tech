@@ -4,6 +4,7 @@ import {Container, Table, Button, Row, Col, Image } from "react-bootstrap";
 import { FaTimes, FaTrash, FaEdit, FaCheck } from "react-icons/fa";
 import Message from "../../../components/Message";
 import Loader from "../../../components/Loader";
+import Paginate from "../../../components/Paginate";
 import { toast } from "react-toastify";
 import {
   useGetProductsQuery,
@@ -12,11 +13,13 @@ import {
 } from "../../../slices/productApiSlice";
 
 const ProductListScreen = () => {
+  const { keyword, pageNumber } = useParams();
+  const page = pageNumber || 1;
 
-  const { pageNumber } = useParams();
-  const { data, isLoading, error, refetch } = useGetProductsQuery();
+  const { data:responseData, isLoading, error, refetch } = useGetProductsQuery({ keyword: "", pageNumber: page });
 
   const [createProduct, { isLoading: loadingCreate }] =
+
     useCreateProductMutation();
   const [deleteProduct, {isLoading:loadingDelete}] = useDeleteProductMutation();
 
@@ -90,9 +93,9 @@ const ProductListScreen = () => {
               </tr>
             </thead>
             <tbody>
-            {data?.length === 0 &&
+            {responseData?.allProducts?.length === 0 &&
                 <p>No any Product found</p>}
-              {data?.map((product) => (
+              {responseData?.allProducts?.map((product) => (
                 <tr key={product?._id}>
                   <td><Image src={product?.image} fluid style={{width:"60px", height:"60px"}} /></td>
                   <td>{product?.name}</td>
@@ -123,6 +126,11 @@ const ProductListScreen = () => {
               ))}
             </tbody>
           </Table>
+          {responseData?.allProducts?.length > 0 &&
+              <div style={{ display: "flex", marginTop: "25px", justifyContent: "center" }}>
+                <Paginate screen="admin/products-list" pages={responseData?.pages} page={parseInt(page)} keyword={keyword} />
+              </div>
+            }
         </>
       )}
     </Container>

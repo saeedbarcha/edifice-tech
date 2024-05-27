@@ -5,11 +5,23 @@ import AdmissionBatch from "../models/admissionBatchModel.js";
 // @route   GET /api/admission-batches
 // @access  Public
 const getAdmissionBatches = asyncHandler(async (req, res) => {
-  const admissionBatches = await AdmissionBatch.find({}).populate({
+  const pageSize = process.env.PAGINATION_LIMIT;
+  const page = Number(req.query.pageNumber) || 1;
+  const keyword = req.query.keyword ? {
+    title: {
+      $regex: req.query.keyword,
+      $options: "i"
+    }
+  } : {};
+  const count = await AdmissionBatch.countDocuments({ ...keyword });
+  const allAdmissionBatches = await AdmissionBatch.find({ ...keyword }).populate({
     path: "selectedCourses.courseId",
-    // populate: { path: 'enrolledUsers.user', select: 'name' } // Populate both selectedCourses and enrolled users
-  });
-  res.status(200).json(admissionBatches);
+  }).limit(pageSize).skip(pageSize * (page - 1));
+
+  if (!allAdmissionBatches) {
+    res.status(404).json({ message: "Admission Batch not found" });
+  }
+  res.status(200).json({ allAdmissionBatches, page, pages: Math.ceil(count / pageSize) });
 });
 
 // @desc    Fetch all Admission Batches with associated selectedCourses and Users

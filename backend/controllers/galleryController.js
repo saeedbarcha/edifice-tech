@@ -5,8 +5,23 @@ import Gallery from "../models/galleryModel.js";
 // @route   GET /api/Gallarys
 // @access  Public
 const getGallarys = asyncHandler(async (req, res) => {
-  const gallerys = await Gallery.find({});
-  res.status(200).json(gallerys);
+ 
+  
+  const pageSize = process.env.PAGINATION_LIMIT;
+  const page = Number(req.query.pageNumber) || 1;
+  const keyword = req.query.keyword ? {
+    name: {
+      $regex: req.query.keyword,
+      $options: "i"
+    }
+  } : {};
+  const count = await Gallery.countDocuments({...keyword});
+  const allGalleries = await Gallery.find({...keyword}).limit(pageSize).skip(pageSize * (page - 1));
+
+  if (!allGalleries) {
+    res.status(404).json({ message: "Image not found" });
+  }
+  res.status(200).json({ allGalleries, page, pages: Math.ceil(count / pageSize) });
 });
 
 // @desc    Fetch all Gallary

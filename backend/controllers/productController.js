@@ -6,9 +6,21 @@ import Product from "../models/productModel.js";
 // @access  Public
 
 const getProducts = asyncHandler(async (req, res) => {
-    const products = await Product.find({})
+  const pageSize = process.env.PAGINATION_LIMIT;
+  const page = Number(req.query.pageNumber) || 1;
+  const keyword = req.query.keyword ? {
+    name: {
+      $regex: req.query.keyword,
+      $options: "i"
+    }
+  } : {};
+  const count = await Product.countDocuments({...keyword});
+  const allProducts = await Product.find({...keyword}).limit(pageSize).skip(pageSize * (page - 1));
 
-    res.status(201).json(products);
+  if (!allProducts) {
+    res.status(404).json({ message: "Product not found" });
+  }
+  res.status(200).json({ allProducts, page, pages: Math.ceil(count / pageSize) });
 });
 
 // @desc    Fetch a single Product by id

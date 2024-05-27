@@ -110,7 +110,7 @@ const ServiceListScreen = () => {
             </Table>
             {responseData?.allServices?.length > 0 &&
                 <div style={{ display: "flex", marginTop:"25px", justifyContent: "center" }}>
-                  <Paginate screen="admin/service-list" pages={responseData?.pages} page={parseInt(page)} keyword={keyword} />
+                  <Paginate screen="admin/services-list" pages={responseData?.pages} page={parseInt(page)} keyword={keyword} />
                 </div>
               }
           </>

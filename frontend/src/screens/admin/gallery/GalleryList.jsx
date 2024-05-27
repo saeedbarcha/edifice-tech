@@ -5,23 +5,29 @@ import { Container, Table, Button, Row, Col, Image } from "react-bootstrap";
 import { FaEdit, FaTrash } from "react-icons/fa";
 import Message from "../../../components/Message";
 import Loader from "../../../components/Loader";
+import Paginate from "../../../components/Paginate";
 import { toast } from "react-toastify";
 import AddAndUpdateGalleryModal from "./AddAndUpdateGalleryModal";
 import { useGetGalleryQuery, useDeleteGalleryItemMutation } from "../../../slices/galleryApiSlice";
 
 
 const GalleryList = () => {
-  const { pageNumber } = useParams();
+  
+  const { keyword, pageNumber } = useParams();
+  const page = pageNumber || 1;
+
   const [showGalleryModal, setShowGalleryModal] = useState(false);
   const [selectedGallery, setSelectedGallery] = useState(null);
+
+  const { data:responseData, isLoading, error, refetch } = useGetGalleryQuery({ keyword: "", pageNumber: page });
+
 
   const handleCloseGalleryModal = () => setShowGalleryModal(false);
 
   const handleOpenGalleryModal = () => setShowGalleryModal(true);
 
 
-  const { data, isLoading, error, refetch } = useGetGalleryQuery();
-
+ 
   const [deleteProduct, { isLoading: loadingDelete }] = useDeleteGalleryItemMutation();
 
   const deleteHandler = async (id) => {
@@ -81,10 +87,10 @@ const GalleryList = () => {
                 </tr>
               </thead>
               <tbody>
-              {data?.length === 0 &&
+              {responseData?.allGalleries?.length === 0 &&
                 <p>No any Gallery found</p>}
 
-                {data?.map((imageItem) => (
+                {responseData?.allGalleries?.map((imageItem) => (
                   <tr key={imageItem._id}>
                     <td><Image src={imageItem.image} fluid style={{ width: "60px", height: "60px" }} /></td>
                     <td>{imageItem.caption}</td>
@@ -101,6 +107,12 @@ const GalleryList = () => {
                 ))}
               </tbody>
             </Table>
+
+            {responseData?.allGalleries?.length > 0 &&
+              <div style={{ display: "flex", marginTop: "25px", justifyContent: "center" }}>
+                <Paginate screen="admin/galleries-list" pages={responseData?.pages} page={parseInt(page)} keyword={keyword} />
+              </div>
+            }
           </>
         )}
       </Container>

@@ -1,6 +1,5 @@
 import { LinkContainer } from "react-router-bootstrap";
-import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Container, Table, Button, Row, Col, Image } from "react-bootstrap";
 import { FaTimes, FaTrash, FaEdit, FaCheck } from "react-icons/fa";
 import Message from "../../../components/Message";
@@ -15,13 +14,12 @@ import {
 } from "../../../slices/blogApiSlice";
 
 const BlogListScreen = () => {
-  
+
   const { keyword, pageNumber } = useParams();
   const page = pageNumber || 1;
 
-  const { data: responseData, isLoading, error, refetch } = useGetBlogsQuery({keyword:"", pageNumber: page });
+  const { data: responseData, isLoading, error, refetch } = useGetBlogsQuery({ keyword: "", pageNumber: page });
 
-  console.log("ssssss...", responseData)
 
   const [createBlog, { isLoading: loadingCreate }] =
     useCreateBlogMutation();
@@ -101,8 +99,8 @@ const BlogListScreen = () => {
                 </tr>
               </thead>
               <tbody>
-              {responseData?.allBolgs?.length === 0 &&
-                <p>No any blog found</p>}
+                {responseData?.allBolgs?.length === 0 &&
+                  <p>No any blog found</p>}
 
                 {responseData?.allBlogs?.map((blog) => (
                   <tr key={blog._id}>
@@ -135,19 +133,15 @@ const BlogListScreen = () => {
                   </tr>
                 ))}
               </tbody>
-             
-            </Table>
-            {responseData?.allBolgs?.length > 0 &&
-                <div style={{ display: "flex", marginTop:"25px", justifyContent: "center" }}>
-                  <Paginate screen="admin/blog-list" pages={responseData?.pages} page={parseInt(page)} keyword={keyword} />
-                </div>
-               } 
 
-                {responseData?.allBolgs?.length > 0 &&
-                <div style={{ display: "flex", marginTop:"25px", justifyContent: "center" }}>
-                  <Paginate screen="admin/blog-list" pages={responseData?.pages} page={parseInt(page)} keyword={keyword} />
-                </div>
-               } 
+            </Table>
+
+
+            {responseData?.allBlogs?.length > 0 &&
+              <div style={{ display: "flex", marginTop: "25px", justifyContent: "center" }}>
+                <Paginate screen="admin/blogs-list" pages={responseData?.pages} page={parseInt(page)} keyword={keyword} />
+              </div>
+            }
           </>
         )}
       </Container>

@@ -218,9 +218,22 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 // @desc    Get all users
 // @route   GET /api/users
 // @access  Private/Admin
-const getUsers = asyncHandler(async (req, res) => {
-  const users = await User.find({});
-  res.status(200).json(users);
+const getUsers = asyncHandler(async (req, res) => {  
+  const pageSize = process.env.PAGINATION_LIMIT;
+  const page = Number(req.query.pageNumber) || 1;
+  const keyword = req.query.keyword ? {
+    name: {
+      $regex: req.query.keyword,
+      $options: "i"
+    }
+  } : {};
+  const count = await User.countDocuments({...keyword});
+  const allUsers = await User.find({...keyword}).limit(pageSize).skip(pageSize * (page - 1));
+
+  if (!allUsers) {
+    res.status(404).json({ message: "User not found" });
+  }
+  res.status(200).json({ allUsers, page, pages: Math.ceil(count / pageSize) });
 });
 
 

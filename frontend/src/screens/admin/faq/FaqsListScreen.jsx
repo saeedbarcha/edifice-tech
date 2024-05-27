@@ -1,14 +1,18 @@
 
 import { LinkContainer } from "react-router-bootstrap";
-import {Link} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 import { Container, Table, Button, Row, Col, Image } from "react-bootstrap";
 import { FaTimes, FaTrash, FaEdit, FaCheck } from "react-icons/fa";
 import Message from "../../../components/Message";
 import Loader from "../../../components/Loader";
+import Paginate from "../../../components/Paginate";
 import { toast } from "react-toastify";
 import {useGetFaqsQuery, useDeleteFaqMutation} from "../../../slices/faqsApiSlice";
 const FaqsListScreen = () => {
-  const { data: allFaqs, isLoading, error, refetch } = useGetFaqsQuery();
+  const { keyword, pageNumber } = useParams();
+  const page = pageNumber || 1;
+
+  const { data: responseData, isLoading, error, refetch } = useGetFaqsQuery({ keyword: "", pageNumber: page });
   const [deleteFaq, { isLoading: loadingDelete }] = useDeleteFaqMutation();
 
   const deleteHandler = async(id) => {
@@ -68,9 +72,9 @@ const FaqsListScreen = () => {
                 </tr>
               </thead>
               <tbody>
-              {allFaqs?.length === 0 &&
+              {responseData?.allFaqs?.length === 0 &&
                 <p>No any FAQ found</p>}
-                {allFaqs?.map((faq) => (
+                {responseData?.allFaqs?.map((faq) => (
                   <tr key={faq?._id}>
                     <td>{faq?.question}</td>
                     <td>{faq?.answer}</td>
@@ -102,6 +106,11 @@ const FaqsListScreen = () => {
                 ))}
               </tbody>
             </Table>
+            {responseData?.allFaqs?.length > 0 &&
+              <div style={{ display: "flex", marginTop: "25px", justifyContent: "center" }}>
+                <Paginate screen="admin/faqs-list" pages={responseData?.pages} page={parseInt(page)} keyword={keyword} />
+              </div>
+            }
           </>
         )}
       </Container>
