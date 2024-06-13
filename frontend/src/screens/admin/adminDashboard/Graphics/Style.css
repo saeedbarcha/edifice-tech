@@ -1,0 +1,39 @@
+
+/* top buyers */
+.chartContainer  {
+  margin-top: 100px;
+    background-color: #f4f7fe;
+    padding:15px  0px ;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 20px;
+  }
+   .chartTitleContainer {
+  
+    display: flex;
+    justify-content: space-between;
+    width: 95%;
+    margin-bottom: 15px;
+    /* position: relative; */
+    border-radius: 20px;
+  }
+  
+  .chartContainer .chartTitleContainer .selectButton {
+    color: var(--fontColorForPara);
+    height: 30px;
+    width: 120px;
+    /* background-color:var(--mainThemeColor); */
+    background-color: #fff;
+    border: none;
+    border-radius: 8px 8px 0px 8px;
+    padding: 5px;
+    outline: none;
+  }
+  .chartContainer .chartTitleContainer .selectButton  option {
+    background-color: #fff;
+  }
+
+  .form-select{
+    width: 40%;
+  }

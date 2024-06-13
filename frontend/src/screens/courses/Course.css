@@ -1,0 +1,60 @@
+
+.rating svg{
+  color: #f8e825;
+}
+.rating-text{
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding-left: 0.5rem;
+}
+.showCourcesCard{  
+  transition: transform 0.8s;
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+
+
+}
+
+.showCourcesCard:hover{
+  transform: scale(1.03);
+}
+
+.titleCources{
+  height: 2rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 20px;
+}
+
+.skillAndDuration{
+  height: 2.8rem;
+  overflow: hidden;
+  color: #6C757D;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 14px;
+}
+
+.review button{
+  margin-top: 10px;
+}
+
+
+
+.course-image {
+  width: 100%;
+  height: 170px;
+}
+
+
+.certificate-icon {
+  width: 35px;
+  height: 35px;
+  background-color: aliceblue;
+  color: var(--blueThemeColor);
+  border-radius: 50%;
+  cursor: pointer;
+  display:flex ;
+  align-items: center;
+  justify-content: center;
+}

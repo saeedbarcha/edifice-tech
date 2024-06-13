@@ -1,0 +1,13 @@
+/* width */
+.scrollerCont::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+
+
+
+  .scrollerCont::-webkit-scrollbar-thumb {
+    background: var(--mainThemeColor); 
+  }
+  
+ 
