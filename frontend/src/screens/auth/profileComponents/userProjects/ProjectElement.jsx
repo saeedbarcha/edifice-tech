@@ -56,7 +56,7 @@ const ProjectElement = () => {
             </Button>
         </Card.Header>
         <Card.Body className="">
-          <Row className="d-flex justify-content-between align-items-center">
+          <Row className="d-flex justify-content-between">
             {user?.projects?.map((pro, index) => (
               <Col lg={4} md={3} sm={6} key={index}>
                 <Card className="mb-3">
@@ -65,18 +65,18 @@ const ProjectElement = () => {
                       {pro?.title}
                       <div className="d-flex justify-content-end align-items-center">
                         <Button
-                          variant="primary"
-                          className="btn-sm m-1"
+                          variant="light"
+                          className="btn-sm deleteAndEditBtn"
                           onClick={() => handleOpenProjectModal(pro)} // Open modal for updating the project
                         >
                           <FaEdit />
                         </Button>
                         <Button
-                          variant="danger"
-                          className="btn-sm"
+                          variant="light"
+                          className="btn-sm deleteAndEditBtn"
                           onClick={() => deleteHandlerProject(pro._id)}
                         >
-                          <FaTrash style={{ color: "white" }} />
+                          <FaTrash />
                         </Button>
                       </div>{" "}
                     </Card.Title>

@@ -160,3 +160,9 @@ td {
   background-color: var(--blueThemeColor);
   /* border-color: var(--bs-pagination-active-border-color); */
 }
+
+.deleteAndEditBtn{
+  border-radius: 50%;
+  background-color: var(--blueThemeColor) ;
+  color: #fff;
+}

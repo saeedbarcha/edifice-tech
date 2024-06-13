@@ -5,7 +5,7 @@ import { useUpdateEducationMutation, useCreateEducationMutation} from "../../../
 import { formatDateMothFormat } from '../../../../common-functions/formatDate.js';
 
 
-const AddUpdateEduModal = ({ show, handleClose, editEducation }) => { 
+const AddUpdateEduModal = ({ show, handleClose, editEducation, refetchAll }) => { 
   const [degree, setDegree] = useState("");
   const [course, setCourse] = useState("");
   const [instituteName, setInstituteName] = useState("");
@@ -47,6 +47,7 @@ const AddUpdateEduModal = ({ show, handleClose, editEducation }) => {
     } else {
       toast.success("Education added successfully");
       handleClose();
+      refetchAll()
     }
   };
   const handleUpdate = async (e) => {
@@ -66,6 +67,7 @@ const AddUpdateEduModal = ({ show, handleClose, editEducation }) => {
     } else {
       toast.success("Education updated successfully");
       handleClose(); 
+      refetchAll()
     }
   };
 
