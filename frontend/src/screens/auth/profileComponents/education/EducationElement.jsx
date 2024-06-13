@@ -80,8 +80,8 @@ const EducationElement = () => {
                       editEducation={selectedEducation}
                     />
                     <Button
-                      variant="primary"
-                      className="btn-sm m-1"
+                      variant="light"
+                      className="btn-sm deleteAndEditBtn"
                       onClick={() => {
                         setSelectedEducation(edu);
                         handleOpenEducationModal(true);
@@ -91,11 +91,11 @@ const EducationElement = () => {
                     </Button>
 
                     <Button
-                      variant="danger"
-                      className="btn-sm"
+                     variant="light"
+                     className="btn-sm deleteAndEditBtn"
                       onClick={() => deleteHandlerEdu(edu._id)}
                     >
-                      <FaTrash style={{ color: "white" }} />
+                      <FaTrash  />
                     </Button>
                   </div>
                   <Card.Text className="">

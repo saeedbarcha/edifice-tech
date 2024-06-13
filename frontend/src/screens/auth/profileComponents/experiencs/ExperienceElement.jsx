@@ -72,8 +72,8 @@ const ExperienceElement = () => {
                       editExperience={selectedExperience}
                     />
                     <Button
-                      variant="primary"
-                      className="btn-sm m-1"
+                        variant="light"
+                        className="btn-sm deleteAndEditBtn"
                       onClick={() => {
                         setSelectedExperience(exp);
                         handleOpenExperienceModal(true);
@@ -82,11 +82,11 @@ const ExperienceElement = () => {
                       <FaEdit />
                     </Button>
                     <Button
-                      variant="danger"
-                      className="btn-sm"
+                        variant="light"
+                        className="btn-sm deleteAndEditBtn"
                       onClick={() => deleteHandlerExp(exp._id)}
                     >
-                      <FaTrash style={{ color: "white" }} />
+                      <FaTrash  />
                     </Button>
                   </div>
                   <Card.Text>
