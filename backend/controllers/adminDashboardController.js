@@ -42,67 +42,51 @@ const fetchModelData = async (model) => {
 };
 
 
-// @desc    Fetch all Blogs 
-// @route   GET /api/admin-dashboard/blogs
-// @access  Private/Admin
+// get all blogs
 const getBlogs = asyncHandler(async (req, res) => {
   const data = await fetchModelData(Blog);
   res.status(200).json(data);
 });
 
-// @desc    Fetch all courses 
-// @route   GET /api/admin-dashboard/courses
-// @access  Private/Admin
+// get all courses
 const getCourses = asyncHandler(async (req, res) => {
   const data = await fetchModelData(Course);
   res.status(200).json(data);
 });
 
-// @desc    Fetch all FAQs 
-// @route   GET /api/admin-dashboard/faqs
-// @access  Private/Admin
+// get all faqs
 const getFaqs = asyncHandler(async (req, res) => {
   const data = await fetchModelData(Faqs);
   res.status(200).json(data);
 });
 
-// @desc    Fetch all services 
-// @route   GET /api/admin-dashboard/services
-// @access  Private/Admin
+// get all services
 const getServices = asyncHandler(async (req, res) => {
   const data = await fetchModelData(Service);
   res.status(200).json(data);
 });
 
 
-// @desc    Fetch all admission batches 
-// @route   GET /api/admin-dashboard/admission-batches
-// @access  Private/Admin
+// get all admission batches
 const getAdmissionBatches = asyncHandler(async (req, res) => {
   const data = await fetchModelData(AdmissionBatch);
   res.status(200).json(data);
 });
 
-// @desc    Fetch all gallery
-// @route   GET /api/admin-dashboard/gallery
-// @access  Private/Admin
+// get all gallery
 const getGallery = asyncHandler(async (req, res) => {
   const data = await fetchModelData(Gallery);
   res.status(200).json(data);
 });
 
-// @desc    Fetch all products
-// @route   GET /api/admin-dashboard/products
-// @access  Private/Admin
+// get all products
 const getProducts = asyncHandler(async (req, res) => {
   const data = await fetchModelData(Product);
   res.status(200).json(data);
 });
 
 
-// @desc    Fetch all users
-// @route   GET /api/admin-dashboard/users
-// @access  Private/Admin
+// get all users
 const getUsers = asyncHandler(async (req, res) => {
   const [admin, members, users, total] = await Promise.all([
     User.countDocuments({ isAdmin: true }),
@@ -119,9 +103,7 @@ const getUsers = asyncHandler(async (req, res) => {
 });
 
 
-// @desc    Fetch all enrollment
-// @route   GET /api/admin-dashboard/enrollment
-// @access  Private/Admin
+// get all enrollments
 const getEnrollments = asyncHandler(async (req, res) => {
   const total = await Enrollment.countDocuments();
 
@@ -132,9 +114,7 @@ const getEnrollments = asyncHandler(async (req, res) => {
   res.status(200).json({ total });
 });
 
-// // @desc    Fetch the most recent admission batch with enrollments
-// // @route   GET /api/admin-dashboard/admission-batch-details
-// // @access  Private/Admin
+// get admission details
 const getAdmissionDetails = asyncHandler(async (req, res) => {
   try {
     const admissionBatches = await AdmissionBatch.find().lean();
@@ -167,9 +147,7 @@ const getAdmissionDetails = asyncHandler(async (req, res) => {
     res.status(500).json({ message: 'Server error' });
   }
 });
-// @desc    Fetch the most recent admission batch with enrollments
-// @route   GET /api/admin-dashboard/admission-batch-details
-// @access  Private/Admins
+// get admission details
 // const getAdmissionDetails = asyncHandler(async (req, res) => {
 //   try {
 //     // const admissionBatches = await AdmissionBatch.find().lean();
@@ -205,9 +183,7 @@ const getAdmissionDetails = asyncHandler(async (req, res) => {
 // });
 
 
-// @desc    Fetch all enrollment
-// @route   GET /api/admin-dashboard/user-rolles
-// @access  Private/Admin
+// get user role
 const getUserRole = asyncHandler(async (req, res) => {
   const [admins, members, users, total] = await Promise.all([
     User.find({ isAdmin: true }).select('name image isAdmin email isTeamMember'),

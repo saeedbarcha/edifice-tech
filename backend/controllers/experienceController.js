@@ -2,9 +2,7 @@ import asyncHandler from "../middleware/asyncHandler.js";
 import Experience from "../models/experienceModel.js";
 
 
-// @desc    Add new experience
-// @route   POST /api/experience
-// @access  Private
+// add experience
 const addExperience = asyncHandler(async (req, res) => {
   const { designation, instituteName, joiningDate, endingDate } = req.body;
 
@@ -27,9 +25,7 @@ const addExperience = asyncHandler(async (req, res) => {
 });
 
 
-// @desc    Update an existing experience
-// @route   PUT /api/experience/:id
-// @access  Private
+// update experience
 const updateExperience = asyncHandler(async (req, res) => {
   const { designation, instituteName, joiningDate, endingDate } = req.body;
 
@@ -54,9 +50,7 @@ const updateExperience = asyncHandler(async (req, res) => {
 });
 
 
-// @desc    Delete experience
-// @route   DELETE /api/experience/:id
-// @access  Private
+// delete experience
 const deleteExperience = asyncHandler(async (req, res) => {
     const experience = await Experience.findById(req.params.id);
     if (experience) {

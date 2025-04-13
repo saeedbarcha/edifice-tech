@@ -2,9 +2,7 @@ import asyncHandler from "../middleware/asyncHandler.js";
 import Blog from "../models/blogModel.js";
 
 
-// @desc    Fetch all Blogs with associated Users
-// @route   GET /api/Blogs
-// @access  Public
+// get all blogs
 const getBlogs = asyncHandler(async (req, res) => {
   const pageSize = process.env.PAGINATION_LIMIT || 8;
   const page = Number(req.query.pageNumber) || 1;
@@ -24,9 +22,7 @@ const getBlogs = asyncHandler(async (req, res) => {
 });
 
 
-// @desc    Fetch all Active Blogs
-// @route   GET /api/blogs
-// @access  Public
+// get all active blogs
 const getActiveBlogs = asyncHandler(async (req, res) => {
   const blogs = await Blog.find({ isActive: true }).populate('user', 'name image email');;
   if (blogs) {
@@ -37,9 +33,7 @@ const getActiveBlogs = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc    Fetch a single Product by id
-// @route   GET /api/blog/:id
-// @access  Public
+// get blog by id
 const getBlogById = asyncHandler(async (req, res) => {
   const blog = await Blog.findById(req.params.id).populate('user', 'name image email');;;
   if (blog) {
@@ -50,9 +44,7 @@ const getBlogById = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc    Create Blog
-// @route   POST /api/blogs
-// @access  Private/Admin
+// create blog
 const createBlog = asyncHandler(async (req, res) => {
   const blog = await Blog({
     user: req.user._id,
@@ -67,9 +59,7 @@ const createBlog = asyncHandler(async (req, res) => {
   res.status(201).json(createdBlog);
 });
 
-// @desc    Delete a blog
-// @route   DELETE /api/blogs/:id
-// @access  Private/Admin
+// delete blog
 const deleteBlog = asyncHandler(async (req, res) => {
   const blog = await Blog.findById(req.params.id).populate('user', 'name image email');;
 
@@ -82,9 +72,7 @@ const deleteBlog = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc    Update Blog
-// @route   PUT /api/blogs/:id
-// @access  Private/Admin
+// update blog
 const updateBlog = asyncHandler(async (req, res) => {
   const {title, image, content, isActive } = req.body;
 

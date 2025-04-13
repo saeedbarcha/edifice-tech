@@ -2,9 +2,7 @@ import asyncHandler from "../middleware/asyncHandler.js";
 import Review from "../models/reviewModel.js";
 import Course from "../models/courseModel.js"
 
-// @desc    Fetch reviews for a course
-// @route   GET /api/reviews/:courseId/reviews
-// @access  Public
+// get reviews for a course
 const getReviewsForCourse = asyncHandler(async (req, res) => {
   const { courseId } = req.params; // Fetch courseId from URL params
   try {
@@ -16,10 +14,7 @@ const getReviewsForCourse = asyncHandler(async (req, res) => {
   }
 });
 
-
-// @desc    Create a review for a course
-// @route   POST /api/reviews/:courseId/reviews
-// @access  Private
+// create a review
 const createCourseReview = asyncHandler(async (req, res) => {
   const { courseId, rating, comment } = req.body;
   const userId = req.user._id;
@@ -53,9 +48,7 @@ const createCourseReview = asyncHandler(async (req, res) => {
   }
 });
 
-// // @desc    Update a review
-// // @route   PUT /api/reviews/:id
-// // @access  Private
+// update a review
 // const updateReview = asyncHandler(async (req, res) => {
 //   const { rating, comment } = req.body;
 
@@ -81,9 +74,7 @@ const createCourseReview = asyncHandler(async (req, res) => {
 //   }
 // });
 
-// // @desc    Delete a review
-// // @route   DELETE /api/reviews/:id
-// // @access  Private
+// delete a review
 // const deleteReview = asyncHandler(async (req, res) => {
 //   try {
 //     const review = await Review.findById(req.params.id);
@@ -105,6 +96,7 @@ const createCourseReview = asyncHandler(async (req, res) => {
 // });
 
 
+// update a review
 const updateCourseReview = asyncHandler(async (req, res) => {
   const { reviewId, rating, comment } = req.body;
   const userId = req.user._id;
@@ -147,6 +139,7 @@ const updateCourseReview = asyncHandler(async (req, res) => {
   }
 });
 
+// delete a review
 const deleteCourseReview = asyncHandler(async (req, res) => {
   const { reviewId } = req.params;
   const userId = req.user._id;

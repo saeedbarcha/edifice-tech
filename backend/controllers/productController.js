@@ -1,10 +1,7 @@
 import asyncHandler from "../middleware/asyncHandler.js";
 import Product from "../models/productModel.js";
 
-// @desc    Fetch all products
-// @route   GET /api/products
-// @access  Public
-
+// get all products
 const getProducts = asyncHandler(async (req, res) => {
   const pageSize = process.env.PAGINATION_LIMIT || 8;
   const page = Number(req.query.pageNumber) || 1;
@@ -23,10 +20,7 @@ const getProducts = asyncHandler(async (req, res) => {
   res.status(200).json({ allProducts, page, pages: Math.ceil(count / pageSize) });
 });
 
-// @desc    Fetch all products
-// @route   GET /api/products
-// @access  Public
-
+// get all active products
 const getActiveProducts = asyncHandler(async (req, res) => {
   const pageSize = process.env.PAGINATION_LIMIT || 8;
   const page = Number(req.query.pageNumber) || 1;
@@ -45,9 +39,7 @@ const getActiveProducts = asyncHandler(async (req, res) => {
   res.status(200).json({ activeProducts, page, pages: Math.ceil(count / pageSize) });
 });
 
-// @desc    Fetch a single Product by id
-// @route   GET /api/Product/:id
-// @access  Public
+// get product by id
 const getProductById = asyncHandler(async (req, res) => {
   const product = await Product.findById(req.params.id);
 
@@ -59,9 +51,7 @@ const getProductById = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc    Create Product
-// @route   POST /api/products
-// @access  Private/Admin
+// create product
   const createProduct = asyncHandler(async (req, res) => {
     const product = await Product({
         user: req.user._id,
@@ -77,9 +67,7 @@ const getProductById = asyncHandler(async (req, res) => {
     res.status(201).json(createProduct);
   });
 
-// @desc    Update Product
-// @route   PUT /api/products/:id
-// @access  Private/Admin
+// update product
 const updateProduct = asyncHandler(async (req, res) => {
   const { name, url, description, image , isActive} = req.body;
   
@@ -99,9 +87,7 @@ const updateProduct = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc    Delete a product
-// @route   DELETE /api/products/:id
-// @access  Private/Admin
+// delete product
 const deleteProduct = asyncHandler(async (req, res) => {
     const product = await Product.findById(req.params.id);
   

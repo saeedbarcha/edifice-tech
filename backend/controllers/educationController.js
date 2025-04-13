@@ -2,9 +2,7 @@ import asyncHandler from "../middleware/asyncHandler.js";
 import Education from "../models/educationModel.js";
 
 
-// @desc    Add education
-// @route   POST /api/educations
-// @access  Private
+// add education
 const addEducation = asyncHandler(async (req, res) => {
   const { degree, course, instituteName, date } = req.body;
 
@@ -31,9 +29,7 @@ const addEducation = asyncHandler(async (req, res) => {
 });
 
 
-// @desc    Delete education
-// @route   DELETE /api/educations/:id
-// @access  Private
+// delete education
 const deleteEducation = asyncHandler(async (req, res) => {
     const education = await Education.findById(req.params.id);
     if (education) {
@@ -47,9 +43,7 @@ const deleteEducation = asyncHandler(async (req, res) => {
 
 
   
-// @desc    Update education
-// @route   PUT /api/educations/:id
-// @access  Private
+// update education
 const updateEducation = asyncHandler(async (req, res) => {
   const {_id, degree, course, instituteName, date,  } = req.body;
 

@@ -6,9 +6,7 @@ import Project from "../models/projectModel.js";
 import { sendGreetingsMail } from "../utils/sendGreetingsMail.js";
 import generateToken from "../utils/generateToken.js";
 
-// @desc    Auth user & get token
-// @route   POST /api/users/auth
-// @access  Public
+// Authenticate user & get token
 const authUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
@@ -42,9 +40,7 @@ const authUser = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc    Register user
-// @route   POST /api/users
-// @access  Public
+// register a new user
 const registerUser = asyncHandler(async (req, res) => {
   const {
     name,
@@ -132,9 +128,7 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc    Logout user / clear cookie
-// @route   POST /api/users/logout
-// @access  Private
+// logout user
 const logoutUser = asyncHandler(async (req, res) => {
   res.cookie("jwt", "", {
     httpOnly: true,
@@ -144,9 +138,7 @@ const logoutUser = asyncHandler(async (req, res) => {
   res.status(200).json({ message: "Logged out successfully" });
 });
 
-// @desc    Get user profile
-// @route   GET /api/users/profile
-// @access  Private
+// get user profile
 const getUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
 
@@ -176,9 +168,7 @@ const getUserProfile = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc    Update user profile
-// @route   PUT /api/users/profile
-// @access  Private
+// update user profile
 const updateUserProfile = asyncHandler(async (req, res) => {
   const user = await User.findById(req.user._id);
 
@@ -215,9 +205,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc    Get all users
-// @route   GET /api/users
-// @access  Private/Admin
+// get all users
 const getUsers = asyncHandler(async (req, res) => {  
   const pageSize = process.env.PAGINATION_LIMIT;
   const page = Number(req.query.pageNumber) || 1;
@@ -237,9 +225,7 @@ const getUsers = asyncHandler(async (req, res) => {
 });
 
 
-// @desc    Get user profile
-// @route   GET /api/users/profile
-// @access  Private
+// Get user profile
 const getUserById = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id).select("-password");
   if (!user) {
@@ -262,9 +248,7 @@ const getUserById = asyncHandler(async (req, res) => {
   });
 });
 
-// @desc    Get member user
-// @route   GET /api/users
-// @access  public
+// Get member user
 const getMemberUser = asyncHandler(async (req, res) => {
   const user = await User.find({ isTeamMember: true }).select("-password");
 
@@ -276,9 +260,7 @@ const getMemberUser = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc    Delete user
-// @route   DELETE /api/users/:id
-// @access  Private/Admin
+// Delete user
 const deleteUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
   if (user) {
@@ -299,9 +281,7 @@ const deleteUser = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc    Update user
-// @route   PUT /api/users/:id
-// @access  Private/Admin
+// Update user
 const updateUser = asyncHandler(async (req, res) => {
   const user = await User.findById(req.params.id);
 

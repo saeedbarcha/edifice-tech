@@ -1,9 +1,7 @@
 import asyncHandler from "../middleware/asyncHandler.js";
 import AdmissionBatch from "../models/admissionBatchModel.js";
 
-// @desc    Fetch all Admission Batches with associated selectedCourses and Users
-// @route   GET /api/admission-batches
-// @access  Public
+// get all admission batches
 const getAdmissionBatches = asyncHandler(async (req, res) => {
   const pageSize = process.env.PAGINATION_LIMIT || 8;
   const page = Number(req.query.pageNumber) || 1;
@@ -24,9 +22,7 @@ const getAdmissionBatches = asyncHandler(async (req, res) => {
   res.status(200).json({ allAdmissionBatches, page, pages: Math.ceil(count / pageSize) });
 });
 
-// @desc    Fetch all Admission Batches with associated selectedCourses and Users
-// @route   GET /api/admission-batches
-// @access  Public
+//get recent admission batch
 const getRecentAdmissionBatch = asyncHandler(async (req, res) => {
   const admissionBatches = await AdmissionBatch.find({})
     .populate({ path: "selectedCourses.courseId" })
@@ -37,25 +33,7 @@ const getRecentAdmissionBatch = asyncHandler(async (req, res) => {
   res.status(200).json(lastBatch);
 });
 
-// // @desc    Fetch a single Admission Batch by id
-// // @route   GET /api/admission-batches/:id
-// // @access  Public
-// const getAdmissionBatchById = asyncHandler(async (req, res) => {
-//   const admissionBatch = await AdmissionBatch.findById(req.params.id).populate({
-//     path: "selectedCourses.courseId",
-//     // populate: { path: 'enrolledUsers.user', select: 'name' }
-//   });
-//   if (admissionBatch) {
-//     return res.json(admissionBatch);
-//   } else {
-//     res.status(404);
-//     throw new Error("Admission batch not found");
-//   }
-// });
-
-// @desc    Fetch a single Admission Batch by id with populated course data
-// @route   GET /api/admission-batches/:id
-// @access  Public
+// get admission batch by id
 const getAdmissionBatchById = asyncHandler(async (req, res) => {
   try {
     const admissionBatch = await AdmissionBatch.findById(req.params.id)

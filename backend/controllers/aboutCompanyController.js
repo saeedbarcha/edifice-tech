@@ -1,17 +1,13 @@
 import asyncHandler from "../middleware/asyncHandler.js";
 import AboutCompany from "../models/aboutCompanyModel.js";
 
-// @desc    Get About Company
-// @route   GET /api/aboutcompany
-// @access  Public
+// get about company
 const getAboutCompany = asyncHandler(async (req, res) => {
   const aboutCompany = await AboutCompany.findOne();
   res.status(200).json(aboutCompany);
 });
 
-// @desc    Update About Company
-// @route   PUT /api/aboutcompany/:id
-// @access  Private/Admin
+// update about company
 const updateAboutCompany = asyncHandler(async (req, res) => {
   const { logoImage, firstName, lastName, phone, whatsApp, address, establishDate, aboutUs, emailAddress, facebookPageUrl, instagramPageUrl, linkedInPageUrl } = req.body;
 

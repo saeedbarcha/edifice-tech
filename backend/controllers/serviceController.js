@@ -1,9 +1,7 @@
 import asyncHandler from "../middleware/asyncHandler.js";
 import Service from "../models/serviceModel.js";
 
-// @desc    Fetch all Services
-// @route   GET /api/Services
-// @access  Public
+// get all services
 const getServices = asyncHandler(async (req, res) => {
   const pageSize = process.env.PAGINATION_LIMIT;
   const page = Number(req.query.pageNumber) || 1;
@@ -22,9 +20,7 @@ const getServices = asyncHandler(async (req, res) => {
   res.status(200).json({ allServices, page, pages: Math.ceil(count / pageSize) });
 });
 
-// @desc    Fetch all active Services
-// @route   GET /api/Services/active
-// @access  Public
+// get all active services with pagination
 const getAllActiveServices = asyncHandler(async (req, res) => {
   const pageSize = process.env.PAGINATION_LIMIT;
   const page = Number(req.query.pageNumber) || 1;
@@ -47,9 +43,7 @@ const getAllActiveServices = asyncHandler(async (req, res) => {
 
 });
 
-// @desc    Fetch a single Service by id
-// @route   GET /api/Service/:id
-// @access  Public
+// get service by id
 const getServiceById = asyncHandler(async (req, res) => {
   const service = await Service.findById(req.params.id);
 
@@ -61,9 +55,7 @@ const getServiceById = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc    Create a new Service
-// @route   POST /api/Services
-// @access  Private/Admin
+// create new service
 const createService = asyncHandler(async (req, res) => {
   const {
     title,
@@ -94,9 +86,7 @@ const createService = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc    Update Service
-// @route   PUT /api/Services/:id
-// @access  Private/Admin
+// update service
 const updateService = asyncHandler(async (req, res) => {
   const {
     title,
@@ -129,17 +119,13 @@ const updateService = asyncHandler(async (req, res) => {
 });
 
 
-// @desc    Fetch all active Service
-// @route   GET /api/Service
-// @access  Public
+// get active service
 const getActiveService = asyncHandler(async (req, res) => {
   const service = await Service.find({ isActive: true })
   res.status(201).json(service);
 });
 
-// @desc    Delete a Service
-// @route   DELETE /api/Services/:id
-// @access  Private/Admin
+// delete service
 const deleteService = asyncHandler(async (req, res) => {
   const service = await Service.findById(req.params.id);
 

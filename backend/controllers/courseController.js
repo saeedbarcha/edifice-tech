@@ -1,9 +1,7 @@
 import asyncHandler from "../middleware/asyncHandler.js";
 import Course from "../models/courseModel.js";
 
-// @desc    Fetch all courses
-// @route   GET /api/courses
-// @access  Public/admin
+// fetch all courses
 const getCourses = asyncHandler(async (req, res) => {
   const pageSize = process.env.PAGINATION_LIMIT || 8;
   const page = Number(req.query.pageNumber) || 1;
@@ -22,9 +20,7 @@ const getCourses = asyncHandler(async (req, res) => {
 });
 
 
-// @desc    Fetch all active courses
-// @route   GET /api/courses/active
-// @access  Public
+// get all active courses with pagination
 const getAllActiveCoursesWithPagination = asyncHandler(async (req, res) => {
   const pageSize = process.env.PAGINATION_LIMIT || 8;
   const page = Number(req.query.pageNumber) || 1;
@@ -44,9 +40,7 @@ const getAllActiveCoursesWithPagination = asyncHandler(async (req, res) => {
 });
 
 
-// @desc    Fetch all active courses
-// @route   GET /api/courses/active-all
-// @access  Public
+// get all active courses
 const getAllActiveCourses = asyncHandler(async (req, res) => {
 
   const activeCourses = await Course.find({isActive: true});
@@ -60,9 +54,7 @@ const getAllActiveCourses = asyncHandler(async (req, res) => {
   // If you need pagination, you can implement it here as well
 });
 
-// @desc    Fetch a single course by id
-// @route   GET /api/course/:id
-// @access  Public
+// get course by id
 const getCourseById = asyncHandler(async (req, res) => {
   const course = await Course.findById(req.params.id);
 
@@ -74,9 +66,7 @@ const getCourseById = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc    Create a new course
-// @route   POST /api/courses
-// @access  Private/Admin
+// create new course
 const createNewCourse = asyncHandler(async (req, res) => {
   const {
   
@@ -120,9 +110,7 @@ const createNewCourse = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc    Update course
-// @route   PUT /api/courses/:id
-// @access  Private/Admin
+// update course
 const updateCourse = asyncHandler(async (req, res) => {
   const {
     title,
@@ -168,9 +156,7 @@ const updateCourse = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc    Delete a course
-// @route   DELETE /api/courses/:id
-// @access  Private/Admin
+// delete course
 const deleteCourse = asyncHandler(async (req, res) => {
   const course = await Course.findById(req.params.id);
 

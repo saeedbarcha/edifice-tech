@@ -1,9 +1,7 @@
 import asyncHandler from "../middleware/asyncHandler.js";
 import Faqs from "../models/faqsModel.js";
 
-// @desc    Fetch all faqs
-// @route   GET /api/faqs
-// @access  Public
+// get faqs
 const getFaqs = asyncHandler(async (req, res) => {
     const pageSize = process.env.PAGINATION_LIMIT || 8;
     const page = Number(req.query.pageNumber) || 1;
@@ -22,17 +20,13 @@ const getFaqs = asyncHandler(async (req, res) => {
     res.status(200).json({ allFaqs, page, pages: Math.ceil(count / pageSize) });
 });
 
-// @desc    Fetch all active faqs
-// @route   GET /api/faqs
-// @access  Public
+// get active faqs
 const getActiveFaqs = asyncHandler(async (req, res) => {
   const faqs = await Faqs.find({isActive:true})
   res.status(201).json(faqs);
 });
 
-// @desc    Fetch a single Faqs by id
-// @route   GET /api/faqs/:id
-// @access  Public
+// get faq by id
 const getFaqById = asyncHandler(async (req, res) => {
   const faq = await Faqs.findById(req.params.id);
 
@@ -44,9 +38,7 @@ const getFaqById = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc    Create Faqs
-// @route   POST /api/faqs
-// @access  Private/Admin
+// create faq
   const createFaq = asyncHandler(async (req, res) => {
     const {question, answer, isActive} = req.body;
     const faq = await Faqs({
@@ -59,9 +51,7 @@ const getFaqById = asyncHandler(async (req, res) => {
     res.status(201).json(createFaq);
   });
 
-// @desc    Update Faqs
-// @route   PUT /api/faqs/:id
-// @access  Private/Admin
+// update faq
 const updateFaq = asyncHandler(async (req, res) => {
   const { question, answer, isActive } = req.body;
   
@@ -81,9 +71,7 @@ const updateFaq = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc    Delete a faq
-// @route   DELETE /api/faqs/:id
-// @access  Private/Admin
+// delete faq
 const deleteFaq = asyncHandler(async (req, res) => {
     const faq = await Faqs.findById(req.params.id);
   

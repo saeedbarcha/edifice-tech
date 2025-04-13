@@ -2,9 +2,7 @@ import asyncHandler from "../middleware/asyncHandler.js";
 import Project from "../models/projectModel.js"
 
 
-// @desc    Delete project
-// @route   DELETE /api/project/:id
-// @access  Private
+// delete project
 const deleteProject = asyncHandler(async (req, res) => {
     const project = await Project.findById(req.params.id);
     if (project) {
@@ -17,9 +15,7 @@ const deleteProject = asyncHandler(async (req, res) => {
   });
 
 
-// @desc    Update Project
-// @route   PUT /api/projects/:id
-// @access  Private
+// update project
 const updateProject = asyncHandler(async (req, res) => {
   const { title, url, description, image } = req.body;
 
@@ -38,9 +34,7 @@ const updateProject = asyncHandler(async (req, res) => {
 });
 
 
-// @desc    Add Project
-// @route   POST /api/projects
-// @access  Private
+// add project
 const addProject = asyncHandler(async (req, res) => {
   const { title, url, description, image } = req.body;
   

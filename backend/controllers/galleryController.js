@@ -1,9 +1,7 @@
 import asyncHandler from "../middleware/asyncHandler.js";
 import Gallery from "../models/galleryModel.js";
 
-// @desc    Fetch all Gallary
-// @route   GET /api/Gallarys
-// @access  Public
+//   Fetch all Gallary
 const getGallarys = asyncHandler(async (req, res) => {
  
   
@@ -24,9 +22,7 @@ const getGallarys = asyncHandler(async (req, res) => {
   res.status(200).json({ allGalleries, page, pages: Math.ceil(count / pageSize) });
 });
 
-// @desc    Fetch all Gallary
-// @route   GET /api/Gallarys
-// @access  Public
+// get all active galleries
 const getActiveGallarys = asyncHandler(async (req, res) => {
   const pageSize = process.env.PAGINATION_LIMIT || 8;
   const page = Number(req.query.pageNumber) || 1;
@@ -45,9 +41,7 @@ const getActiveGallarys = asyncHandler(async (req, res) => {
   res.status(200).json({activeGalleries, page, pages: Math.ceil(count / pageSize)});
 });
 
-// @desc    Add gallery item
-// @route   POST /api/gallery
-// @access  Private
+// add gallery item
 const addGalleryItem = asyncHandler(async (req, res) => {
   const { caption, image } = req.body;
   const userId = req.user._id;
@@ -67,9 +61,7 @@ const addGalleryItem = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc    Delete experience
-// @route   DELETE /api/gallery/:id
-// @access  Private admin
+// delete gallery item
 const deleteGalleryItem = asyncHandler(async (req, res) => {
   const galleryItem = await Gallery.findById(req.params.id);
   if (galleryItem) {
@@ -81,9 +73,7 @@ const deleteGalleryItem = asyncHandler(async (req, res) => {
   }
 });
 
-// @desc    Update an existing experience
-// @route   PUT /api/experience/:id
-// @access  Private
+// update gallery item
 const updateGalleryItem = asyncHandler(async (req, res) => {
   const { caption, image , isActive } = req.body;
 

@@ -2,9 +2,7 @@ import asyncHandler from "../middleware/asyncHandler.js";
 import Enrollment from "../models/enrollmentModel.js";
 import AdmissionBatch from "../models/admissionBatchModel.js"
 
-// @desc    Add enrollment
-// @route   POST /api/enrollments
-// @access  Private
+// new enrollments
 const newEnrollment = asyncHandler(async (req, res) => {
     const { admissionBatchId, courses, firstName, lastName, fatherName, gender } = req.body;
 
@@ -66,9 +64,7 @@ const newEnrollment = asyncHandler(async (req, res) => {
     }
 });
 
-// @desc    Update enrollment by admin to issue certificate
-// @route   PUT /api/enrollments/:id/issueCertificate
-// @access  Private (admin)
+// update enrollment to issue certificate
 const updateEnrollmentToIssueCertificate = asyncHandler(async (req, res) => {
     const { enrollmentId,
         firstName,
@@ -115,9 +111,7 @@ const updateEnrollmentToIssueCertificate = asyncHandler(async (req, res) => {
 
 
 
-// @desc    Get all admission batches and their enrolled courses for a user
-// @route   GET /api/admission-batches/enrollments
-// @access  Private/admin
+//get all admission batches and their enrolled courses
 const getAllAdmissionBatchesWithEnrolments = asyncHandler(async (req, res) => {
     try {
         const userEnrollments = await Enrollment.find().populate('courseId');
@@ -137,9 +131,7 @@ const getAllAdmissionBatchesWithEnrolments = asyncHandler(async (req, res) => {
 });
 
 
-// @desc    Get all admission batches and their enrolled courses for a user
-// @route   GET /api/admission-batches/enrollments
-// @access  Private
+// get user admission batches
 const getUserAdmissionBatches = asyncHandler(async (req, res) => {
     const userId = req.user._id;
 
@@ -161,9 +153,7 @@ const getUserAdmissionBatches = asyncHandler(async (req, res) => {
 });
 
 
-// @desc    Delete enrollment
-// @route   DELETE /api/enrollments/:id
-// @access  Private
+// delete enrollment
 const deleteEnrollment = asyncHandler(async (req, res) => {
     const enrollment = await Enrollment.findById(req.params.id);
     if (enrollment) {
@@ -175,9 +165,7 @@ const deleteEnrollment = asyncHandler(async (req, res) => {
     }
 });
 
-// @desc    Update enrollment
-// @route   PUT /api/enrollments/:id
-// @access  Private
+// update enrollment
 const updateEnrollment = asyncHandler(async (req, res) => {
     const { firstName, lastName, fatherName, completed, courseFeePaid, performance } = req.body;
 
